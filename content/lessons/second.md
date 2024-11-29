@@ -1,5 +1,5 @@
 ---
-title: The Second Lesson
+title: The Bash Lesson
 summary: second lesson summary
 ---
 
@@ -11,16 +11,13 @@ hello
 
 ## two
 
-```bash
+```shell-session
+$ mkdir learn-git && cd learn-git
 $ git clone
 ```
 
 ```output
-git init
-```
-
-```
-$ git clone
+Initialized empty Git repository in /Users/adamgreen/data-science-south-neu/temp/.git/
 ```
 
 ### three
