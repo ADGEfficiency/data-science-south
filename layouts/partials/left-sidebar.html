@@ -1,0 +1,17 @@
+<h2 class="text-xl font-semibold mb-4">
+    <a href="/lessons/"
+       class="hover:text-blue-600 transition-colors duration-200">Lessons</a>
+</h2>
+<nav>
+    <ul class="space-y-2">
+        {{ range where .Site.RegularPages "Section" "lessons" }} {{ $isCurrentPage
+        := eq .RelPermalink $.RelPermalink }}
+        <li>
+        <a href="{{ .RelPermalink }}"
+           class="block p-2 rounded transition-colors duration-200 {{ if $isCurrentPage }} bg-blue-100 text-blue-700 font-medium border-l-4 border-blue-500 {{ else }} hover:bg-gray-200 {{ end }}">
+            {{ .Title }}
+        </a>
+    </li>
+    {{ end }}
+</ul>
+</nav>
