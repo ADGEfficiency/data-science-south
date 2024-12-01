@@ -12,7 +12,7 @@ def talk() -> str:
 print(talk())
 ```
 
-```output
+```
 hi
 ```
 
