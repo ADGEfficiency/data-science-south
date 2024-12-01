@@ -12,12 +12,8 @@ hello
 ## two
 
 ```shell-session
-$ mkdir learn-git && cd learn-git
-$ git clone
-```
-
-```output
-Initialized empty Git repository in /Users/adamgreen/data-science-south-neu/temp/.git/
+$ echo "hello"
+hello
 ```
 
 ### three
