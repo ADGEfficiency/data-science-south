@@ -1,8 +1,9 @@
 app:
 	hugo server --minify
 
+SYNTAX=xcode
 syntax:
-	hugo gen chromastyles --style=dracula > assets/css/syntax.css
+	hugo gen chromastyles --style=$(SYNTAX) > assets/css/syntax.css
 
 PHMDOCTEST_DIR=.phmdoctest
 test:
