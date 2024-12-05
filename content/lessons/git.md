@@ -7,9 +7,9 @@ summary: TODO
 
 Why should you learn Git?
 
-- **Git is common** - standard tool for version control for software engineers and data professionals.
-- **Git enables version control of code** - allowing developers to maintain a history of changes in a code base.
-- **Git enables collaboration** - allowing multiple developers to work on the same code base.
+- **Widely used** - standard tool for version control for software engineers and data professionals.
+- **Version control** - Git allows developers to maintain a history of changes in a code base.
+- **Collaboration** - Git allows multiple developers to work on the same code base.
 
 ## Tooling
 
@@ -404,9 +404,15 @@ Two useful `lang:shell-session:$ git log` commands are:
 - show all files changed in the last 5 commits - `lang:shell-session:git log --pretty=fuller --abbrev-commit --stat -n 5`,
 - show all files changed with diffs in the last 5 commits - `lang:shell-session:git log --pretty=fuller --abbrev-commit --stat -n 5`,
 
-## Github
+## GitHub
 
 ### What is Github?
+
+GitHub is a web-based platform that hosts Git repositories and adds collaboration features on top of Git.
+
+Git is the version control system that tracks changes in your code. GitHub is a service that hosts Git repositories and makes it easier to collaborate with others.
+
+GitHub is as a central hub where developers can share their code, contribute to others' projects, and collaborate on software development.
 
 ### Creating a Repository on Github
 
