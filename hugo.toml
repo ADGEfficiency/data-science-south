@@ -3,7 +3,7 @@ languageCode = 'en-us'
 title = 'Data Science South'
 [markup]
   [markup.tableOfContents]
-    startLevel = 1
+    startLevel = 2
     endLevel = 2
     ordered = false
   [markup.goldmark]

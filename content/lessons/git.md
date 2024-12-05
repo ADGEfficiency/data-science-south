@@ -83,7 +83,7 @@ Git Kraken is a GUI developed by Axosoft -- [you can install it here](https://ww
 
 ### TODO - inside Databricks
 
-## Version Control?
+## Version Control
 
 **Git's main function is version control of files**.  Developers write code that is stored in text files.
 

@@ -1,5 +1,5 @@
 app:
-	hugo server --minify
+	hugo server --disableFastRender
 
 SYNTAX=xcode
 syntax:

@@ -3,15 +3,15 @@ title: Python Libraries
 summary: Install Python libraries with pip and import them into your code.
 ---
 
-## Libraries in Python
+### Modules, Packages and Libraries
 
 **A library is a collection of pre-written code that can be used to perform specific tasks**. 
 
 Libraries can be imported and used to add functionality to the program without having to write the code from scratch.  
 
-Python has a large ecosystem of libraries.
+Python has a large ecosystem of libraries, available both from the standard library and from third-parties.
 
-## Modules, Packages and Libraries
+## Libraries in Python
 
 **A Python library is formed of modules and packages**:
 
@@ -91,7 +91,7 @@ from pathlib import Path as PathObject
 print(PathObject)
 ```
 
-## Using the Standard Library
+## The Standard Library
 
 **The standard library in Python is a collection of libraries that are included with the Python programming language**. 
 
@@ -99,7 +99,7 @@ It includes a wide range of libraries that are available for use without the nee
 
 **Python's standard library is why Python is known as a batteries included programming language**.  Python includes a lot of functionality out of the box.
 
-## What Standard Library Modules Should I Know?
+### What Standard Library Modules Should I Know?
 
 Important standard library libraries to know include:
 
@@ -112,13 +112,13 @@ Important standard library libraries to know include:
 
 Don't feel the need to go and study these libraries - just being aware of them and using them as you need is fine.
 
-## Using Third Party Libraries
+## Third Party Libraries
 
 **Third party libraries are libraries that are not included by default**. They need to be installed before they can be used.
 
 `pandas` is an open source, third party Python library - it's foundational for data professionals.  We will use it as an example third party library.
 
-## Installing Third Party Libraries
+### Installing Third Party Libraries
 
 Installing third party Python libraries is usually done with `lang:shell-session:pip`.  `lang:shell-session:pip` is a Python package manager that integrates with `PyPI` - an index of Python packages.
 
@@ -138,7 +138,7 @@ If you are in a notebook environment (or anything running iPython), you can use 
 
 This `!` prefix syntax is very useful within any environment running iPython (like a notebook) - you can also use it for any other shell command (not only `lang:shell-session:pip install`).
 
-## Using Third Party Libraries
+### Using Third Party Libraries
 
 We can import a third party library the same as one from the standard library:
 
