@@ -3,6 +3,10 @@ title: Python
 summary: Install Python libraries with pip and import them into your code.
 ---
 
+## Why Learn Python?
+
+TODO
+
 ## Reading Python Code
 
 **Writing always requires reading**. 

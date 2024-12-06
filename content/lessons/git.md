@@ -5,11 +5,9 @@ summary: TODO
 
 ## Why Learn Git?
 
-Why should you learn Git?
-
-- **Widely used** - standard tool for version control for software engineers and data professionals.
-- **Version control** - Git allows developers to maintain a history of changes in a code base.
-- **Collaboration** - Git allows multiple developers to work on the same code base.
+- **Widely used** - the standard tool for version control for software engineers and data professionals.
+- **Version control** - allows developers to maintain a history of changes in a code base.
+- **Collaboration** - allows multiple developers to work on the same code base.
 
 ## Tooling
 

@@ -5,8 +5,6 @@ summary: TODO
 
 ## Why Learn the Shell?
 
-Why should you learn how to use a shell?
-
 - **Widely used** - a core developer tool & skill,
 - **Unlocks powerful tools** - some development tasks can only be done through the shell - many are best done through a shell,
 - **Automation** - automating text based commands is easier than automating pointing and clicking. 
@@ -416,6 +414,22 @@ $ ls -l >> files.txt
 ```
 
 This will sort the lines in the `lang:shell-session:unsorted.txt` file.
+
+### Pipes
+
+The pipe operator `|` allows you to chain commands together by passing the output of one command as input to another. This enables powerful command combinations without needing temporary files.
+
+A pipe connects the standard output of the first command to the standard input of the second command.
+
+```shell-session
+$ ls | wc -l
+```
+
+Multiple pipes can be chained together to create more complex operations:
+
+```shell-session
+$ ls -l | grep ".txt" | sort | head -n 5
+```
 
 ## Shell Configuration
 
