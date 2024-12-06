@@ -1,0 +1,5 @@
+[tool.phmdoctest]
+markdown_globs = ["content/lessons/*.md"]
+exclude_globs = []
+output_directory = ".phmdoctest"
+print = ["filename", "summary"]
