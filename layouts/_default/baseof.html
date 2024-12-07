@@ -41,7 +41,7 @@
         {{ if .Param "math" }}
         {{ partialCached "math.html" . }}
         {{ end }}
-        <title>{{.Title}}</title>
+        <title data-pagefind-meta="title">{{.Title}}</title>
     </head>
     <body class="font-sans leading-normal">
         <header class="bg-gray-800 text-white p-4 sticky top-0 z-50">

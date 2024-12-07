@@ -18,6 +18,8 @@ What data professionals call themselves changes between companies and over time:
 - a data engineer in one company is called a business intelligence analyst in another,
 - the big data technologist of the 2000's would now call themselves a data scientist.
 
+### Value
+
 ## Where Do Data Professionals Come From?
 
 As data professions continue to evolve, the academic qualifications are as well.

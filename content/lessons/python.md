@@ -60,7 +60,7 @@ This refactor demonstrates an additional feature of the Python programming langu
 
 Whether you think our refactored program is an improvement depends on your preferences as a developer.
 
-## Iteration and For Loops
+## For Loops
 
 **Looping is the process of running the same thing many times**.  
 
@@ -252,7 +252,7 @@ The state that the conditional relies upon (here the variable `counter`) is upda
 
 An infinite loop is a bug where a program will never finish.
 
-## Testing with Asserts
+## Asserts
 
 **Assert statements check for correctness in your code**.
 
@@ -757,7 +757,7 @@ data_from_file = json.loads(file_contents)
 print(data_from_file)
 ```
 
-## Modules, Packages and Libraries
+## Libraries
 
 **A library is a collection of pre-written code that can be used to perform specific tasks**. 
 
