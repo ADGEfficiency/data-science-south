@@ -38,7 +38,10 @@
         </script>
         {{ $style := resources.Get "css/syntax.css" | resources.ToCSS | resources.Minify }}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-        <title>{{ block "title" . }} {{ .Site.Title }} {{ end }}</title>
+        {{ if .Param "math" }}
+        {{ partialCached "math.html" . }}
+        {{ end }}
+        <title>{{.Title}}</title>
     </head>
     <body class="font-sans leading-normal">
         <header class="bg-gray-800 text-white p-4 sticky top-0 z-50">

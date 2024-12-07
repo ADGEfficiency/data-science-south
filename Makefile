@@ -19,3 +19,5 @@ test:
 	# TODO - install pytest-playwright
 	playwright install
 
+search:
+	npx -y pagefind --site public

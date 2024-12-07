@@ -1,6 +1,8 @@
 ---
 title: Choose a Data Career
 summary: Find your data career focus on data analytics, science or engineering.
+competencies:
+  - "Soft Skills"
 ---
 
 ## What is a Data Professional?

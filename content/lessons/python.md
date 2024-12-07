@@ -1,6 +1,8 @@
 ---
 title: Python
 summary: Install Python libraries with pip and import them into your code.
+competencies:
+- "Software Engineering"
 ---
 
 ## Why Learn Python?

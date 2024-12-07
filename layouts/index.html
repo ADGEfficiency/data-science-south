@@ -5,6 +5,15 @@
         <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
         <div class="prose prose-blue max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
             {{ .Content }}
+            <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+            <script src="/pagefind/pagefind-ui.js"></script>
+            <div id="search">
+                <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+                </script>
+            </div>
         </div>
     </div>
 </div>
