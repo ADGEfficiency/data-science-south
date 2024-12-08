@@ -1,6 +1,8 @@
 ---
 title: Shell
 summary: TODO
+competencies:
+- "Software Engineering"
 ---
 
 ## Why Learn the Shell?

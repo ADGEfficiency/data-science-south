@@ -1,6 +1,8 @@
 ---
 title: Git
 summary: TODO
+competencies:
+- "Software Engineering"
 ---
 
 ## Why Learn Git?

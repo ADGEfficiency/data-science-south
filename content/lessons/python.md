@@ -9,9 +9,11 @@ competencies:
 
 TODO
 
+## How to Run Python Code?
+
 ## Reading Python Code
 
-**Writing always requires reading**. 
+Writing always requires reading. This means that writing code will require reading it.
 
 Many development tasks involve more reading than writing code.
 
@@ -39,9 +41,12 @@ This program demonstrates features of the Python language:
 
 ## Built-in Functions
 
-Built-in functions are functions that are always available in Python. We do not need to define built-in functions ourselves - we can just use them.
+Built-in functions are always available in Python. We do not need to define built-in functions - we can just use them.
 
-Common built-in functions include `sum`, which will add all the elements of an iterable and `len` which will measure the length of an iterable.
+Common built-in functions include:
+- `print` which will print to the screen,
+- `sum`, which will add all the elements of an iterable, 
+- `len` which will measure the length of an iterable.
 
 ### Refactoring Hello World
 
