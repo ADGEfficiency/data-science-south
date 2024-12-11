@@ -6,35 +6,35 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
         <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        typography: {
-                            DEFAULT: {
-                                css: {
-                                    maxWidth: 'none',
-                                    h1: {
-                                        marginTop: '1rem',
-                                        marginBottom: '1rem',
-                                    },
-                                    h2: {
-                                        marginTop: '1em',
-                                        marginBottom: '0.5rem',
-                                    },
-                                    h3: {
-                                        marginTop: '1rem',
-                                        marginBottom: '0.75rem',
-                                    },
-                                    h4: {
-                                        marginTop: '0.875rem',
-                                        marginBottom: '0.5rem',
-                                    }
-                                }
-                            }
-                        }
-                    }
+    tailwind.config = {
+      theme: {
+        extend: {
+          typography: {
+            DEFAULT: {
+              css: {
+                maxWidth: 'none',
+                h1: {
+                  marginTop: '1rem',
+                  marginBottom: '1rem',
+                },
+                h2: {
+                  marginTop: '1em',
+                  marginBottom: '0.5rem',
+                },
+                h3: {
+                  marginTop: '1rem',
+                  marginBottom: '0.75rem',
+                },
+                h4: {
+                  marginTop: '0.875rem',
+                  marginBottom: '0.5rem',
                 }
+              }
             }
+          }
+        }
+      }
+    }
         </script>
         {{ $style := resources.Get "css/syntax.css" | resources.ToCSS | resources.Minify }}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}">

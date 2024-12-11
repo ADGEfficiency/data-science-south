@@ -1,11 +1,15 @@
 ---
 title: Statistics
-summary: TODO
+summary: Don't be fooled by randomness!
 competencies:
 - Algorithms
 ---
 
 ## Why Learn Statistics?
+
+- **Critical thinking** - Statistics teaches you how to separate signal from noise and avoid being fooled by randomness in data.
+- **Data literacy** - Essential skill for understanding and working with data in any quantitative field, from science to business.
+- **Decision making** - Enables evidence-based decisions by helping you understand uncertainty and interpret data correctly.
 
 ## What is Statistics?
 
@@ -439,3 +443,13 @@ noise = np.random.normal(size=100)
 rho, p_value = stats.spearmanr(independent, dependent)
 print("Spearman correlation coefficient:", rho)
 ```
+
+## Law of Large Numbers
+
+The Law of Large Numbers states that as the sample size increases, the sample mean will tend to approach the population mean. Mathematically, for a sequence of independent and identically distributed (IID) random variables $X_1, X_2, ..., X_n$, with expected value $\mu$ and variance $\sigma^2$, the sample mean $\bar{X}$ approaches $\mu$ as $n$ approaches infinity:
+
+$$\lim_{n\to\infty} \bar{X} = \mu$$
+
+This is why statistics works - with more data, we can obtain more accurate estimates of the population statistics like the mean.
+
+On the other hand, a single sample is high variance and should not be trusted as it may not be representative of the population.

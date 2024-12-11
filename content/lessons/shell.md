@@ -1,6 +1,6 @@
 ---
 title: Shell
-summary: TODO
+summary: Learn how to use a shell, write shell scripts, and configure your shell environment.
 competencies:
 - "Software Engineering"
 ---

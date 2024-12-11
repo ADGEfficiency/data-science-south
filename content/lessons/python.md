@@ -1,6 +1,6 @@
 ---
 title: Python
-summary: Install Python libraries with pip and import them into your code.
+summary: The default programming language for working with data.
 competencies:
 - "Software Engineering"
 ---

@@ -1,7 +1,16 @@
 ---
 title: CI/CD
-summary: TODO
+summary: Essential techniques for automatically testing & deploying changes to code.
+competencies:
+- "Software Engineering"
 ---
+
+## Why Learn CI/CD?
+
+- **Industry standard** - CI/CD is the backbone of modern software delivery, used by nearly all tech companies and data teams for reliable code deployment.
+- **Automation power** - Eliminates manual testing and deployment tasks, reducing human error and freeing up developer time for higher-value work.
+- **Quality assurance** - Automated testing catches bugs early, ensuring code quality and preventing costly production issues.
+- **Cloud deployment** - Essential skill for working with cloud infrastructure, enabling reliable and consistent deployments across environments.
 
 ## Why Continuous Integration?
 

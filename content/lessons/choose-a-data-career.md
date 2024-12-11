@@ -1,6 +1,6 @@
 ---
 title: Choose a Data Career
-summary: Find your data career focus on data analytics, science or engineering.
+summary: Focus your data career on data analytics, science or engineering.
 competencies:
   - "Soft Skills"
 ---

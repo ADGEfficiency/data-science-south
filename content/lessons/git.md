@@ -1,6 +1,6 @@
 ---
 title: Git
-summary: TODO
+summary: How Git enables version control and code collaboration.
 competencies:
 - "Software Engineering"
 ---
