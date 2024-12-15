@@ -20,6 +20,7 @@ title = 'Data Science South'
     noClasses = false
     lineNumbersInTable = true
     tabWidth = 4
+    guessSyntax = false
 
 [taxonomies]
   competency = "competencies"

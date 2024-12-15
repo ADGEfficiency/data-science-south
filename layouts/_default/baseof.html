@@ -28,16 +28,29 @@
                 h4: {
                   marginTop: '0.875rem',
                   marginBottom: '0.5rem',
-                }
-              }
+                },
+pre: {
+              backgroundColor: 'transparent',
+              color: 'inherit'  // This lets syntax.css control the text color
+            },
+            'pre code': {
+              backgroundColor: 'transparent',
+              color: 'inherit'
+            },
+            code: {
+              backgroundColor: 'transparent',
+              color: 'inherit'
+            }
             }
           }
         }
       }
     }
         </script>
-        {{ $style := resources.Get "css/syntax.css" | resources.ToCSS | resources.Minify }}
+        {{ if true }}
+        {{ $style := resources.Get "css/syntax.css" | resources.Minify }}
         <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+        {{ end }}
         {{ if .Param "math" }}
         {{ partialCached "math.html" . }}
         {{ end }}

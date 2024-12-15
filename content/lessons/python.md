@@ -7,7 +7,11 @@ competencies:
 
 ## Why Learn Python?
 
-TODO
+- **Industry standard** - The most popular programming language for data science, machine learning, and data engineering.
+- **Easy to learn** - Clean syntax, readable code, and extensive documentation make Python beginner-friendly.
+- **Powerful libraries** - Rich ecosystem of data science tools like pandas, numpy, and scikit-learn.
+- **Versatile** - Used across web development, automation, scientific computing, and artificial intelligence.
+- **Community driven** - Massive open-source community providing libraries, tools, and support.
 
 ## How to Run Python Code?
 
