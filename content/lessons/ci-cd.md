@@ -7,20 +7,18 @@ competencies:
 
 ## Why Learn CI/CD?
 
-- **Industry standard** - CI/CD is the backbone of modern software delivery, used by nearly all tech companies and data teams for reliable code deployment.
-- **Automation power** - Eliminates manual testing and deployment tasks, reducing human error and freeing up developer time for higher-value work.
-- **Quality assurance** - Automated testing catches bugs early, ensuring code quality and preventing costly production issues.
-- **Cloud deployment** - Essential skill for working with cloud infrastructure, enabling reliable and consistent deployments across environments.
+- **Automated Testing** - Ensure that code changes pass tests before being deployed.
+- **Automated Deployments** - Deploy using a consistent, repeatable process.
 
 ## Why Continuous Integration?
 
-Continuous Integration (CI) is a software engineering technique where changes to a codebase are tested automatically.
+Continuous Integration (CI) is a software engineering technique where changes to a codebase are tested automatically before merging and deploying. 
 
 Automated testing allows teams to detect and fix problems before they are merged into branches that deploy infrastructure to the cloud.
 
 CI is based around testing Git branches, commonly on pull requests, before code is merged from one branch to another.  
 
-It's also common to run tests after two branches have been merged, or on push to a branch.
+It's also common to run tests again after a branch has been merged, to ensure that the codebase is still working as expected.
 
 ## Continuous Integration in GitHub Actions
 

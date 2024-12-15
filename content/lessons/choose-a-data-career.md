@@ -5,6 +5,11 @@ competencies:
   - "Soft Skills"
 ---
 
+## Why Learn About a Data Career?
+
+- **Data Roles** - Understand the core data roles and how they differ.
+- **Data Competencies** - Know what skills and competencies are required for data roles.
+
 ## What is a Data Professional?
 
 **A data professional provides business value from data**.

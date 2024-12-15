@@ -1,6 +1,7 @@
 ---
 title: Linear Algebra
 summary: TODO
+draft: true
 competencies:
 - Algorithms
 ---

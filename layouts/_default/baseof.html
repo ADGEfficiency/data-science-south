@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+        <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -30,24 +30,25 @@
                     marginBottom: '0.5rem',
                   },
                 },
+                '.mermaid': false
               },
             },
           },
         },
       }
-    </script>
-    {{ if true }} {{ $style := resources.Get "css/syntax.css" | resources.Minify
-    }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-    {{ end }} {{ if .Param "math" }} {{ partialCached "math.html" . }} {{ end }}
-    <title data-pagefind-meta="title">{{.Title}}</title>
-  </head>
-  <body class="font-sans leading-normal">
-    <header class="bg-gray-800 text-white p-4 sticky top-0 z-50">
-      <h1 class="text-2xl font-bold">
-        <a href="/">{{ .Site.Title }}</a>
-      </h1>
-    </header>
-    {{ block "main" . }}{{ end }}
-  </body>
+        </script>
+        {{ if true }} {{ $style := resources.Get "css/syntax.css" | resources.Minify
+        }}
+        <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+        {{ end }} {{ if .Param "math" }} {{ partialCached "math.html" . }} {{ end }}
+        <title data-pagefind-meta="title">{{.Title}}</title>
+    </head>
+    <body class="font-sans leading-normal">
+        <header class="bg-gray-800 text-white p-4 sticky top-0 z-50">
+            <h1 class="text-2xl font-bold">
+                <a href="/">{{ .Site.Title }}</a>
+            </h1>
+        </header>
+        {{ block "main" . }}{{ end }}
+    </body>
 </html>
