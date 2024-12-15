@@ -1,7 +1,7 @@
 app:
 	hugo server --disableFastRender
 
-SYNTAX=xcode
+SYNTAX=github-dark
 syntax:
 	hugo gen chromastyles --style=$(SYNTAX) > assets/css/syntax.css
 

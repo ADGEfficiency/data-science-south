@@ -1,6 +1,8 @@
 ---
 title: Linear Algebra
 summary: TODO
+competencies:
+- Algorithms
 ---
 
 ## Why Learn Linear Algebra?
@@ -13,6 +15,7 @@ To run the code in this lesson, you need to install:
 
 ```shell-session
 $ pip install -q numpy pandas matplotlib
+todo
 ```
 
 ## Attribution
