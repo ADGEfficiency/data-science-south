@@ -1,5 +1,5 @@
 ---
-title: Shell
+title: Bash Shell
 summary: Learn how to use a shell, write shell scripts, and configure your shell environment.
 competencies:
 - "Software Engineering"
