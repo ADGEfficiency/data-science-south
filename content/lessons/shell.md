@@ -7,31 +7,28 @@ competencies:
 
 ## Why Learn the Shell?
 
-- **Widely used** - a core developer tool & skill,
-- **Unlocks powerful tools** - some development tasks can only be done through the shell - many are best done through a shell,
-- **Automation** - automating text based commands is easier than automating pointing and clicking. 
+- **Efficiently use a computer** - precision
+- **Repeat and automate tasks** - automating text based commands is easier than automating pointing and clicking. 
+- **Unlock powerful tools** - some development tasks can only be done through the shell - many are best done through a shell.
 
 ## Terminal
 
 The terminal, command line and shell are often used interchangeably. 
 
-Each however is a distinct component used when using a computer via text input.
+Each however is a distinct tool - all three are used when using a computer via text input.
 
-The terminal (also called a console) is an interface that controls user input & output.  
-
-Commonly the input is a keyboard, with the output being the console screen.
-
-A terminal acts as an interface that allows users to interact with computers through text.
+**The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with computers through text commands.
 
 ![](/static/lesson/why-shell/f1.png '<a class="hover:text-cyan-400 hover:underline" href="https://en.wikipedia.org/wiki/File:DEC_VT100_terminal_transparent.png">The DEC VT100 Terminal</a>')
 
-The terminal originates in the mainframe era of computing.  Historically a terminal was hardware, with a keyboard and a screen.  Terminals could connect to other computers.
+The terminal originates in the mainframe era of computing.  Historically a terminal was hardware, with a keyboard and a screen.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
-Today most developers use a software terminal, using a terminal emulator program on their computer.  These software terminals can also be used to connect to other computers.
+The terminals most developers use today are software - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
 
-Popular terminal emulators include iTerm2 (Mac), Windows Terminal (Windows) and Gnome Terminal (Linux).
-
-Access to a terminal is part of a [functional development environment](https://datasciencesouth.com/lesson/development-environments).
+Popular terminal emulators include:
+- iTerm2 (Mac), 
+- Windows Terminal (Windows),
+- Gnome Terminal (Linux).
 
 ## Command-Line
 
@@ -39,20 +36,38 @@ The command-line is the space or interface in the terminal where you type comman
 
 When you launch your terminal, you are in a command-line interface.
 
+```shell-session
+$ echo "this is the command line"
+this is the command line
+```
+
 ## The Shell
 
-A shell is a computer program that executes text commands.  
+A shell is a computer program that executes text commands. You can combine many different shells with a given terminal emulator.
 
 Shells are used in two ways:
 
-1. as a REPL (Read-Eval-Print Loop) that runs interactively via a terminal, 
+1. as a REPL (Read-Eval-Print Loop) that runs interactively,
 2. as programming language that runs via scripts.
 
-A shell is automatically started in a terminal. When you write text in the command-line of a terminal, it is executed in a shell.
+A shell is automatically started in a new terminal. When you write text in the command-line of a terminal, it is executed in a shell, the output displayed, and then a new command line prompt is shown, ready for the next user input.
+
+**The shell we shall use in this lesson is the Bash shell**.
+
+### Shells
+
+There are many different shells available -- commonly used shells are:
+
+- `sh` -- the Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`).
+- `bash` -- the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
+- `zsh` -- the default shell on MacOS, which improves on Bash,
+- `PowerShell` -- a shell developed by Microsoft for Windows.
+
+The best shells to know are the ones that are most easily available in the cloud. Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud.
 
 ### Shell Notation
 
-`$` indicates a command is run interactively in a shell -- you don't need to write this leading `$` when you are typing in the shell.
+`$` indicates a command is run interactively in a Bash shell -- you don't need to write this leading `$` when you are typing in the shell.
 
 For example, if you see:
 
@@ -60,11 +75,11 @@ For example, if you see:
 $ ls
 ```
 
-To reproduce this in your terminal, you only need to type `lang:shell-session:ls`.
+To reproduce this in your terminal, you only need to type `ls`.
 
-### Using the Shell as a REPL
+### Using the Bash Shell as a REPL
 
-We can use the shell as a REPL to list the current directory files & directories using the `lang:shell-session:ls` program:
+We can use the shell as a REPL to list the current directory files & directories using the `ls` program:
 
 ```shell-session
 $ ls
@@ -72,7 +87,7 @@ $ ls
 
 ### Using the Shell as a Programming Language
 
-We can use the shell as a programming language via shell scripting - an example shell script that lists the current directory using `lang:bash:ls`:
+We can use the shell as a programming language via shell scripting - an example shell script that lists the current directory using `ls`:
 
 ```bash
 fn:script.sh
@@ -86,28 +101,20 @@ We can then execute this script in a shell REPL:
 $ bash script.sh
 ```
 
-### Shells
-
-There are many different shells available -- commonly used shells are:
-
-- `lang:shell-session:sh` -- the Bourne Shell, the original Unix shell. It introduced features like redirection (`lang:shell-session:>`, `lang:shell-session:>>`, `lang:shell-session:<`) and piping (`lang:shell-session:|`).
-- `lang:shell-session:bash` -- the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
-- `lang:shell-session:zsh` -- the default shell on MacOS, which improves on Bash.
-
 ### Common Shell Programs
 
 A shell has its own syntax and set of commands, along with a collection of programs available.  
 
 Common shell programs include:
 
-- `lang:shell-session:ls` -- list files & directories,
-- `lang:shell-session:pwd` -- print working directory,
-- `lang:shell-session:cd` -- change directory,
-- `lang:shell-session:cat` -- print file contents.
+- `ls` -- list files & directories,
+- `pwd` -- print working directory,
+- `cd` -- change directory,
+- `cat` -- print file contents.
 
-A shell program is a common way for developers to share their work.  For example, AWS offers a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
+A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
 
-The programs that are available in your shell are programs that are in the shell's `lang:shell-session:$PATH` environment variable -- more about that in [our lesson on how to use the Bash shell](https://datasciencesouth.com/lesson/using-bash).
+The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
 
 ## Whitespace
 
@@ -117,15 +124,15 @@ This makes working at the shell natural, but requires some care when using with 
 
 **The shell will expand spaces by default into separate commands** -- this means that spaces in the wrong places can cause shell scripts to break.
 
-We can use the `lang:shell-session:echo` program to print text to the terminal.
+We can use the `echo` program to print text to the terminal.
 
-The `lang:shell-session:echo` program takes an argument of the text to print -- enclosing our message `lang:shell-session:"this is fine"` in quotes will prevent the shell from expanding the spaces in our message:
+The `echo` program takes an argument of the text to print -- enclosing our message `"this is fine"` in quotes will prevent the shell from expanding the spaces in our message:
 
 ```shell-session
 $ echo "this is fine"
 ```
 
-This space based expansion is one reason why you should never put spaces in file names -- use `lang:shell-session:-` or `lang:shell-session:_` as a separator in file names:
+This space based expansion is one reason why you should never put spaces in file names -- use `-` or `_` as a separator in file names:
 
 ```bash
 #  this is bad
@@ -135,7 +142,7 @@ This space based expansion is one reason why you should never put spaces in file
 /folder-name/file_name.txt
 ```
 
-If you do use spaces, you may end up seeing (or having to write!) your paths by escaping the spaces with a `lang:shell-session:bash\`:
+If you do use spaces, you may end up seeing (or having to write!) your paths by escaping the spaces with a `bash\`:
 
 ```bash
 #  this is harder to work with
@@ -146,13 +153,13 @@ If you do use spaces, you may end up seeing (or having to write!) your paths by 
 
 ### Where Am I?
 
-`lang:shell-session:pwd` shows us where we are in the file system - this is our current directory:
+`pwd` shows us where we are in the file system - this is our current directory:
 
 ```shell-session
 $ pwd
 ```
 
-We can remove output from the terminal with `lang:shell-session:clear`:
+We can remove output from the terminal with `clear`:
 
 ```shell-session
 $ clear
@@ -160,15 +167,15 @@ $ clear
 
 ### What is in the Current Directory?
 
-`lang:shell-session:ls` lists our current directory - showing us the files and folders:
+`ls` lists our current directory - showing us the files and folders:
 
 ```shell-session
 $ ls
 ```
 
-We can configure how `lang:shell-session:ls` works using **flags** - these are options that the `lang:shell-session:ls` program exposes.
+We can configure how `ls` works using **flags** - these are options that the `ls` program exposes.
 
-Two common flags for `lang:shell-session:ls` are showing hidden files with `lang:shell-session:-a` in a long format with `lang:shell-session:-l`:
+Two common flags for `ls` are showing hidden files with `-a` in a long format with `-l`:
 
 ```shell-session
 $ ls -al
@@ -176,19 +183,19 @@ $ ls -al
 
 ### Changing Directories
 
-We can change our current directory using `lang:shell-session:cd`, which will move down into a directory:
+We can change our current directory using `cd`, which will move down into a directory:
 
 ```shell-session
 $ cd practice-dir
 ```
 
-We can move back up a directory with `lang:shell-session:cd ..`, which moves into the parent directory:
+We can move back up a directory with `cd ..`, which moves into the parent directory:
 
 ```shell-session
 $ cd ..
 ```
 
-Another useful `lang:shell-session:cd` command is `lang:shell-session:cd -`, which moves to the directory we were previously in:
+Another useful `cd` command is `cd -`, which moves to the directory we were previously in:
 
 ```shell-session
 $ cd -
@@ -204,9 +211,9 @@ $ cd $HOME
 $ cd
 ```
 
-`~` is a special syntax that refers to the home folder. `lang:shell-session:$HOME` is a special variable that contains the path to the home folder.
+`~` is a special syntax that refers to the home folder. `$HOME` is a special variable that contains the path to the home folder.
 
-The highest level of a file system on MacOS contains folders like `lang:shell-session:/etc` and `lang:shell-session:/Users` - we can move to these directories using `lang:shell-session:cd`:
+The highest level of a file system on MacOS contains folders like `/etc` and `/Users` - we can move to these directories using `cd`:
 
 ```shell-session
 $ cd /etc
@@ -214,16 +221,16 @@ $ cd /etc
 
 Important top level directories include:
 
-- `lang:shell-session:/etc` - configuration files,
-- `lang:shell-session:/bin` - programs,
-- `lang:shell-session:/Users` - user home directories on MacOS,
-- `lang:shell-session:/home` - user home directories on Linux.
+- `/etc` - configuration files,
+- `/bin` - programs,
+- `/Users` - user home directories on MacOS,
+- `/home` - user home directories on Linux.
 - 
 ## Files & Directories
 
 ### Making & Editing Files
 
-We can make an empty file using `lang:shell-session:touch`:
+We can make an empty file using `touch`:
 
 ```shell-session
 $ touch myfile.txt
@@ -239,13 +246,13 @@ $ nano myfile.txt
 
 ### Making Directories
 
-You can make a directory with `lang:shell-session:mkdir`:
+You can make a directory with `mkdir`:
 
 ```shell-session
 $ mkdir practice
 ```
 
-We can recursively create directories by passing the `lang:shell-session:-p` flag to `lang:shell-session:mkdir`:
+We can recursively create directories by passing the `-p` flag to `mkdir`:
 
 ```shell-session
 $ mkdir -p practice/subfolder
@@ -253,15 +260,15 @@ $ mkdir -p practice/subfolder
 
 ### Moving Stuff
 
-We can move a file or folder from one place to another with `lang:shell-session:mv`:
+We can move a file or folder from one place to another with `mv`:
 
 ```shell-session
 $ mv myfile.txt practice-dir/myfile.txt
 ```
 
-Be careful with `lang:shell-session:mv` - it will overwrite the file!
+Be careful with `mv` - it will overwrite the file!
 
-We can copy a file or directory using `lang:shell-session:cp`:
+We can copy a file or directory using `cp`:
 
 ```shell-session
 $ cp myfile.txt practice-dir/myfile-copy.txt
@@ -269,45 +276,45 @@ $ cp myfile.txt practice-dir/myfile-copy.txt
 
 ### Removing Stuff
 
-We can delete files with `lang:shell-session:rm`:
+We can delete files with `rm`:
 
 ```shell-session
 $ rm file
 ```
 
-Be careful with `lang:shell-session:rm` - there is no trash can for `lang:shell-session:rm`!
+Be careful with `rm` - there is no trash can for `rm`!
 
-We can also delete a folder using `lang:shell-session:rm`.  Two useful flags are `lang:shell-session:-r` which will recursively delete a folder and `lang:shell-session:-f` which will force deletion:
+We can also delete a folder using `rm`.  Two useful flags are `-r` which will recursively delete a folder and `-f` which will force deletion:
 
 ```shell-session
 $ rm -rf directory
 ```
 
-`lang:shell-session:-f` is needed as by default, `lang:shell-session:rm` will not delete a directory that has things in it.
+`-f` is needed as by default, `rm` will not delete a directory that has things in it.
 
 ### Viewing Files
 
-`lang:shell-session:cat` is a program that prints the contents of a file to the terminal:
+`cat` is a program that prints the contents of a file to the terminal:
 
 ```shell-session
 $ cat README.md
 ```
 
-One common use of `lang:shell-session:cat` is at the start of a shell pipeline.  
+One common use of `cat` is at the start of a shell pipeline.  
 
-For example, we can pipe the contents of a file into another program `lang:shell-session:grep`:
+For example, we can pipe the contents of a file into another program `grep`:
 
 ```shell-session
 $ cat README.md | grep "data"
 ```
 
-`lang:shell-session:head` will print the first `lang:shell-session:n` lines of a file:
+`head` will print the first `n` lines of a file:
 
 ```shell-session
 $ head -n 3 readme.md
 ```
 
-`lang:shell-session:tail` will print the last `lang:shell-session:n` lines of a file:
+`tail` will print the last `n` lines of a file:
 
 ```shell-session
 $ tail -n 3 readme.md
@@ -315,7 +322,7 @@ $ tail -n 3 readme.md
 
 A file pager is a program that will keep a file open and allows you to move through that file.  
 
-A most common pager is `lang:shell-session:less`:
+A most common pager is `less`:
 
 ```shell-session
 $ less readme.md
@@ -327,7 +334,7 @@ We don't always know exactly where files or directories are, or what the content
 
 ### Finding Directories
 
-We can find directories using the `lang:shell-session:find` program:
+We can find directories using the `find` program:
 
 ```shell-session
 $ find /path/to/search -type d -name "directory-name"
@@ -335,13 +342,13 @@ $ find /path/to/search -type d -name "directory-name"
 
 ### Finding Files
 
-To find a file by it's name, we can use the `lang:shell-session:find` program:
+To find a file by it's name, we can use the `find` program:
 
 ```shell-session
 $ find /path/to/search -type f -name "file-name"
 ```
 
-We can use the wildcard character `lang:shell-session:*` to match any characters.
+We can use the wildcard character `*` to match any characters.
 
 For example, to find all Python scripts:
 
@@ -351,7 +358,7 @@ $ find /path/to/search -type f -name "*.py"
 
 ### Finding Text in Files
 
-To find a specific string in files, we can use `lang:shell-session:grep`:
+To find a specific string in files, we can use `grep`:
 
 ```shell-session
 $ grep "search-string" filename.txt
@@ -359,13 +366,13 @@ $ grep "search-string" filename.txt
 
 ### Finding Programs
 
-To find where a program lives, we can use `lang:shell-session:which`:
+To find where a program lives, we can use `which`:
 
 ```shell-session
 $ which ls
 ```
 
-This will show the location of the `lang:shell-session:ls` program, which is a binary file.
+This will show the location of the `ls` program, which is a binary file.
 
 ## Redirection 
 
@@ -387,7 +394,7 @@ The shell establishes three text streams:
 
 ### Redirecting Input
 
-The `lang:shell-session:<` operator is used to redirect input. It reads input from a file instead of the keyboard. For example:
+The `<` operator is used to redirect input. It reads input from a file instead of the keyboard. For example:
 
 ```shell-session
 $ sort < unsorted.txt
@@ -397,9 +404,9 @@ $ sort < unsorted.txt
 
 ### Redirecting Output
 
-The `lang:shell-session:>` operator is used to redirect output from a command to a file, overwriting the file if it exists.
+The `>` operator is used to redirect output from a command to a file, overwriting the file if it exists.
 
-The following redirects the output of `lang:shell-session:ls -l` to a file named `lang:shell-session:files.txt`.
+The following redirects the output of `ls -l` to a file named `files.txt`.
 
 ```shell-session
 $ ls -l > files.txt
@@ -409,13 +416,13 @@ $ ls -l > files.txt
 
 ### Appending Output
 
-The `lang:shell-session:>` command will overwrite -- if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
+The `>` command will overwrite -- if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
 
 ```shell-session
 $ ls -l >> files.txt
 ```
 
-This will sort the lines in the `lang:shell-session:unsorted.txt` file.
+This will sort the lines in the `unsorted.txt` file.
 
 ### Pipes
 
@@ -445,7 +452,7 @@ Programming languages like Python can access environment variables -- in Python 
 
 #### Setting an Environment Variable
 
-We can set an environment variable using `lang:shell-session:NAME=VALUE` -- note the lack of space around the `lang:shell-session:=`:
+We can set an environment variable using `NAME=VALUE` -- note the lack of space around the `=`:
 
 ```shell-session
 $ stage=production
@@ -453,7 +460,7 @@ $ stage=production
 
 #### Accessing an Environment Variable
 
-We can view the value of this environment variable with `lang:shell-session:echo`, using the `lang:shell-session:$NAME` syntax:
+We can view the value of this environment variable with `echo`, using the `$NAME` syntax:
 
 ```shell-session
 $ echo $stage
@@ -468,40 +475,40 @@ Many actions we take in a shell create a new process -- this new process is call
 
 Environment variables are not inherited by sub processes.
 
-We can however make environment variables accessible to sub processes using `lang:shell-session:export`:
+We can however make environment variables accessible to sub processes using `export`:
 
 ```shell-session
 $ export stage=production
 ```
-You will often see `lang:shell-session:export` used in the shell config scripts like `lang:shell-session:.bashrc`.  This is because these scripts are run during shell startup, and the environment variables defined in these scripts are supposed to be available to all sub processes.
+You will often see `export` used in the shell config scripts like `.bashrc`.  This is because these scripts are run during shell startup, and the environment variables defined in these scripts are supposed to be available to all sub processes.
 
 #### Viewing All Environment Variables
 
-You can see all the environment variables currently defined in your shell with the `lang:shell-session:env` command:
+You can see all the environment variables currently defined in your shell with the `env` command:
 
 ```shell-session
 $ env
 ```
 
-You can access an environment variable using the `lang:shell-session:$NAME` syntax.  We can use `lang:shell-session:echo` to view the value of an environment variable:
+You can access an environment variable using the `$NAME` syntax.  We can use `echo` to view the value of an environment variable:
 
 ```shell-session
 $ echo $HOME
 ```
 
-### The `lang:shell-session:PATH`
+### The `PATH`
 
-The `lang:shell-session:PATH` environment variable is a list of directories, separated by a `lang:shell-session::`.
+The `PATH` environment variable is a list of directories, separated by a `:`.
 
-The `lang:shell-session:PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `lang:shell-session:PATH` makes that program accessible via a shell from any directory.
+The `PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `PATH` makes that program accessible via a shell from any directory.
 
-The `lang:shell-session:PATH` variable will be quite long -- a useful tip is to pipe the variable into `lang:shell-session:tr`, which can replace the `lang:shell-session::` used to separate the paths with a new line `lang:shell-session:\n`:
+The `PATH` variable will be quite long -- a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
 
 ```shell-session
 $ echo $PATH | tr ":" "\n"
 ```
 
-It's common to see the `lang:shell-session:PATH` variable modified in scripts by appending a new path onto the existing path:
+It's common to see the `PATH` variable modified in scripts by appending a new path onto the existing path:
 
 ```shell-session
 $ export PATH=$PATH:$SPARK_HOME/bin
@@ -511,9 +518,9 @@ A common pattern you will see in install scripts is to copy this path update com
 
 `$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
 
-This will append `lang:shell-session:export PATH=$PATH:$SPARK_HOME/bin` to the user's `lang:shell-session:~/.bashrc`.  On next shell startup, the `lang:shell-session:$SPARK_HOME/bin` directory will be available in the user's `lang:shell-session:PATH`.
+This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
 
-Any binary programs that exist in `lang:shell-session:$SPARK_HOME/bin` will now be available to run from the shell.
+Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run from the shell.
 
 
 ### Sourcing
@@ -522,7 +529,7 @@ Sourcing a file executes the commands in the file in the current shell.
 
 This is different from running a file, which will execute the commands in a new shell in a sub-process.
 
-One common use of `lang:shell-session:source` is to load environment variables into the current shell:
+One common use of `source` is to load environment variables into the current shell:
 
 ```bash
 fn:myfile
@@ -537,14 +544,14 @@ value
 
 ### RC Files
 
-Your shell is configured using text files.  These text files are `lang:shell-session:source`'d during shell startup, before you see your first command line prompt.  Often these files are `lang:shell-session:.rc` files, which stands for "run command".
+Your shell is configured using text files.  These text files are `source`'d during shell startup, before you see your first command line prompt.  Often these files are `.rc` files, which stands for "run command".
 
 Which shell configuration file depends on both your shell and your operating system:
 
-- `lang:shell-session:~/.bashrc` on Linux with Bash,
-- `lang:shell-session:~/.zshrc` on Linux with Zsh,
-- `lang:shell-session:~/.bashrc` & `lang:shell-session:~/.bash_profile` on MacOS with Bash,
-- `lang:shell-session:~/.bashrc` & `lang:shell-session:~/.zshenv` on MacOS with Zsh.
+- `~/.bashrc` on Linux with Bash,
+- `~/.zshrc` on Linux with Zsh,
+- `~/.bashrc` & `~/.bash_profile` on MacOS with Bash,
+- `~/.bashrc` & `~/.zshenv` on MacOS with Zsh.
 
 ### Login vs. Non-Login Shells
 
@@ -554,7 +561,7 @@ When you log into a system and start a shell, that's called a login shell. Login
 
 When you start a new terminal window or a new shell in an existing session, those are non-login shells. They read a different set of configuration files, and settings last only for the life of the shell.
 
-This distinction depends on your operating system -- for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `lang:shell-session:source`'d.
+This distinction depends on your operating system -- for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
 
 ## Aliases
 
@@ -569,7 +576,7 @@ alias cls='clear && ls'
 alias bashrc='vim ~/git/dotfiles/.bashrc'
 ```
 
-You can use `lang:shell-session:"command"` to run a command without alias expansion:
+You can use `"command"` to run a command without alias expansion:
 
 ```shell-session
 $ "ls"
@@ -592,7 +599,7 @@ Even you are using Zsh as an interactive REPL via a terminal, you can still run 
 $ bash script.sh
 ```
 
-The shell is able to find the program `lang:shell-session:bash` in it's `lang:shell-session:$PATH`.
+The shell is able to find the program `bash` in it's `$PATH`.
 
 ### What is a Script?
 
@@ -602,7 +609,7 @@ Any command that can be executed in the terminal can also be put into a Bash scr
 
 ### The Shebang
 
-The first line of a bash script usually begins with a 'shebang' (`lang:bash:#!`) followed by the path to the Bash program:
+The first line of a bash script usually begins with a 'shebang' (`#!`) followed by the path to the Bash program:
 
 ```bash
 #!/usr/bin/env bash
@@ -610,7 +617,7 @@ The first line of a bash script usually begins with a 'shebang' (`lang:bash:#!`)
 
 This line tells the system that the file is a bash script and to use the Bash shell to interpret the script. 
 
-A shebang is not necessary - even without a shebang, we can execute a script by specifying the `lang:shell-session:bash` program directly:
+A shebang is not necessary - even without a shebang, we can execute a script by specifying the `bash` program directly:
 
 ```shell-session
 $ bash script.sh
@@ -628,13 +635,13 @@ Common shebangs include:
 - Bash `#!/usr/bin/env bash`,
 - Sh `#!/usr/bin/env sh`.
 
-We use `/bin/env` as this will find the program wherever it occurs in the `lang:shell-session:$PATH` shell environment variable.
+We use `/bin/env` as this will find the program wherever it occurs in the `$PATH` shell environment variable.
 
 ## File Permissions and Execution
 
-Before you can run your script using the `lang:shell-session:./` syntax, it must have execute permissions.
+Before you can run your script using the `./` syntax, it must have execute permissions.
 
-You can add execute permissions with the `lang:shell-session:chmod` command:
+You can add execute permissions with the `chmod` command:
 
 ```shell-session
 $ chmod +x script.sh
@@ -666,7 +673,7 @@ fn:script.sh
 echo "Hello, World!"
 ```
 
-`lang:bash:echo` is a shell program that prints its arguments to standard out - commonly to a terminal.
+`echo` is a shell program that prints its arguments to standard out - commonly to a terminal.
 
 ### Adding Variables
 
@@ -680,11 +687,11 @@ name="adam"
 echo "Hello, $name!"
 ```
 
-We use the `lang:shell-session:$name` syntax to refer to the value of the `lang:shell-session:name` variable within the script.
+We use the `$name` syntax to refer to the value of the `name` variable within the script.
 
 ### Functions in Bash
 
-We can write a function in a Bash script using the `lang:Bash:function` keyword:
+We can write a function in a Bash script using the `function` keyword:
 
 ```bash
 function greet {

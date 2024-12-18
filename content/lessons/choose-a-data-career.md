@@ -7,8 +7,8 @@ competencies:
 
 ## Why Learn About a Data Career?
 
-- **Data Roles** - Understand the core data roles and how they differ.
-- **Data Competencies** - Know what skills and competencies are required for data roles.
+- **Data roles** - Understand the core data roles and how they differ.
+- **Data competencies** - Know what skills and competencies are required for data roles.
 
 ## What is a Data Professional?
 

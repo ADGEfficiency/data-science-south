@@ -7,51 +7,213 @@ competencies:
 
 ## Why Learn Statistics?
 
-- **Critical thinking** - Statistics teaches you how to separate signal from noise and avoid being fooled by randomness in data.
-- **Data literacy** - Essential skill for understanding and working with data in any quantitative field, from science to business.
-- **Decision making** - Enables evidence-based decisions by helping you understand uncertainty and interpret data correctly.
+- **Decision making** - Make good decisions by separating signal from noise.
+ 
+## Uncertainty
+
+Uncertainty is inherent in real-world decision-making. Managing uncertainty is required to make good decisions.
+
+For example, when driving traffic and unscheduled road maintenance leads to uncertainty about which route is best to take.
+
+### Sources of Uncertainty
+
+Any decision involves uncertainty. Being specific about where uncertainty comes from is the first step to managing it.
+
+### 1. Stochastic Environments
+
+A stochastic environment is one where the outcome of events are random - stochastic is a fancy way of saying random.
+
+An event is random if we cannot predict it - examples include flipping a coin and weather forecasting.
+
+### 2. Incomplete Observability
+
+Incomplete observability occurs when we lack data (samples or variables) about the world.  Incomplete observability of variables arises from incomplete sampling of data (think rows), and from noise or errors in data collection (think columns).
+
+For example, in climate modeling, incomplete observability arises from a lack of samples (our network of weather sensors doesn't cover the entire planet) and from noise in data collection (from weather sensors that are uncalibrated).
+
+### 3. Incomplete Models
+
+Incomplete models fail to fully extract signal from data. Think about a map that doesn't show all the roads - it's incomplete and can't be used for navigation.
 
 ## What is Statistics?
 
-My favourite definition of statistics to `not being fooled by randomness`.
+My favourite definition of statistics to *don't be fooled by randomness*. A statisticians primary concern is making sure nature hasn't tricked us.
 
-One of a statisticians primary concerns is making sure nature hasn't tricked us.
-
-Trying to determine whether an observed measurement is due to chance, or whether it is a repeatable observation, is needed for us to separate out `the signal from the noise` (my second favourite definition of statistics).
+Determining whether an observation is due to chance, is needed for us to *separate out the signal from the noise* (my second favourite definition of statistics).
 
 ### What is a Statistic?
 
-A statistic is a summary of data. It is a numeric measure that captures, extracts and summarizes information about data.  
+A statistic is a summary of data. It is a numeric measure that captures, extracts and summarizes information about data. A statistic is a lower dimensional summary of a larger dataset.
 
-Statistics allow us to reason about data.  Many datasets are too large for us to understand.  A statistic is a lower dimensional summary of a larger dataset.
+The value of these summaries is that we can reason about data that is to large to fit in our brain.  Many datasets are too large for us to understand.  
 
-Like data itself, statistics contain both signal and noise.
+Like data itself, a statistic can contain both signal and noise.
+
+We can simulate this by generating a dataset with both signal and noise:
+
+```python
+import numpy as np
+
+np.random.seed(42)
+
+n_samples = 1000
+truth = 5
+signal = np.full(n_samples, truth)
+noise = np.random.normal(0, 1, n_samples)
+
+data = signal + noise
+print(np.mean(data))
+```
+
+```
+5.019332055822326
+```
+
+Our statistic (in this case the `mean`) allows us to take a high dimensional dataset of `1000` samples and measure its central tendency.  What we get back is close to the `signal` value of `5`, but not exactly.
+
+The mean is not the only statistic we can measure - we could also estimate the standard deviation:
+
+```python
+print(np.std(data))
+```
+
+```
+0.9787262077473542
+```
+
+As with our estimate of the mean, our estimate of the standard deviation is close to the truth, but not exactly.  It contains both noise and signal.
 
 ### All Statistics Are Wrong
 
 All statistics are a fiction that don't exist in reality.  Any statistic removes information about the data is it summarizing.
 
-All statistics are estimates - they involve some sort of sampling to create the dataset from which they are derived.  This is an example of uncertainty coming from a stochastic environment.
+Take for example the `mean` we measure above - with the `mean` alone, we have no idea about the spread of the distribution. Likewise if we only have our estimate of the standard deviation, we don't know what the central tendency of the data is.
 
 All statistics involve some form of aggregation - this aggregation in one dimension leads to a loss of information.  This is an example of uncertainty coming from incomplete modelling.
 
-### All Data is Wrong
+All statistics are estimates - they all aggregate across samples.  These samples are noisy and contain error - an example of uncertainty coming from a stochastic environment.
 
-error - sources
+## What is Probability?
 
-### Classical vs. Modern Statistics
+Probability is a set of tools developed to deal with uncertainty.  Like statistics, probability allows us to make better decisions by reasoning about uncertainty.
+
+A single probability measures the likelihood of an event - how often an event will occur.
+
+Probability is essential in machine learning, with applications such as:
+
+- Maximum likelihood, finding model parameters that maximize the probability of observing training data,
+- Kullback-Leibler (KL) divergence minimization, forcing two distributions to be similar, used in training generative models for realistic images or text,
+- Reinforcement learning, modeling a policy as a probability distribution over actions based on the current state.
+
+## Frequentist vs. Bayesian Probability
+
+There are two main perspectives on probability - the Frequentist perspective and the Bayesian perspective.
+
+### Frequentist Perspective 
+
+The Frequentist probability measures the frequency at which an event occurs. It is calculated by the number of times it occurs in a large number of trials.
+
+Below is an example of calculating the probability of rolling a four on a six-sided die. We roll the die 1000 times and calculate the frequency at which a four is rolled. The probability of rolling a four is the frequency of rolling a four divided by the total number of trials:
+
+```python
+from collections import Counter
+import random
+
+num_trials = 1000
+dice_sides = 6
+
+results = Counter()
+for i in range(num_trials):
+    result = random.randint(1, dice_sides)
+    results[result] += 1
+
+prob = results[4] / num_trials
+print(f"probability of rolling a four: {100 * prob.2f} %")
+```
+
+```
+probability of rolling a four: 16.80 %
+```
+
+### Bayesian Perspective
+
+Bayesian probability expresses belief about event occurrence. It incorporates prior knowledge and uncertainty in probability estimates, which is useful when data is limited, noisy, or ambiguous.
+
+One example of belief in the Bayesian world is the prior, which is a probability distribution that reflects our initial beliefs about how likely an event is. This prior distribution can be based on past experience, expert knowledge, or other sources of information.
+
+In the example of flipping a coin, a natural prior is a fair coin with 50% heads and 50% tails.
+
+Bayesian methods allow us to update this prior using data.  As we receive data from the world, we can use it to update our prior into a posterior.
+
+This represents our revised belief about the event's likelihood, and can become our next prior when we have more data.
+
+```python
+import random
+
+def update_belief(prior_heads, prior_total, new_heads, new_flips):
+    """Update belief about probability of heads after seeing new flips"""
+    return prior_heads + new_heads, prior_total + new_flips
+
+def probability_of_heads(heads, total):
+    """Calculate probability of heads"""
+    return heads / total
+
+# Starting belief: we've seen 1 heads out of 2 flips
+heads = 1
+total_flips = 2
+
+print(f"Starting belief: {probability_of_heads(heads, total_flips):.3f}")
+
+# Simulate 10 flips of a biased coin (70% chance of heads)
+for flip_number in range(10):
+    # Flip coin (True = heads, False = tails)
+    new_flip = 1 if random.random() < 0.7 else 0
+    
+    # Update our belief
+    heads, total_flips = update_belief(heads, total_flips, new_flip, 1)
+    
+    # Calculate and print new probability
+    prob = probability_of_heads(heads, total_flips)
+    print(f"After flip {flip_number + 1}: {prob:.3f}")
+```
+
+```
+Starting belief: 0.500
+After flip 1: 0.667
+After flip 2: 0.750
+After flip 3: 0.600
+After flip 4: 0.500
+After flip 5: 0.429
+After flip 6: 0.375
+After flip 7: 0.444
+After flip 8: 0.500
+After flip 9: 0.455
+After flip 10: 0.500
+```
+
+### Bayes' Theorem
+
+Bayes' Theorem is a mathematical formula that describes how to update our probability estimates based on new data. It states that:
+
+$$\text{Posterior Probability} = \frac{\text{Prior Probability} \times \text{Likelihood}}{\text{Evidence}}$$
+
+Here, the posterior probability is the updated probability estimate, the prior probability is our initial belief about the event's likelihood, the likelihood is the probability of observing the data given the event, and the evidence is the probability of observing the data.
+
+## Classical vs. Modern Statistics
 
 Statistics originated in a world without computers - reaching back to the 17th century.
 
-The early origins of statistics are a time when computation was expensive and data was a sparse resource, leading mathematicians to spend a lot of effort to avoid calculations.
+Statistics emerged at a time when computation was expensive and data was a sparse resource, leading mathematicians to spend a lot of effort to avoid calculations.
 
-Today the inverse is true - we live in a world with access to cheap compute and lots of data.  This means that the best approach to statistics today can differ a lot from statistical techniques taught in the second half of the 20th century.
+Today the inverse is true - we live in a world with access to cheap compute and lots of data.  This means that the best approach to statistics today can differ a lot from statistical techniques taught in the second half of the 20th century - perhaps even what you were taught at school.
 
 An example of this is the rise of bootstrap based methods to calculate confidence intervals and determine statistical significance.
 
+Another example of modern statistics is the double descent curve - a phenomenon where the performance of a model can improve with more data, even after it has started to overfit. This counteracts traditional statistical thinking where the more training you do, the more likely you are to overfit.
+
 ## Distributions
 
-A statistic will describe something about a probability distribution 
+A distribution is a set of values and their corresponding probabilities. It describes how likely each value is to occur.
 
 ## Central Tendency
 
@@ -90,14 +252,10 @@ The mean demonstrates well the limitations of using a single statistic to repres
 
 Take the classic example of the person with their feet in a fridge and head in the fireplace - on average they are comfortable but at both extremes they are not comfortable:
 
-```pyrepl
+```python
 import numpy as np
 
-temperatures = {
-  "head": 40,
-  "body": 37,
-  "feet": 32
-}
+temperatures = {"head": 40, "body": 37, "feet": 32}
 
 print(sum(temperatures.values()) / len(temperatures))
 print(np.mean(temperatures.values()))
@@ -105,7 +263,7 @@ print(np.mean(temperatures.values()))
 
 Another example is taking the average of all the people in a room that includes a single billionaire:
 
-```pyrepl
+```python
 net_worths = [10_000, 50_000, 80_000, 50_000]
 print(sum(net_worths) / len(net_worths))
 
@@ -126,7 +284,7 @@ The expectation is the same as the mean - a weighted average across all possible
 
 When a statistician says 'on expectation' or 'the expected value of this function', they mean on average.
 
-```pyrepl
+```python
 win = {'amount': 100, 'probability': 0.1}
 lose = {'amount': -10, 'probability': 0.9}
 
@@ -145,7 +303,7 @@ The median is another measure of central tendency that represents the middle val
 
 In many ways, the median is the true centre of the data - it's by definition in the middle.  It's also not sensitive to outliers, so it will be a more stable statistic over time.
 
-```pyrepl
+```python
 import numpy as np
 
 def stats(data):
@@ -202,7 +360,7 @@ For example, the 25th quantile (also known as the first quartile) is the value $
 
 We can find the $p$-th quantile of a distribution using the numpy.quantile function. For example, to find the first quartile of the net_worths list, we can use:
 
-```pyrepl
+```python
 import numpy as np
 
 net_worths = [10_000, 50_000, 80_000, 50_000, 1_000_000]
@@ -214,7 +372,7 @@ In this example, the first quartile is $50,000$.
 
 We can also find multiple quantiles at once using the numpy.quantile function. For example, to find the first and third quartiles of the net_worths list, we can use:
 
-```pyrepl
+```python
 import numpy as np
 
 net_worths = [10_000, 50_000, 80_000, 50_000, 1_000_000]
@@ -224,7 +382,7 @@ print(q1, q3)
 
 In this example, the first quartile is $50,000$ and the third quartile is $80,000$. We can use the first and third quartiles to calculate the interquartile range (IQR), which is a measure of the spread of the middle 50% of the data:
 
-```pyrepl
+```python
 import numpy as np
 
 net_worths = [10_000, 50_000, 80_000, 50_000, 1_000_000]
@@ -233,8 +391,7 @@ iqr = q3 - q1
 print(iqr)
 ```
 
-
-## Deviation Measures
+## Deviation 
 
 Deviation measures are used to characterize how spread out or random a distribution is.  You should be thinking about deviation measures as measuring the space or width of a distribution.
 
@@ -246,10 +403,9 @@ $$
 \text{MAD} = \frac{1}{n} \sum_{i=1}^{n} |x_i - \bar{x}|
 $$
 
-```pyrepl
+```python
 import numpy as np
 
-# create two numpy arrays of size 5 with random uniform values
 wide = np.random.uniform(low=0, high=10, size=5)
 narrow = np.random.uniform(low=4, high=6, size=5)
 
@@ -267,7 +423,7 @@ $$
 d_{\max} = \max_i |x_i - \bar{x}|
 $$
 
-```pyrepl
+```python
 import numpy as np
 
 # create two numpy arrays of size 5 with random uniform values
@@ -291,7 +447,7 @@ $$
 
 where $\mu$ is the mean of the dataset, and $n$ is the number of values in the dataset.
 
-```pyrepl
+```python
 import numpy as np
 
 # create two numpy arrays of size 5 with random uniform values
@@ -325,7 +481,7 @@ $$
 
 where $x_i$ is the $i^{th}$ value in the distribution, $\mu$ is the mean of the distribution, and $n$ is the number of values in the distribution.
 
-```pyrepl
+```python
 import numpy as np
 
 # create two numpy arrays of size 5 with random uniform values
@@ -342,7 +498,7 @@ print(variance(narrow))
 
 Variance is closely related to standard deviation, as the standard deviation is the square root of the variance.
 
-```pyrepl
+```python
 import numpy as np
 
 data = np.array([1, 2, 3, 4, 5])
@@ -355,7 +511,7 @@ $$
 \sigma = \sqrt{\frac{\sum_{i=1}^{n}(x_i - \mu)^2}{n}}
 $$
 
-```pyrepl
+```python
 import numpy as np
 
 data = np.array([1, 2, 3, 4, 5])
@@ -400,7 +556,7 @@ $$
 
 where $x_i$ and $y_i$ are the values of the two variables for the $i^{th}$ observation, and $\bar{x}$ and $\bar{y}$ are their means.
 
-```pyrepl
+```python
 import numpy as np
 from scipy import stats
 
@@ -430,7 +586,7 @@ where $d_i$ is the difference between the ranks of $X_i$ and $Y_i$.
 
 The Spearman correlation is based on the ranks of the observations so is more robust to outliers.
 
-```pyrepl
+```python
 import numpy as np
 from scipy import stats
 

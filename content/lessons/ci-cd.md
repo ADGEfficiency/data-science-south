@@ -7,8 +7,8 @@ competencies:
 
 ## Why Learn CI/CD?
 
-- **Automated Testing** - Ensure that code changes pass tests before being deployed.
-- **Automated Deployments** - Deploy using a consistent, repeatable process.
+- **Ensure code passes tests** - ensure that code is tested before it is merged.
+- **Repeatable deployments** - deploy code using a consistent, re-runnable pipeline.
 
 ## Why Continuous Integration?
 
@@ -24,9 +24,9 @@ It's also common to run tests again after a branch has been merged, to ensure th
 
 GitHub Actions is a CI/CD (Continuous Integration/Continuous Deployment) provider that integrates directly with GitHub.
 
-Github Actions is configured by putting `lang:shell-session:yaml` files into the `lang:shell-session:.github/workflows` folder of a Github repository.
+Github Actions is configured by putting `yaml` files into the `.github/workflows` folder of a Github repository.
 
-`lang:shell-session:.github/workflows/test.yaml` is a CI workflow that runs on every pull request to the `lang:shell-session:main` branch.
+`.github/workflows/test.yaml` is a CI workflow that runs on every pull request to the `main` branch.
 
 It sets up a Python environment, installs dependencies, and then runs tests using the Python library `pytest`:
 
