@@ -7,28 +7,30 @@ competencies:
 
 ## Why Learn CI/CD?
 
-- **Ensure code passes tests** - ensure that code is tested before it is merged.
-- **Repeatable deployments** - deploy code using a consistent, re-runnable pipeline.
+- **Amplify benefits of tests** - tests allow you to test for incorrectness and improve code with confidence.
+- **Repeatable, low maintenance deployments** - deploy code using consistent, re-runnable pipelines.
 
-## Why Continuous Integration?
+## Continuous Integration
 
-Continuous Integration (CI) is a software engineering technique where changes to a codebase are tested automatically before merging and deploying. 
+Continuous Integration (CI) is a software engineering technique where changes to a codebase are tested automatically before merging code and deploying to environments like dev or prod. 
 
-Automated testing allows teams to detect and fix problems before they are merged into branches that deploy infrastructure to the cloud.
+Testing allows teams to detect and fix problems before they are merged into branches that deploy infrastructure to the cloud.
 
-CI is based around testing Git branches, commonly on pull requests, before code is merged from one branch to another.  
+CI is based around testing Git branches, commonly on pull requests, run before code is merged from one branch to another.  These tests are often run when a pull request is open.  Each commit to the branch will kick off testing of the updated code.
 
-It's also common to run tests again after a branch has been merged, to ensure that the codebase is still working as expected.
+It's common to run tests again after a branch has been merged, to ensure that the codebase is still working as expected.
 
-## Continuous Integration in GitHub Actions
+### Continuous Integration in GitHub Actions
 
-GitHub Actions is a CI/CD (Continuous Integration/Continuous Deployment) provider that integrates directly with GitHub.
+GitHub Actions integrates directly with GitHub.
 
-Github Actions is configured by putting `yaml` files into the `.github/workflows` folder of a Github repository.
+Github Actions is configured with `yaml` files into the `.github/workflows` folder of a GitHub repository.
 
-`.github/workflows/test.yaml` is a CI workflow that runs on every pull request to the `main` branch.
+The file `.github/workflows/test.yaml` below is a CI workflow that runs on every pull request to the `main` branch. It:
 
-It sets up a Python environment, installs dependencies, and then runs tests using the Python library `pytest`:
+- sets up a Python environment, 
+- installs dependencies, 
+- then runs tests using the Python library `pytest`.
 
 ```yaml
 fn:.github/workflows/test.yaml
@@ -55,23 +57,21 @@ jobs:
           pytest tests
 ```
 
-## Why Continuous Deployment?
+## Continuous Deployment
 
 Continuous Deployment (CD) is a software engineering technique where changes to a codebase are deployed automatically.
 
-Automated deployments allows teams to deploy infrastructure to the cloud reliably, without any manual work.
+Automated deployments allows teams to deploy infrastructure to the cloud automatically, without any manual work.  Manual deployments come with the non-zero risk of human error, and cost of developer time.
 
-CD is based around deploying Git branches, commonly after code is merged or pushed from one branch to another.
+CD is based around deploying Git branches, commonly after code is merged or pushed from one branch to another. CD should only occur after CI tests have passed.
 
-## Continuous Deployment in GitHub Actions
+### Continuous Deployment in GitHub Actions
 
-GitHub Actions is a CI/CD (Continuous Integration/Continuous Deployment) provider that integrates directly with GitHub.
+`.github/workflows/deploy.yaml` is a CD workflow that runs on every push to the `main` branch. It: 
 
-Github Actions is configured by putting `yaml` files into the `.github/workflows` folder of a Github repository.
-
-`.github/workflows/deploy.yaml` is a CI workflow that runs on every push to the `main` branch.
-
-It sets up Node & Python environments, installs dependencies, and then deploys a CDK app to AWS:
+- sets up Node & Python environments, 
+- installs dependencies, 
+- deploys a CDK app to AWS.
 
 ```yaml
 fn:.github/workflows/deploy.yaml
