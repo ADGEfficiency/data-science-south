@@ -32,8 +32,7 @@ The file `.github/workflows/test.yaml` below is a CI workflow that runs on every
 - installs dependencies, 
 - then runs tests using the Python library `pytest`.
 
-```yaml
-fn:.github/workflows/test.yaml
+```yaml { title = ".github/workflows/test.yaml" }
 name: test
 
 on:
@@ -73,8 +72,7 @@ CD is based around deploying Git branches, commonly after code is merged or push
 - installs dependencies, 
 - deploys a CDK app to AWS.
 
-```yaml
-fn:.github/workflows/deploy.yaml
+```yaml { title = ".github/workflows/deploy.yaml" }
 name: deploy
 
 on:

@@ -34,7 +34,7 @@ words:
  [0 0 0]]
 ```
 
-Our embedded sentence has a dimensionality of `lang:python:(4, 3)`:
+Our embedded sentence has a dimensionality of `(4, 3)`:
 
 <!--phmdoctest-share-names-->
 ```python
@@ -125,11 +125,11 @@ To calculate the query, key and value vectors we need three sets of weights.
 
 The dimensionality of the embeddings and weights determine the dimensionality of the query, key and value vectors:
 
-1. The query dimensionality is set by the embedding dimension and an arbitrary dimension `lang:python:d_query`,
-2. The key dimensionality is set by the query dimensionality `lang:python:d_query`,
-3. The values dimensionality is set by the values dimension `lang:python:d_values`.
+1. The query dimensionality is set by the embedding dimension and an arbitrary dimension `d_query`,
+2. The key dimensionality is set by the query dimensionality `d_query`,
+3. The values dimensionality is set by the values dimension `d_values`.
 
-The values dimension `lang:python:d_values` is arbitrary, and will set the size of the output context vector.
+The values dimension `d_values` is arbitrary, and will set the size of the output context vector.
 
 <!--phmdoctest-share-names-->
 ```python

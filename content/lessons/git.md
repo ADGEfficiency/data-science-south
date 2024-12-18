@@ -5,9 +5,18 @@ competencies:
 - "Software Engineering"
 ---
 
+memes
+
+delete-repo.webp - memorize commands, delete report, fresh copy
+
+merge-master.jpg - merging to master
+
+https://xkcd.com/1296/ - commit messages
+
+---
+
 ## Why Learn Git?
 
-- **Widely used** - the standard tool for version control for software engineers and data professionals.
 - **Version control** - allows developers to maintain a history of changes in a code base.
 - **Collaboration** - allows multiple developers to work on the same code base.
 
@@ -15,15 +24,18 @@ competencies:
 
 **Different developers use different tools for using Git**.
 
-This lesson focuses on using Git through a terminal via a CLI.
+This lesson focuses on using Git through a terminal via a CLI. This is because if we can use Git via a CLI, we can use it both interactively as we work and in [CI/CD pipelines](/lessons/ci-cd).
+
+Other Git tools include:
+
+- IDE's like PyCharm or VSCode,
+- GUI programs like GitKraken or Github Desktop.
 
 Git commits & branches can be naturally visualized, making visual tools popular and useful.
 
-If you prefer a more visual way to use Git, feel free to use a tool like GitKraken or Github Desktop and repeat the actions we do in the terminal in your Git GUI program.
-
 ### Git CLI
 
-[Install Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - you can then use the Git CLI `lang:shell-session:$ git`:
+[Install Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - you can then use the Git CLI `$ git`:
 
 ```shell-session
 $ git --help
@@ -73,15 +85,26 @@ to read about a specific subcommand or concept.
 See 'git help git' for an overview of the system.
 ```
 
-### Git Kraken
+If you aren't comfortable with a terminal, [work through the lesson on the Bash Shell first](/lessons/bash-shell).
 
-Git Kraken is a GUI developed by Axosoft -- [you can install it here](https://www.gitkraken.com).
+## Minimal Git Workflow
 
-![](/static/lesson/git-patterns/kraken.png)
+The commands below
 
-### TODO - VS Code Plugins
+```shell-session
+$ git status
+$ git add -u
+$ git commit -m 'message'
+$ git push
+```
 
-### TODO - inside Databricks
+Other Git operations need to happen before we run these commands (like `git init` or `git clone`).
+
+## How safe is Git?
+
+can't corrupt the source / origin repo
+
+can lose work
 
 ## Version Control
 
@@ -103,7 +126,7 @@ This keep everything approach means that anything you commit to a repository wil
 
 ### Local Repositories
 
-A local repository is created on a developer's computer using the `lang:shell-session:$ git init`, and is contained in a folder called `lang:shell-session:.git`. 
+A local repository is created on a developer's computer using the `$ git init`, and is contained in a folder called `.git`. 
 
 It contains a copy of the entire project commit history, including all the commits and branches. A local repository can be used for version control and collaboration even when working offline.
 
@@ -113,27 +136,26 @@ A remote repository is a copy of the local repository that is stored on a remote
 
 The remote allows developers to share their work.
 
-A remote repository can be created using `lang:shell-session:$ git remote add`, and it can be connected to a local repository using `lang:shell-session:$ git push` and `lang:shell-session:$ git pull`.
-
+A remote repository can be created using `$ git remote add`, and it can be connected to a local repository using `$ git push` and `$ git pull`.
 
 
 ### Initializing a Repo
 
-The `lang:shell-session:$ git init` command is used to initialize a new repository in the current directory:
+The `$ git init` command is used to initialize a new repository in the current directory:
 
 ```shell-session
 $ git init
 Initialized empty Git repository in .git/
 ```
 
-It creates a directory `lang:shell-session:.git`, that contains data for the new Git repository:
+It creates a directory `.git`, that contains data for the new Git repository:
 
 ```shell-session
 $ ls .git
 HEAD            config          description     hooks           info            objects         refs
 ```
 
-You don't need to understand or look at these files - the most important thing to know is that the `lang:shell-session:.git` folder is where Git will store the entire history of your Git project:
+You don't need to understand or look at these files - the most important thing to know is that the `.git` folder is where Git will store the entire history of your Git project:
 
 ```shell-session
 $ tree .git
@@ -168,7 +190,7 @@ $ tree .git
 
 ### Status
 
-The `lang:shell-session:$ git status` command allows you to check the status of your repository:
+The `$ git status` command allows you to check the status of your repository:
 
 ```shell-session
 $ git status
@@ -193,7 +215,7 @@ Be careful though - if you remove this folder (and you don't have a remote copy 
 
 **A repository (or repo) holds all the files and metadata associated with a codebase, including the codebase's commit history and branches**.  
 
-A repository is created using `lang:shell-session:$ git init`. A repository can be either local or remote.
+A repository is created using `$ git init`. A repository can be either local or remote.
 
 Status will show you what files are staged or unstaged and tracked versus untracked.
 
@@ -207,7 +229,7 @@ Git joins changes from multiple files into a single unit - a commit.  These comm
 
 ### Commit Hashes
 
-A commit has unique hash identifier - a string like `lang:shell-session:d6a583a419797104d985ab8aaa471a153cd24d2f`.  
+A commit has unique hash identifier - a string like `d6a583a419797104d985ab8aaa471a153cd24d2f`.  
 
 The hash uniquely identifies a commit.
 
@@ -219,9 +241,9 @@ When developers are reviewing the commits of others, they often only look at the
 
 ### Adding Untracked Files to a Commit
 
-Commits are created using `lang:shell-session:$ git commit` and include a message - a short bit of text that describes what changes are made with each commit.
+Commits are created using `$ git commit` and include a message - a short bit of text that describes what changes are made with each commit.
 
-Let's create a new Git repository with `lang:shell-session:$ git init`, and create a file `lang:shell-session:README.md`:
+Let's create a new Git repository with `$ git init`, and create a file `README.md`:
 
 ```shell-session
 $ git init
@@ -269,7 +291,7 @@ $ git commit -m 'initial commit'
  create mode 100644 README.md
 ```
 
-We now have this commit in our history, which we can see through `lang:shell-session:$ git log`:
+We now have this commit in our history, which we can see through `$ git log`:
 
 ```shell-session
 $ git log --stat
@@ -288,7 +310,7 @@ These changes to our Git repository live only on our local machine.
 
 ### Adding Multiple Files to a Commit 
 
-Let's simulate some more work by changing our `lang:shell-session:README.md` file.
+Let's simulate some more work by changing our `README.md` file.
 
 Git now tells us that we have changes to tracked files that are unstaged:
 
@@ -304,7 +326,7 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-Let's add a new file - this file `lang:shell-session:main.py` is untracked by Git:
+Let's add a new file - this file `main.py` is untracked by Git:
 
 ```shell-session
 $ touch main.py
@@ -322,7 +344,7 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-We can add both of these changes into a single commit with `lang:shell-session:$ git add .`, which adds all changes in the current directory and subdirectories:
+We can add both of these changes into a single commit with `$ git add .`, which adds all changes in the current directory and subdirectories:
 
 ```shell-session
 $ git add .
@@ -334,9 +356,9 @@ Changes to be committed:
 	new file:   main.py
 ```
 
-We now have two changes staged for commit - one change to a tracked file `lang:shell-session:README.md` and a new untracked file `lang:shell-session:main.py`.
+We now have two changes staged for commit - one change to a tracked file `README.md` and a new untracked file `main.py`.
 
-We can create the Git commit using `lang:shell-session:$ git commit -m 'message`:
+We can create the Git commit using `$ git commit -m 'message`:
 
 ```shell-session
 $ git commit -m 'second commit'
@@ -345,7 +367,7 @@ $ git commit -m 'second commit'
  create mode 100644 main.py
 ```
 
-`lang:shell-session:git log` now shows our two commits:
+`git log` now shows our two commits:
 
 ```shell-session
 $ git log --stat
@@ -373,22 +395,22 @@ Date:   Sat Aug 5 15:14:38 2023 +1200
 
 There are a few ways to add files to a Git commit:
 
-- `lang:shell-session:$ git add README.md` - tracks & changes in a file `README.md`,
-- `lang:shell-session:$ git add .` - tracks & changes all files in all directories,
-- `lang:shell-session:$ git add -u` - adds changes in all tracked files (untracked files are ignored),
-- `lang:shell-session:$ git add *` - tracks & changes all files in the current directory only.
+- `$ git add README.md` - tracks & changes in a file `README.md`,
+- `$ git add .` - tracks & changes all files in all directories,
+- `$ git add -u` - adds changes in all tracked files (untracked files are ignored),
+- `$ git add *` - tracks & changes all files in the current directory only.
 
 ### Commit History
 
 Commits are organized in a linear sequence which allows developers to see the entire history of changes made to the project. This linear sequence is the commit history.
 
-The entire commit history is stored in the project's repository and can be viewed using `lang:shell-session: $ git log`.
+The entire commit history is stored in the project's repository and can be viewed using ` $ git log`.
 
 ### Log
 
-The `lang:shell-session:$ git log` command displays a list of all the commits made to the repository.
+The `$ git log` command displays a list of all the commits made to the repository.
 
-Each entry shown by `lang:shell-session:$ git log` includes the commit's SHA-1 checksum, the author's name and email, the date and time of the commit, and the commit message.
+Each entry shown by `$ git log` includes the commit's SHA-1 checksum, the author's name and email, the date and time of the commit, and the commit message.
 
 ```shell-session
 $ git log
@@ -399,10 +421,10 @@ Date:   Mon May 30 23:12:39 2023 +0000
     Initial commit
 ```
 
-Two useful `lang:shell-session:$ git log` commands are:
+Two useful `$ git log` commands are:
 
-- show all files changed in the last 5 commits - `lang:shell-session:git log --pretty=fuller --abbrev-commit --stat -n 5`,
-- show all files changed with diffs in the last 5 commits - `lang:shell-session:git log --pretty=fuller --abbrev-commit --stat -n 5`,
+- show all files changed in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
+- show all files changed with diffs in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
 
 ## GitHub
 
@@ -450,14 +472,14 @@ Almost always it's best to initialize empty repositories on GitHub.
 
 Next, you need to link your local repository to the remote repository on GitHub and push your commits to it. To do this, use the following commands:
 
-Now you have a repository on GitHub, you can push your local repo up into GitHub by adding it as a remote repository called `lang:shell-session:origin`:
+Now you have a repository on GitHub, you can push your local repo up into GitHub by adding it as a remote repository called `origin`:
 
 ```shell-session
 $ git remote add origin https://github.com/USER/the-repo-name
 $ git push -u origin master
 ```
 
-`lang:shell-session:git push -u origin master` pushes your commits to the 'master' branch of the 'origin' repository. The `lang:shell-session:-u` flag tells Git to remember the parameters.
+`git push -u origin master` pushes your commits to the 'master' branch of the 'origin' repository. The `-u` flag tells Git to remember the parameters.
 
 Now your local Git repository is connected & backed up to your GitHub repository, enabling version control.  
 
@@ -469,11 +491,11 @@ Other developers can now clone and work on it separately, enabling collaboration
 
 **Branches allow you to work on multiple features or bug fixes in parallel without affecting the main development branch**. 
 
-A branch is given a human readable name like `lang:shell-session:amazing-new-feature` or `lang:shell-session:fix-the-bug`.
+A branch is given a human readable name like `amazing-new-feature` or `fix-the-bug`.
 
 ### Creating a New Branch
 
-A branch is created using the `lang:shell-session:$ git branch` command and can be switched between using the `lang:shell-session:git checkout` command. 
+A branch is created using the `$ git branch` command and can be switched between using the `git checkout` command. 
 
 When a branch is created, it is based on the current state of the codebase, and it includes all the commits up to that point. 
 
@@ -481,7 +503,7 @@ Any new commits made while on that branch will be added to that branch, creating
 
 ### Merging Branches
 
-Once the work on a branch is finished, it can be merged back into the main codebase using `lang:shell-session:$ git push`, `lang:shell-session:$ git pull` or `lang:shell-session:$ git merge`. This allows developers to incorporate their work into any other branch.
+Once the work on a branch is finished, it can be merged back into the main codebase using `$ git push`, `$ git pull` or `$ git merge`. This allows developers to incorporate their work into any other branch.
 
 The ability to work on multiple branches allows developers to work on features or bug fixes in separate versions of the same codebase, without affecting other branches of the codebase.
 
@@ -495,7 +517,7 @@ For example, prefixing with `feature/` or `bug/` or a GitHub issue number can he
 
 By default Git starts on the master branch:
 
-For Git the `lang:shell-session:master` branch is the default branch - it's the one that is automatically created when you create a Git repository:
+For Git the `master` branch is the default branch - it's the one that is automatically created when you create a Git repository:
 
 ```shell-session
 $ git status
@@ -503,28 +525,28 @@ On branch master
 nothing to commit, working tree clean
 ```
 
-It's also common for the default branch to be called `lang:shell-session:main`.
+It's also common for the default branch to be called `main`.
 
 ### Creating a New Branch
 
-We can create a new branch using `lang:shell-session:git branch`:
+We can create a new branch using `git branch`:
 
 ```shell-session
 $ git branch tech/requirements
 ```
 
-We can then switch to this branch with `lang:shell-session:git checkout`:
+We can then switch to this branch with `git checkout`:
 
 ```shell-session
 $ git checkout tech/requirements
 Switched to branch 'tech/requirements'
 ```
 
-This new branch is at the same state as `lang:shell-session:master`.
+This new branch is at the same state as `master`.
 
 ### Adding Commits to a Branch
 
-We can add commits to a branch using our `lang:shell-session:git add` and `lang:shell-session:git commit` workflow:
+We can add commits to a branch using our `git add` and `git commit` workflow:
 
 ```shell-session
 $ echo "pandas" >> requirements.txt
@@ -537,9 +559,9 @@ $ git commit -m 'added Python pip requirements'
 
 ### Showing the Diff Between Two Branches
 
-We now have two branches `lang:shell-session:master` and `lang:shell-session:tech/requirements`.
+We now have two branches `master` and `tech/requirements`.
 
-We can look at the difference between these branches using `lang:shell-session:git diff`:
+We can look at the difference between these branches using `git diff`:
 
 ```shell-session
 $ git diff master tech/requirements
@@ -556,7 +578,7 @@ Diffs can be quite large -- many developers will view the diff between branches 
 
 ### Merging Branches
 
-We can bring our changes from `lang:shell-session:tech/requirements` into our `lang:shell-session:master` branch using `lang:shell-session:git pull`:
+We can bring our changes from `tech/requirements` into our `master` branch using `git pull`:
 
 ```shell-session
 $ git checkout master
@@ -571,9 +593,9 @@ Fast-forward
  create mode 100644 requirements.txt
 ```
 
-`lang:shell-session:git pull` allows specifying the repository (in the command above `lang:shell-session:.`).
+`git pull` allows specifying the repository (in the command above `.`).
 
-It's also possible to use `lang:shell-session:git merge`:
+It's also possible to use `git merge`:
 
 ```shell-session
 $ git checkout master
@@ -588,7 +610,7 @@ Fast-forward
 
 ### Pushing a Branch to the GitHub Remote
 
-Currently we have our two branches locally -- we can push these branches up to our remote repository `lang:shell-session:origin` on GitHub:
+Currently we have our two branches locally -- we can push these branches up to our remote repository `origin` on GitHub:
 
 ```shell-session
 $ git push origin master

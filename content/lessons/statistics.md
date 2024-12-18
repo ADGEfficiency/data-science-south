@@ -3,6 +3,7 @@ title: Statistics
 summary: Don't be fooled by randomness!
 competencies:
 - Algorithms
+draft: true
 ---
 
 ## Why Learn Statistics?

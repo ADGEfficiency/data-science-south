@@ -74,9 +74,25 @@ Working with Python requires being able to work both with different versions of 
 
 **[uv]() is a tool for managing different versions of Python**. It's an alternative to using pyenv, miniconda or installing Python from a downloaded installer.
 
+example
+
 **uv is also a tool for managing virtual environments in Python**. It's an alternative to venv or miniconda.  Virtual environments allow separate installations of Python to live side-by-side.
 
+example
+
 **uv is also a tool for managing Python dependencies and packages**. It's an alternative to pip. Both pip and Poetry are used to install and upgrade third party packages.
+
+example - simple pyproject, uv.lock
+
+Running tools:
+
+```shell-session
+$ uv tool run --python 3.11 pytest 
+```
+
+```shell-session
+$ uv tool run --python 3.12 pytest 
+```
 
 *Tip - create a `.python-version` file to automatically switch to a pyenv-virtualenv virtual environment when you enter a directory.*
 
@@ -84,7 +100,27 @@ Working with Python requires being able to work both with different versions of 
 
 **[Ruff]() is a tool to lint and format Python code** - it is an alternatives to tools like autopep8.
 
+Ruff's big thing is being written in Rust - this makes it fast.  When used with Black to ensure consistent code style, Ruff covers much of the Flake8 rule set, along with other rules such as isort.
 
+A great way to use Ruff is with the defaults and check everything.  
+
+The code below has three problems - we use an undefined variable `datas`, it has imports in the wrong place and imports something we don't use:
+
+```python { title = "ruff.py" }
+data = datas[0]
+import collections
+```
+
+Running Ruff in the same directory points out the issues:
+
+```shell-session
+$ ruff check .
+ruff.py:1:8: F821 Undefined name `datas`
+ruff.py:2:1: E402 Module level import not at top of file
+ruff.py:2:8: F401 [*] `collections` imported but unused
+Found 3 errors.
+[*] 1 potentially fixable with the --fix option.
+```
 
 *Tip - Ruff is quick enough to run on file save during development - your text editor will allow this somehow!*
 
@@ -143,6 +179,8 @@ Static type checking will catch some bugs that many unit test suites won't.  Sta
 
 ## pydantic
 
+TODO mention pydantic 2.0
+
 **[pydantic](https://pydantic-docs.helpmanual.io/) is a tool for organizing and validating data in Python** - it's an alternative to using dictionaries or dataclasses.
 
 pydantic is part of Python's typing revolution - pydantic's ability to create custom types makes writing typed Python a joy.
@@ -187,7 +225,7 @@ class User(pydantic.BaseModel):
     id: str = None
 
     @pydantic.validator('id')
-    def validate_id(cls, user_id):
+    def validate_id(cls, user_id:str ) -> str | None:
         try:
             user_id = uuid.UUID(user_id, version=4)
             print(f"{user_id} is valid")
@@ -302,7 +340,15 @@ import rich
 
 user = {'name': 'omega', 'id': 'invalid'}
 print(f" normal printing\nuser {user}\n")
-rich.print(f" :wave: [bold blue]rich[/] [green]printing[/]\nuser {user}\n")
+rich.print(f" :wave: rich printing\nuser {user}\n")
+```
+
+```
+ normal printing
+user {'name': 'omega', 'id': 'invalid'}
+
+ 👋 rich printing
+user {'name': 'omega', 'id': 'invalid'}
 ```
 
 ![](/static/blog/hypermodern-python/rich.png)
@@ -311,7 +357,12 @@ If you are happy with Rich you can simplify your code by replacing the built-in 
 
 ```python
 from rich import print
+
 print('this will be printed with rich :clap:')
+```
+
+```
+this will be printed with rich 👏
 ```
 
 ![](/static/blog/hypermodern-python/rich2.png)
@@ -323,8 +374,6 @@ print('this will be printed with rich :clap:')
 ## Pandera
 
 ## DuckDB
-
-## Streamlit
 
 ## HTMX
 

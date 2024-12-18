@@ -89,8 +89,7 @@ $ ls
 
 We can use the shell as a programming language via shell scripting - an example shell script that lists the current directory using `ls`:
 
-```bash
-fn:script.sh
+```bash { title = "script.sh" }
 #!/usr/bin/env bash
 ls
 ```
@@ -531,8 +530,7 @@ This is different from running a file, which will execute the commands in a new 
 
 One common use of `source` is to load environment variables into the current shell:
 
-```bash
-fn:myfile
+```bash { title = "myfile" }
 NAME=value
 ```
 
@@ -665,8 +663,7 @@ $ bash script.sh
 
 Let's start with the traditional Hello World program as a Bash script:
 
-```bash
-fn:script.sh
+```bash { title = "script.sh" }
 #!/usr/bin/env bash
 
 #  comments in Bash use a #
@@ -679,8 +676,7 @@ echo "Hello, World!"
 
 We can add a variable for a name:
 
-```bash
-fn:script.sh
+```bash { title = "script.sh" }
 #!/usr/bin/env bash
 
 name="adam"
@@ -713,8 +709,7 @@ $ ./myscript.sh adam
 
 Inside the script, you can access the arguments using special variables -- `$1` refers to the first argument:
 
-```bash
-fn:script.sh
+```bash { title = "script.sh" }
 #!/usr/bin/env bash
 
 name=$1
