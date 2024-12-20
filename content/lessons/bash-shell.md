@@ -5,7 +5,7 @@ competencies:
 - "Software Engineering"
 ---
 
-## Why Learn the Shell?
+## Why Learn Bash?
 
 - **Efficiently use a computer** - precision
 - **Repeat and automate tasks** - automating text based commands is easier than automating pointing and clicking. 

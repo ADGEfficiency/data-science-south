@@ -26,11 +26,7 @@ GitHub Actions integrates directly with GitHub.
 
 Github Actions is configured with `yaml` files into the `.github/workflows` folder of a GitHub repository.
 
-The file `.github/workflows/test.yaml` below is a CI workflow that runs on every pull request to the `main` branch. It:
-
-- sets up a Python environment, 
-- installs dependencies, 
-- then runs tests using the Python library `pytest`.
+The file `.github/workflows/test.yaml` below is a CI workflow that runs on every pull request to the `main` branch:
 
 ```yaml { title = ".github/workflows/test.yaml" }
 name: test
@@ -47,10 +43,13 @@ jobs:
         - uses: actions/checkout@v3
 
         - uses: actions/setup-python@v4
+          name: setup a python environment
           with:
             python-version: 3.10.6
 
-        - run: |
+        # 
+        - name: install dependencies and run tests
+          run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pytest tests
@@ -66,11 +65,7 @@ CD is based around deploying Git branches, commonly after code is merged or push
 
 ### Continuous Deployment in GitHub Actions
 
-`.github/workflows/deploy.yaml` is a CD workflow that runs on every push to the `main` branch. It: 
-
-- sets up Node & Python environments, 
-- installs dependencies, 
-- deploys a CDK app to AWS.
+`.github/workflows/deploy.yaml` is a CD workflow that runs on every push to the `main` branch:
 
 ```yaml { title = ".github/workflows/deploy.yaml" }
 name: deploy
@@ -87,6 +82,7 @@ jobs:
         - uses: actions/checkout@v3
 
         - uses: actions/setup-node@v2
+          name: setup node
           with:
             node-version: '18'
 
@@ -94,14 +90,17 @@ jobs:
             npm install aws-cdk-lib@2.75.0
 
         - uses: actions/setup-python@v4
+          name: setup a python environment
           with:
             python-version: 3.10.6
 
-        - run: |
+        - name: install dependencies
+          run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
-        - run: |
+        - name: run cdk deploy with environment variables
+          run: |
             cdk deploy --require-approval never
           env:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
