@@ -126,7 +126,7 @@ This keep everything approach means that anything you commit to a repository wil
 
 ### Local Repositories
 
-A local repository is created on a developer's computer using the `$ git init`, and is contained in a folder called `.git`. 
+A local repository is created on a developer's computer using the `git init`, and is contained in a folder called `.git`. 
 
 It contains a copy of the entire project commit history, including all the commits and branches. A local repository can be used for version control and collaboration even when working offline.
 
@@ -136,12 +136,12 @@ A remote repository is a copy of the local repository that is stored on a remote
 
 The remote allows developers to share their work.
 
-A remote repository can be created using `$ git remote add`, and it can be connected to a local repository using `$ git push` and `$ git pull`.
+A remote repository can be created using `git remote add`, and it can be connected to a local repository using `git push` and `git pull`.
 
 
 ### Initializing a Repo
 
-The `$ git init` command is used to initialize a new repository in the current directory:
+The `git init` command is used to initialize a new repository in the current directory:
 
 ```shell-session
 $ git init
@@ -190,7 +190,7 @@ $ tree .git
 
 ### Status
 
-The `$ git status` command allows you to check the status of your repository:
+The `git status` command allows you to check the status of your repository:
 
 ```shell-session
 $ git status
@@ -215,7 +215,7 @@ Be careful though - if you remove this folder (and you don't have a remote copy 
 
 **A repository (or repo) holds all the files and metadata associated with a codebase, including the codebase's commit history and branches**.  
 
-A repository is created using `$ git init`. A repository can be either local or remote.
+A repository is created using `git init`. A repository can be either local or remote.
 
 Status will show you what files are staged or unstaged and tracked versus untracked.
 
@@ -241,9 +241,9 @@ When developers are reviewing the commits of others, they often only look at the
 
 ### Adding Untracked Files to a Commit
 
-Commits are created using `$ git commit` and include a message - a short bit of text that describes what changes are made with each commit.
+Commits are created using `git commit` and include a message - a short bit of text that describes what changes are made with each commit.
 
-Let's create a new Git repository with `$ git init`, and create a file `README.md`:
+Let's create a new Git repository with `git init`, and create a file `README.md`:
 
 ```shell-session
 $ git init
@@ -291,7 +291,7 @@ $ git commit -m 'initial commit'
  create mode 100644 README.md
 ```
 
-We now have this commit in our history, which we can see through `$ git log`:
+We now have this commit in our history, which we can see through `git log`:
 
 ```shell-session
 $ git log --stat
@@ -344,7 +344,7 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-We can add both of these changes into a single commit with `$ git add .`, which adds all changes in the current directory and subdirectories:
+We can add both of these changes into a single commit with `git add .`, which adds all changes in the current directory and subdirectories:
 
 ```shell-session
 $ git add .
@@ -358,7 +358,7 @@ Changes to be committed:
 
 We now have two changes staged for commit - one change to a tracked file `README.md` and a new untracked file `main.py`.
 
-We can create the Git commit using `$ git commit -m 'message`:
+We can create the Git commit using `git commit -m 'message`:
 
 ```shell-session
 $ git commit -m 'second commit'
@@ -395,22 +395,22 @@ Date:   Sat Aug 5 15:14:38 2023 +1200
 
 There are a few ways to add files to a Git commit:
 
-- `$ git add README.md` - tracks & changes in a file `README.md`,
-- `$ git add .` - tracks & changes all files in all directories,
-- `$ git add -u` - adds changes in all tracked files (untracked files are ignored),
-- `$ git add *` - tracks & changes all files in the current directory only.
+- `git add README.md` - tracks & changes in a file `README.md`,
+- `git add .` - tracks & changes all files in all directories,
+- `git add -u` - adds changes in all tracked files (untracked files are ignored),
+- `git add *` - tracks & changes all files in the current directory only.
 
 ### Commit History
 
 Commits are organized in a linear sequence which allows developers to see the entire history of changes made to the project. This linear sequence is the commit history.
 
-The entire commit history is stored in the project's repository and can be viewed using ` $ git log`.
+The entire commit history is stored in the project's repository and can be viewed using ` git log`.
 
 ### Log
 
-The `$ git log` command displays a list of all the commits made to the repository.
+The `git log` command displays a list of all the commits made to the repository.
 
-Each entry shown by `$ git log` includes the commit's SHA-1 checksum, the author's name and email, the date and time of the commit, and the commit message.
+Each entry shown by `git log` includes the commit's SHA-1 checksum, the author's name and email, the date and time of the commit, and the commit message.
 
 ```shell-session
 $ git log
@@ -421,7 +421,7 @@ Date:   Mon May 30 23:12:39 2023 +0000
     Initial commit
 ```
 
-Two useful `$ git log` commands are:
+Two useful `git log` commands are:
 
 - show all files changed in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
 - show all files changed with diffs in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
@@ -495,7 +495,7 @@ A branch is given a human readable name like `amazing-new-feature` or `fix-the-b
 
 ### Creating a New Branch
 
-A branch is created using the `$ git branch` command and can be switched between using the `git checkout` command. 
+A branch is created using the `git branch` command and can be switched between using the `git checkout` command. 
 
 When a branch is created, it is based on the current state of the codebase, and it includes all the commits up to that point. 
 
@@ -503,7 +503,7 @@ Any new commits made while on that branch will be added to that branch, creating
 
 ### Merging Branches
 
-Once the work on a branch is finished, it can be merged back into the main codebase using `$ git push`, `$ git pull` or `$ git merge`. This allows developers to incorporate their work into any other branch.
+Once the work on a branch is finished, it can be merged back into the main codebase using `git push`, `git pull` or `git merge`. This allows developers to incorporate their work into any other branch.
 
 The ability to work on multiple branches allows developers to work on features or bug fixes in separate versions of the same codebase, without affecting other branches of the codebase.
 
