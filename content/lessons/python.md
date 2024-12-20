@@ -621,19 +621,11 @@ print(MathRobot.get_robot_count())
 
 ## Files
 
-### The `pathlib` Python Library
+`pathlib` is part of the Python standard library.  It provides an object-oriented way of working with file and directory paths, and is available in Python 3.4.
 
-`pathlib` is part of the Python standard library.  
+The `pathlib.Path` object represents a file system path. This can be for either a file or a directory.
 
-It provides an object-oriented way of working with file and directory paths, and is available in Python 3.4.
-
-### The `pathlib.Path` Object
-
-The `pathlib.Path` object is represents a file system path.  
-
-The path can be for either a file or a directory.
-
-### Creating a Path Object
+### Creating a `pathlib.Path` Object
 
 You can create a `pathlib.Path` object by instantiating it with a string:
 
