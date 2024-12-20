@@ -1,6 +1,6 @@
 ---
 title: Git Best Practices
-summary: Git
+summary: Five patterns to guide your Git workflows.
 ---
 
 ## Commit Messages

@@ -19,16 +19,16 @@ Each however is a distinct tool - all three are used when using a computer via t
 
 **The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with computers through text commands.
 
-![](/static/lesson/why-shell/f1.png '<a class="hover:text-cyan-400 hover:underline" href="https://en.wikipedia.org/wiki/File:DEC_VT100_terminal_transparent.png">The DEC VT100 Terminal</a>')
+![The DEC VT100 Terminal](/images/bash-shell/terminal.png "The DEC VT100 Terminal")
 
-The terminal originates in the mainframe era of computing.  Historically a terminal was hardware, with a keyboard and a screen.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
+The terminal originates in the mainframe era of computing.  **Historically a terminal was hardware**.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
-The terminals most developers use today are software - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
+**The terminals developers use today are software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
 
 Popular terminal emulators include:
-- iTerm2 (Mac), 
-- Windows Terminal (Windows),
-- Gnome Terminal (Linux).
+- **MacOS** - iTerm2,
+- **Windows** - Windows Terminal,
+- **Ubuntu** - Gnome Terminal.
 
 ## Command-Line
 
@@ -47,8 +47,8 @@ A shell is a computer program that executes text commands. You can combine many 
 
 Shells are used in two ways:
 
-1. as a REPL (Read-Eval-Print Loop) that runs interactively,
-2. as programming language that runs via scripts.
+1. **as a REPL** (Read-Eval-Print Loop) that runs interactively,
+2. **as a programming language** that runs via scripts.
 
 A shell is automatically started in a new terminal. When you write text in the command-line of a terminal, it is executed in a shell, the output displayed, and then a new command line prompt is shown, ready for the next user input.
 
@@ -58,10 +58,10 @@ A shell is automatically started in a new terminal. When you write text in the c
 
 There are many different shells available -- commonly used shells are:
 
-- `sh` -- the Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`).
-- `bash` -- the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
-- `zsh` -- the default shell on MacOS, which improves on Bash,
-- `PowerShell` -- a shell developed by Microsoft for Windows.
+- **sh** - the Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`).
+- **Bash** - the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
+- **zsh** - the default shell on MacOS, which improves on Bash,
+- **PowerShell** - a shell developed by Microsoft for Windows.
 
 The best shells to know are the ones that are most easily available in the cloud. Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud.
 
@@ -106,10 +106,10 @@ A shell has its own syntax and set of commands, along with a collection of progr
 
 Common shell programs include:
 
-- `ls` -- list files & directories,
-- `pwd` -- print working directory,
-- `cd` -- change directory,
-- `cat` -- print file contents.
+- `ls` - list files & directories,
+- `pwd` - print working directory,
+- `cd` - change directory,
+- `cat` - print file contents.
 
 A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
 
@@ -121,17 +121,17 @@ Bash use the space character to separate commands & arguments.
 
 This makes working at the shell natural, but requires some care when using with spaces.  
 
-**The shell will expand spaces by default into separate commands** -- this means that spaces in the wrong places can cause shell scripts to break.
+**The shell will expand spaces by default into separate commands** - this means that spaces in the wrong places can cause shell scripts to break.
 
 We can use the `echo` program to print text to the terminal.
 
-The `echo` program takes an argument of the text to print -- enclosing our message `"this is fine"` in quotes will prevent the shell from expanding the spaces in our message:
+The `echo` program takes an argument of the text to print - enclosing our message `"this is fine"` in quotes will prevent the shell from expanding the spaces in our message:
 
 ```shell-session
 $ echo "this is fine"
 ```
 
-This space based expansion is one reason why you should never put spaces in file names -- use `-` or `_` as a separator in file names:
+This space based expansion is one reason why you should never put spaces in file names - use `-` or `_` as a separator in file names:
 
 ```bash
 #  this is bad
@@ -385,9 +385,9 @@ This enables the composition of programs, with programs generating text for each
 
 The shell establishes three text streams:
 
-- standard input (stdin) -- the input stream, in a REPL this is the keyboard,
-- standard output (stdout) -- the output stream, in a REPL this is the terminal console,
-- standard error (stderr) -- the error output stream, in a REPL this is also the terminal console.
+- **standard input stdin** - the input stream, in a REPL this is the keyboard,
+- **standard output stdout** - the output stream, in a REPL this is the terminal console,
+- **standard error stderr** - the error output stream, in a REPL this is also the terminal console.
 
 ![](/static/mermaid/redirection1.svg)
 
@@ -415,7 +415,7 @@ $ ls -l > files.txt
 
 ### Appending Output
 
-The `>` command will overwrite -- if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
+The `>` command will overwrite - if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
 
 ```shell-session
 $ ls -l >> files.txt
@@ -443,15 +443,15 @@ $ ls -l | grep ".txt" | sort | head -n 5
 
 ### Environment Variables
 
-The shell is a stateful system -- a shell stores data in between execution of programs.  This data is stored in environment variables.
+The shell is a stateful system - a shell stores data in between execution of programs.  This data is stored in environment variables.
 
 Environment variables can set and accessed in the shell, and then used as part of shell commands.
 
-Programming languages like Python can access environment variables -- in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in.
+Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in.
 
 #### Setting an Environment Variable
 
-We can set an environment variable using `NAME=VALUE` -- note the lack of space around the `=`:
+We can set an environment variable using `NAME=VALUE` - note the lack of space around the `=`:
 
 ```shell-session
 $ stage=production
@@ -468,9 +468,9 @@ production
 
 #### Exporting Environment Variables to Sub-Processes
 
-Our shell is run in a process -- there are hundreds of processes running on your computer now.
+Our shell is run in a process - there are hundreds of processes running on your computer now.
 
-Many actions we take in a shell create a new process -- this new process is called a sub-process.  For example, when we run a Python script in a shell, a new Python process is created.
+Many actions we take in a shell create a new process - this new process is called a sub-process.  For example, when we run a Python script in a shell, a new Python process is created.
 
 Environment variables are not inherited by sub processes.
 
@@ -501,7 +501,7 @@ The `PATH` environment variable is a list of directories, separated by a `:`.
 
 The `PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `PATH` makes that program accessible via a shell from any directory.
 
-The `PATH` variable will be quite long -- a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
+The `PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
 
 ```shell-session
 $ echo $PATH | tr ":" "\n"
@@ -559,7 +559,7 @@ When you log into a system and start a shell, that's called a login shell. Login
 
 When you start a new terminal window or a new shell in an existing session, those are non-login shells. They read a different set of configuration files, and settings last only for the life of the shell.
 
-This distinction depends on your operating system -- for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
+This distinction depends on your operating system - for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
 
 ## Aliases
 
@@ -582,28 +582,25 @@ $ "ls"
 
 ## Shell Scripting
 
-Why shell scripts?  Shell scripts allow:
+### Why Shell Scripts?  
 
-- code reuse,
-- automation of routine tasks, 
-- running jobs in the background, 
-- chaining together multiple commands or scripts. 
+Shell scripts allow:
+
+- **code reuse**,
+- **automation**,
+- **composing multiple commands or scripts**. 
 
 Bash is frequently used for scripting as it's the default shell on common Linux distributions like Ubuntu.
 
-Even you are using Zsh as an interactive REPL via a terminal, you can still run scripts using the Bash program -- below would work in both Zsh and Bash:
+Even you are using Zsh as an interactive REPL via a terminal, you can still run scripts using the Bash program - below would work in both Zsh and Bash:
 
 ```shell-session
 $ bash script.sh
 ```
 
-The shell is able to find the program `bash` in it's `$PATH`.
-
 ### What is a Script?
 
-A script is a text file containing lines of commands.
-
-Any command that can be executed in the terminal can also be put into a Bash script.
+A script is a text file containing lines of commands. Any command that can be executed in the terminal REPL with the Bash shell can also be put into a Bash script.
 
 ### The Shebang
 
@@ -629,13 +626,13 @@ $ ./script.sh
 
 Common shebangs include:
 
-- Python `#!/usr/bin/env python`,
-- Bash `#!/usr/bin/env bash`,
-- Sh `#!/usr/bin/env sh`.
+- **Python** - `#!/usr/bin/env python`,
+- **Bash** - `#!/usr/bin/env bash`,
+- **sh** - `#!/usr/bin/env sh`.
 
 We use `/bin/env` as this will find the program wherever it occurs in the `$PATH` shell environment variable.
 
-## File Permissions and Execution
+### File Permissions and Execution
 
 Before you can run your script using the `./` syntax, it must have execute permissions.
 
@@ -685,7 +682,26 @@ echo "Hello, $name!"
 
 We use the `$name` syntax to refer to the value of the `name` variable within the script.
 
-### Functions in Bash
+### Accepting Command Line Arguments
+
+Command line arguments provide a way to customize the behavior of a script each time it's run. They are provided after the script name, separated by spaces.
+
+Inside the script, you can access the arguments using special variables - `$1` refers to the first argument:
+
+```bash { title = "myscript.sh" }
+#!/usr/bin/env bash
+
+name=$1
+echo "Hello, $name!"
+```
+
+Running a Bash script with command line arguments:
+
+```shell-session
+$ ./myscript.sh adam
+```
+
+## Functions 
 
 We can write a function in a Bash script using the `function` keyword:
 
@@ -697,21 +713,3 @@ function greet {
 greet "adam"
 ```
 
-### Accepting Command Line Arguments
-
-Command line arguments provide a way to customize the behavior of a script each time it's run. They are provided after the script name, separated by spaces.
-
-Here is an example of running a bash script with command line arguments:
-
-```shell-session
-$ ./myscript.sh adam
-```
-
-Inside the script, you can access the arguments using special variables -- `$1` refers to the first argument:
-
-```bash { title = "script.sh" }
-#!/usr/bin/env bash
-
-name=$1
-echo "Hello, $name!"
-```
