@@ -63,7 +63,7 @@ The hardest thing about learning Python is learning to install & manage Python. 
 
 Even senior developers can struggle with the complexity of managing Python, especially if it is not their main language.
 
-![The xkcd classic commentary on the complex Python ecosystem.](/static/blog/hypermodern-python/python_environment_xkcd.png "The xkcd classic commentary on the complex Python ecosystem.")
+![The xkcd classic commentary on the complex Python ecosystem.](/images/hypermodern-2025/python_environment_xkcd.png)
 
 **[uv]() is a tool for managing different versions of Python**. It's an alternative to using pyenv, miniconda or installing Python from a downloaded installer.
 
@@ -456,8 +456,6 @@ user {'name': 'omega', 'id': 'invalid'}
 user {'name': 'omega', 'id': 'invalid'}
 ```
 
-![](/static/blog/hypermodern-python/rich.png)
-
 If you are happy with Rich you can simplify your code by replacing the built-in print with the Rich print:
 
 ```python
@@ -469,8 +467,6 @@ print('this will be printed with rich :clap:')
 ```
 this will be printed with rich 👏
 ```
-
-![](/static/blog/hypermodern-python/rich2.png)
 
 *Tip - Rich offers much more than color and emojis - including displaying tabular data and better trackbacks of Python errors.*
 
@@ -564,12 +560,7 @@ schema = DataFrameSchema(
 )
 ```
 
-We can now validate data using this schema. The validation will:
-
-- Check data types match (DateTime, float, str)
-- Ensure sales values are within bounds (0 to 10000)
-- Verify regions are valid (North, South, East, West)
-- Convert date strings to DateTime objects (coerce=True)
+We can now validate data using this schema, which will check data types. along with our checks on the `sales` and the `region` columns:
 
 ```python
 data = pl.DataFrame({
@@ -578,7 +569,7 @@ data = pl.DataFrame({
     "region": ["North", "South", "East"]
 })
 
-schema(data)
+print(schema(data))
 ```
 
 ```
