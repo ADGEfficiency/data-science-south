@@ -21,3 +21,6 @@ test:
 
 search:
 	npx -y pagefind --site public
+
+build: syntax search
+	hugo --gc --minify
