@@ -10,15 +10,15 @@ tags:
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤
 
-![Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white'. Seed: 4.<br />Created with Stable Diffusion 1.](/static/blog/hypermodern-python/hero.png "Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white'. Seed: 4.<br />Created with Stable Diffusion 1.")
+![TODO](/images/hypermodern-2025/hero.png)
 
 This post provides clarity with a **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2025.
 
 ## Python 3.11
 
-Both 3.11 and 3.12 have brought performance improvements to Python. We choose 3.11 here because 3.12 is still a bit unstable with many popular libraries.
+Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 as the version to use as 3.12 is still a bit unstable with some popular data science libraries.
 
-**Python 3.11 added better tracebacks** - the exact location of the error is pointed out.  This improves the information available to you during development and debugging.
+**Python 3.11 added better tracebacks** - the exact location of the error is pointed out in the traceback.  This improves the information available to you during development and debugging.
 
 The code below has a mistake. We want to assign a value to the first element of `data`, but the code refers to a non-existent variable `datas`:
 
@@ -30,7 +30,7 @@ datas[0] = 2
 
 With pre 3.10 versions of Python, this results in an error traceback that points out that the variable `datas` doesn't exist:
 
-```shell-session {shelldocwhatever}
+```shell-session
 $ uv run --python 3.9 --no-project mistake.py
 ```
 
@@ -41,9 +41,9 @@ Traceback (most recent call last):
 NameError: name 'datas' is not defined
 ```
 
-Python 3.11 takes it's diagnosis two steps further and also offers a solution that the variable should be called `data` instead, and points out where on the line the error occurred:
+Python 3.11 takes its diagnosis two steps further and also offers a solution that the variable should be called `data` instead, and points out where on the line the error occurred:
 
-```shell-session {shelldocwhatever}
+```shell-session
 $ uv run --python 3.11 --no-project mistake.py
 ```
 
@@ -59,9 +59,7 @@ So much of programming is reading & responding error messages - these improvemen
 
 ## uv
 
-The hardest thing about learning Python is learning to install & manage Python. Working with Python requires being able to work both with different versions of Python and with different Python virtual environments.
-
-Even senior developers can struggle with the complexity of managing Python, especially if it is not their main language.
+The hardest thing about learning Python is learning to install & manage Python. Even senior developers can struggle with the complexity of managing Python, especially if it is not their main language.
 
 ![The xkcd classic commentary on the complex Python ecosystem.](/images/hypermodern-2025/python_environment_xkcd.png)
 
@@ -78,7 +76,9 @@ hello
 $ uv venv --python 3.11
 ```
 
-**uv is also a tool for managing Python dependencies and packages**. It's an alternative to pip. Both pip and Poetry are used to install and upgrade third party packages.
+**uv is also a tool for managing Python dependencies and packages**. It's an alternative to pip. Pip, Poetry and uv can all be used to install and upgrade Python packages.
+
+Below is an example `pyproject.toml`:
 
 ```toml {title = "pyproject.toml"}
 [project]
@@ -94,16 +94,19 @@ dependencies = [
 test = ["pytest>=7.0.0"]
 ```
 
+Creating virtual environment at is a simple as `uv venv` - remember to activate the virtual environment with `source .venv/bin/activate`:
+
 ```shell-session
 $ uv venv --python 3.11
 ```
 
 ```
-warning: `VIRTUAL_ENV=/Users/adamgreen/.venv` does not match the project environment path `.venv` and will be ignored
 Using CPython 3.11.9 interpreter at: /Users/adamgreen/.nix-profile/bin/python3.11
 Creating virtual environment at: .venv
 Activate with: source .venv/bin/activate
 ```
+
+Installing a project can be doing by pointing `uv pip install` at our `pyproject.toml`:
 
 ```shell-session
 $ uv pip install -r pyproject.toml
@@ -122,6 +125,7 @@ Installed 11 packages in 61ms
  + urllib3==2.2.3
 ```
 
+Like Poetry, uv can lock the dependencies into `uv.lock`:
 
 ```shell-session
 $ uv lock
@@ -131,8 +135,7 @@ $ uv lock
 Resolved 17 packages in 5ms
 ```
 
-
-Running tools:
+uv can also be used to add tools - TODO
 
 ```shell-session
 $ uv tool run --python 3.11 pytest 
@@ -149,11 +152,11 @@ $ which pytest
 /Users/adamgreen/.local/bin/pytest
 ```
 
-*Tip - create a `.envrc` with direnv to automatically switch to the correct Python version when you enter a directory.*
+*Tip - add the direnv tool with a `.envrc` to automatically switch to the correct Python version when you enter a directory.*
 
 ## ruff
 
-**[Ruff]() is a tool to lint and format Python code** - it is an alternatives to tools like autopep8.
+**[Ruff](https://docs.astral.sh/ruff/) is a tool to lint and format Python code** - it is an alternatives to tools like Black or autopep8.
 
 Ruff's big thing is being written in Rust - this makes it fast.  When used with Black to ensure consistent code style, Ruff covers much of the Flake8 rule set, along with other rules such as isort.
 
@@ -316,54 +319,32 @@ These pydantic types can become the primitive data structures in your Python pro
 
 **[Typer](https://typer.tiangolo.com/) is a tool for building command line interfaces (CLIs) using type hints in Python** - it's an alternative to sys.argv or argparse.
 
-We can build a Python CLI with Poetry and Typer by first creating a Python package with Poetry, adding `typer` as a dependency).
+We can build a Python CLI with uv and Typer by first creating a Python package with uv, adding `typer` as a dependency).
 
 Here we use `$ uv init` to create a new project from scratch:
 
 ```shell-session
-$ uv init --name typer-demo
-$ uv venv
+$ uv init --name demo --python 3.11.10 --package
 ```
 
 ```shell-session
 $ tree .
-```
-
-```
+.
 ├── .python-version
-├── .venv
-│   ├── .gitignore
-│   ├── bin
-│   │   ├── activate
-│   │   ├── activate.bat
-│   │   ├── activate.csh
-│   │   ├── activate.fish
-│   │   ├── activate.nu
-│   │   ├── activate.ps1
-│   │   ├── activate_this.py
-│   │   ├── deactivate.bat
-│   │   ├── pydoc.bat
-│   │   ├── python ⇒ /Users/adamgreen/.nix-profile/bin/python3.11
-│   │   ├── python3 ⇒ python
-│   │   └── python3.11 ⇒ python
-│   ├── CACHEDIR.TAG
-│   ├── lib
-│   │   └── python3.11
-│   │       └── site-packages
-│   │           ├── _virtualenv.pth
-│   │           └── _virtualenv.py
-│   └── pyvenv.cfg
-├── hello.py
 ├── pyproject.toml
-└── README.md
+├── README.md
+└── src
+    └── demo
+        └── __init__.py
 ```
 
 ```shell-session
 $ uv add typer
-Resolved 26 packages in 1.79s
-Prepared 8 packages in 3.11s
-Installed 8 packages in 14ms
- + click==8.1.7
+Using CPython 3.11.10
+Creating virtual environment at: .venv
+Resolved 10 packages in 2ms
+Installed 8 packages in 9ms
+ + click==8.1.8
  + markdown-it-py==3.0.0
  + mdurl==0.1.2
  + pygments==2.18.0
@@ -373,9 +354,32 @@ Installed 8 packages in 14ms
  + typing-extensions==4.12.2
 ```
 
-We then add a Python file `./general/cli.py` with our Typer CLI:
+```toml { title = "pyproject.toml" }
+[project]
+name = "demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Adam Green", email = "adam.green@adgefficiency.com" }
+]
+requires-python = ">=3.11.10"
+dependencies = [
+    "typer>=0.15.1",
+]
 
-```python { title = "./general/cli.py" }
+[project.scripts]
+demo = "demo:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+```
+
+
+We then add modify the Python file `src/demo/__init__.py` to include a simple CLI:
+
+```python { title = "src/demo/\_\_init\_\_.py" }
 import typer
 
 def main(name: str) -> None:
@@ -385,43 +389,19 @@ if __name__ == "__main__":
     typer.run(main)
 ```
 
-We can now run this CLI by running `python ./general/cli.py`:
+Because we have included a `[project.scripts]` in our `pyproject.toml`, we can run this CLI with `uv run`:
 
 ```shell-session
-$ python ./general/cli.py omega
+$ uv run demo
 Hello omega
 ```
 
 Typer gives us a `--help` flag for free:
 
 ```shell-session
-$ python general/cli.py --help
-Usage: cli.py [OPTIONS] NAME
-
-Arguments:
-  NAME  [required]
-
-Options:
-  --install-completion  Install completion for the current shell.
-  --show-completion     Show completion for the current shell, to copy it or
-                        customize the installation.
-  --help                Show this message and exit.
+$ python src/demo/__init__.py --help
 ```
 
-We can take this one step further, by adding a script to our `pyproject.toml`. `general-cli` will now point towards the `main` function in `general.cli`:
-
-```toml {title = "pyproject.toml"}
-# TODO TODO
-[tool.poetry.scripts]
-general-cli = "general.cli:main"
-```
-
-This then allows us to run our Typer CLI using `$ poetry run general-cli`:
-
-```shell-session
-$ poetry run general-cli zeta
-hello zeta
-```
 
 *Tip - you can create nested CLI groups using commands and command groups.*
 
@@ -463,13 +443,13 @@ this will be printed with rich 👏
 
 ## Polars
 
-**Polars is a tool for fast data manipulation and analysis in Python** - it's an alternative to Pandas.
+**Polars is a tool for tabular data manipulation in Python** - it's an alternative to Pandas.
 
-Built in Rust, Polars offers exceptional performance through query optimization and parallelization.
+Polars can offer exceptional performance through query optimization. It can also work with larger than memory datasets.  It also has a syntax that may prefer to Pandas.
 
 In eager-execution frameworks like Pandas, each data transformation is run without knowledge of what came before and after. By allowing data to be evaluated lazily, Polars can optimize across a series of data transformations.  
 
-The example below shows query optimization with a toy dataset with three columns:
+The example below demonstrates query optimization. Let's start with a dataset of three columns:
 
 ```python
 import polars as pl
@@ -481,25 +461,30 @@ df = pl.DataFrame({
 })
 ```
 
-We can then chain operations together and run them in one optimized query.  Below we chain together column creation and aggregation:
+We can then chain operations together and run them in a single optimized query.  Below we chain together column creation and aggregation into one query:
 
 ```python
-result = (df
+result = (
+    df
     # start lazy evaluation
     # Polars won't execute anything until .collect()
     .lazy()
     # with columns adds new columns
-    .with_columns([
-        # Parse string to date
-        pl.col('date').str.strptime(pl.Date).alias('date'),
-        # Add a new column with running total
-        pl.col('sales').cum_sum().alias('cumulative_sales')
-    ])
-    .group_by('region')
-    .agg([
-        pl.col('sales').mean().alias('avg_sales'),
-        pl.col('sales').count().alias('n_days')
-    ])
+    .with_columns(
+        [
+            # Parse string to date
+            pl.col("date").str.strptime(pl.Date).alias("date"),
+            # Add a new column with running total
+            pl.col("sales").cum_sum().alias("cumulative_sales"),
+        ]
+    )
+    .group_by("region")
+    .agg(
+        [
+            pl.col("sales").mean().alias("avg_sales"),
+            pl.col("sales").count().alias("n_days"),
+        ]
+    )
     # run the optimized query
     .collect()
 )
@@ -519,15 +504,17 @@ shape: (2, 3)
 └────────┴───────────┴────────┘
 ```
 
-*Tip - Polars has powerful string operations with `pl.col("column").str`.*
+*Tip - Polars has no concept of index - a `pl.DataFrame` is a table with each column having the same data type, with no column being more or less special than another.*
+
+*Tip - you can use `pl.DataFrame.to_pandas()` to convert a Polars DataFrame to a Pandas DataFrame. This can be useful to slowly refactor a Pandas based pipeline into a Polars based pipeline.*
 
 ## Pandera
 
-Pandera is a tool for data validation and testing of Pandas and Polars - it's an alternative to Great Expectations or assert statements.
+**Pandera is a tool for data quality of DataFrames**- it's an alternative to Great Expectations or assert statements.
 
 Pandera allows you to define schemas for your data, which can then be used to validate, clean, and transform your data. By defining schemas upfront, Pandera can catch data issues before they propagate through your analysis pipeline.
 
-First let's create a schema for some sales data:
+Let's create a schema for some sales data.  We define column names, types, and data quality checks like if null values are acceptable, numeric upper and lower bound constraints and check accepted values for categorical data:
 
 ```python
 import polars as pl
@@ -551,7 +538,7 @@ schema = DataFrameSchema(
 )
 ```
 
-We can now validate data using this schema, which will check data types. along with our checks on the `sales` and the `region` columns:
+We can now validate data using this schema:
 
 ```python
 data = pl.DataFrame({
@@ -576,11 +563,27 @@ shape: (3, 3)
 └────────────┴────────┴────────┘
 ```
 
-*Tip - Use Pandera's check decorators to add custom validation logic beyond simple range and type checks. Custom checks can validate complex business rules or statistical properties of your data.*
+When we have *bad data*, Pandera will raise an exception:
+
+```python
+data = pl.DataFrame({
+    "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
+    "sales": [-1000, 1200, 950],
+    "region": ["North", "South", "East"]
+})
+
+print(schema(data))
+```
+
+```
+TODO
+```
+
+*Tip - Check decorators can enable custom validation logic beyond simple range and type checks. Custom checks can validate complex business rules or statistical properties of your data.*
 
 ## DuckDB
 
-**DuckDB is database for fast analytical SQL querying** - it's an alternative to SQLite, Polars and Pandas.
+**DuckDB is database for analytical SQL queries** - it's an alternative to SQLite, Polars and Pandas.
 
 Like SQLite, DuckDB is a single-file database. While SQLite are optimized for transactional workloads, DuckDB is specifically designed for analytical queries on structured data.
 
@@ -641,13 +644,13 @@ print(
 
 DuckDB shines when working with larger than memory datasets. It can efficiently query Parquet files directly without loading them into memory first.
 
-*Tip - Use DuckDB's EXPLAIN command to understand query execution plans and optimize your queries. For example, `con.execute("EXPLAIN SELECT * FROM 'sales.csv'")` shows how DuckDB will process your query.*
+*Tip - Use DuckDB's EXPLAIN command to understand query execution plans and optimize your queries.*
 
 ## Loguru
 
-**[Loguru](https://github.com/Delgan/loguru) is a tool for adding logging to Python applications** - it's an alternative to the standard library's logging module and structlog.
+**[Loguru](https://github.com/Delgan/loguru) is a logger** - it's an alternative to the standard library's logging module and structlog.  Loguru builds on top of the Python standard library `logging` module.  It's not a complete rethinking, but a few tweaks here and there to make logging from Python programs less painful.
 
-Loguru's central idea is that there is only one `logger`. In a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many.
+A central Loguru idea is that there is only one `logger`. This is a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many. Because Loguru builds on top of the Python `logging` module, it's easy to swap in a Loguru logger for a Python standard library `logging.Logger`.
 
 Let's see how Loguru simplifies logging. First, a basic example:
 
@@ -682,20 +685,20 @@ logger.add(
 )
 ```
 
-*Tip - Use `@logger.catch` decorators liberally on your main functions - it will catch and log any exceptions with rich tracebacks while allowing your application to continue running. This is especially useful during development and debugging.*
+*Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.**
 
-## The Toolbox
+## The 2025 Toolbox
 
-The **Hypermodern Python Toolbox** is:
+The **2025 Hypermodern Python Toolbox** is:
 
-- [**Python 3.10**](https://www.python.org/downloads/release/python-3100/) for better error messages,
-- [**pyenv**](https://github.com/pyenv/pyenv) & [**pyenv-virtualenv**](https://github.com/pyenv/pyenv-virtualenv) for managing Python versions and virtual environments,
-- [**Poetry**](https://python-poetry.org/docs/) for managing Python packages & dependencies,
-- [**Black**](https://black.readthedocs.io/en/stable/) & [**isort**](https://pycqa.github.io/isort/) for formatting Python code,
-- [**Ruff**](https://github.com/antonmedv/ruff) for linting Python code,
+- [**Python 3.11**](https://www.python.org/downloads/release/python-3110/) for better error messages,
+- [uv](https://docs.astral.sh/uv/) for managing Python, virtual environments, and dependencies.
+- [**Ruff**](https://docs.astral.sh/ruff/) for formatting and linting Python code,
 - [**mypy**](http://mypy-lang.org/) for static type checking,
-- [**pydantic**](https://pydantic-docs.helpmanual.io/) for organizing & validating data,
+- [**pydantic**](https://pydantic-docs.helpmanual.io/) for organizing code and validating data,
 - [**Typer**](https://typer.tiangolo.com/) for typed CLIs,
-- [**zxpy**](https://github.com/tusharsadhwani/zxpy) for running shell commands inside Python,
 - [**Rich**](https://rich.readthedocs.io/en/stable/) for pretty printing to the terminal.
+- [Polars](https://docs.pola.rs/) for manipulating tabular data,
+- [DuckDB](https://duckdb.org/docs/) for a single file, analytical SQL database,
+- [Loguru](https://loguru.readthedocs.io/en/stable/) for logging.
 

@@ -7,15 +7,17 @@ competencies:
 
 ## Why Learn Bash?
 
-- **Efficiently use a computer** - precision
-- **Repeat and automate tasks** - automating text based commands is easier than automating pointing and clicking. 
-- **Unlock powerful tools** - some development tasks can only be done through the shell - many are best done through a shell.
+Bash is one of the tools needed to enable a terminal based developer workflow.
+
+The terminal, command line and shell are often used interchangeably. Each however is a distinct tool - all three are used when using a computer via text input. If you don't know what the differences are - this lesson is for you.
+
+You should learn Bash so that you can:
+
+- **Efficiently use a computer** - text is a precise way to use a computer.
+- **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
+- **Unlock powerful tools** - many development tasks can only be done through a terminal.
 
 ## Terminal
-
-The terminal, command line and shell are often used interchangeably. 
-
-Each however is a distinct tool - all three are used when using a computer via text input.
 
 **The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with computers through text commands.
 
@@ -43,7 +45,7 @@ this is the command line
 
 ## The Shell
 
-A shell is a computer program that executes text commands. You can combine many different shells with a given terminal emulator.
+**A shell is a computer program that executes text commands**. 
 
 Shells are used in two ways:
 
@@ -63,6 +65,8 @@ There are many different shells available -- commonly used shells are:
 - **zsh** - the default shell on MacOS, which improves on Bash,
 - **PowerShell** - a shell developed by Microsoft for Windows.
 
+You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
+
 The best shells to know are the ones that are most easily available in the cloud. Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud.
 
 ### Shell Notation
@@ -75,9 +79,9 @@ For example, if you see:
 $ ls
 ```
 
-To reproduce this in your terminal, you only need to type `ls`.
+To reproduce this in your terminal, you only need to type `ls`, then `Enter` to run the command in the REPL.
 
-### Using the Bash Shell as a REPL
+### Bash as a REPL
 
 We can use the shell as a REPL to list the current directory files & directories using the `ls` program:
 
@@ -85,7 +89,7 @@ We can use the shell as a REPL to list the current directory files & directories
 $ ls
 ```
 
-### Using the Shell as a Programming Language
+### Bash as a Programming Language
 
 We can use the shell as a programming language via shell scripting - an example shell script that lists the current directory using `ls`:
 
@@ -134,17 +138,17 @@ $ echo "this is fine"
 This space based expansion is one reason why you should never put spaces in file names - use `-` or `_` as a separator in file names:
 
 ```bash
-#  this is bad
+# don't do this
 /folder name/file name.txt
 
-#  do this instead
+# do this instead
 /folder-name/file_name.txt
 ```
 
-If you do use spaces, you may end up seeing (or having to write!) your paths by escaping the spaces with a `bash\`:
+If you do use spaces, you may end up seeing (or having to write!) your paths by escaping the spaces with the escape character `\`:
 
 ```bash
-#  this is harder to work with
+# this is harder to work with
 /folder\ name/file\ name.txt
 ```
 
@@ -385,9 +389,15 @@ This enables the composition of programs, with programs generating text for each
 
 The shell establishes three text streams:
 
-- **standard input stdin** - the input stream, in a REPL this is the keyboard,
-- **standard output stdout** - the output stream, in a REPL this is the terminal console,
-- **standard error stderr** - the error output stream, in a REPL this is also the terminal console.
+- **standard input** (stdin) - the input stream,
+- **standard output** (stdout) - the output stream,
+- **standard error** (stderr) - the error output stream.
+
+When using Bash as a REPL, the three text streams are connected to:
+
+- stdin - the keyboard,
+- stdout - the terminal console,
+- stderr - also the terminal console.
 
 ![](/static/mermaid/redirection1.svg)
 
@@ -425,7 +435,7 @@ This will sort the lines in the `unsorted.txt` file.
 
 ### Pipes
 
-The pipe operator `|` allows you to chain commands together by passing the output of one command as input to another. This enables powerful command combinations without needing temporary files.
+**The pipe operator `|` allows you to chain commands together by passing the output of one command as input to another**. This enables composition of commands without using temporary files.
 
 A pipe connects the standard output of the first command to the standard input of the second command.
 
@@ -663,7 +673,7 @@ Let's start with the traditional Hello World program as a Bash script:
 ```bash { title = "script.sh" }
 #!/usr/bin/env bash
 
-#  comments in Bash use a #
+# comments in Bash use a #
 echo "Hello, World!"
 ```
 
