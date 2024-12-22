@@ -30,7 +30,7 @@ datas[0] = 2
 
 With pre 3.10 versions of Python, this results in an error traceback that points out that the variable `datas` doesn't exist:
 
-```shell-session
+```shell-session {shelldocwhatever}
 $ uv run --python 3.9 --no-project mistake.py
 ```
 
@@ -43,7 +43,7 @@ NameError: name 'datas' is not defined
 
 Python 3.11 takes it's diagnosis two steps further and also offers a solution that the variable should be called `data` instead, and points out where on the line the error occurred:
 
-```shell-session
+```shell-session {shelldocwhatever}
 $ uv run --python 3.11 --no-project mistake.py
 ```
 
@@ -68,20 +68,14 @@ Even senior developers can struggle with the complexity of managing Python, espe
 **[uv]() is a tool for managing different versions of Python**. It's an alternative to using pyenv, miniconda or installing Python from a downloaded installer.
 
 ```shell-session
-$ uv python install 3.13
-$ uv run --python 3.13 -c "hello"
+$ uv run --python 3.13 --no-project python -c "print('hello')"
+hello
 ```
 
 **uv is also a tool for managing virtual environments in Python**. It's an alternative to venv or miniconda.  Virtual environments allow separate installations of Python to live side-by-side.
 
 ```shell-session
-$ uv venv
-```
-
-```
-Using CPython 3.11.9 interpreter at: /Users/adamgreen/.nix-profile/bin/python3
-Creating virtual environment at: .venv
-Activate with: source .venv/bin/activate
+$ uv venv --python 3.11
 ```
 
 **uv is also a tool for managing Python dependencies and packages**. It's an alternative to pip. Both pip and Poetry are used to install and upgrade third party packages.
@@ -113,9 +107,6 @@ Activate with: source .venv/bin/activate
 
 ```shell-session
 $ uv pip install -r pyproject.toml
-```
-
-```
 Resolved 11 packages in 1.69s
 Installed 11 packages in 61ms
  + certifi==2024.12.14
