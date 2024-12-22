@@ -14,7 +14,7 @@ tags:
 
 This post provides clarity with a **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2025.
 
-## Python 3.11
+## Python 3.11 {shelldocwhatever}
 
 Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 as the version to use as 3.12 is still a bit unstable with some popular data science libraries.
 
@@ -32,9 +32,6 @@ With pre 3.10 versions of Python, this results in an error traceback that points
 
 ```shell-session
 $ uv run --python 3.9 --no-project mistake.py
-```
-
-```
 Traceback (most recent call last):
   File "/Users/adamgreen/data-science-south-neu/mistake.py", line 3, in <module>
     datas[0] = 2
@@ -45,9 +42,6 @@ Python 3.11 takes its diagnosis two steps further and also offers a solution tha
 
 ```shell-session
 $ uv run --python 3.11 --no-project mistake.py
-```
-
-```
 Traceback (most recent call last):
   File "/Users/adamgreen/data-science-south-neu/mistake.py", line 3, in <module>
     datas[0] = 2
@@ -74,11 +68,16 @@ hello
 
 ```shell-session
 $ uv venv --python 3.11
+Using CPython 3.11.10
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate
 ```
+
+You will need to activate the virtual environment to use it.
 
 **uv is also a tool for managing Python dependencies and packages**. It's an alternative to pip. Pip, Poetry and uv can all be used to install and upgrade Python packages.
 
-Below is an example `pyproject.toml`:
+Below is an example `pyproject.toml` for a uv managed project:
 
 ```toml {title = "pyproject.toml"}
 [project]
@@ -92,18 +91,6 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=7.0.0"]
-```
-
-Creating virtual environment at is a simple as `uv venv` - remember to activate the virtual environment with `source .venv/bin/activate`:
-
-```shell-session
-$ uv venv --python 3.11
-```
-
-```
-Using CPython 3.11.9 interpreter at: /Users/adamgreen/.nix-profile/bin/python3.11
-Creating virtual environment at: .venv
-Activate with: source .venv/bin/activate
 ```
 
 Installing a project can be doing by pointing `uv pip install` at our `pyproject.toml`:
@@ -129,20 +116,20 @@ Like Poetry, uv can lock the dependencies into `uv.lock`:
 
 ```shell-session
 $ uv lock
-```
-
-```
 Resolved 17 packages in 5ms
 ```
 
 uv can also be used to add tools - TODO
 
 ```shell-session
-$ uv tool run --python 3.11 pytest 
-```
-
-```shell-session
-$ uv tool run --python 3.12 pytest 
+$ uv tool install --python 3.11 pytest 
+Resolved 4 packages in 525ms
+Installed 4 packages in 7ms
+ + iniconfig==2.0.0
+ + packaging==24.2
+ + pluggy==1.5.0
+ + pytest==8.3.4
+Installed 2 executables: py.test, pytest
 ```
 
 This will add programs that are available outside of a virtual environment:
