@@ -7,8 +7,9 @@ competencies:
 
 ## Why Learn CI/CD?
 
-- **Amplify benefits of tests** - tests allow you to test for incorrectness and improve code with confidence.
-- **Repeatable, low maintenance deployments** - deploy code using consistent, re-runnable pipelines.
+CI/CD is a safety net for developers working in teams. It helps reduce human error by automating two key workflows - testing and deployments.
+
+A well engineered CI/CD system offers **repeatable, low maintenance deployments**.
 
 ## Continuous Integration
 
