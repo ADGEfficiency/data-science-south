@@ -17,6 +17,8 @@ https://xkcd.com/1296/ - commit messages
 
 ## Why Learn Git?
 
+Learning Git will allow you to:
+
 - **Version control** - allows developers to maintain a history of changes in a code base.
 - **Collaboration** - allows multiple developers to work on the same code base.
 

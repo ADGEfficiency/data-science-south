@@ -7,9 +7,14 @@ competencies:
 
 ## Why Learn CI/CD?
 
-CI/CD is a safety net for developers working in teams. It helps reduce human error by automating two key workflows - testing and deployments.
+CI/CD is a safety net for developers working in teams. It helps reduce human error by automating two key development workflows - testing and deployment.
 
-A well engineered CI/CD system offers **repeatable, low maintenance deployments**.
+Learning CI/CD will allow you to:
+
+- **Work with others**.
+- **Avoid human error**.
+
+A well engineered CI/CD system offers repeatable, low maintenance deployments.
 
 ## Continuous Integration
 
@@ -48,7 +53,6 @@ jobs:
           with:
             python-version: 3.10.6
 
-        # 
         - name: install dependencies and run tests
           run: |
           python -m pip install --upgrade pip

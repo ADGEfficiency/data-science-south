@@ -7,25 +7,39 @@ competencies:
 
 ## Why Learn Bash?
 
-Bash is one of the tools needed to enable a terminal based developer workflow.
+The shell is a core development tool. Bash is a commonly used shell, that is readily available in the cloud.
 
-The terminal, command line and shell are often used interchangeably. Each however is a distinct tool - all three are used when using a computer via text input. If you don't know what the differences are - this lesson is for you.
-
-You should learn Bash so that you can:
+Learning how to use a shell will allow you to:
 
 - **Efficiently use a computer** - text is a precise way to use a computer.
 - **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
 - **Unlock powerful tools** - many development tasks can only be done through a terminal.
 
+Learing Bash makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  Learning to use Bash unlocks automation in the cloud.
+
+### Notation
+
+`$` indicates a command is run interactively in a Bash shell -- you don't need to write this leading `$` when you are typing in the shell.
+
+For example, if you see:
+
+```shell-session
+$ ls
+```
+
+To reproduce this in your terminal, you only need to type `ls`, then `Enter` to run the command in the REPL.
+
 ## Terminal
 
-**The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with computers through text commands.
+The terminal, command line and shell are often used interchangeably. They are however different tools - all three are used when using a computer via text input.
+
+**The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with a computer through text commands.
 
 ![The DEC VT100 Terminal](/images/bash-shell/terminal.png "The DEC VT100 Terminal")
 
 The terminal originates in the mainframe era of computing.  **Historically a terminal was hardware**.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
-**The terminals developers use today are software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
+**Today terminals are often software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
 
 Popular terminal emulators include:
 - **MacOS** - iTerm2,
@@ -34,13 +48,12 @@ Popular terminal emulators include:
 
 ## Command-Line
 
-The command-line is the space or interface in the terminal where you type commands. 
+The command-line is the space or interface in the terminal where you can type and execute text commands. 
 
 When you launch your terminal, you are in a command-line interface.
 
 ```shell-session
 $ echo "this is the command line"
-this is the command line
 ```
 
 ## The Shell
@@ -67,19 +80,7 @@ There are many different shells available -- commonly used shells are:
 
 You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
 
-The best shells to know are the ones that are most easily available in the cloud. Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud.
-
-### Shell Notation
-
-`$` indicates a command is run interactively in a Bash shell -- you don't need to write this leading `$` when you are typing in the shell.
-
-For example, if you see:
-
-```shell-session
-$ ls
-```
-
-To reproduce this in your terminal, you only need to type `ls`, then `Enter` to run the command in the REPL.
+The best shells to know are the ones that are most easily available in the cloud. **Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud**.
 
 ### Bash as a REPL
 
@@ -592,13 +593,9 @@ $ "ls"
 
 ## Shell Scripting
 
-### Why Shell Scripts?  
+### Why Use Shell Scripts?  
 
-Shell scripts allow:
-
-- **code reuse**,
-- **automation**,
-- **composing multiple commands or scripts**. 
+Shell scripts allow code reuse and automation.
 
 Bash is frequently used for scripting as it's the default shell on common Linux distributions like Ubuntu.
 
@@ -611,6 +608,26 @@ $ bash script.sh
 ### What is a Script?
 
 A script is a text file containing lines of commands. Any command that can be executed in the terminal REPL with the Bash shell can also be put into a Bash script.
+
+Below prints when we are using Bash as a REPL:
+
+```shell-session
+$ echo "this is printing in the Bash repl"
+this is printing in the Bash repl
+```
+
+Below is a script that prints some text:
+
+```bash { title = "script.sh" }
+echo "this is printing in a Bash script"
+```
+
+We can run this script in the shell to see what it prints:
+
+```shell-session
+$ bash script.sh
+this is printing in a Bash script
+```
 
 ### The Shebang
 

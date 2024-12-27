@@ -7,6 +7,8 @@ competencies:
 
 ## Why Learn Python?
 
+Learning Python will allow you to:
+
 - **Industry standard** - Popular programming language for data work.
 - **Powerful** - Rich ecosystem of data science tools like `pandas` and `scikit-learn`.
 - **Mature** - Massive open-source community providing libraries, tools, and support.
