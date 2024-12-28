@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://datasciencesouth.com'
 languageCode = 'en-us'
 title = 'Data Science South'
 [markup]
@@ -28,6 +28,3 @@ title = 'Data Science South'
 [params]
   mainSections = ["lessons"]
   math = true
-
-
-
