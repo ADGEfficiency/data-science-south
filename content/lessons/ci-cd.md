@@ -11,10 +11,10 @@ CI/CD is a safety net for developers working in teams. It helps reduce human err
 
 Learning CI/CD will allow you to:
 
-- **Work with others**.
-- **Avoid human error**.
+- **Avoid breaking production unnecessarily** - CI checks that code passes tests before merging, avoiding deploying known breaking changes.
+- **Avoid human error** - CD deploys code with a pipeline that requires no manual input.
 
-A well engineered CI/CD system offers repeatable, low maintenance deployments.
+A well engineered CI/CD system offers repeatable, low maintenance deployments.  It's a crucial part of working with others - with CI you know that both your and your colleagues code has passed tests, and that deployments are done consistently across the entire team.
 
 ## Continuous Integration
 
@@ -60,6 +60,41 @@ jobs:
           pytest tests
 ```
 
+In Github Actions, pipelines will automatically be setup when the YAML file is put into the `.github/workflows` folder in a GitHub repository.
+
+### Continuous Integration in Azure DevOps
+
+Azure DevOps also uses pipelines defined in `yaml` to define CI workflows.
+
+Below is an example of a CI pipeline that runs on every pull request to the `main` branch:
+
+```yaml
+trigger:
+- main
+
+pr:
+- main
+
+jobs:
+- job: test
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.10.6'
+      addToPath: true
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+      pytest tests
+    displayName: 'Install dependencies and run tests'
+```
+
+In Azure Devops, pipelines will not automatically run when the YAML file is created.  You need to setup the pipeline through the Azure Devops web interface after adding the YAML file to your Azure Devops respository.
+
 ## Continuous Deployment
 
 Continuous Deployment (CD) is a software engineering technique where changes to a codebase are deployed automatically.
@@ -104,10 +139,56 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
-        - name: run cdk deploy with environment variables
+        - name: deploy with python
           run: |
-            cdk deploy --require-approval never
+            python deploy.py
           env:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
+
+The environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set from secrets in the GitHub repository.  These secrets are usually added manually via the GitHub web interface.
+
+### Continuous Deployment in Azure DevOps
+
+Below is an example of a CD pipeline that runs on every push to the `main` branch:
+
+```yaml
+trigger:
+- main
+
+jobs:
+- job: deploy
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - task: UseNode@2
+    inputs:
+      versionSpec: '18'
+      checkLatest: true
+
+  - script: |
+      npm install aws-cdk-lib@2.75.0
+    displayName: 'Install Node dependencies'
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.10.6'
+      addToPath: true
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install Python dependencies'
+
+  - script: |
+      python deploy.py
+    displayName: 'Deploy with Python'
+    env:
+      CLIENT_ID: $(CLIENT_ID)
+      CLIENT_SECRET: $(CLIENT_SECRET)
+      TENANT_ID: $(TENANT_ID)
+```
+
+The environment variables `CLIENT_ID`, `CLIENT_SECRET` and `TENANT_ID` are set from variables in the Azure Devops pipeline. These secrets are usually added manually via the Azure Devops web interface.
