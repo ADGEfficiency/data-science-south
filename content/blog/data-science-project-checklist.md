@@ -1,7 +1,7 @@
 ---
 title: Data Science Project Checklist
-summary: 'Make your data science projects presentable, reproducible, accessible and extensible.'
-
+description: Make your data science projects presentable, reproducible, accessible and extensible.
+date: 2020-10-16
 ---
 
 ## Why a Checklist?

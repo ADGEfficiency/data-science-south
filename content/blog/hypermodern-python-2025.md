@@ -1,7 +1,7 @@
 ---
 title: Hypermodern Python Toolbox - 2025
 description: Python tools setting the standard in 2025.
-date: 2024-12-05
+date: 2025-01-01
 tags:
 - Python
 - Hypermodern
@@ -14,7 +14,7 @@ tags:
 
 This post provides clarity with a **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2025.
 
-## Python 3.11 {shelldocwhatever}
+## Python 3.11
 
 Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 as the version to use as 3.12 is still a bit unstable with some popular data science libraries.
 

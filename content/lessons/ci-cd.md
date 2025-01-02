@@ -13,6 +13,7 @@ Learning CI/CD will allow you to:
 
 - **Avoid breaking production unnecessarily** - CI checks that code passes tests before merging, avoiding deploying known breaking changes.
 - **Avoid human error** - CD deploys code with a pipeline that requires no manual input.
+- **Get more from your Git repositories** - both CI and CD run based on changes to Git branches, allowing you to make your code changes do things like deploy to production.
 
 A well engineered CI/CD system offers repeatable, low maintenance deployments.  It's a crucial part of working with others - with CI you know that both your and your colleagues code has passed tests, and that deployments are done consistently across the entire team.
 
@@ -161,16 +162,6 @@ jobs:
 - job: deploy
   pool:
     vmImage: 'ubuntu-latest'
-
-  steps:
-  - task: UseNode@2
-    inputs:
-      versionSpec: '18'
-      checkLatest: true
-
-  - script: |
-      npm install aws-cdk-lib@2.75.0
-    displayName: 'Install Node dependencies'
 
   - task: UsePythonVersion@0
     inputs:

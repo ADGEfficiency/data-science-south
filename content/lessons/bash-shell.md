@@ -27,7 +27,7 @@ For example, if you see:
 $ ls
 ```
 
-To reproduce this in your terminal, you only need to type `ls`, then `Enter` to run the command in the REPL.
+You need to type `ls`, then `Enter` to run the command in the REPL.
 
 ## Terminal
 
@@ -37,7 +37,7 @@ The terminal, command line and shell are often used interchangeably. They are ho
 
 ![The DEC VT100 Terminal](/images/bash-shell/terminal.png "The DEC VT100 Terminal")
 
-The terminal originates in the mainframe era of computing.  **Historically a terminal was hardware**.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
+**Historically a terminal was hardware**. The terminal originates in the mainframe era of computing.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
 **Today terminals are often software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
 

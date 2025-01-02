@@ -49,11 +49,12 @@
         <title data-pagefind-meta="title">{{.Title}}</title>
     </head>
     <body class="font-sans leading-normal">
-        <header class="bg-gray-800 text-white hover:text-gray-300 p-4 sticky top-0 z-50 flex items-center">
-            <img src="/logos/light.svg" alt="Site Logo"  width="70" height="70">
-            <h1 class="text-2xl font-bold">
-                <a href="/">{{ .Site.Title }}</a>
-            </h1>
+        <header class="bg-gray-800 sticky top-0 z-50 p-1 pt-2">
+            <a href="/"
+               class="group inline-flex items-center rounded-full hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                <img src="/logos/light.svg" alt="Site Logo" width="50" height="50">
+                <h1 class="text-xl font-bold text-white group-hover:text-gray-800 ml-2 mr-4">{{ .Site.Title }}</h1>
+            </a>
         </header>
         {{ block "main" . }}{{ end }}
     </body>

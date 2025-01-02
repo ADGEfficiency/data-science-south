@@ -5,22 +5,19 @@ competencies:
 - "Software Engineering"
 ---
 
-memes
-
-delete-repo.webp - memorize commands, delete report, fresh copy
-
-merge-master.jpg - merging to master
-
-https://xkcd.com/1296/ - commit messages
-
----
-
 ## Why Learn Git?
 
 Learning Git will allow you to:
 
 - **Version control** - allows developers to maintain a history of changes in a code base.
 - **Collaboration** - allows multiple developers to work on the same code base.
+
+{{% center %}}
+<img safeHTML src="https://imgs.xkcd.com/comics/git.png" title="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." alt="Git">
+{{% /center %}}
+{{% center %}}
+[XKCD #1597](https://xkcd.com/1597/)
+{{% /center %}}
 
 ## Tooling
 
@@ -37,7 +34,7 @@ Git commits & branches can be naturally visualized, making visual tools popular 
 
 ### Git CLI
 
-[Install Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - you can then use the Git CLI `$ git`:
+[Install Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - you can then use the Git CLI:
 
 ```shell-session
 $ git --help
@@ -87,20 +84,27 @@ to read about a specific subcommand or concept.
 See 'git help git' for an overview of the system.
 ```
 
-If you aren't comfortable with a terminal, [work through the lesson on the Bash Shell first](/lessons/bash-shell).
+If you aren't comfortable using a terminal or CLIs, [work through the lesson on the Bash Shell first](/lessons/bash-shell).
 
 ## Minimal Git Workflow
 
-The commands below
+The commands below are what you need to get started:
 
 ```shell-session
+# check which files have been modified
 $ git status
+
+# stage all tracked files that have been modified/deleted
 $ git add -u
+
+# commit staged changes with a descriptive message
 $ git commit -m 'message'
+
+# upload commits to remote repository
 $ git push
 ```
 
-Other Git operations need to happen before we run these commands (like `git init` or `git clone`).
+Other Git operations need to happen before we run these commands (like `git init` or `git clone`) - but the four commands above will get you through the day.
 
 ## How safe is Git?
 
@@ -224,6 +228,13 @@ Status will show you what files are staged or unstaged and tracked versus untrac
 ## Commits
 
 **The commit is the atomic unit of Git**.
+
+{{% center %}}
+<img safeHTML src="https://imgs.xkcd.com/comics/git_commit.png" title="https://imgs.xkcd.com/comics/git_commit.png" alt="Git Commit">
+{{% /center %}}
+{{% center %}}
+[XKCD #1597](https://xkcd.com/1296/)
+{{% /center %}}
 
 Git joins changes from multiple files into a single unit - a commit.  These commits are snapshots of your project at different points in time.
 
@@ -438,6 +449,8 @@ Git is the version control system that tracks changes in your code. GitHub is a 
 
 GitHub is as a central hub where developers can share their code, contribute to others' projects, and collaborate on software development.
 
+Github is not the only platform that developers use to work with Git repositories - services like Azure Devops or Gitlab offer similar functionality to Github.
+
 ### Creating a Repository on Github
 
 So far we have only created a Git repository locally - it only exists on our local machine.
@@ -517,7 +530,11 @@ For example, prefixing with `feature/` or `bug/` or a GitHub issue number can he
 
 ### Master Branch is the Default
 
-By default Git starts on the master branch:
+By default Git starts on the master branch.
+
+{{% center %}}
+<img safeHTML src="https://github.com/ADGEfficiency/programming-resources/blob/master/memes/merge-master.jpg?raw=true">
+{{% /center %}}
 
 For Git the `master` branch is the default branch - it's the one that is automatically created when you create a Git repository:
 

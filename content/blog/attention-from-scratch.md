@@ -1,6 +1,7 @@
 ---
 title: Attention from Scratch
-summary: Attention and Multi-Head Attention in NumPy.
+description: Attention and Multi-Head Attention in NumPy.
+date: 2024-04-24
 ---
 
 ## Embedding Words 
