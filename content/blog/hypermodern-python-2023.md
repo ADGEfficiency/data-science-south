@@ -1,17 +1,16 @@
 ---
-title: Hypermodern Python Toolbox - 2023
+title: 2023 Hypermodern Python Toolbox
 description: Python tools setting the standard in 2023.
 date: 2023-02-25
 tags:
 - Python
 - Hypermodern
-slug: hypermodern-python
 
 ---
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤
 
-![Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white'. Seed: 4.<br />Created with Stable Diffusion 1.](/static/blog/hypermodern-python/hero.png "Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white'. Seed: 4.<br />Created with Stable Diffusion 1.")
+![Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white'. Seed: 4.<br />Created with Stable Diffusion 1.](/images/hypermodern-python-2023/hero.png)
 
 This post provides clarity with the **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2023.
 
@@ -48,7 +47,7 @@ $ python --version
 
 $ python mistake.py
 Traceback (most recent call last):
-  File "/Users/adam/hypermodern-python-2022/mistake.py", line 2, in <module>
+  File "/Users/adam/hypermodern-python/mistake.py", line 2, in <module>
     datas[0] = 2
 NameError: name 'datas' is not defined. Did you mean: 'data'?
 ```

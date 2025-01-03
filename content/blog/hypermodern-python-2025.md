@@ -1,10 +1,11 @@
 ---
-title: Hypermodern Python Toolbox - 2025
+title: 2025 Hypermodern Python Toolbox 
 description: Python tools setting the standard in 2025.
 date: 2025-01-01
 tags:
 - Python
 - Hypermodern
+slug: hypermodern-python
 
 ---
 
@@ -461,19 +462,20 @@ We can then chain operations together and run them in a single optimized query. 
 ```python
 result = (
     df
-    # start lazy evaluation
-    # Polars won't execute anything until .collect()
+    # start lazy evaluation - Polars won't execute anything until .collect()
     .lazy()
-    # with columns adds new columns
+    # with_columns adds new columns
     .with_columns(
         [
-            # Parse string to date
+            # parse string to date
             pl.col("date").str.strptime(pl.Date).alias("date"),
-            # Add a new column with running total
+            # add a new column with running total
             pl.col("sales").cum_sum().alias("cumulative_sales"),
         ]
     )
+    # column to group by
     .group_by("region")
+    # how to aggregate the groups
     .agg(
         [
             pl.col("sales").mean().alias("avg_sales"),
@@ -520,7 +522,7 @@ schema = DataFrameSchema(
     {
         "date": Column(pa.DateTime, nullable=False, coerce=True, title="Date of sale"),
         "sales": Column(
-            float,
+            int,
             checks=[pa.Check.greater_than(0), pa.Check.less_than(10000)],
             title="Daily sales amount",
         ),
@@ -538,9 +540,10 @@ We can now validate data using this schema:
 ```python
 data = pl.DataFrame({
     "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
-    "sales": [-1000, 1200, 950],
+    "sales": [1000, 1200, 950],
     "region": ["North", "South", "East"]
 })
+data = data.with_columns(pl.col("date").str.strptime(pl.Date, "%Y-%m-%d"))
 
 print(schema(data))
 ```
@@ -566,12 +569,13 @@ data = pl.DataFrame({
     "sales": [-1000, 1200, 950],
     "region": ["North", "South", "East"]
 })
+data = data.with_columns(pl.col("date").str.strptime(pl.Date, "%Y-%m-%d"))
 
 print(schema(data))
 ```
 
 ```
-TODO
+SchemaError: Column 'sales' failed validator number 0: <Check greater_than: greater_than(0)> failure case examples: [{'sales': -1000}]
 ```
 
 *Tip - Check decorators can enable custom validation logic beyond simple range and type checks. Custom checks can validate complex business rules or statistical properties of your data.*
@@ -680,9 +684,9 @@ logger.add(
 )
 ```
 
-*Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.**
+*Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.*
 
-## The 2025 Toolbox
+## The 2025 Hypermodern Python Toolbox
 
 The **2025 Hypermodern Python Toolbox** is:
 
