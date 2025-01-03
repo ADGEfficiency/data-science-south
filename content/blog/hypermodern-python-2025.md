@@ -690,7 +690,7 @@ logger.add(
 
 *Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.*
 
-## The 2025 Hypermodern Python Toolbox
+## Summary
 
 The **2025 Hypermodern Python Toolbox** is:
 
