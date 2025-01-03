@@ -108,9 +108,44 @@ Other Git operations need to happen before we run these commands (like `git init
 
 ## How safe is Git?
 
-can't corrupt the source / origin repo
+**Git is designed to protect your code but isn't completely foolproof**. Some Git commands can cause permanent data loss if used incorrectly.
 
-can lose work
+The most dangerous Git commands are:
+
+- `git reset --hard` - discards all uncommitted changes & resets to a specific commit,
+- `git clean -f` - permanently deletes all untracked files,
+- `git push --force` - overwrites remote history (can cause problems for other developers),
+- `git rebase` - rewrites commit history (can cause conflicts for other developers),
+- `git checkout` - can discard uncommitted changes when switching branches.
+
+Most of these you will not need to use in daily work.  If in doubt, copy the folder the Git repository folder so you have a local backup if needed - or better push to a remote repository before doing dangerous commands.
+
+### Remote Repository Safety
+
+Remote repositories (like those on GitHub) are extremely safe:
+
+- impossible to corrupt the remote repository through normal Git operations,
+- all commits are immutable (can't be changed),
+- even if you delete a branch, the commits still exist and can be recovered.
+
+### Local Repository Risks
+
+Your local Git repository can lose work in a few ways:
+
+- uncommitted changes can be lost if you switch branches, run `git reset --hard` or `git checkout`,
+- staged but uncommitted changes can be lost,
+- commits that aren't pushed to a remote can be lost if your local repository is corrupted or deleted.
+
+### Best Practices for Safety
+
+You can keep your work safe by:
+
+- committing work frequently,
+- pushing to a remote repository regularly,
+- being careful with commands that can't be undone (like `git reset --hard`),
+- making sure you understand a Git command before running it.
+
+These practices mean that even if you do lose work locally, you'll only ever lose a small amount of recent changes.
 
 ## Version Control
 
@@ -463,9 +498,7 @@ To put a Git repo onto Github, we need to do a few things:
 
 ### Create the Remote Repository on GitHub
 
-After logging in to Github, you'll find a `'+'` button on the upper right side where you can add a new repository:
-
-![](/static/lesson/git-patterns/github.png)
+After logging in to Github, you'll find a `'+'` button on the upper right side where you can add a new repository.
 
 You'll be directed to a new page where you'll be asked to fill out some information:
 
@@ -480,8 +513,6 @@ Initialize this repository with: This section should typically be left blank as 
 ```
 
 Almost always it's best to initialize empty repositories on GitHub.
-
-![](/static/lesson/git-patterns/github1.png)
 
 ### Push the Local Git Repository to the GitHub Repository
 

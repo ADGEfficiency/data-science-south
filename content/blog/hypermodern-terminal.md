@@ -18,7 +18,9 @@ This post introduces the **Hypermodern Terminal Toolbox** - terminal, shell and 
 
 **[Kitty](https://sw.kovidgoyal.net/kitty/) is a terminal emulator** - it's an alternative to the GNOME Terminal, Alacritty or the Windows Terminal.
 
-![](/images/hypermodern-terminal/kitty-theme.png)
+![](./static/images/hypermodern-terminal/ki
+
+/images/hypermodern-terminal/kitty-theme.png)
 
 A terminal emulator is the program that runs your terminal. Different operating systems (OS) offer different terminal emulators, either as part of the OS or as installable third-party programs. 
 
