@@ -661,6 +661,10 @@ from loguru import logger
 logger.info("Hello, Loguru!")
 ```
 
+```
+2025-01-04 02:28:37.622 | INFO     | __main__:<module>:3 - Hello, Loguru!
+```
+
 Configuring the logger is all done through a single `logger.add` call.
 
 We can configure how we log to `std.out`:
