@@ -16,7 +16,9 @@ This post provides clarity with a **Hypermodern Python Toolbox** - tools that ar
 
 ## Python 3.11
 
-Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 as the version to use as 3.12 is still a bit unstable with some popular data science libraries.
+Python 3.11 and 3.12 both brought performance improvements to Python. 
+
+We choose 3.11 as the version to use in the Hypermodern Toolbox, as 3.12 is still a bit unstable with some popular data science libraries.
 
 **Python 3.11 added better tracebacks** - the exact location of the error is pointed out in the traceback.  This improves the information available to you during development and debugging.
 
@@ -59,12 +61,18 @@ The hardest thing about learning Python is learning to install & manage Python. 
 
 **[uv]() is a tool for managing different versions of Python**. It's an alternative to using pyenv, miniconda or installing Python from a downloaded installer.
 
+uv can be used to run Python commands and scripts with the Python version specified - uv will download the Python version if it needs to.  This massively simplifies the complexity of managing different versions of Python locally.
+
+The command below runs a `hello world` program with Python 3.13:
+
 ```shell-session
-$ uv run --python 3.13 --no-project python -c "print('hello')"
+$ uv run --python 3.13 --no-project python -c "print('hello world')"
 hello
 ```
 
-**uv is also a tool for managing virtual environments in Python**. It's an alternative to venv or miniconda.  Virtual environments allow separate installations of Python to live side-by-side.
+**uv is also a tool for managing virtual environments in Python**. It's an alternative to venv or miniconda.  Virtual environments allow separate installations of Python to live side-by-side, which makes working on different projects possible locally.
+
+The command below creates a virtual environment with Python 3.11:
 
 ```shell-session
 $ uv venv --python 3.11
@@ -73,7 +81,7 @@ Creating virtual environment at: .venv
 Activate with: source .venv/bin/activate
 ```
 
-You will need to activate the virtual environment to use it.
+You will need to activate the virtual environment to use it with `$ source activate .venv/bin`.
 
 **uv is also a tool for managing Python dependencies and packages**. It's an alternative to pip. Pip, Poetry and uv can all be used to install and upgrade Python packages.
 
@@ -93,7 +101,7 @@ dependencies = [
 test = ["pytest>=7.0.0"]
 ```
 
-Installing a project can be doing by pointing `uv pip install` at our `pyproject.toml`:
+Installing a project can be done by pointing `uv pip install` at our `pyproject.toml`:
 
 ```shell-session
 $ uv pip install -r pyproject.toml
@@ -119,7 +127,7 @@ $ uv lock
 Resolved 17 packages in 5ms
 ```
 
-uv can also be used to add tools - TODO
+uv can also be used to add tools, which are globally available Python tools.  The command below installs `pytest` as tool we can use anywhere:
 
 ```shell-session
 $ uv tool install --python 3.11 pytest 
