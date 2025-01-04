@@ -3,7 +3,7 @@ title: Statistics
 summary: Don't be fooled by randomness!
 competencies:
 - Algorithms
-draft: true
+draft: false
 ---
 
 ## Why Learn Statistics?
@@ -329,17 +329,13 @@ Like the mean and median, the mode is a measure of central tendency that can pro
 
 Advantages:
 
-    Useful for categorical data: The mode is a useful measure of central tendency for categorical data, such as colors, names, or types of products. In such cases, the mode provides information about the most common category in the dataset.
-
-    Easy to calculate: The mode is relatively easy to calculate, especially for small datasets. It simply requires counting the frequency of each value in the dataset and identifying the value(s) with the highest frequency.
+- Useful for categorical data: The mode is a useful measure of central tendency for categorical data, such as colors, names, or types of products. In such cases, the mode provides information about the most common category in the dataset.
+- Easy to calculate: The mode is relatively easy to calculate, especially for small datasets. It simply requires counting the frequency of each value in the dataset and identifying the value(s) with the highest frequency.
 
 Disadvantages:
 
-    Limited use for continuous data: The mode is not a useful measure of central tendency for continuous data, such as height or weight, because the probability of any specific value occurring is very small. In such cases, the mode may not provide any meaningful information about the dataset.
-
-    May not exist or be unique: The mode may not exist or be unique in some datasets, especially those with a uniform or random distribution. In such cases, the mode is not a useful measure of central tendency.
-
-Overall, the mode is a useful measure of central tendency in certain situations, especially for categorical data. However, it should be used with caution and in conjunction with other measures of central tendency, such as the mean and median, to provide a more complete picture of the dataset.
+- Limited use for continuous data: The mode is not a useful measure of central tendency for continuous data, such as height or weight, because the probability of any specific value occurring is very small. In such cases, the mode may not provide any meaningful information about the dataset.
+- May not exist or be unique: The mode may not exist or be unique in some datasets, especially those with a uniform or random distribution. In such cases, the mode is not a useful measure of central tendency.
 
 ## Quantiles
 
@@ -396,6 +392,38 @@ print(iqr)
 
 Deviation measures are used to characterize how spread out or random a distribution is.  You should be thinking about deviation measures as measuring the space or width of a distribution.
 
+### Range
+
+The range is the simplest measure of spread in a dataset, calculated as the difference between the maximum and minimum values:
+
+$$
+\text{Range} = \max(x) - \min(x)
+$$
+
+```python
+def calculate_range(data):
+    return max(data) - min(data)
+
+data = [2, 4, 4, 4, 5, 5, 7, 9]
+data_range = calculate_range(data)
+print(f'Range: {data_range}')
+```
+
+Advantages:
+
+- Easy to understand,
+- Gives full span of the data,
+- Same units as original data.
+
+Disadvantages:
+
+- Sensitive to outliers,
+- Doesn't inform about how data is distributed between the extreme values.
+
+### Interquartile Range
+
+### Interdecile Range
+
 ### Mean Absolute Deviation
 
 Mean absolute deviation is the average of the absolute differences between each value in the dataset and the mean:
@@ -417,6 +445,20 @@ def mean_absolute_deviation(data):
 print(mean_absolute_deviation(wide), mean_absolute_deviation(narrow))
 ```
 
+Advantages:
+
+- More robust to outliers than range or standard deviation,
+- Easy to interpret as average distance from mean,
+- Same units as original data,
+- Works well for non-normal distributions.
+
+Disadvantages:
+
+- Less commonly used than standard deviation,
+- Not suitable for further mathematical operations (due to absolute values),
+- Harder to work with analytically than standard deviation,
+- Can be computationally more expensive than range.
+
 ### Maximal Deviation
 
 Maximal deviation is the largest absolute difference between any value in the dataset and the mean:
@@ -437,6 +479,20 @@ def max_deviation(data):
 
 print(max_deviation(wide), max_deviation(narrow))
 ```
+
+Advantages:
+
+- Good for detecting extreme outliers,
+- Useful for setting error bounds or tolerance limits,
+- Same units as original data,
+- Simple to understand as "worst case" deviation.
+
+Disadvantages:
+
+- Sensitive to outliers,
+- Ignores all but the most extreme value,
+- May overstate typical spread of data,
+- Not representative of overall distribution.
 
 ### Standard Deviation
 
@@ -463,12 +519,21 @@ print(standard_deviation(wide))
 print(standard_deviation(narrow))
 ```
 
-If the data is not normally distributed, then the standard deviation may not accurately capture the spread of the dataset.
+Advantages:
 
-If a dataset is highly skewed, with most of the values concentrated on one side of the mean, the standard deviation may be larger than expected, because it is influenced by the few extreme values on the other side of the mean. 
+- Most widely used measure of spread, making it familiar and comparable across studies,
+- Works well with normal distributions and the empirical rule (68-95-99.7 rule),
+- Useful for statistical inference and hypothesis testing,
+- Squaring differences makes it more sensitive to outliers, which is useful in quality control,
+Forms the basis for many advanced statistical methods.
 
-If a dataset has multiple peaks or modes, the standard deviation may not accurately capture the spread of each individual mode.
+Disadvantages:
 
+- Not as intuitive to interpret as MAD since it uses squared differences,
+- Can be misleading for non-normal distributions,
+- More sensitive to outliers than MAD,
+- Units are squared then square-rooted, making direct interpretation less intuitive,
+- May not accurately represent spread in multimodal or highly skewed distributions.
 
 ### Variance
 
@@ -496,6 +561,22 @@ def variance(data):
 print(variance(wide))
 print(variance(narrow))
 ```
+
+Advantages:
+
+- Mathematically tractable for many statistical operations,
+- Additive for independent variables (sum of variances equals variance of sum),
+- Key component in many statistical methods including ANOVA and regression,
+- Squaring makes it particularly useful for optimization problems,
+- More sensitive to outliers than MAD, which is useful in some applications.
+
+Disadvantages:
+
+- Units are squared, making direct interpretation difficult,
+- Not as intuitive as other measures like range or MAD,
+- Can be heavily influenced by outliers,
+- May give too much weight to extreme values due to squaring,
+- Not as useful for highly skewed or heavy-tailed distributions.
 
 Variance is closely related to standard deviation, as the standard deviation is the square root of the variance.
 
@@ -530,8 +611,6 @@ $$ Cov(X, Y) = E[(X - \mu_X) \cdot (Y - \mu_Y)] $$
 where $E$ denotes the expected value, $\mu_X$ is the mean of X, and $\mu_Y$ is the mean of Y.
 
 Covariance can take on any value, positive or negative, depending on the relationship between the two variables. A positive covariance indicates that the two variables tend to increase or decrease together, while a negative covariance indicates that one variable tends to increase when the other decreases.
-
-In Python, we can use the NumPy library to compute the covariance between two arrays of data. Here is an example:
 
 The negative covariance indicates that the variables tend to move in opposite directions.
 
