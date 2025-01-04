@@ -12,12 +12,12 @@ Learning Git will allow you to:
 - **Version control** - allows developers to maintain a history of changes in a code base.
 - **Collaboration** - allows multiple developers to work on the same code base.
 
-{{% center %}}
-<img safeHTML src="https://imgs.xkcd.com/comics/git.png" title="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything." alt="Git">
-{{% /center %}}
-{{% center %}}
-[XKCD #1597](https://xkcd.com/1597/)
-{{% /center %}}
+{{< img 
+    src="https://imgs.xkcd.com/comics/git.png" 
+    alt="Git XKCD Comic" 
+    title="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything."
+    caption="[XKCD #1597](https://xkcd.com/1597/)" 
+>}}
 
 ## Tooling
 
@@ -264,12 +264,12 @@ Status will show you what files are staged or unstaged and tracked versus untrac
 
 **The commit is the atomic unit of Git**.
 
-{{% center %}}
-<img safeHTML src="https://imgs.xkcd.com/comics/git_commit.png" title="https://imgs.xkcd.com/comics/git_commit.png" alt="Git Commit">
-{{% /center %}}
-{{% center %}}
-[XKCD #1597](https://xkcd.com/1296/)
-{{% /center %}}
+{{< img 
+    src="https://imgs.xkcd.com/comics/git_commit.png" 
+    alt="Git Commit" 
+title="Merge branch 'asdfasjkfdlas/alkdjf' into sdkjfls-final"
+    caption="[XKCD #1296](https://xkcd.com/1296/)" 
+>}}
 
 Git joins changes from multiple files into a single unit - a commit.  These commits are snapshots of your project at different points in time.
 
@@ -563,9 +563,10 @@ For example, prefixing with `feature/` or `bug/` or a GitHub issue number can he
 
 By default Git starts on the master branch.
 
-{{% center %}}
-<img safeHTML src="https://github.com/ADGEfficiency/programming-resources/blob/master/memes/merge-master.jpg?raw=true">
-{{% /center %}}
+{{< img 
+    src="https://github.com/ADGEfficiency/programming-resources/blob/master/memes/merge-master.jpg?raw=true"
+    alt="Meme about merging to master branch" 
+>}}
 
 For Git the `master` branch is the default branch - it's the one that is automatically created when you create a Git repository:
 

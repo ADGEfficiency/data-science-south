@@ -11,7 +11,12 @@ slug: hypermodern-python
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤
 
-![Created with Stable Diffusion 2, Prompt 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant', Seed = 42](/images/hypermodern-2025/hero.png)
+{{< img 
+    src="/images/hypermodern-2025/hero.png" 
+    alt="Terminal in MC Escher style with birds" 
+    caption="Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant'. Seed: 42. Created with Stable Diffusion 2."
+    caption="{Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant', Seed: 42, Creator: Stable Diffusion 2}"
+>}}
 
 This post provides clarity with a **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2025.
 

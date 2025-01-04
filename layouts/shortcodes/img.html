@@ -1,0 +1,11 @@
+<figure class="flex flex-col items-center justify-center my-8">
+    <img src="{{ .Get "src" }}"
+         alt="{{ .Get "alt" }}"
+         {{ with .Get "title" }}
+         title="{{ . }}"
+         {{ end }}
+         class="max-w-full h-auto rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.02]">
+    {{ with .Get "caption" }}
+    <figcaption class="text-center mt-4 text-gray-600 italic px-4">{{ . | markdownify }}</figcaption>
+    {{ end }}
+</figure>

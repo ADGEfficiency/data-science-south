@@ -10,7 +10,11 @@ tags:
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤
 
-![Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white'. Seed: 4.<br />Created with Stable Diffusion 1.](/images/hypermodern-python-2023/hero.png)
+{{< img 
+    src="/images/hypermodern-python-2023/hero.png"
+    alt="Computer terminal in MC Escher style" 
+    caption="{Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white', Seed: 4, Creator: Stable Diffusion 1}" 
+>}}
 
 This post provides clarity with the **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2023.
 
