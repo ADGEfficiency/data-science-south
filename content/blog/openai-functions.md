@@ -11,7 +11,7 @@ tags:
 
 It allows programmers to have more control over the OpenAI API.
 
-![](/static/blog/openai-functions.png "Prompt: 'calling functions with the open ai api, vibrant, style of dali'. Seed: 42.<br />Created with Stable Diffusion 1.")
+![](/images/openai-functions/hero.png "Prompt: 'calling functions with the open ai api, vibrant, style of dali'. Seed: 42.<br />Created with Stable Diffusion 1.")
 
 **This post explains what function calling is and how to use it in Python**.
 
