@@ -3,14 +3,14 @@
      {{ if in .File.Path "blog" }}
      data-pagefind-ignore
      {{ end }}>
-    <div class="hidden xl:block flex-1 max-w-64 bg-gray-100 p-2 rounded-lg">{{ partial "left-sidebar.html" . }}</div>
-    <div class="flex-1 max-w-3xl bg-gray-100 p-2 rounded-lg ">
+    <div class="hidden xl:block flex-1 max-w-64 p-2 rounded-lg">{{ partial "left-sidebar.html" . }}</div>
+    <div class="flex-1 max-w-3xl p-2 rounded-lg ">
         <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
         <div class="prose max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
             {{ .Content }}
         </div>
     </div>
-    <div class="hidden lg:block flex-1 max-w-64 bg-gray-100 p-2 rounded-lg sticky top-20 h-fit">
+    <div class="hidden lg:block flex-1 max-w-64 p-2 rounded-lg sticky top-20 h-fit">
         {{ partial "right-sidebar.html" . }}
     </div>
 </div>
