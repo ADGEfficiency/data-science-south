@@ -14,7 +14,6 @@ slug: hypermodern-python
 {{< img 
     src="/images/hypermodern-2025/hero.png" 
     alt="Terminal in MC Escher style with birds" 
-    caption="Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant'. Seed: 42. Created with Stable Diffusion 2."
     caption="{Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant', Seed: 42, Creator: Stable Diffusion 2}"
 >}}
 
@@ -695,6 +694,24 @@ logger.add(
 
 *Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.*
 
+## Marimo
+
+**[Marimo](https://marimo.io) is a Python notebook editor and format** - it's an alternative to Jupyter Lab and the JSON Jupyter notebook file format.
+
+Marimo offers multiple improvements over older ways of writing Python notebooks:
+
+- **Safer** - Marimo notebook cells are executed based on variable references rather than order,
+- **Reactive** - Marimo's safety allows it to be reactive - cells are re-run when their dependencies change,
+- **Development Experience** - Marimo offers many quality of life features for developers,
+- **Interactive** - Marimo offers an interactive, web-app like experience.
+
+Marimo notebooks are stored as pure Python files, which means that:
+
+- Git diffs are meaningful,
+- The notebook can be executed as a script.
+
+*Tip - Marimo integrates with GitHub Copilot and Ruff code formatting.*
+
 ## Summary
 
 The **2025 Hypermodern Python Toolbox** is:
@@ -709,4 +726,4 @@ The **2025 Hypermodern Python Toolbox** is:
 - [Polars](https://docs.pola.rs/) for manipulating tabular data,
 - [DuckDB](https://duckdb.org/docs/) for a single file, analytical SQL database,
 - [Loguru](https://loguru.readthedocs.io/en/stable/) for logging.
-
+- [Marimo](https://docs.marimo.io/) for reactive Python notebooks.
