@@ -705,10 +705,31 @@ Marimo offers multiple improvements over older ways of writing Python notebooks:
 - **Development Experience** - Marimo offers many quality of life features for developers,
 - **Interactive** - Marimo offers an interactive, web-app like experience.
 
-Marimo notebooks are stored as pure Python files, which means that:
+Marimo notebooks are stored as pure Python files, which means that:Git diffs are meaningful, and the notebook can be executed as a script.
 
-- Git diffs are meaningful,
-- The notebook can be executed as a script.
+Below is an example of the Marimo notebook format:
+
+```python { title = "marimo.py" }
+import marimo
+
+__generated_with = "0.10.12"
+app = marimo.App(width="medium")
+
+
+@app.cell
+def _():
+    import pandas as pd
+
+    def func():
+        return None
+
+    print("hello")
+    return func, pd
+
+
+if __name__ == "__main__":
+    app.run()
+```
 
 *Tip - Marimo integrates with GitHub Copilot and Ruff code formatting.*
 
