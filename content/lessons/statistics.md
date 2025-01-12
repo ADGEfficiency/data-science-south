@@ -3,54 +3,79 @@ title: Statistics
 summary: Don't be fooled by randomness!
 competencies:
 - Algorithms
-draft: false
+draft: true
 ---
 
 ## Why Learn Statistics?
 
-- **Decision making** - Make good decisions by separating signal from noise.
+- **Decision Making** - Make good decisions by separating signal from noise.
+- **Machine Learning Model Evaluation** - Assess whether your models are truly capturing signal or just fitting to noise.
  
 ## Uncertainty
 
-Uncertainty is inherent in real-world decision-making. Managing uncertainty is required to make good decisions.
+Uncertainty is inherent in real-world decision-making. Any decision we make will be under uncertainty.
 
-For example, when driving traffic and unscheduled road maintenance leads to uncertainty about which route is best to take.
+Examples of uncertainty in decision making include:
+
+- **Planning a Hike** - Weather, the route and what food and your own fitness level.
+- **Allocating Capital** - As an investor or business owner, deciding how to distribute limited money across different opportunities like stocks, bonds, real estate, or business expansion to achieve optimal returns.
+- **Choosing Where to Live** - Changes in the neighborhood, whether you'll enjoy the community, job opportunities, and how housing prices will change over time.
+- **Climate Change** - The rate of warming, effectiveness of mitigation efforts, impact on specific regions, and how different ecosystems will adapt to changing conditions.
 
 ### Sources of Uncertainty
 
-Any decision involves uncertainty. Being specific about where uncertainty comes from is the first step to managing it.
+Navigating uncertainty is required to make good decisions - so where does uncertainty come from?
 
 ### 1. Stochastic Environments
 
-A stochastic environment is one where the outcome of events are random - stochastic is a fancy way of saying random.
+A stochastic environment is a random environment, where the outcome of events is uncertain (stochastic is a fancy way of saying random).
 
-An event is random if we cannot predict it - examples include flipping a coin and weather forecasting.
+An event is random if we cannot predict it - examples include:
+
+- The weather.
+- Performance of a business.
+- Job opportunities for a career.
+- Global warning.
 
 ### 2. Incomplete Observability
 
 Incomplete observability occurs when we lack data (samples or variables) about the world.  Incomplete observability of variables arises from incomplete sampling of data (think rows), and from noise or errors in data collection (think columns).
 
-For example, in climate modeling, incomplete observability arises from a lack of samples (our network of weather sensors doesn't cover the entire planet) and from noise in data collection (from weather sensors that are uncalibrated).
+Examples include:
+
+- **Weather Forecasting** - Limited coverage of weather stations across oceans and remote areas, plus measurement errors in sensors
+- **Stock Market Analysis** - Missing data about private trades, delayed reporting of insider transactions, and incomplete knowledge of company internals
+- **Public Health** - Unreported cases during disease outbreaks, limited testing capacity, and inconsistent reporting across regions
+- **Real Estate** - Hidden property defects, unreported sales prices in some markets, and missing historical maintenance records
 
 ### 3. Incomplete Models
 
 Incomplete models fail to fully extract signal from data. Think about a map that doesn't show all the roads - it's incomplete and can't be used for navigation.
 
+Examples include:
+
+- **Economic Models** - Simplified assumptions about human behavior, inability to capture all market factors, and difficulties modeling complex interactions
+- **Climate Predictions** - Models that can't capture all feedback loops between atmosphere, oceans, and land systems
+- **Credit Scoring** - Models that miss important factors about a person's creditworthiness due to limited variables
+- **Traffic Prediction** - Navigation apps that don't account for local events, construction, or changing traffic patterns
+
 ## What is Statistics?
 
-My favourite definition of statistics to *don't be fooled by randomness*. A statisticians primary concern is making sure nature hasn't tricked us.
+My favourite definition of statistics to **don't be fooled by randomness**. A statisticians primary concern is making sure nature hasn't tricked her.
 
-Determining whether an observation is due to chance, is needed for us to *separate out the signal from the noise* (my second favourite definition of statistics).
+Determining whether an observation is due to chance, is needed for us to **separate out the signal from the noise** (my second favourite definition of statistics).
+
+The world is random, and we will see effects of that randomness everywhere.  Statistics allows us to separate out effects that are repeatable, from ones that won't occur again.
 
 ### What is a Statistic?
 
-A statistic is a summary of data. It is a numeric measure that captures, extracts and summarizes information about data. A statistic is a lower dimensional summary of a larger dataset.
+**A statistic is a summary of data**. It captures, extracts and summarizes information about data. A statistic is a lower dimensional summary of a larger dataset.
 
-The value of these summaries is that we can reason about data that is to large to fit in our brain.  Many datasets are too large for us to understand.  
+The value of these summaries is that we can reason about data that is to large to fit in our brain.  Many datasets are too large for us to understand - statistics allow us to make decisions about large amounts of data in low dimensional spaces.
 
-Like data itself, a statistic can contain both signal and noise.
+Like data itself, a statistic will contain both signal and noise.
 
-We can simulate this by generating a dataset with both signal and noise:
+We can simulate this by generating a dataset with both signal and noise, and then measuring the mean across that dataset.  The mean estimates the central tendency (the middle) of the data:
 
 ```python
 import numpy as np
@@ -72,7 +97,7 @@ print(np.mean(data))
 
 Our statistic (in this case the `mean`) allows us to take a high dimensional dataset of `1000` samples and measure its central tendency.  What we get back is close to the `signal` value of `5`, but not exactly.
 
-The mean is not the only statistic we can measure - we could also estimate the standard deviation:
+The mean is not the only statistic we can measure - we could also estimate the standard deviation, which is a measure of the spread of the data:
 
 ```python
 print(np.std(data))
@@ -88,11 +113,11 @@ As with our estimate of the mean, our estimate of the standard deviation is clos
 
 All statistics are a fiction that don't exist in reality.  Any statistic removes information about the data is it summarizing.
 
-Take for example the `mean` we measure above - with the `mean` alone, we have no idea about the spread of the distribution. Likewise if we only have our estimate of the standard deviation, we don't know what the central tendency of the data is.
-
-All statistics involve some form of aggregation - this aggregation in one dimension leads to a loss of information.  This is an example of uncertainty coming from incomplete modelling.
+Take for example the mean we measure above - with the mean alone, we have no idea about the spread of the distribution. Likewise if we only have our estimate of the standard deviation, we don't know what the central tendency of the data is.
 
 All statistics are estimates - they all aggregate across samples.  These samples are noisy and contain error - an example of uncertainty coming from a stochastic environment.
+
+All statistics involve some form of aggregation - this aggregation in one dimension leads to a loss of information.  This is an example of uncertainty coming from incomplete modelling.
 
 ## What is Probability?
 
@@ -102,8 +127,8 @@ A single probability measures the likelihood of an event - how often an event wi
 
 Probability is essential in machine learning, with applications such as:
 
-- Maximum likelihood, finding model parameters that maximize the probability of observing training data,
-- Kullback-Leibler (KL) divergence minimization, forcing two distributions to be similar, used in training generative models for realistic images or text,
+- Maximum likelihood, finding model parameters that maximize the probability of observing training data.
+- Kullback-Leibler (KL) divergence minimization, forcing two distributions to be similar, used in training generative models for realistic images or text.
 - Reinforcement learning, modeling a policy as a probability distribution over actions based on the current state.
 
 ## Frequentist vs. Bayesian Probability
@@ -159,21 +184,21 @@ def probability_of_heads(heads, total):
     """Calculate probability of heads"""
     return heads / total
 
-# Starting belief: we've seen 1 heads out of 2 flips
+# starting belief: we've seen 1 heads out of 2 flips
 heads = 1
 total_flips = 2
 
 print(f"Starting belief: {probability_of_heads(heads, total_flips):.3f}")
 
-# Simulate 10 flips of a biased coin (70% chance of heads)
+# simulate 10 flips of a biased coin (70% chance of heads)
 for flip_number in range(10):
-    # Flip coin (True = heads, False = tails)
+    # flip coin (True = heads, False = tails)
     new_flip = 1 if random.random() < 0.7 else 0
     
-    # Update our belief
+    # update our belief
     heads, total_flips = update_belief(heads, total_flips, new_flip, 1)
     
-    # Calculate and print new probability
+    # calculate new probability
     prob = probability_of_heads(heads, total_flips)
     print(f"After flip {flip_number + 1}: {prob:.3f}")
 ```
@@ -194,11 +219,15 @@ After flip 10: 0.500
 
 ### Bayes' Theorem
 
-Bayes' Theorem is a mathematical formula that describes how to update our probability estimates based on new data. It states that:
+Bayes' Theorem is a mathematical formula that describes how to update our probability estimates based on new data. 
+
+It states that:
 
 $$\text{Posterior Probability} = \frac{\text{Prior Probability} \times \text{Likelihood}}{\text{Evidence}}$$
 
-Here, the posterior probability is the updated probability estimate, the prior probability is our initial belief about the event's likelihood, the likelihood is the probability of observing the data given the event, and the evidence is the probability of observing the data.
+The posterior probability is the updated probability estimate, the prior probability is our initial belief about the event's likelihood, the likelihood is the probability of observing the data given the event, and the evidence is the probability of observing the data.
+
+What Bayes Theorem allows us to do is understand how to update our prior beliefs when we receive new data.
 
 ## Classical vs. Modern Statistics
 
@@ -208,13 +237,17 @@ Statistics emerged at a time when computation was expensive and data was a spars
 
 Today the inverse is true - we live in a world with access to cheap compute and lots of data.  This means that the best approach to statistics today can differ a lot from statistical techniques taught in the second half of the 20th century - perhaps even what you were taught at school.
 
-An example of this is the rise of bootstrap based methods to calculate confidence intervals and determine statistical significance.
+Examples include:
 
-Another example of modern statistics is the double descent curve - a phenomenon where the performance of a model can improve with more data, even after it has started to overfit. This counteracts traditional statistical thinking where the more training you do, the more likely you are to overfit.
+An example of this is the rise of 
+- **Bootstraps** - can calculate confidence intervals and determine statistical significance.
+- **Double Descent** - a phenomenon where the performance of a model can improve with more data, even after it has started to overfit. This counteracts traditional statistical thinking where the more training you do, the more likely you are to overfit.
 
 ## Distributions
 
 A distribution is a set of values and their corresponding probabilities. It describes how likely each value is to occur.
+
+TODO - MORE - USE OLD STATISTICS NOTES
 
 ## Central Tendency
 
@@ -262,7 +295,7 @@ print(sum(temperatures.values()) / len(temperatures))
 print(np.mean(temperatures.values()))
 ```
 
-Another example is taking the average of all the people in a room that includes a single billionaire:
+Another example is taking the average of all the people in a room that includes a single millionaire:
 
 ```python
 net_worths = [10_000, 50_000, 80_000, 50_000]
@@ -279,9 +312,9 @@ The problem with expected value thinking is that sometimes, the expected outcome
 
 Also there is no person with this net worth in our dataset.
 
-### Expected Value
+### Mean
 
-The expectation is the same as the mean - a weighted average across all possible outcomes.  The weight is the probability of that event happening.
+The mean is the same as the expected value - a weighted average across all possible outcomes.  The weight is the probability of that event happening.
 
 When a statistician says 'on expectation' or 'the expected value of this function', they mean on average.
 
@@ -294,9 +327,23 @@ expectation = (win['amount'] * win['probability']) + (lose['amount'] * lose['pro
 # 1.0
 ```
 
-Sometimes preferable to take a lower expected value, but higher probability choice
+Sometimes preferable to take a lower expected value, but higher probability choice. The mean is distorted by extreme values.
 
-Expected value is distorted with extreme value.
+Advantages:
+
+- Takes all data points into account
+- Familiar and widely understood
+- Useful for further statistical calculations
+- Works well with normally distributed data
+- Minimizes the sum of squared deviations
+
+Disadvantages:
+
+- Sensitive to outliers and extreme values
+- Can be misleading for skewed distributions
+- May represent a value that doesn't exist in the dataset
+- Not suitable for ordinal or nominal data
+- Can hide important patterns in multimodal data
 
 ### Median
 
@@ -319,6 +366,22 @@ net_worths = [10_000, 50_000, 80_000, 50_000, 1_000_000]
 stats(net_worths)
 ```
 
+Advantages:
+
+- Robust to outliers and extreme values
+- Better represents the "middle" for skewed distributions
+- Always exists for ordered data
+- Easy to understand conceptually
+- More stable over time than the mean
+
+Disadvantages:
+
+- Ignores the actual values of most data points
+- Less useful for further statistical calculations
+- Can be difficult to compute for large datasets
+- May not be representative for multimodal distributions
+- Loses information about the shape of the distribution
+
 ### Mode
 
 The mode is the value in a dataset that occurs most frequently. In other words, it is the value that has the highest frequency or probability of occurrence. The mode is denoted by the symbol $M$.
@@ -329,8 +392,7 @@ Like the mean and median, the mode is a measure of central tendency that can pro
 
 Advantages:
 
-- Useful for categorical data: The mode is a useful measure of central tendency for categorical data, such as colors, names, or types of products. In such cases, the mode provides information about the most common category in the dataset.
-- Easy to calculate: The mode is relatively easy to calculate, especially for small datasets. It simply requires counting the frequency of each value in the dataset and identifying the value(s) with the highest frequency.
+- Provides information about the most common category in the dataset.
 
 Disadvantages:
 
@@ -348,6 +410,26 @@ The mean is good for homogeneous distributions but is sensitive to outliers.
 Quantiles are able to deal with heterogeneous distributions - this means that quantiles are useful for summarizing and analyzing distributions that are not uniform or evenly distributed. In other words, they can handle distributions that have significant differences or disparities in the values or frequencies of their data points.
 
 Quantiles are generally less sensitive to outliers than the mean.
+
+Advantages:
+
+- Robust to outliers and extreme values
+- Work well for skewed and non-normal distributions
+- Provide insights about data distribution shape
+- Useful for comparing different parts of a distribution
+- Can identify unusual or extreme values effectively
+- Good for setting thresholds or cutoff points
+- Maintain their meaning across different scales
+
+Disadvantages:
+
+- Lose information about individual data points
+- Can be computationally intensive for large datasets
+- Different methods of calculation can give slightly different results
+- Not as intuitive for non-technical audiences
+- Less useful for small sample sizes
+- Don't work well with discrete or categorical data
+- Can be sensitive to ties in the data
 
 ### Finding a Quantile
 
@@ -658,9 +740,9 @@ The formula for Spearman correlation coefficient is:
 
 $$
 \rho = 1 - \frac{6 \sum_{i=1}^{n} d_i^2}{n(n^2-1)}
-
-$d_i = rank(X_i) - rank(Y_i)
 $$
+
+$d_i = rank(X_i) - rank(Y_i)$$
 
 where $d_i$ is the difference between the ranks of $X_i$ and $Y_i$.
 
@@ -686,6 +768,6 @@ The Law of Large Numbers states that as the sample size increases, the sample me
 
 $$\lim_{n\to\infty} \bar{X} = \mu$$
 
-This is why statistics works - with more data, we can obtain more accurate estimates of the population statistics like the mean.
+This is why statistics at scale works - with more data, we can obtain more accurate estimates of the population statistics like the mean.
 
 On the other hand, a single sample is high variance and should not be trusted as it may not be representative of the population.

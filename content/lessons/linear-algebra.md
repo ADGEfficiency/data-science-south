@@ -300,6 +300,8 @@ np.array([0, 1, 2]) - np.array([1])
 np.array([0, 1, 2]) * np.array([2]) 
 ```
 
+All of these are examples of broadcasting.
+
 ### Broadcasting
 
 The smaller array will be broadcast across the larger array
