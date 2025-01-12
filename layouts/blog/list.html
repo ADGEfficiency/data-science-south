@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="container mx-auto p-4 flex flex-col gap-4 min-h-[calc(100vh-8rem)]"
+     data-pagefind-ignore>
+    <div class="bg-gray-100 p-6 rounded-lg">
+        <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
+        {{ $pages := .Pages.ByDate.Reverse }}
+        {{ $posts := $pages.GroupByDate "2006" }}
+        {{ range $posts }}
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">{{ .Key }}</h2>
+            <div class="grid gap-4 pl-4">
+                {{ range .Pages.ByDate }}
+                <div class="group hover:text-white">
+                    <a href="{{ .RelPermalink }}"
+                       class="block p-4 bg-white rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 transition-all duration-200">
+                        <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
+                        <p class="text-sm opacity-75">{{ .Date.Format "January" }}</p>
+                        {{ with .Description }}
+                        <p class="mt-2 text-sm">{{ . }}</p>
+                        {{ end }}
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

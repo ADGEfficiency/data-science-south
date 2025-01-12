@@ -1,3 +1,5 @@
 public
 resources
 .phmdoctest
+.aider*
+.env

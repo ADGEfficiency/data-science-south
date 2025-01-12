@@ -1,7 +1,15 @@
 ---
 title: Choose a Data Career
-summary: Find your data career focus on data analytics, science or engineering.
+summary: Focus your data career on data analytics, science or engineering.
+competencies:
+  - "Soft Skills"
+draft: true
 ---
+
+## Why Learn About a Data Career?
+
+- **Data roles** - Understand the core data roles and how they differ.
+- **Data competencies** - Know what skills and competencies are required for data roles.
 
 ## What is a Data Professional?
 
@@ -15,6 +23,8 @@ What data professionals call themselves changes between companies and over time:
 
 - a data engineer in one company is called a business intelligence analyst in another,
 - the big data technologist of the 2000's would now call themselves a data scientist.
+
+### Value
 
 ## Where Do Data Professionals Come From?
 

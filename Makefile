@@ -1,7 +1,7 @@
 app:
 	hugo server --disableFastRender
 
-SYNTAX=xcode
+SYNTAX=github-dark
 syntax:
 	hugo gen chromastyles --style=$(SYNTAX) > assets/css/syntax.css
 
@@ -19,3 +19,10 @@ test:
 	# TODO - install pytest-playwright
 	playwright install
 
+search:
+	npx -y pagefind --site public
+
+build:
+	hugo --gc --minify
+
+deploy: syntax build search

@@ -1,6 +1,7 @@
 ---
 title: Git Best Practices
-summary: Git
+description: Five patterns to guide your Git workflows.
+date: 2024-05-01
 ---
 
 ## Commit Messages

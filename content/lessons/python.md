@@ -1,23 +1,33 @@
 ---
 title: Python
-summary: Install Python libraries with pip and import them into your code.
+summary: The default programming language for working with data.
+competencies:
+- "Software Engineering"
 ---
 
 ## Why Learn Python?
 
-TODO
+Learning Python will allow you to:
+
+- **Industry standard** - Popular programming language for data work.
+- **Powerful** - Rich ecosystem of data science tools like `pandas` and `scikit-learn`.
+- **Mature** - Massive open-source community providing libraries, tools, and support.
+
+## How to Run Python Code?
+
+Running Python code requires two things - code and a Python interpreter.
+
+Code is something you can write in a text file - often a `.py` file. The Python interpreter is something you need to install on your computer.
 
 ## Reading Python Code
 
-**Writing always requires reading**. 
+Writing always requires reading. This means that writing code will require reading it.
 
 Many development tasks involve more reading than writing code.
 
 ### How is Python Read?
 
-Like English, Python is read from top to bottom, left to right.
-
-Code is executed line by line. 
+Like English, Python is read from top to bottom, left to right. Code is executed line by line. 
 
 When reading you should start at the top, and read downwards.
 
@@ -25,7 +35,7 @@ When reading you should start at the top, and read downwards.
 
 The traditional place to start when learning a new programming language is with a `Hello World` program:
 
-```pyrepl
+```python
 print("Hello World")
 ```
 
@@ -37,9 +47,12 @@ This program demonstrates features of the Python language:
 
 ## Built-in Functions
 
-Built-in functions are functions that are always available in Python. We do not need to define built-in functions ourselves - we can just use them.
+Built-in functions are always available in Python. We do not need to define built-in functions - we can just use them.
 
-Common built-in functions include `sum`, which will add all the elements of an iterable and `len` which will measure the length of an iterable.
+Common built-in functions include:
+- `print` which will print to the screen,
+- `sum`, which will add all the elements of an iterable, 
+- `len` which will measure the length of an iterable.
 
 ### Refactoring Hello World
 
@@ -49,7 +62,7 @@ The goal of refactor is improving code quality, without breaking it or changing 
 
 We can refactor our program by assigning the string `Hello World` to a variable `message`:
 
-```pyrepl
+```python
 message = "Hello World"
 print(message)
 ```
@@ -58,7 +71,7 @@ This refactor demonstrates an additional feature of the Python programming langu
 
 Whether you think our refactored program is an improvement depends on your preferences as a developer.
 
-## Iteration and For Loops
+## For Loops
 
 **Looping is the process of running the same thing many times**.  
 
@@ -80,7 +93,7 @@ The length of the for loop is determined by the length of `things`.
 
 Its length will determine how many times our for loop runs:
 
-```pyrepl
+```python
 size = 4
 for n in range(size):
     print(f"loop position {n} of {size}")
@@ -93,7 +106,6 @@ This program demonstrates:
 - **iteration** of a `for` loop 4 times,
 - **f-string formatting** of the string `f"{n} of {size}"`, which creates strings like `2 of 4`,
 - **white space indentation**, which controls which code runs in each loop.
- 
 
 ## Scope
 
@@ -109,7 +121,7 @@ These two identically named variables `x` can exist alongside each other in the 
 
 They exist in different scopes:
 
-```pyrepl
+```python
 def main():
     x = 20
     print(f"function main scope, {x=}")
@@ -154,7 +166,7 @@ In Python we can use the equality check `==` to compare two objects.
 
 `==` resolves to the boolean `bool` type, which can be either `True` or `False`:
 
-```pyrepl
+```python
 print(1 == 1)
 print(1 == 2)
 ```
@@ -170,7 +182,7 @@ We can do a few kinds of conditionals in Python:
 
 We can use this condition in an `if` statement:
 
-```pyrepl
+```python
 if True:
     print("condition is true")
 
@@ -191,7 +203,7 @@ All Python objects are either truthy or falsy (but not both).
 
 A truthy object will act the same as the Boolean `True` object - it will evaluate to `True` in contexts like `if` statements:
 
-```pyrepl
+```python
 if True:
     print("the boolean True is truthy")
 
@@ -209,7 +221,7 @@ if "a string":
 
 A falsy statement will not trigger an `if` condition:
 
-```pyrepl
+```python
 
 if None:
     print(f"this will never be printed")
@@ -232,15 +244,15 @@ Relying on truthiness in `if` statements can be a source of subtle errors, but r
 
 A while loop runs and terminates based on a conditional:
 
-```pyrepl
-#  initialize our counter at zero
+```python
+# initialize our counter at zero
 counter = 0
 
-#  a while loop that runs until our counter is greater than 3
+# a while loop that runs until our counter is greater than 3
 while counter < 3:
-    #  iterate up our counter
+    # iterate up our counter
     counter += 1
-    #  print the counter
+    # print the counter
     print(f"counter: {counter}")
 ```
 
@@ -250,11 +262,9 @@ The state that the conditional relies upon (here the variable `counter`) is upda
 
 An infinite loop is a bug where a program will never finish.
 
-## Testing with Asserts
+## Asserts
 
 **Assert statements check for correctness in your code**.
-
-### Assert Statements in Python
 
 An assert allows you to check a conditional expression (like `x == 10`), and raise an exception if the condition is not met.  An exception is an error.
 
@@ -268,7 +278,7 @@ assert condition, "optional error message"
 
 A useful feature of an assert is being able to print a custom message when it fails:
 
-```pyrepl
+```python
 assert 1 == 0, "this assert failed because 1 is not equal to 0"
 ```
 
@@ -296,7 +306,7 @@ Lists are good when we have data that is ordinal or sequential, where things com
 
 We can create an instance of a list using either `[]` or `list`:
 
-```pyrepl
+```python
 data = [0, 1, 2]
 print(data)
 
@@ -308,7 +318,7 @@ print(data)
 
 We can add elements to our list - we can do this with `.append()`
 
-```pyrepl
+```python
 data = []
 for n in range(3):
     data.append(n)
@@ -319,7 +329,7 @@ print(data)
 
 If instead we assigned our variable `data` to the output of `.append`, we would lose our variable reference to the list - a common mistake:
 
-```pyrepl
+```python
 data = [0, 1, 2]
 data = data.append(3)
 print(data is None)
@@ -331,7 +341,7 @@ We can select elements of the list using the `[]` syntax.
 
 We can use `[0]` to select the first element:
 
-```pyrepl
+```python
 data = [4, 40, 400]
 assert data[0] == 4
 assert data[1] == 40
@@ -340,7 +350,7 @@ assert data[2] == 400
 
 And `[-1]` to select the last element:
 
-```pyrepl
+```python
 data = [4, 40, 400]
 assert data[-1] == 400
 assert data[-2] == 40
@@ -351,7 +361,7 @@ assert data[-3] == 4
 
 Other common list operations include measuring the length (the number of elements in the list) using the Python built-in `len`:
 
-```pyrepl
+```python
 data = [0, 1, 2]
 assert len(data) == 3
 ```
@@ -368,7 +378,7 @@ The dictionary is a data structure that refers to data by name. Each **value** (
 
 We can instantiate a dictionary using either `dict` or `{}`:
 
-```pyrepl
+```python
 data = {"message": "hello"}
 print(data)
 ```
@@ -377,7 +387,7 @@ print(data)
 
 We can select values of our dictionary by key using `[]`:
 
-```pyrepl
+```python
 data = {"message": "hello"}
 print(data["message"])
 ```
@@ -386,7 +396,7 @@ print(data["message"])
 
 We can add elements to our dictionary by assigning a key to a value:
 
-```pyrepl
+```python
 data = {
   "message": "hello",
   "status": "priority"
@@ -399,7 +409,7 @@ print(data)
 
 We can iterate over the keys and values in a dictionary with `.items()`:
 
-```pyrepl
+```python
 data = {
   "message": "hello",
   "status": "priority"
@@ -424,7 +434,7 @@ The set is a data structure that holds unique values - each value only occurs on
 
 Below we create a set using a list of four items - but as two are duplicates, our set only has three:
 
-```pyrepl
+```python
 data = set([0, 1, 2, 2])
 assert len(data) == 3
 print(data)
@@ -436,7 +446,7 @@ Sets are useful when we want to do anything around unique values.
 
 We can check that there are no unique values in a list by comparing it's length with a set:
 
-```pyrepl
+```python
 data = [0, 1, 2, 2]
 assert len(data) != len(set(data))
 
@@ -461,7 +471,7 @@ Good function design will avoid duplicated code. Duplicated code is bad because 
 
 We can define a function in Python by using the `def` keyword to **define the function name** `f` and inputs `x`, using **whitespace indentation** to define the scope of our function and using the `return` keyword to define **what our function returns**:
 
-```pyrepl
+```python
 def f(x):
     return x * x
 ```
@@ -470,7 +480,7 @@ The function `f(x)` is defined at the moment this code is executed, but it's not
 
 We can execute this function using `function_name(inputs)`:
 
-```pyrepl
+```python
 def f(x):
     return x * x
 
@@ -481,7 +491,7 @@ assert f(3) == 9
 
 We can use a different name for our function by changing the word after the `def` keyword - below we write a function called `g` that performs the same task as `f`.
 
-```pyrepl
+```python
 def g(x):
     return x * x
 
@@ -494,7 +504,7 @@ assert g(3) == 9
 
 Functions can also take multiple inputs, which can be defined in the parenthses after the function name:
 
-```pyrepl
+```python
 def add(a, b):
     return a + b
 print(add(2, 3))
@@ -505,7 +515,7 @@ assert add(2, 3) == 5
 
 Functions can also have default values for inputs, which means that the input does not have to be provided when the function is called. For example:
 
-```pyrepl
+```python
 def add(a, b=0):
     return a + b
 
@@ -517,7 +527,7 @@ assert add(2) == 2
 
 Functions can also return multiple values, which can be done by separating the values with a comma. For example, a function could return the result of a calculation and a string message indicating the status of the calculation:
 
-```pyrepl
+```python
 def calculate_result(a, b):
     result = a + b
     message = "Calculation successful"
@@ -528,7 +538,7 @@ print(calculate_result(2, 3))
 
 Or it could return a dictionary containing different pieces of information:
 
-```pyrepl
+```python
 def gather_data(a, b):
     data = {"result": a*b, "status": "success"}
     return data
@@ -558,7 +568,7 @@ Each instance can have its own state, behavior, and identity, and can be manipul
 
 We can define a class using `class MathRobot` to define the class name, `def __init__(self, name)` as the method that runs when the class is created and `def method(self, argument)` to defines a custom method.
 
-```pyrepl
+```python
 class MathRobot:
     def __init__(self, name):
         self.name = name
@@ -575,19 +585,19 @@ robot = MathRobot("issac")
 
 After creating an instance of the class (here called `robot`), we can access the attributes of the class using the `.` syntax:
 
-```pyrepl
+```python
 print(robot.name)
 ```
 
 We can also access the methods of the class in the same way that we call functions:
 
-```pyrepl
+```python
 robot.hello()
 ```
 
 Additionally, classes can create and use class variables and class methods. Class variables are variables that are shared among all instances of a class, while instance variables are unique to each instance of a class.
 
-```pyrepl
+```python
 class MathRobot:
     robot_count = 0
 
@@ -613,23 +623,15 @@ print(MathRobot.get_robot_count())
 
 ## Files
 
-### The `pathlib` Python Library
+`pathlib` is part of the Python standard library.  It provides an object-oriented way of working with file and directory paths, and is available in Python 3.4.
 
-`pathlib` is part of the Python standard library.  
+The `pathlib.Path` object represents a file system path. This can be for either a file or a directory.
 
-It provides an object-oriented way of working with file and directory paths, and is available in Python 3.4.
-
-### The `pathlib.Path` Object
-
-The `pathlib.Path` object is represents a file system path.  
-
-The path can be for either a file or a directory.
-
-### Creating a Path Object
+### Creating a `pathlib.Path` Object
 
 You can create a `pathlib.Path` object by instantiating it with a string:
 
-```pyrepl
+```python
 from pathlib import Path
 
 path = Path("./intro-to-python/main.py")
@@ -640,7 +642,7 @@ print(path)
 
 You can check if a path exists using `pathlib.Path.exists`:
 
-```pyrepl
+```python
 from pathlib import Path
 
 if not Path("./intro-to-python/main.py").exists():
@@ -651,7 +653,7 @@ if not Path("./intro-to-python/main.py").exists():
 
 One of the strengths of `pathlib` is the ability to separate out parts of the path as attributes of the `pathlib.Path` object:
 
-```pyrepl
+```python
 from pathlib import Path
 
 path = Path("./intro-to-python/main.py")
@@ -666,7 +668,7 @@ print(path)
 
 Paths can be joined using the `/` syntax:
 
-```pyrepl
+```python
 from pathlib import Path
 
 path = Path("./intro-to-python")
@@ -681,7 +683,7 @@ We can use `pathlib` to list the files and directories in a given directory.
 
 The `pathlib.Path` object has a method called `iterdir()` which returns a list of `Path` objects for each file and directory in the given directory:
 
-```pyrepl
+```python
 from pathlib import Path
 
 print(list(Path(".").iterdir()))
@@ -691,7 +693,7 @@ print(list(Path(".").iterdir()))
 
 To create a new directory, you can use the `Path.mkdir()` which creates a new directory with the given name:
 
-```pyrepl
+```python
 from pathlib import Path
 
 folder = Path("example_directory")
@@ -724,17 +726,17 @@ The suffix `s` in `json.loads` and `json.dumps` means string - that we are eithe
 
 `json.dumps()` function is used to convert a Python object into a JSON string, and `Path.write_text()` method writes this string into a file.
 
-```pyrepl
+```python
 import json
 from pathlib import Path
 
-#  define a Python object - a list of dictionaries
+# define a Python object - a list of dictionaries
 data = [{'name': 'John', 'age': 30}, {'name': 'Jane', 'age': 25}]
 
-#  convert the Python object to a JSON formatted string
+# convert the Python object to a JSON formatted string
 data_json = json.dumps(data)
 
-#  write the JSON string to a file using the Path object
+# write the JSON string to a file using the Path object
 file = Path("example.json")
 file.write_text(data_json)
 ```
@@ -743,19 +745,19 @@ file.write_text(data_json)
 
 The `Path.read_text()` method is used to read the contents of a file as a string, and `json.loads()` function converts this string back into a Python object.
 
-```pyrepl
+```python
 import json
 from pathlib import Path
 
-#  read the JSON string to a Python string
+# read the JSON string to a Python string
 file_contents = file.read_text()
 
-#  convert the JSON string back into list of dictionaries
+# convert the JSON string back into list of dictionaries
 data_from_file = json.loads(file_contents)
 print(data_from_file)
 ```
 
-## Modules, Packages and Libraries
+## Libraries
 
 **A library is a collection of pre-written code that can be used to perform specific tasks**. 
 
@@ -813,7 +815,7 @@ $ tree .
 
 Libraries can be imported in a Python script by `import {library}`:
 
-```pyrepl
+```python
 import pathlib
 
 print(pathlib)
@@ -827,7 +829,7 @@ These objects can be Python classes, functions or variables that point to lower 
 
 We can import objects using `from {library} import {thing}`:
 
-```pyrepl
+```python
 from pathlib import Path
 
 print(Path)
@@ -837,7 +839,7 @@ print(Path)
 
 A common pattern is to alias when importing - a library, module or object can be aliased on import using `import {library} as {alias}`:
 
-```pyrepl
+```python
 from pathlib import Path as PathObject
 
 print(PathObject)
@@ -877,14 +879,14 @@ Installing third party Python libraries is usually done with `lang:shell-session
 If you have installed Python locally, then you can access `lang:shell-session:pip` from a terminal as as shell program:
 
 ```shell-session
-#  install pandas using pip
+# install pandas using pip
 $ pip install pandas
 ```
 
 If you are in a notebook environment (or anything running iPython), you can use the `!` prefix (which will run a shell command inside your notebook):
 
 ```ipython
-#  install pandas using pip in an iPython notebook
+# install pandas using pip in an iPython notebook
 !pip install pandas
 ```
 
@@ -894,10 +896,10 @@ This `!` prefix syntax is very useful within any environment running iPython (li
 
 We can import a third party library the same as one from the standard library:
 
-```pyrepl
+```python
 import pandas
 
-#  print the pandas version
+# print the pandas version
 print(pandas.__version__)
 ```
 
@@ -905,18 +907,18 @@ A common pattern is to alias when importing - `pandas` is often aliased to `pd` 
 
 The code below imports the `pandas` library, aliases it to a variable `pd`, and uses the built-in `dir` to show what we can do with our `pandas` module:
 
-```pyrepl
+```python
 import pandas as pd
 
-#  print the attributes of the pandas module
+# print the attributes of the pandas module
 print(dir(pd))
 ```
 
 `dir` is a useful function when you want to understand what you can do with any Python object - very useful when you want to explore what you can do with a third party library like `pandas` or `pandas.DataFrame`:
 
-```pyrepl
+```python
 import pandas as pd
 
-#  print the attributes of the pandas DataFrame object
+# print the attributes of the pandas.DataFrame object
 print(dir(pd.DataFrame))
 ```

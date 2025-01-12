@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://datasciencesouth.com'
 languageCode = 'en-us'
 title = 'Data Science South'
 [markup]
@@ -9,11 +9,22 @@ title = 'Data Science South'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
   [markup.highlight]
     lineNos = false
     noClasses = false
     lineNumbersInTable = true
     tabWidth = 4
+    guessSyntax = false
+
+[taxonomies]
+  competency = "competencies"
 
 [params]
   mainSections = ["lessons"]
+  math = true

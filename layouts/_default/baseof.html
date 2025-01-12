@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
         <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        typography: {
-                            DEFAULT: {
-                                css: {
-                                    maxWidth: 'none',
-                                    h1: {
-                                        marginTop: '1rem',
-                                        marginBottom: '1rem',
-                                    },
-                                    h2: {
-                                        marginTop: '1em',
-                                        marginBottom: '0.5rem',
-                                    },
-                                    h3: {
-                                        marginTop: '1rem',
-                                        marginBottom: '0.75rem',
-                                    },
-                                    h4: {
-                                        marginTop: '0.875rem',
-                                        marginBottom: '0.5rem',
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+      tailwind.config = {
+        theme: {
+          extend: {
+            typography: {
+              DEFAULT: {
+                css: {
+                  maxWidth: 'none',
+                  h1: {
+                    marginTop: '1rem',
+                    marginBottom: '1rem',
+                  },
+                  h2: {
+                    marginTop: '1em',
+                    marginBottom: '0.5rem',
+                  },
+                  h3: {
+                    marginTop: '1rem',
+                    marginBottom: '0.75rem',
+                  },
+                  h4: {
+                    marginTop: '0.875rem',
+                    marginBottom: '0.5rem',
+                  },
+                  'code::before': {
+                    content: '""'  // Removes the backtick
+                  },
+                  'code::after': {
+                    content: '""'  // Removes the backtick
+                  },
+                },
+              },
+            },
+          },
+        },
+      }
         </script>
-        {{ $style := resources.Get "css/syntax.css" | resources.ToCSS | resources.Minify }}
-        <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-        <title>{{ block "title" . }} {{ .Site.Title }} {{ end }}</title>
+        {{ if true }} {{ $style := resources.Get "css/syntax.css" | resources.Minify
+        }}
+        <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+        {{ end }} {{ if .Param "math" }} {{ partialCached "math.html" . }} {{ end }}
+        <title data-pagefind-meta="title">{{.Title}}</title>
     </head>
     <body class="font-sans leading-normal">
-        <header class="bg-gray-800 text-white p-4 sticky top-0 z-50">
-            <h1 class="text-2xl font-bold">
-                <a href="/">{{ .Site.Title }}</a>
-            </h1>
+        <header class="bg-gray-800 sticky top-0 z-50 p-1 pt-2">
+            <a href="/"
+               class="group inline-flex items-center rounded-full hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                <img src="/logos/light.svg" alt="Site Logo" width="50" height="50">
+                <h1 class="text-xl font-bold text-white group-hover:text-gray-800 ml-2 mr-4">{{ .Site.Title }}</h1>
+            </a>
         </header>
         {{ block "main" . }}{{ end }}
     </body>
