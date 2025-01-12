@@ -701,9 +701,10 @@ logger.add(
 Marimo offers multiple improvements over older ways of writing Python notebooks:
 
 - **Safer** - Marimo notebook cells are executed based on variable references rather than order,
-- **Reactive** - Marimo's safety allows it to be reactive - cells are re-run when their dependencies change,
 - **Development Experience** - Marimo offers many quality of life features for developers,
 - **Interactive** - Marimo offers an interactive, web-app like experience.
+
+Marimo also offers the feature of being reactive - cells can be re-executed when their inputs change.  This can be a double-edged sword for some notebooks, where changing a call can cause side effects like querying APIs or databases.
 
 Marimo notebooks are stored as pure Python files, which means that:Git diffs are meaningful, and the notebook can be executed as a script.
 
