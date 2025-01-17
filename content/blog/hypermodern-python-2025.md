@@ -237,8 +237,6 @@ Static type checking will catch some bugs that many unit test suites won't.  Sta
 
 ## pydantic
 
-TODO mention pydantic 2.0
-
 **[pydantic](https://pydantic-docs.helpmanual.io/) is a tool for organizing and validating data in Python** - it's an alternative to using dictionaries or dataclasses.
 
 pydantic is part of Python's typing revolution - pydantic's ability to create custom types makes writing typed Python a joy.
@@ -504,8 +502,6 @@ shape: (2, 3)
 │ South  ┆ 1200.0    ┆ 1      │
 └────────┴───────────┴────────┘
 ```
-
-*Tip - Polars has no concept of index - a `pl.DataFrame` is a table with each column having the same data type, with no column being more or less special than another.*
 
 *Tip - you can use `pl.DataFrame.to_pandas()` to convert a Polars DataFrame to a Pandas DataFrame. This can be useful to slowly refactor a Pandas based pipeline into a Polars based pipeline.*
 

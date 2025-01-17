@@ -9,7 +9,26 @@
                 {{ .Page.Title }}
                 <span class="text-sm font-normal text-gray-600">({{ .Count }} lessons)</span>
             </h2>
-            <div class="grid gap-4 pl-4">{{ range .Pages.ByTitle }} {{ partial "lesson-card.html" . }} {{ end }}</div>
+            <div class="grid gap-4 pl-4">
+                {{ range .Pages.ByTitle }}
+                <div class="group">
+                    <a href="{{ .RelPermalink }}"
+                       class="block p-4 bg-white rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 hover:text-white transition-all duration-200">
+                        <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
+                        {{ with .Params.summary }}
+                        <p class="text-sm opacity-75 group-hover:text-white/75">{{ . }}</p>
+                        {{ end }}
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            {{ range .Params.competencies }}
+                            <span class="px-2 py-1 text-xs rounded bg-gray-100 text-gray-700 group-hover:bg-emerald-500 group-hover:text-emerald-50 transition-colors duration-200">
+                                {{ . }}
+                            </span>
+                            {{ end }}
+                        </div>
+                    </a>
+                </div>
+                {{ end }}
+            </div>
         </div>
         {{ end }}
     </div>
