@@ -14,7 +14,6 @@ slug: hypermodern-python
 {{< img 
     src="/images/hypermodern-2025/hero.png" 
     alt="Terminal in MC Escher style with birds" 
-    caption="Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant'. Seed: 42. Created with Stable Diffusion 2."
     caption="{Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant', Seed: 42, Creator: Stable Diffusion 2}"
 >}}
 
@@ -237,8 +236,6 @@ Static type checking will catch some bugs that many unit test suites won't.  Sta
 *Tip - Use `reveal_type(variable)` in your code when debugging type issues. mypy will show you what type it thinks a variable has.*
 
 ## pydantic
-
-TODO mention pydantic 2.0
 
 **[pydantic](https://pydantic-docs.helpmanual.io/) is a tool for organizing and validating data in Python** - it's an alternative to using dictionaries or dataclasses.
 
@@ -506,8 +503,6 @@ shape: (2, 3)
 └────────┴───────────┴────────┘
 ```
 
-*Tip - Polars has no concept of index - a `pl.DataFrame` is a table with each column having the same data type, with no column being more or less special than another.*
-
 *Tip - you can use `pl.DataFrame.to_pandas()` to convert a Polars DataFrame to a Pandas DataFrame. This can be useful to slowly refactor a Pandas based pipeline into a Polars based pipeline.*
 
 ## Pandera
@@ -695,6 +690,46 @@ logger.add(
 
 *Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.*
 
+## Marimo
+
+**[Marimo](https://marimo.io) is a Python notebook editor and format** - it's an alternative to Jupyter Lab and the JSON Jupyter notebook file format.
+
+Marimo offers multiple improvements over older ways of writing Python notebooks:
+
+- **Safer** - Marimo notebook cells are executed based on variable references rather than order,
+- **Development Experience** - Marimo offers many quality of life features for developers,
+- **Interactive** - Marimo offers an interactive, web-app like experience.
+
+Marimo also offers the feature of being reactive - cells can be re-executed when their inputs change.  This can be a double-edged sword for some notebooks, where changing a call can cause side effects like querying APIs or databases.
+
+Marimo notebooks are stored as pure Python files, which means that:Git diffs are meaningful, and the notebook can be executed as a script.
+
+Below is an example of the Marimo notebook format:
+
+```python { title = "marimo.py" }
+import marimo
+
+__generated_with = "0.10.12"
+app = marimo.App(width="medium")
+
+
+@app.cell
+def _():
+    import pandas as pd
+
+    def func():
+        return None
+
+    print("hello")
+    return func, pd
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+*Tip - Marimo integrates with GitHub Copilot and Ruff code formatting.*
+
 ## Summary
 
 The **2025 Hypermodern Python Toolbox** is:
@@ -709,4 +744,4 @@ The **2025 Hypermodern Python Toolbox** is:
 - [Polars](https://docs.pola.rs/) for manipulating tabular data,
 - [DuckDB](https://duckdb.org/docs/) for a single file, analytical SQL database,
 - [Loguru](https://loguru.readthedocs.io/en/stable/) for logging.
-
+- [Marimo](https://docs.marimo.io/) for reactive Python notebooks.
