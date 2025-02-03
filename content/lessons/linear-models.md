@@ -6,7 +6,7 @@ competencies:
 - Algorithms
 ---
 
-## What are Linear Models?
+## Why Learn Linear Models?
 
 The advantage of linear models are:
 
@@ -18,6 +18,10 @@ The disadvantages include:
 - **Limited Capacity** - model linear relationships between features,
 - **No Feature Interactions** - 
 - **Collinarity** - need to consider mutual infomation between features to ensure stable coefficients.
+
+Other things to know:
+
+- **Regularization** - Different regularization penalties can affect feature values (see the section of Regularization)
 
 Linear models are a good choice when:
 
@@ -43,7 +47,23 @@ Logistic regression
 
 Fully connected neural network layer.  Bias = intercept.  Parameters are learnt.
 
-## What is Linearity?
+## Languages of Linear Models (what is another work / phrase to use instead of language - taxonomy etc)
+
+The equation for a linear model is written with two different forms of notation:
+
+$$y = m \cdot x + c$$
+
+$$y = \beta \cdot x + \alpha$$
+
+There are also a few different languages used in linear regression.
+
+The dependent variable $y$ is our target; it is the variable we want to predict.
+
+The independent or explanatory variables $x$ are the variables we use to make predictions. 
+
+It is important to inspect the learned parameters manually and also check the distribution of errors (i.e., through a histogram). In theory, the errors should be normally distributed, which indicates no collinearity between the features.
+
+## Linearity
 
 Linearity concerns how things change.
 
@@ -54,21 +74,6 @@ This means that in a linear system, if we make a measurement of direction or cha
 Linear functions are additive, meaning that inputs are proportional to outputs. 
 
 Nonlinear functions, on the other hand, are multiplicative and can be caused by accumulation or feedbacks, such as friction or diminishing returns. Networks are highly nonlinear.
-
-## Why Use Linear Models?
-
-Advantages of linear models include:
-
-- Closed form solution: 
-- Simplicity: Linear models are simple and easy to understand, making them a good choice for problems where interpretability is important.
-- Interpretability: 
-
-Disadvantages of linear models include:
-
-- Linear relationships only: Linear models can only model linear relationships between the features and the target variable. If there are nonlinear relationships, a linear model will not be able to capture them.
-- No interaction between features: Linear models assume that there is no interaction between the features, meaning that the relationship between the target variable and each feature is independent of the other features.
-
-Linear models are a good choice when:
 
 ## Co-Linearity
 
@@ -117,22 +122,9 @@ print(np.corrcoef(clean, rowvar=False))
 
 The resulting correlation matrix shows that the features are now uncorrelated.
 
-## The Language of Linear Models
+## Linear Models from Scratch
 
-The equation for a linear model is written with two different forms of notation:
-
-$$y = m \cdot x + c$$
-
-$$y = \beta \cdot x + \alpha$$
-
-There are also a few different languages used in linear regression.
-
-The dependent variable $y$ is our target; it is the variable we want to predict.
-
-The independent or explanatory variables $x$ are the variables we use to make predictions. 
-
-It is important to inspect the learned parameters manually and also check the distribution of errors (i.e., through a histogram). In theory, the errors should be normally distributed, which indicates no collinearity between the features.
-## Predicting a Constant
+### Predicting a Constant
 
 The simplest linear model has a single parameter $\alpha$ - for this model, our prediction is always a single value $\alpha$:
 
@@ -152,9 +144,9 @@ y_pred = beta_0 * np.ones_like(y)
 print(y_pred)
 ```
 
-This model is the simplest linear model possible.
+This model is the simplest linear model possible - we always predict a constant value.  We don't need or use any features to make this prediction.
 
-## Adding Dependent Variables
+### Adding Dependent Variables
 
 We can make our linear model more complex by adding our independent variables $x$:
 

@@ -1,10 +1,6 @@
 app:
 	hugo server --disableFastRender
 
-SYNTAX=github-dark
-syntax:
-	hugo gen chromastyles --style=$(SYNTAX) > assets/css/syntax.css
-
 PHMDOCTEST_DIR=.phmdoctest
 test:
 	rm -rf $(PHMDOCTEST_DIR)
@@ -26,3 +22,7 @@ build:
 	hugo --gc --minify
 
 deploy: syntax build search
+
+SYNTAX=github-dark
+syntax:
+	hugo gen chromastyles --style=$(SYNTAX) > assets/css/syntax.css
