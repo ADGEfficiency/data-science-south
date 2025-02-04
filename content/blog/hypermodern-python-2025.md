@@ -21,9 +21,9 @@ This post provides clarity with a **Hypermodern Python Toolbox** - tools that ar
 
 ## Python 3.11
 
-Python 3.11 and 3.12 both brought performance improvements to Python. 
+Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 as 3.12 is still a bit unstable with some popular data science libraries.
 
-We choose 3.11 as the version to use in the Hypermodern Toolbox, as 3.12 is still a bit unstable with some popular data science libraries.
+So much of programming is reading & responding error messages - error message improvements are a great quality of life improvement for Python developers in 2025.
 
 **Python 3.11 added better tracebacks** - the exact location of the error is pointed out in the traceback.  This improves the information available to you during development and debugging.
 
@@ -56,11 +56,10 @@ Traceback (most recent call last):
 NameError: name 'datas' is not defined. Did you mean: 'data'?
 ```
 
-So much of programming is reading & responding error messages - these improvements are a great quality of life improvement for Python developers in 2025.
 
 ## uv
 
-The hardest thing about learning Python is learning to install & manage Python. Even senior developers can struggle with the complexity of managing Python, especially if it is not their main language.
+**The hardest thing about learning Python is learning to install & manage Python**. Even senior developers can struggle with the complexity of managing Python, especially if it is not their main language.
 
 ![The xkcd classic commentary on the complex Python ecosystem.](/images/hypermodern-2025/python_environment_xkcd.png)
 
@@ -158,11 +157,13 @@ $ which pytest
 
 **[Ruff](https://docs.astral.sh/ruff/) is a tool to lint and format Python code** - it is an alternatives to tools like Black or autopep8.
 
-Ruff's big thing is being written in Rust - this makes it fast.  When used with Black to ensure consistent code style, Ruff covers much of the Flake8 rule set, along with other rules such as isort.
+Ruff's big thing is being written in Rust - this makes it fast. Ruff covers much of the Flake8 rule set, along with other rules such as isort.
 
-A great way to use Ruff is with the defaults and check everything.  
+The code below has three problems: 
 
-The code below has three problems - we use an undefined variable `datas`, it has imports in the wrong place and imports something we don't use:
+1. We use an undefined variable `datas`.
+2. It has imports in the wrong place.
+3. Imports something we don't use.
 
 ```python { title = "ruff.py" }
 data = datas[0]
@@ -180,13 +181,15 @@ Found 3 errors.
 [*] 1 potentially fixable with the --fix option.
 ```
 
-*Tip - Ruff is quick enough to run on file save during development - your text editor will allow this somehow!*
+*Tip - Ruff is quick enough to run on file save during development - make sure you have formatting on save configured in your text editor!*
 
 ## mypy
 
-**[mypy](http://www.mypy-lang.org/) is a tool for enforcing type safety in Python** - it's an alternative to type declarations remaining as only unexecuted documentation.
+**[mypy](http://www.mypy-lang.org/) is a tool for enforcing type safety in Python** - it's an alternative to limiting type declarations to unexecuted documentation.
 
-Recently Python has undergone a similar transition to the Javascript to Typescript transition, with static typing being improved in the standard library and with third party tooling.  Statically typed Python is the standard for many teams developing Python in 2025.
+Recently Python has undergone a similar transition to the Javascript to Typescript transition, with static typing becoming core to Python development (if you want). Statically typed Python is the standard for many teams developing Python in 2025.
+
+Static type checking will catch some bugs that many unit test suites won't.  Static typing will check more paths than a single unit test often does - catching edge cases that would otherwise only occur in production.
 
 `mypy_error.py` has a problem - we attempt to divide a string by `10`:
 
@@ -208,7 +211,7 @@ mypy_error.py:5: error: Call to untyped function "process" in typed context
 Found 2 errors in 1 file (checked 1 source file)
 ```
 
-These first errors are because our code has no typing - let's add two type annotations:
+These first errors are because our code has no typing - we can add two type annotations to make our code typed:
 
 1. `user: dict[str,str]` - `user` is a dictionary with strings as keys and values,
 2. `-> None:` - the `process` function returns None.
@@ -231,17 +234,15 @@ Found 1 error in 1 file (checked 1 source file)
 
 This is a test we can run without writing any specific test logic - very cool!
 
-Static type checking will catch some bugs that many unit test suites won't.  Static typing will check more paths than a single unit test often does - catching edge cases that would otherwise only occur in production.
-
 *Tip - Use `reveal_type(variable)` in your code when debugging type issues. mypy will show you what type it thinks a variable has.*
 
 ## pydantic
 
 **[pydantic](https://pydantic-docs.helpmanual.io/) is a tool for organizing and validating data in Python** - it's an alternative to using dictionaries or dataclasses.
 
-pydantic is part of Python's typing revolution - pydantic's ability to create custom types makes writing typed Python a joy.
+**pydantic is part of Python's typing revolution** - pydantic's ability to create and validate custom types makes your Python code clearer and safer.
 
-pydantic uses Python type hints to define data types. Imagine we want a user with a `name` and `id`:
+pydantic uses Python type hints to define data types. Imagine we want a user with a `name` and `id`, which we could model with a dictionary:
 
 ```python
 import uuid
@@ -253,7 +254,7 @@ users = [
 ]
 ```
 
-We could model this with pydantic - introducing a class that inherits from `pydantic.BaseModel`:
+We could also model this with pydantic - introducing a class that inherits from `pydantic.BaseModel`:
 
 ```python
 import uuid
@@ -319,22 +320,34 @@ These pydantic types can become the primitive data structures in your Python pro
 
 We can build a Python CLI with uv and Typer by first creating a Python package with uv, adding `typer` as a dependency).
 
-Here we use `$ uv init` to create a new project from scratch:
+TODO
+
+```
+$ uv venv --python=3.11.10
+Using CPython 3.11.10
+Creating virtual environment at: .venv
+Activate with: source .venv/bin/activate
+```
+
+Below we use `uv init` to create a new project from scratch:
 
 ```shell-session
 $ uv init --name demo --python 3.11.10 --package
+Initialized project `demo`
 ```
 
+$ uv init --name demo --python 3.11.10 --package
+
 ```shell-session
-$ tree .
 .
-├── .python-version
 ├── pyproject.toml
 ├── README.md
 └── src
     └── demo
         └── __init__.py
 ```
+
+We can then add `typer` as a dependency with `uv add`:
 
 ```shell-session
 $ uv add typer
@@ -352,6 +365,29 @@ Installed 8 packages in 9ms
  + typing-extensions==4.12.2
 ```
 
+
+We then add modify the Python file `src/demo/__init__.py` to include a simple CLI:
+
+```python { title = "src/demo/\_\_init\_\_.py" }
+import typer
+
+
+app = typer.Typer()
+
+
+@app.command()
+def main(name: str) -> None:
+    print(f"Hello {name}")
+```
+
+We need to add this to our `pyproject.toml` to be able to run our CLI with the `demo` command:
+
+```toml { title = "pyproject.toml" }
+demo = "demo:app"
+```
+
+This is our full `pyproject.toml`:
+
 ```toml { title = "pyproject.toml" }
 [project]
 name = "demo"
@@ -367,30 +403,17 @@ dependencies = [
 ]
 
 [project.scripts]
-demo = "demo:main"
+demo = "demo:app"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
 
-
-We then add modify the Python file `src/demo/__init__.py` to include a simple CLI:
-
-```python { title = "src/demo/\_\_init\_\_.py" }
-import typer
-
-def main(name: str) -> None:
-    print(f"Hello {name}")
-
-if __name__ == "__main__":
-    typer.run(main)
-```
-
 Because we have included a `[project.scripts]` in our `pyproject.toml`, we can run this CLI with `uv run`:
 
 ```shell-session
-$ uv run demo
+$ uv run demo omega
 Hello omega
 ```
 
@@ -398,16 +421,27 @@ Typer gives us a `--help` flag for free:
 
 ```shell-session
 $ python src/demo/__init__.py --help
+ Usage: demo [OPTIONS] NAME
+
+╭─ Arguments ──────────────────────────────────────────────────────────────────────────────────╮
+│ *    name      TEXT  [default: None] [required]                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                      │
+│ --show-completion             Show completion for the current shell, to copy it or customize │
+│                               the installation.                                              │
+│ --help                        Show this message and exit.                                    │
+╰──────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 
-*Tip - you can create nested CLI groups using commands and command groups.*
+*Tip - you can create nested CLI groups in typer using commands and command groups.*
 
 ## Rich
 
 **[Rich](https://rich.readthedocs.io/en/stable/) is a tool for printing pretty text to a terminal** - it's an alternative to the monotone terminal output of most Python programs.
 
-One of Rich's most useful features is pretty printing of color and emojis:
+Rich's features pretty printing of color and emojis:
 
 ```python
 import rich
@@ -443,11 +477,11 @@ this will be printed with rich 👏
 
 **Polars is a tool for tabular data manipulation in Python** - it's an alternative to Pandas.
 
-Polars can offer exceptional performance through query optimization. It can also work with larger than memory datasets.  It also has a syntax that may prefer to Pandas.
+Polars offers exceptional performance with query optimization, parallel processing and can work with larger than memory datasets.  It also has a more declaraitve syntax that may prefer to the more imperative Pandas syntax.
 
-In eager-execution frameworks like Pandas, each data transformation is run without knowledge of what came before and after. By allowing data to be evaluated lazily, Polars can optimize across a series of data transformations.  
+In eager-execution frameworks like Pandas, each data transformation is run without knowledge of what came before and after. By allowing data to be processed lazily by grouping multiple transformations, Polars can optimize across many data transformations.  
 
-The example below demonstrates query optimization. Let's start with a dataset of three columns:
+Let's start with a dataset of three columns:
 
 ```python
 import polars as pl
@@ -459,10 +493,10 @@ df = pl.DataFrame({
 })
 ```
 
-We can then chain operations together and run them in a single optimized query.  Below we chain together column creation and aggregation into one query:
+Below we chain together column creation and aggregation into one query:
 
 ```python
-result = (
+query = (
     df
     # start lazy evaluation - Polars won't execute anything until .collect()
     .lazy()
@@ -484,11 +518,9 @@ result = (
             pl.col("sales").count().alias("n_days"),
         ]
     )
-    # run the optimized query
-    .collect()
 )
-
-print(result)
+# run the optimized query
+print(query.collect())
 ```
 
 ```
@@ -503,6 +535,16 @@ shape: (2, 3)
 └────────┴───────────┴────────┘
 ```
 
+We can use Polars to explain our query:
+
+```python
+query.explain()
+```
+
+```
+'AGGREGATE\n\t[col("sales").mean().alias("avg_sales"), col("sales").count().alias("n_days")] BY [col("region")] FROM\n  DF ["date", "sales", "region"]; PROJECT 2/3 COLUMNS; SELECTION: None'
+```
+
 *Tip - you can use `pl.DataFrame.to_pandas()` to convert a Polars DataFrame to a Pandas DataFrame. This can be useful to slowly refactor a Pandas based pipeline into a Polars based pipeline.*
 
 ## Pandera
@@ -511,7 +553,11 @@ shape: (2, 3)
 
 Pandera allows you to define schemas for your data, which can then be used to validate, clean, and transform your data. By defining schemas upfront, Pandera can catch data issues before they propagate through your analysis pipeline.
 
-Let's create a schema for some sales data.  We define column names, types, and data quality checks like if null values are acceptable, numeric upper and lower bound constraints and check accepted values for categorical data:
+Below we create a schema for some sales data, including data quality checks like:
+
+- null value checks, 
+- upper and lower bounds,
+- accepted values.
 
 ```python
 import polars as pl
@@ -578,13 +624,13 @@ print(schema(data))
 SchemaError: Column 'sales' failed validator number 0: <Check greater_than: greater_than(0)> failure case examples: [{'sales': -1000}]
 ```
 
-*Tip - Check decorators can enable custom validation logic beyond simple range and type checks. Custom checks can validate complex business rules or statistical properties of your data.*
+*Tip - Pandera also offers a Pydantic style class based API that can validate using Python types.*
 
 ## DuckDB
 
 **DuckDB is database for analytical SQL queries** - it's an alternative to SQLite, Polars and Pandas.
 
-Like SQLite, DuckDB is a single-file database. While SQLite are optimized for transactional workloads, DuckDB is specifically designed for analytical queries on structured data.
+DuckDB is a single-file database like SQLite. While SQLite is optimized for row based, transactional workloads, DuckDB is specifically designed for column based, analytical queries.
 
 Let's create some sample data using both CSV and Parquet formats:
 
@@ -605,7 +651,7 @@ products = pl.DataFrame(
 ).to_parquet("products.parquet")
 ```
 
-Below we run a SQL query across both formats:
+Below we run a SQL query across both data formats:
 
 ```python
 con = duckdb.connect()
@@ -650,8 +696,6 @@ DuckDB shines when working with larger than memory datasets. It can efficiently 
 **[Loguru](https://github.com/Delgan/loguru) is a logger** - it's an alternative to the standard library's logging module and structlog.  Loguru builds on top of the Python standard library `logging` module.  It's not a complete rethinking, but a few tweaks here and there to make logging from Python programs less painful.
 
 A central Loguru idea is that there is only one `logger`. This is a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many. Because Loguru builds on top of the Python `logging` module, it's easy to swap in a Loguru logger for a Python standard library `logging.Logger`.
-
-Let's see how Loguru simplifies logging. First, a basic example:
 
 Logging with Loguru is as simple as `from loguru import logger`:
 
