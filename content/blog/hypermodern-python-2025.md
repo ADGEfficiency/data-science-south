@@ -320,7 +320,7 @@ These pydantic types can become the primitive data structures in your Python pro
 
 We can build a Python CLI with uv and Typer by first creating a Python package with uv, adding `typer` as a dependency).
 
-TODO
+First we create a virtual environment:
 
 ```
 $ uv venv --python=3.11.10
@@ -329,7 +329,7 @@ Creating virtual environment at: .venv
 Activate with: source .venv/bin/activate
 ```
 
-Below we use `uv init` to create a new project from scratch:
+Then use `uv init` to create a new project from scratch:
 
 ```shell-session
 $ uv init --name demo --python 3.11.10 --package
