@@ -13,9 +13,21 @@ Learning how to use a shell will allow you to:
 
 - **Efficiently use a computer** - text is a precise way to use a computer.
 - **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
-- **Unlock powerful tools** - many development tasks can only be done through a terminal.
+- **Unlock powerful tools** - many development tasks are best done with shells - for example DBT is used via a CLI.
 
 Learing Bash makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  Learning to use Bash unlocks automation in the cloud.
+
+You might not always need to write shell scripts to automate tests and deployments, but the skills required to write shell scripts will allow you setup both CI and CD.
+
+## Tooling
+
+**Different developers use different tools for using a Bash shell**.
+
+Some developers run terminals inside an IDE like VS Code.  Others will use a separate program like Windows Terminal to run shell commands.
+
+What shells you have available depends on your operating system.
+
+TODO - Git Bash on Windows or WSL, or Bash on Linux or MacOS. Zsh is also fine.
 
 ### Notation
 
