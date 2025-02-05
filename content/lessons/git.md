@@ -19,6 +19,12 @@ Learning Git will allow you to:
     caption="[XKCD #1597](https://xkcd.com/1597/)" 
 >}}
 
+## Useful Git Resources
+
+The [Pro Git](https://git-scm.com/book/en/v2) book, covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
+
+[Beej's Guide to Git](https://beej.us/guide/bggit/).
+
 ## Tooling
 
 **Different developers use different tools for using Git**.
