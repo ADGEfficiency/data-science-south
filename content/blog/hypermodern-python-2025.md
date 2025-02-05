@@ -6,6 +6,8 @@ tags:
 - Python
 - Hypermodern
 slug: hypermodern-python
+aliases:
+- "/blog/hypermodern-python-2025"
 
 ---
 
