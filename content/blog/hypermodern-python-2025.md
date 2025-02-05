@@ -549,11 +549,11 @@ query.explain()
 
 ## Pandera
 
-**Pandera is a tool for data quality of DataFrames**- it's an alternative to Great Expectations or assert statements.
+**Pandera is a tool for data quality checks of tabular data**- it's an alternative to Great Expectations or assert statements.
 
-Pandera allows you to define schemas for your data, which can then be used to validate, clean, and transform your data. By defining schemas upfront, Pandera can catch data issues before they propagate through your analysis pipeline.
+Pandera allows you to define schemas for tabular data (data with rows and columns), which are used validate a table of data. By defining schemas explicitly, Pandera can catch data issues before they propagate through your analysis pipeline.
 
-Below we create a schema for some sales data, including data quality checks like:
+Below we create a schema for sales data, including a few data quality checks:
 
 - null value checks, 
 - upper and lower bounds,
