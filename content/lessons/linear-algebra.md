@@ -10,6 +10,10 @@ competencies:
 
 TODO
 
+### Attribution
+
+This lesson uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
+
 ## Tooling
 
 To run the Python code in this lesson, you need a Python interpreter and to install the following Python packages:
@@ -34,9 +38,6 @@ Scipy lectures:
 - [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
 - [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
 
-## Attribution
-
-This lesson uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
 
 ## Why Learn NumPy?
 
@@ -189,9 +190,7 @@ len(np.array([10, 20.0, 30]))
 ```
 
 
-## Scalars to Tensors
-
-### Scalar
+## Scalars
 
 Let's start with the most basic building block of linear algebra: the scalar.
 
@@ -227,7 +226,7 @@ print(x.ndim)
 print(x.size)
 ```
 
-## Vector
+## Vectors
 
 A vector has multiple dimensions.
 
@@ -346,8 +345,6 @@ Vectors - flat lists
 
 <img src="assets/agg.png" alt="" width="800"/>
 
-
-
 ### Vector norms
 
 Size of a vector
@@ -452,6 +449,7 @@ $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\e
 - area
 
 ## Matricies
+
 #### Tensor
 
 - n-dimensional
