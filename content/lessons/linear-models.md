@@ -1,27 +1,64 @@
 ---
-title: Linear Models
+title: Linear Predictive Models
 summary: TODO
 draft: false
 competencies:
 - Algorithms
 ---
 
+
+## Linearity
+
+Linearity concerns how things change.
+
+In a linear system, the system changes at the same rate at all points, while in a nonlinear system, the system changes at different rates at different points. 
+
+This means that in a linear system, if we make a measurement of direction or change, we can be confident that this will hold for other data, but in a nonlinear system, this may not be the case.
+
+Linear functions are additive, meaning that inputs are proportional to outputs. 
+
+Nonlinear functions, on the other hand, are multiplicative and can be caused by accumulation or feedbacks, such as friction or diminishing returns. Networks are highly nonlinear.
+
+## What is a Linear Model?
+
+A linear model is one that can only learn linear relationships between features and a target.
+
+A linear relationship changes at the same rate at all points.  
+
+Take for example a linear relationship of doubling:
+
+$$ y = 2 x $$
+
+If we take the gradient with respect to `x`, the gradient is a constant value:
+
+$$ dy/dx = 2 $$
+
+No matter the value of `x`, our the change in the value of `y` for a given value of `x` is always the same.
+
+Note however that much of the world is non-linear - the rate of change of a variable is not constant. The limitation of linear models to only learn linear relationships is a disadvantage versus higher capacity models like XGBoost or neural networks.
+
+### Linear Models are Global
+
 ## Why Learn Linear Models?
+
+Linear models are an important tool for data scientists.  While they are limited in the their capacity to learn non-linear relationships, they have many advantages.
 
 The advantage of linear models are:
 
 - **Closed form solutions** - linear models have a closed form solution, which means that convergence is guaranteed.
 - **Interpretability** - The coefficients of a linear model are directly proportional to how each feature affects a prediction.
+- **Baseline** - TODO
 
 The disadvantages include: 
 
 - **Limited Capacity** - model linear relationships between features,
 - **No Feature Interactions** - 
-- **Collinarity** - need to consider mutual infomation between features to ensure stable coefficients.
+- **Collinearity** - need to consider mutual infomation between features to ensure stable coefficients.
 
 Other things to know:
 
 - **Regularization** - Different regularization penalties can affect feature values (see the section of Regularization)
+- ** ** - TODO trick to model non-linear or interaction effects
 
 Linear models are a good choice when:
 
@@ -47,7 +84,7 @@ Logistic regression
 
 Fully connected neural network layer.  Bias = intercept.  Parameters are learnt.
 
-## Languages of Linear Models (what is another work / phrase to use instead of language - taxonomy etc)
+### Common Linear Models
 
 The equation for a linear model is written with two different forms of notation:
 
@@ -63,17 +100,7 @@ The independent or explanatory variables $x$ are the variables we use to make pr
 
 It is important to inspect the learned parameters manually and also check the distribution of errors (i.e., through a histogram). In theory, the errors should be normally distributed, which indicates no collinearity between the features.
 
-## Linearity
-
-Linearity concerns how things change.
-
-In a linear system, the system changes at the same rate at all points, while in a nonlinear system, the system changes at different rates at different points. 
-
-This means that in a linear system, if we make a measurement of direction or change, we can be confident that this will hold for other data, but in a nonlinear system, this may not be the case.
-
-Linear functions are additive, meaning that inputs are proportional to outputs. 
-
-Nonlinear functions, on the other hand, are multiplicative and can be caused by accumulation or feedbacks, such as friction or diminishing returns. Networks are highly nonlinear.
+TODO - add a bit on arrary versions of these - fully connected layer etc
 
 ## Co-Linearity
 
@@ -175,7 +202,7 @@ print("Learned coefficients:", model.coef_)
 print("Learned intercept:", model.intercept_)
 ```
 
-## Least Squares Linear Regression
+## Least Squares 
 
 In the examples above, our parameters $\beta$ and $\alpha$ were given to us.
 
@@ -276,7 +303,7 @@ This expression is known as the normal equations, and it gives the values of the
 
 In summary, the least squares method is a widely used technique for finding the coefficients of a linear regression model that best fits the observed data. The derivation involves taking the derivative of the sum of squared errors with respect to each coefficient, setting the derivative equal to zero, and solving for the coefficient. The normal equations provide a convenient way to express the coefficients as a matrix expression, but the matrix inversion is only possible if the columns of the matrix of independent variables are linearly independent.
 
-## Ridge & Lasso Linear Regression
+## Ridge & Lasso
 
 Ridge regression is particularly useful to mitigate the problem of multicollinearity in linear regression, which commonly occurs in models with large numbers of parameters.  The method provides improved efficiency in parameter estimation problems in exchange for a tolerable amount of bias.
 
@@ -316,3 +343,35 @@ Ridge regression is an example of regularization, which is a technique for preve
 In addition to ridge regression, another common type of regularization is Lasso regression, which adds a penalty term that is proportional to the absolute value of the coefficients. Lasso regression can be more effective than ridge regression in situations where the number of features is very large and only a small subset of them are important for predicting the outcome.
 
 Regularization is an important technique for building models that generalize well to new data, and it is widely used in machine learning and statistical modeling. The choice of the regularization hyperparameter, such as $\alpha$ in ridge regression, can have a significant impact on the performance of the model, and it is often chosen using cross-validation or other model selection techniques.
+
+## Evaluating the Fit of Linear Models
+
+Evaluating the fit of a linear model is crucial to understand how well the model describes the relationship between the dependent and independent variables. Here are some common methods to evaluate the fit of linear models:
+
+### 1. R-squared (Coefficient of Determination)
+R-squared measures the proportion of the variance in the dependent variable that is predictable from the independent variables. It ranges from 0 to 1, where:
+- 0 indicates that the model explains none of the variability of the response data around its mean.
+- 1 indicates that the model explains all the variability of the response data around its mean.
+
+### 2. Adjusted R-squared
+Adjusted R-squared adjusts the R-squared value based on the number of predictors in the model. It is useful for comparing models with a different number of predictors.
+
+### 3. Mean Squared Error (MSE)
+MSE measures the average of the squares of the errors, that is, the average squared difference between the observed actual outcomes and the outcomes predicted by the model. Lower values of MSE indicate a better fit.
+
+### 4. Root Mean Squared Error (RMSE)
+RMSE is the square root of the MSE. It provides a measure of how well the model's predictions match the observed data in the same units as the dependent variable.
+
+### 5. Residual Analysis
+Residuals are the differences between the observed values and the predicted values. Analyzing residuals can help identify patterns that the model does not capture. Ideally, residuals should be randomly distributed with no discernible pattern.
+
+### 6. F-statistic
+The F-statistic tests the overall significance of the model. It compares the model with no predictors (intercept only model) to the specified model. A higher F-statistic value indicates that the model is a better fit.
+
+### 7. Cross-Validation
+Cross-validation involves partitioning the data into subsets, training the model on some subsets, and validating it on the remaining subsets. This helps in assessing how the model generalizes to an independent dataset.
+
+### 8. AIC and BIC
+Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) are measures for model selection. They balance model fit and complexity, with lower values indicating a better model.
+
+By using these methods, you can comprehensively evaluate the performance and fit of your linear model.
