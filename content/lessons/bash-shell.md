@@ -5,9 +5,13 @@ competencies:
 - "Software Engineering"
 ---
 
+## What is Bash?
+
+Bash is a shell - a shell is a program that uses text commands to run computer programs.  
+
 ## Why Learn Bash?
 
-The shell is a core development tool. Bash is a commonly used shell, that is readily available in the cloud.
+Bash is a popular shell, that is commonly available in the cloud on Linux machines.
 
 Learning how to use a shell will allow you to:
 
@@ -15,37 +19,47 @@ Learning how to use a shell will allow you to:
 - **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
 - **Unlock powerful tools** - many development tasks are best done with shells - for example DBT is used via a CLI.
 
-Learing Bash makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  Learning to use Bash unlocks automation in the cloud.
+Learning to use Bash unlocks automation in the cloud. Learning the shell makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  
 
 You might not always need to write shell scripts to automate tests and deployments, but the skills required to write shell scripts will allow you setup both CI and CD.
 
-## Tooling
+### Tooling
 
 **Different developers use different tools for using a Bash shell**.
 
 Some developers run terminals inside an IDE like VS Code.  Others will use a separate program like Windows Terminal to run shell commands.
 
-What shells you have available depends on your operating system.
+What shells you have available depends on your operating system - my suggestion is:
 
-TODO - Git Bash on Windows or WSL, or Bash on Linux or MacOS. Zsh is also fine.
+- **Windows** - for a shell, either Windows Subsystem for Linux or Git Bash.  For a terminal, Windows terminal is great.
+- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
+- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
+
+### Resources
+
+[Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/).
+
+[Effective Shell](https://effective-shell.com/).
+
+[BashGuide](https://mywiki.wooledge.org/BashGuide).
 
 ### Notation
 
 `$` indicates a command is run interactively in a Bash shell -- you don't need to write this leading `$` when you are typing in the shell.
 
-For example, if you see:
+For example, in the code below, to run this on your own machine, you need to type `ls`, then `Enter` to run the command in the REPL:
 
 ```shell-session
 $ ls
 ```
 
-You need to type `ls`, then `Enter` to run the command in the REPL.
+## Terminal, Command-Line, Shell
 
-## Terminal
+### The Terminal
 
-The terminal, command line and shell are often used interchangeably. They are however different tools - all three are used when using a computer via text input.
+The terminal, command line and shell are often used interchangeably. They are however different tools - all three are used when using a computer via text commands.
 
-**The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with a computer through text commands.
+**The terminal (also called a console) is an interface that controls user input & output**.
 
 ![The DEC VT100 Terminal](/images/bash-shell/terminal.png "The DEC VT100 Terminal")
 
@@ -58,7 +72,7 @@ Popular terminal emulators include:
 - **Windows** - Windows Terminal,
 - **Ubuntu** - Gnome Terminal.
 
-## Command-Line
+### Command-Line
 
 The command-line is the space or interface in the terminal where you can type and execute text commands. 
 
@@ -68,7 +82,7 @@ When you launch your terminal, you are in a command-line interface.
 $ echo "this is the command line"
 ```
 
-## The Shell
+### The Shell
 
 **A shell is a computer program that executes text commands**. 
 
@@ -173,6 +187,7 @@ If you do use spaces, you may end up seeing (or having to write!) your paths by 
 
 ```shell-session
 $ pwd
+/Users/adamgreen/data-science-south-projects/bash-shell
 ```
 
 We can remove output from the terminal with `clear`:
@@ -202,6 +217,7 @@ $ ls -al
 We can change our current directory using `cd`, which will move down into a directory:
 
 ```shell-session
+$ mkdir practice-dir
 $ cd practice-dir
 ```
 
@@ -227,7 +243,7 @@ $ cd $HOME
 $ cd
 ```
 
-`~` is a special syntax that refers to the home folder. `$HOME` is a special variable that contains the path to the home folder.
+`~` is a special syntax that refers to the home folder. `$HOME` is an environment variable that is the path to your home folder.
 
 The highest level of a file system on MacOS contains folders like `/etc` and `/Users` - we can move to these directories using `cd`:
 
@@ -239,9 +255,9 @@ Important top level directories include:
 
 - `/etc` - configuration files,
 - `/bin` - programs,
-- `/Users` - user home directories on MacOS,
-- `/home` - user home directories on Linux.
-- 
+- `/Users` - user home directories (MacOS),
+- `/home` - user home directories (Linux).
+
 ## Files & Directories
 
 ### Making & Editing Files
@@ -402,15 +418,11 @@ This enables the composition of programs, with programs generating text for each
 
 The shell establishes three text streams:
 
-- **standard input** (stdin) - the input stream,
-- **standard output** (stdout) - the output stream,
-- **standard error** (stderr) - the error output stream.
+- **standard input** (STDIN) - the input stream (commonly a keyboard),
+- **standard output** (STDOUT) - the output stream (commonly a terminal console),
+- **standard error** (STDERR) - the error output stream (also usually goes to terminal console).
 
-When using Bash as a REPL, the three text streams are connected to:
-
-- stdin - the keyboard,
-- stdout - the terminal console,
-- stderr - also the terminal console.
+It's possible to direct these text streams to different places - for example to redirect STDOUT to a file, rather than the terminal console.
 
 ![](/static/mermaid/redirection1.svg)
 
@@ -512,19 +524,21 @@ You can see all the environment variables currently defined in your shell with t
 $ env
 ```
 
-You can access an environment variable using the `$NAME` syntax.  We can use `echo` to view the value of an environment variable:
+You can access an environment variable using the `$NAME` syntax.  
+
+You can use `echo` to view the value of an environment variable - below we look at the `$HOME` environment variable.
 
 ```shell-session
 $ echo $HOME
 ```
 
-### The `PATH`
+### `$PATH`
 
-The `PATH` environment variable is a list of directories, separated by a `:`.
+The `$PATH` environment variable is a list of directories, separated by a `:`.
 
-The `PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `PATH` makes that program accessible via a shell from any directory.
+The `$PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `$PATH` makes that program accessible via a shell from any directory.
 
-The `PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
+The `$PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
 
 ```shell-session
 $ echo $PATH | tr ":" "\n"
@@ -543,7 +557,6 @@ A common pattern you will see in install scripts is to copy this path update com
 This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
 
 Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run from the shell.
-
 
 ### Sourcing
 
@@ -751,4 +764,3 @@ function greet {
 
 greet "adam"
 ```
-
