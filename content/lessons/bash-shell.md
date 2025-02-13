@@ -9,32 +9,6 @@ competencies:
 
 Bash is a shell - a shell is a program that uses text commands to run computer programs.  
 
-## Why Learn Bash?
-
-Bash is a popular shell, that is commonly available in the cloud on Linux machines.
-
-Learning how to use a shell will allow you to:
-
-- **Efficiently use a computer** - text is a precise way to use a computer.
-- **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
-- **Unlock powerful tools** - many development tasks are best done with shells - for example DBT is used via a CLI.
-
-Learning to use Bash unlocks automation in the cloud. Learning the shell makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  
-
-You might not always need to write shell scripts to automate tests and deployments, but the skills required to write shell scripts will allow you setup both CI and CD.
-
-### Tooling
-
-**Different developers use different tools for using a Bash shell**.
-
-Some developers run terminals inside an IDE like VS Code.  Others will use a separate program like Windows Terminal to run shell commands.
-
-What shells you have available depends on your operating system - my suggestion is:
-
-- **Windows** - for a shell, either Windows Subsystem for Linux or Git Bash.  For a terminal, Windows terminal is great.
-- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
-- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
-
 ### Resources
 
 [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/).
@@ -52,6 +26,20 @@ For example, in the code below, to run this on your own machine, you need to typ
 ```shell-session
 $ ls
 ```
+
+## Why Learn Bash?
+
+Bash is a popular shell, that is commonly available in the cloud.  A lot of computing in the cloud is done on machines running Linux, where the Bash shell will either be installed by default or easily available.  Likewise in cloud CI/CD tools like GitHub Actions or Azure Devops, Bash is very available.
+
+Learning how to use a shell will allow you to:
+
+- **Efficiently use a computer** - text is a precise way to use a computer.
+- **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
+- **Unlock powerful tools** - many development tasks are best done with shells - for example DBT is used via a CLI.
+
+Learning to use Bash unlocks automation in the cloud. Learning the shell makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  
+
+You might not always need to write shell scripts to automate tests and deployments, but the skills required to write shell scripts will allow you setup both CI and CD.
 
 ## Terminal, Command-Line, Shell
 
@@ -95,6 +83,18 @@ A shell is automatically started in a new terminal. When you write text in the c
 
 **The shell we shall use in this lesson is the Bash shell**.
 
+## Tooling
+
+**Different developers use different tools for using a Bash shell**.
+
+Some developers run terminals inside an IDE like VS Code - one terminal can be used with different shells.  Others will use a separate program like Windows Terminal to run different shells.
+
+What shells you have available depends on your operating system - my suggestion is:
+
+- **Windows** - for a shell, either Windows Subsystem for Linux or Git Bash.  For a terminal, Windows terminal is great.
+- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
+- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
+
 ### Shells
 
 There are many different shells available -- commonly used shells are:
@@ -107,6 +107,23 @@ There are many different shells available -- commonly used shells are:
 You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
 
 The best shells to know are the ones that are most easily available in the cloud. **Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud**.
+
+### Common Bash Programs
+
+A shell has its own syntax and set of commands, along with a collection of programs available.  
+
+Common Bash shell programs include:
+
+- `ls` - list files & directories,
+- `pwd` - print working directory,
+- `cd` - change directory,
+- `cat` - print file contents.
+
+A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
+
+The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
+
+## Ways to use Bash
 
 ### Bash as a REPL
 
@@ -131,38 +148,15 @@ We can then execute this script in a shell REPL:
 $ bash script.sh
 ```
 
-### Common Shell Programs
-
-A shell has its own syntax and set of commands, along with a collection of programs available.  
-
-Common shell programs include:
-
-- `ls` - list files & directories,
-- `pwd` - print working directory,
-- `cd` - change directory,
-- `cat` - print file contents.
-
-A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
-
-The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
+Shell scripts can take input from command-line arguments or from environment variables.
 
 ## Whitespace
 
-Bash use the space character to separate commands & arguments.  
-
-This makes working at the shell natural, but requires some care when using with spaces.  
+Bash use the space character to separate commands & arguments. This makes working at the shell natural, but requires some care.
 
 **The shell will expand spaces by default into separate commands** - this means that spaces in the wrong places can cause shell scripts to break.
 
-We can use the `echo` program to print text to the terminal.
-
-The `echo` program takes an argument of the text to print - enclosing our message `"this is fine"` in quotes will prevent the shell from expanding the spaces in our message:
-
-```shell-session
-$ echo "this is fine"
-```
-
-This space based expansion is one reason why you should never put spaces in file names - use `-` or `_` as a separator in file names:
+Space expansion is one reason why you should never put spaces in file names - use `-` or `_` as a separator in file names:
 
 ```bash
 # don't do this
