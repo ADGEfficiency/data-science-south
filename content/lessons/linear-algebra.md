@@ -1,7 +1,7 @@
 ---
 title: Linear Algebra
 summary: TODO
-draft: true
+draft: false
 competencies:
 - Algorithms
 ---
@@ -10,40 +10,54 @@ competencies:
 
 TODO
 
-## Setup
-
-To run the code in this lesson, you need to install:
-
-```shell-session
-$ pip install -q numpy pandas matplotlib
-todo
-```
-
-## Attribution
+### Attribution
 
 This lesson uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
 
-## numpy
+## Tooling
 
-### When `numpy`
+To run the Python code in this lesson, you need a Python interpreter and to install the following Python packages:
 
-Linear algebra, data processing
+```shell-session
+$ pip install -q numpy pandas matplotlib
+```
 
-Pandas sits on top of `numpy`:
+## Resources
+
+Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville](https://www.deeplearningbook.org/)
+
+[Array programming with NumPy - Nature](https://www.nature.com/articles/s41586-020-2649-2)
+
+[Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
+
+[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) 
+
+[Understanding the internals of NumPy to avoid unnecessary array copying](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
+
+Scipy lectures:
+- [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
+- [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
+
+
+## Why Learn NumPy?
+
+NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.  
+
+Working with a NumPy array is fast - it stores and operates on data using C structures.
+
+Pandas, a popular tabular data Python library, sits on top of `numpy`. Below we access the numpy array that holds data in a Pandas dataframe:
 
 ```python
-#  access the numpy array that holds the data
+import pandas as pd
+
 pd.DataFrame([1, 2]).values
 ```
 
-### What `numpy`
+PyTorch, the leading Python deep learning library, uses NumPy arrays as input and output:
 
-Library for working with n-dimensional data
-- **store and operate on data using C structures**
-
-<img src="assets/c.png" alt="" width="350"/>
-
-### Why `numpy`
+```python
+TODO
+```
 
 Functionality
 - vector, matrix & tensor operations
@@ -51,14 +65,15 @@ Functionality
 Uses less memory
 - fixed data types
 
-Speed
+### Speed
+
 - fixed data types (benefit from static typing)
 - C implementation
 
 Below we implement a sum operation using a Python loop:
 
 ```python
-def loop(left, right):
+def loop(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     data = np.zeros(left.shape[0])
     for i in range(data.shape[0]):
         data[i] = left[i] + right[i]
@@ -67,22 +82,21 @@ def loop(left, right):
 left = np.arange(10000000)
 right = np.arange(10000000)
 
-#  excuse the horrbile hack here
-#  want to always print the time in seconds
-res = %timeit -qo loop(left, right)
-
-'{:.2f} seconds'.format(res.average)
+# TODO - add timing
+lp = loop(left, right)
 ```
 
 Now lets try it using `numpy` addition:
 
 ```python
-res = %timeit -qo left + right
-
-'{:.2f} seconds'.format(res.average)
+# TODO - add timing
+check = left + right
+assert check == lp
 ```
 
-Note that not only is `numpy` quicker, it is **more readable**!
+Note that not only is NumPy quicker, it is also **more readable**!
+
+### Vectorization
 
 The reason that `numpy` is faster is **vectorization**
 - running multiple operations from a single instruction
@@ -176,9 +190,7 @@ len(np.array([10, 20.0, 30]))
 ```
 
 
-## Scalars to Tensors
-
-### Scalar
+## Scalars
 
 Let's start with the most basic building block of linear algebra: the scalar.
 
@@ -214,7 +226,7 @@ print(x.ndim)
 print(x.size)
 ```
 
-## Vector
+## Vectors
 
 A vector has multiple dimensions.
 
@@ -333,8 +345,6 @@ Vectors - flat lists
 
 <img src="assets/agg.png" alt="" width="800"/>
 
-
-
 ### Vector norms
 
 Size of a vector
@@ -439,6 +449,7 @@ $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\e
 - area
 
 ## Matricies
+
 #### Tensor
 
 - n-dimensional
@@ -863,21 +874,5 @@ A one day course introducing NumPy and linear algebra.  The course is split into
 1. [vector.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/1.vector.ipynb) - single dimension arrays
 2. [matrix.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/2.matrix.ipynb) - two dimensional arrays
 3. [tensor.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/3.tensor.ipynb) - n dimensional arrays
-
-### Resources & further reading
-
-Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville](https://www.deeplearningbook.org/)
-
-[Array programming with NumPy - Nature](https://www.nature.com/articles/s41586-020-2649-2)
-
-[Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
-
-[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) 
-
-[Understanding the internals of NumPy to avoid unnecessary array copying](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
-
-Scipy lectures:
-- [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
- - [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
 
 ## Dot-Products
