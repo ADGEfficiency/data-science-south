@@ -65,14 +65,14 @@ NameError: name 'datas' is not defined. Did you mean: 'data'?
 
 ![The xkcd classic commentary on the complex Python ecosystem.](/images/hypermodern-2025/python_environment_xkcd.png)
 
-**[uv]() is a tool for managing different versions of Python**. It's an alternative to using pyenv, miniconda or installing Python from a downloaded installer.
+**[uv](https://docs.astral.sh/uv/) is a tool for managing different versions of Python**. It's an alternative to using pyenv, miniconda or installing Python from a downloaded installer.
 
 uv can be used to run Python commands and scripts with the Python version specified - uv will download the Python version if it needs to.  This massively simplifies the complexity of managing different versions of Python locally.
 
-The command below runs a `hello world` program with Python 3.13:
+The command below runs a `hello world` program with Python 3.12:
 
 ```shell-session
-$ uv run --python 3.13 --no-project python -c "print('hello world')"
+$ uv run --python 3.12 --no-project python -c "print('hello world')"
 hello
 ```
 
@@ -216,7 +216,7 @@ Found 2 errors in 1 file (checked 1 source file)
 These first errors are because our code has no typing - we can add two type annotations to make our code typed:
 
 1. `user: dict[str,str]` - `user` is a dictionary with strings as keys and values,
-2. `-> None:` - the `process` function returns None.
+2. `-> None:` - the `process` function returns `None`.
 
 ```python { title = "mypy_intermediate.py"}
 def process(user: dict[str,str]) -> None:
@@ -238,13 +238,13 @@ This is a test we can run without writing any specific test logic - very cool!
 
 *Tip - Use `reveal_type(variable)` in your code when debugging type issues. mypy will show you what type it thinks a variable has.*
 
-## pydantic
+## Pydantic
 
-**[pydantic](https://pydantic-docs.helpmanual.io/) is a tool for organizing and validating data in Python** - it's an alternative to using dictionaries or dataclasses.
+**[Pydantic](https://pydantic-docs.helpmanual.io/) is a tool for organizing and validating data in Python** - it's an alternative to using dictionaries or dataclasses.
 
-**pydantic is part of Python's typing revolution** - pydantic's ability to create and validate custom types makes your Python code clearer and safer.
+**Pydantic is part of Python's typing revolution** - Pydantic's ability to create and validate custom types makes your Python code clearer and safer.
 
-pydantic uses Python type hints to define data types. Imagine we want a user with a `name` and `id`, which we could model with a dictionary:
+Pydantic uses Python type hints to define data types. Imagine we want a user with a `name` and `id`, which we could model with a dictionary:
 
 ```python
 import uuid
@@ -256,7 +256,7 @@ users = [
 ]
 ```
 
-We could also model this with pydantic - introducing a class that inherits from `pydantic.BaseModel`:
+We could also model this with Pydantic - introducing a class that inherits from `pydantic.BaseModel`:
 
 ```python
 import uuid
@@ -273,7 +273,7 @@ users = [
 ]
 ```
 
-A strength of pydantic is validation - we can introduce some validation of our user ids - below checking that the `id` is a valid GUID - otherwise setting to `None`:
+A strength of Pydantic is validation - we can introduce some validation of our user ids - below checking that the `id` is a valid GUID - otherwise setting to `None`:
 
 ```python { title = "pydantic_eg.py" }
 import uuid
@@ -301,7 +301,7 @@ users = [
 [print(user) for user in users]
 ```
 
-Running the code above, our pydantic model has rejected one of our ids - our `omega` has had it's original ID of `invalid` rejected and ends up with an `id=None`:
+Running the code above, our Pydantic model has rejected one of our ids - our `omega` has had it's original ID of `invalid` rejected and ends up with an `id=None`:
 
 ```shell-session
 $ python pydantic_eg.py
@@ -312,9 +312,9 @@ name='beta' id=None
 name='omega' id=None
 ```
 
-These pydantic types can become the primitive data structures in your Python programs (instead of dictionaries) - making it eaiser for other developers to understand what is going on.
+These Pydantic types can become the primitive data structures in your Python programs (instead of dictionaries) - making it eaiser for other developers to understand what is going on.
 
-*Tip - you can generate Typescript types from pydantic models - making it possible to share the same data structures with your Typescript frontend and Python backend.*
+*Tip - you can generate Typescript types from Pydantic models - making it possible to share the same data structures with your Typescript frontend and Python backend.*
 
 ## Typer
 
@@ -322,9 +322,9 @@ These pydantic types can become the primitive data structures in your Python pro
 
 We can build a Python CLI with uv and Typer by first creating a Python package with uv, adding `typer` as a dependency).
 
-First we create a virtual environment:
+First create a virtual environment:
 
-```
+```shell-session
 $ uv venv --python=3.11.10
 Using CPython 3.11.10
 Creating virtual environment at: .venv
@@ -338,9 +338,10 @@ $ uv init --name demo --python 3.11.10 --package
 Initialized project `demo`
 ```
 
-$ uv init --name demo --python 3.11.10 --package
+This creates a project:
 
 ```shell-session
+$ tree
 .
 ├── pyproject.toml
 ├── README.md
@@ -473,17 +474,17 @@ print('this will be printed with rich :clap:')
 this will be printed with rich 👏
 ```
 
-*Tip - Rich offers much more than color and emojis - including displaying tabular data and better trackbacks of Python errors.*
+*Tip - Rich offers much more than color and emojis - including displaying tabular data and better trackbacks of Python errors.*
 
 ## Polars
 
-**Polars is a tool for tabular data manipulation in Python** - it's an alternative to Pandas.
+**Polars is a tool for tabular data manipulation in Python** - it's an alternative to Pandas or Spark.
 
-Polars offers exceptional performance with query optimization, parallel processing and can work with larger than memory datasets.  It also has a more declaraitve syntax that may prefer to the more imperative Pandas syntax.
+Polars offers query optimization, parallel processing and can work with larger than memory datasets.  It also has a syntax that many prefer to Pandas.
 
-In eager-execution frameworks like Pandas, each data transformation is run without knowledge of what came before and after. By allowing data to be processed lazily by grouping multiple transformations, Polars can optimize across many data transformations.  
+Query optimization allows multiple data transformations to be grouped together and optimized over.  This cannot be done in eager-execution frameworks like Pandas, each data transformation is run without knowledge of what came before and after.
 
-Let's start with a dataset of three columns:
+Let's start with a dataset with three columns:
 
 ```python
 import polars as pl
@@ -540,18 +541,20 @@ shape: (2, 3)
 We can use Polars to explain our query:
 
 ```python
-query.explain()
+print(query.explain())
 ```
 
 ```
-'AGGREGATE\n\t[col("sales").mean().alias("avg_sales"), col("sales").count().alias("n_days")] BY [col("region")] FROM\n  DF ["date", "sales", "region"]; PROJECT 2/3 COLUMNS; SELECTION: None'
+AGGREGATE
+        [col("sales").mean().alias("avg_sales"), col("sales").count().alias("n_days")] BY [col("region")] FROM
+  DF ["date", "sales", "region"]; PROJECT 2/3 COLUMNS; SELECTION: Non
 ```
 
 *Tip - you can use `pl.DataFrame.to_pandas()` to convert a Polars DataFrame to a Pandas DataFrame. This can be useful to slowly refactor a Pandas based pipeline into a Polars based pipeline.*
 
 ## Pandera
 
-**Pandera is a tool for data quality checks of tabular data**- it's an alternative to Great Expectations or assert statements.
+**Pandera is a tool for data quality checks of tabular data** - it's an alternative to Great Expectations or assert statements.
 
 Pandera allows you to define schemas for tabular data (data with rows and columns), which are used validate a table of data. By defining schemas explicitly, Pandera can catch data issues before they propagate through your analysis pipeline.
 
@@ -568,7 +571,12 @@ from pandera.polars import DataFrameSchema, Column
 
 schema = DataFrameSchema(
     {
-        "date": Column(pa.DateTime, nullable=False, coerce=True, title="Date of sale"),
+        "date": Column(
+            pa.DateTime,
+            nullable=False,
+            coerce=True,
+            title="Date of sale"
+        ),
         "sales": Column(
             int,
             checks=[pa.Check.greater_than(0), pa.Check.less_than(10000)],
@@ -609,7 +617,7 @@ shape: (3, 3)
 └────────────┴────────┴────────┘
 ```
 
-When we have *bad data*, Pandera will raise an exception:
+When we have bad data, Pandera will raise an exception:
 
 ```python
 data = pl.DataFrame({
@@ -630,9 +638,9 @@ SchemaError: Column 'sales' failed validator number 0: <Check greater_than: grea
 
 ## DuckDB
 
-**DuckDB is database for analytical SQL queries** - it's an alternative to SQLite, Polars and Pandas.
+**DuckDB is database for analytical SQL queries** - it's an alternative to SQLite, Polars, Spark and Pandas.
 
-DuckDB is a single-file database like SQLite. While SQLite is optimized for row based, transactional workloads, DuckDB is specifically designed for column based, analytical queries.
+DuckDB is a single-file database like SQLite. While SQLite is optimized for row based, transactional workloads, DuckDB is designed for column based, analytical queries. DuckDB shines when working with larger than memory datasets. It can efficiently query Parquet files directly without loading them into memory first.
 
 Let's create some sample data using both CSV and Parquet formats:
 
@@ -689,15 +697,15 @@ print(
 2  2025-01-03      Widget        A         200
 ```
 
-DuckDB shines when working with larger than memory datasets. It can efficiently query Parquet files directly without loading them into memory first.
-
 *Tip - Use DuckDB's EXPLAIN command to understand query execution plans and optimize your queries.*
 
 ## Loguru
 
-**[Loguru](https://github.com/Delgan/loguru) is a logger** - it's an alternative to the standard library's logging module and structlog.  Loguru builds on top of the Python standard library `logging` module.  It's not a complete rethinking, but a few tweaks here and there to make logging from Python programs less painful.
+**[Loguru](https://github.com/Delgan/loguru) is a logger** - it's an alternative to the standard library's logging module and structlog.  
 
-A central Loguru idea is that there is only one `logger`. This is a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many. Because Loguru builds on top of the Python `logging` module, it's easy to swap in a Loguru logger for a Python standard library `logging.Logger`.
+Loguru builds on top of the Python standard library `logging` module.  It's not a complete rethinking, but a few tweaks that make logging from Python programs less painful. Because Loguru builds on top of the Python `logging` module, it's easy to swap in a Loguru logger for a Python standard library `logging.Logger`.
+
+A central Loguru idea is that there is only one `logger`. This is a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many. 
 
 Logging with Loguru is as simple as `from loguru import logger`:
 
