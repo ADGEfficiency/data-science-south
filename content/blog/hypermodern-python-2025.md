@@ -1,5 +1,5 @@
 ---
-title: 2025 Hypermodern Python Toolbox 
+title: Hypermodern Python Toolbox 2025 
 description: Python tools setting the standard in 2025.
 date: 2025-01-01
 tags:

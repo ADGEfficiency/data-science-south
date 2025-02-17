@@ -1,7 +1,7 @@
 ---
 title: Linear Predictive Models
 summary: TODO
-draft: false
+draft: true
 competencies:
 - Algorithms
 ---
