@@ -6,7 +6,9 @@ competencies:
 draft: true
 ---
 
-## Why Learn About a Data Career?
+## Why Learn About a Data Careers?
+
+Learning about data careers will allow you to:
 
 - **Data roles** - Understand the core data roles and how they differ.
 - **Data competencies** - Know what skills and competencies are required for data roles.
@@ -26,25 +28,29 @@ What data professionals call themselves changes between companies and over time:
 
 ### Value
 
+The business value a data professional generates can come in many forms - a few examples:
+
+- financial,
+- ecological,
+- safety.
+
+What business value you want to generate, depends on who you work for.
+
 ## Where Do Data Professionals Come From?
 
-As data professions continue to evolve, the academic qualifications are as well.
+Many data professionals of today have education in other fields. Often they come from STEM backgrounds.  Many more come from other backgrounds, such as commerce or the arts.
 
-Historically, no university offered data science degrees or masters programs.  **Currently many data professionals do not have formal qualifications as a data professional**.
-
-Instead, many data professionals of today have education in other fields. Often they come from STEM backgrounds.  Many more come from other backgrounds, such as commerce or the arts.
-
-Today this is changing, with many universities offering data science programs.
+Historically, no university offered data science degrees or masters programs. Today this is changing, with many universities offering data science programs, and many data scientists now have formal education in data science.
 
 ## Who Can Be A Data Professional?
 
-**We believe that anyone can start or transition into a data career**.
+**I believe that anyone can start or transition into a data career**.
 
 The tools (such as Python) and knowledge (such as how backpropagation works) are all available online or through education - it's only your ability to dedicate time and energy that limits you.
 
 Some backgrounds (such as a math or programming heavy bachelors degree) will have an easier time picking up the skills and mindsets needed in modern data work.
 
-**While a STEM background offers an advantage, we believe that if you want it, anyone can develop the skills to deliver value as a data professional**.
+**While a STEM background offers an advantage, I believe that if you want it, anyone can develop the skills to deliver value as a data professional**.
 
 ## Core Data Roles
 
@@ -93,7 +99,6 @@ A data scientist could be expected to work with tabular data, images and text.
 A data engineer is responsible for the infrastructure that stores, processes, and transforms data. They develop and maintain the systems that enable data analysts and scientists to do their jobs.
 
 A data engineer requires SQL and Python skills, and will be expected to be comfortable working with cloud infrastructure.
-
 
 ## Four Competencies of a Data Professional
 
