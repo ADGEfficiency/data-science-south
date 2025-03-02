@@ -788,7 +788,7 @@ if __name__ == "__main__":
 
 The **2025 Hypermodern Python Toolbox** is:
 
-- [**Python 3.11**](https://www.python.org/downloads/release/python-3110/) for better error messages,    
+- [**Python 3.11**](https://www.python.org/downloads/release/python-3110/) for better error messages,
 - [uv](https://docs.astral.sh/uv/) for managing Python, virtual environments, and dependencies.
 - [**Ruff**](https://docs.astral.sh/ruff/) for formatting and linting Python code,
 - [**mypy**](http://mypy-lang.org/) for static type checking,
