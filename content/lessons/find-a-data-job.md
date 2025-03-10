@@ -10,10 +10,10 @@ draft: false
 
 There are four steps to finding a data job:
 
-1. [choose the data career you want](https://www.datasciencesouth.com/lesson/choose-a-data-career),
+1. [choose the data career you want](https://www.datasciencesouth.com/lessons/choose-a-data-career),
 2. summarize common job requirements across many job advertisements for that role,
 3. create stories that demonstrate your competence in requirements,
-4. use these stories in your [career materials](https://www.datasciencesouth.com/lesson/career-materials).
+4. use these stories in your career materials.
  
 ## Demonstrating Competence
 
@@ -302,9 +302,9 @@ You should share your CV as a PDF document, and it should be one or two pages lo
 
 Space on your CV is valuable - it represents time that someone needs to spend understanding your CV.  The more you can focus on important, relevant skills, the better your CV will be.
 
-## Structuring Your CV
+### Structuring Your CV
 
-### Header
+#### Header
 
 The first part of your CV should be a header that contains:
 
@@ -314,7 +314,7 @@ The first part of your CV should be a header that contains:
 
 Whether you need to include a picture or not depends on the market - most likely you don't need a picture on your CV.
 
-### Summary
+#### Summary
 
 **Your CV should start with a one to three sentence summary**.
 
@@ -327,7 +327,7 @@ Proven ability to {skill}.
 Passionate about {industry | topic}.
 ```
 
-### Work Experience
+#### Work Experience
 
 **Your work experience should be based on stories** - action focused, using phrases like:
 
@@ -344,7 +344,7 @@ fn:experience
 - {action focused achievement}.
 ```
 
-### Education
+#### Education
 
 **Your education section lists relevant education at universities or bootcamps**. 
 
@@ -361,7 +361,7 @@ fn:experience
 - {action focused achievement}.
 ```
 
-### Skills & Projects
+#### Skills & Projects
 
 **Skills and projects are optional sections**.
 
