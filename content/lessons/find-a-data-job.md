@@ -6,7 +6,7 @@ competencies:
 draft: false
 ---
 
-TODO - where does the `start as a data analyst then become ds` go?  I guess into data analyst section?
+This lesson is all about getting a job as a data professional.  In my mentoring work, this is the most common goal of people I mentor.
 
 ## Staying Positive
 
@@ -25,9 +25,7 @@ There are four steps to finding a data job:
 
 ## 1. Choose Your Data Focus
 
-### Choosing a Data Focus
-
-**You should always have a clear idea about which data role best aligns with your current work, your goals and your future work**.
+You should always have a clear idea about which data role best aligns with your current work, your goals and your future work.  Different data roles require different skill sets and career paths.
 
 ### Why Choose a Data Focus?
 
@@ -65,9 +63,9 @@ There is a lot of overlap between the competencies and skills in each of the thr
 
 Learning about data careers will allow you to:
 
-- **Data roles** - Understand the core data roles and how they differ.
-- **Data competencies** - Know what skills and competencies are required for data roles.
-- **Target jobs** - Know what jobs to apply for.
+- **Data Roles** - Understand the core data roles and how they differ.
+- **Data Competencies** - Know what skills and competencies are required for data roles.
+- **Target Jobs** - Know what jobs to apply for.
 
 ### What is a Data Professional?
 
@@ -112,23 +110,27 @@ Some backgrounds (such as a math or programming heavy bachelors degree) will hav
 
 **There are three core data roles**:
 
-1. **data analyst** - summarizes the past,
-2. **data scientist** - predicts the future,
-3. **data engineer** - provides access to data.
+1. **Data Analyst** - Summarizes the past,
+2. **Data Scientist** - Predicts the future,
+3. **Data Engineer** - Provides access to data.
 
 These three roles are the foundation of modern data work. Deciding which role to focus on depends on your experience, skillset, goals and personality.
 
 **These roles are complementary, and it is not uncommon for professionals to develop skills across multiple roles over their career**.
 
-```goat
-               Core Data Roles
-                     |
-  +------------------+---------------+
-  |                  |               |
-Data Analyst    Data Engineer    Data Scientist
+```mermaid
+graph TD
+    core["Core Data Roles"]
+    analyst["Data Analyst"]
+    engineer["Data Engineer"]
+    scientist["Data Scientist"]
+    
+    core --- analyst
+    core --- engineer
+    core --- scientist
 ```
 
-#### Data Analyst
+### Data Analyst
 
 **A data analyst summarizes historical data**.
 
@@ -138,7 +140,7 @@ A data analyst uses statistics, a programming language like Python and SQL to ex
 
 A data analyst commonly requires SQL and Python skills. A data analyst will be expected to be able to work with tabular data, and is unlikely to require any machine learning knowledge.
 
-#### Data Scientist
+### Data Scientist
 
 **A data scientist predicts unseen data**.
 
@@ -148,7 +150,7 @@ Data science requires a deep understanding of mathematics including calculus, li
 
 A data scientist could be expected to work with tabular data, images and text.
 
-#### Data Engineer
+### Data Engineer
 
 **A data engineer provides access to data**.
 
@@ -224,7 +226,7 @@ You are looking for:
 - tools,
 - competencies like leadership or initiative.
  
-#### Where to find jobs?
+### Where to Find Jobs?
 
 One of the best places to find a job is directly from a company - by paying attention to their job listings on their website or social media.
 
@@ -235,7 +237,6 @@ More common is to find job listings on an aggregated platform such as LinkedIn, 
 Even when you find a job on an aggregation site, always try to apply through the company website - it is very easy to spam applications on LinkedIn!
 
 Jobs can also posted on community forums such as Slack or Discord channels - here are a few of our favourites are the [Climate Change AI](https://www.climatechange.ai/) and [DataTalks.Club](https://datatalks.club/).
-
  
 ## 3. Demonstrate Competence
 
@@ -280,7 +281,7 @@ To summarize, stories are important because:
 - stories can be re-used - one story can demonstrate many competencies,
 - stories are believable - it's harder to lie in a story than a list.
 
-## Four Competencies of a Data Professional
+### Four Competencies of a Data Professional
 
 **There are four competencies that make up a data professional**:
 
@@ -404,7 +405,17 @@ Space on your CV is valuable - it represents time that someone needs to spend un
 
 ### Structuring Your CV
 
-#### Header
+A CV should have these sections:
+
+- Header,
+- Summary,
+- Work Experience,
+- Education,
+- Projects.
+
+You should not have a skills section - instead your skills should naturally appear in your work experience, education or projects sections.
+
+### Header
 
 The first part of your CV should be a header that contains:
 
@@ -414,20 +425,19 @@ The first part of your CV should be a header that contains:
 
 Whether you need to include a picture or not depends on the market - most likely you don't need a picture on your CV.
 
-#### Summary
+### Summary
 
 **Your CV should start with a one to three sentence summary**.
 
 Your summary can focus on your experience, your skills or your professional mission.
 
-```text
-fn:summary
+```text {title = "Summary Section"}
 Data {analyst | scientist | engineer} with {n} years of experience in {industry}.
 Proven ability to {skill}. 
 Passionate about {industry | topic}.
 ```
 
-#### Work Experience
+### Work Experience
 
 **Your work experience should be based on stories** - action focused, using phrases like:
 
@@ -437,14 +447,13 @@ Passionate about {industry | topic}.
 - built, developed or constructed,
 - made or saved money.
 
-```text
-fn:experience
+```text {title = "Experience Section"}
 {job title} at {company} from {date} to {date}
 - {action focused achievement},
 - {action focused achievement}.
 ```
 
-#### Education
+### Education
 
 **Your education section lists relevant education at universities or bootcamps**. 
 
@@ -454,14 +463,13 @@ How much you include here depends on your level.  If you are early on in your ca
 
 For those with a decade of experience, they may only include the degree title, preferring to use the space on their experience.
 
-```text
-fn:experience
+```text {title = "Experience"}
 {degree} at {university} from {date} to {date}
 - {action focused achievement},
 - {action focused achievement}.
 ```
 
-#### Skills & Projects
+### Skills & Projects
 
 **Skills and projects are optional sections**.
 
@@ -481,8 +489,7 @@ A cover letter is a one page personalised note to support your job application. 
 
 A example cover letter structure:
 
-```text
-fn:cover-letter
+```text {title = "Cover Letter"}
 To {whom it may concern | $NAME},
 
 I am writing to apply for the {POSITION} role at {COMPANY}, as advertised on {WHEREYOUFOUNDIT}
@@ -520,6 +527,59 @@ Your LinkedIn profile is most similar to your CV - both can have the same conten
 
 A GitHub profile has many false negatives - many good developers have no GitHub, with their best work being done in private & on the job.
 
+## Portfolio Projects
+
+A well-crafted portfolio of data projects is one of the most powerful ways to demonstrate your skills to potential employers. While 
+
+your resume tells employers what you can do, your portfolio shows them.
+
+### Why Portfolio Projects Matter
+
+Portfolio projects serve multiple purposes in your job search:
+
+- **Demonstrate Technical Skills** in a tangible way that resumes cannot.
+- **Highlight your Communication Abilities** through documentation and presentation.
+- **Prove your Ability to Complete Work** independently.
+- **Differentiate Yourself** from other candidates with similar qualifications.
+- **Give interviewers specific projects** to ask you about.
+
+### Project Selection Strategy
+
+Choose projects that align with your target role. Your portfolio should contain 3-5 quality projects that collectively demonstrate the key competencies needed for your target position.
+
+| Role | Project Focus Areas |
+|------|-------------------|
+| **Data Analyst** | Data cleaning, exploratory analysis, visualization, business insights, dashboard creation |
+| **Data Scientist** | Predictive modeling, machine learning, statistical analysis, A/B testing, natural language processing |
+| **Data Engineer** | Data pipelines, database design, ETL processes, data architecture, scalability solutions |
+
+### Quality Over Quantity
+
+A few well-executed, thoroughly documented projects are far more valuable than many incomplete or superficial ones. For each project, focus on:
+
+1. **Solving a meaningful problem** with clear business relevance.
+2. **Following professional best practices** in your code and process.
+3. **Documenting your work** thoroughly, including your thought process.
+4. **Creating clear visualizations** that effectively communicate your findings.
+5. **Drawing actionable conclusions** from your analysis.
+
+### Project Checklist for Professional Quality
+
+For guidance on creating high-quality data science projects, refer to our [Data Science Project Checklist](link-to-your-checklist-blog-post). This resource provides a comprehensive framework for ensuring your projects are:
+
+- **Presentable**: Professional in appearance and structure.
+- **Reproducible**: Others can run your code and get the same results.
+- **Accessible**: Well-documented and easy to understand.
+- **Extensible**: Built so others (or you) can expand on your work.
+
+### Portfolio Platforms
+
+Present your portfolio in a way that's accessible and professional:
+
+- **GitHub**: The standard for sharing code projects with proper documentation.
+- **Personal website**: Showcase your projects with more context and personality.
+- **Medium/Blog posts**: Explain your methodology and insights in depth.
+- **Interactive applications**: Deploy dashboards or tools when appropriate.
 
 ## Application Process
 
@@ -546,13 +606,13 @@ Potential co-workers will be involved at different points in the process, often 
 
 The process starts with the candidate applying via a company website, which can be done by submitting a CV, cover letter and other required application materials.  Always prefer applying via the company website over an aggregator like LinkedIn.
 
-#### What jobs should I apply for?
+### What Jobs Should I Apply For?
 
 Apply for jobs that resemble your skillset and your data focus (such as data engineering) - avoid applying to jobs where the core requirements are clearly unrelated your primary skill set.
 
 Go for jobs one step above (and at!) your level - many companies advertise for a senior data scientist, but will hire a data scientist.
 
-#### Collect job descriptions
+### Collect Job Descriptions
 
 Job description has two parts - what you'll do and what the company is looking for (experience & education).
 
@@ -560,16 +620,15 @@ Qualifications (like experience or education) are always negotiable and should n
 
 Why you are a good fit - ask yourself the following questions:
 
-- what is the company’s mission?
-- what problem are they trying to solve?
-- what’s the product?
-- what’s unique about this company compared to its competitors?
-- what are some policies or values that the company has that they feature on their homepage?
-- describe any of the organization’s community engagement projects or employee development programs.
-- how does the company make money?
+- What is the company’s mission?
+- What problem are they trying to solve?
+- What’s the product?
+- What’s unique about this company compared to its competitors?
+- What are some policies or values that the company has that they feature on their homepage?
+- Describe any of the organization’s community engagement projects or employee development programs.
+- How does the company make money?
 
-
-### Interviews
+## Interviews
 
 After submitting the application, the candidate will typically move on to the interview stage, where they will have the opportunity to speak with the hiring manager or a member of the HR team.
 
@@ -583,7 +642,7 @@ Some of the basics for interviews are:
 
 Don't be too modest - avoid one word answers, take the time to expand on your skills, abilities, achievements and goals.
 
-#### Questions You Might Be Asked
+### Questions You Might Be Asked
 
 Always answer questions - if you need to take a minute to answer with confidence, ask for a moment.
 
@@ -600,89 +659,115 @@ Types of questions you may be asked include:
 - so we have this problem / case studies - told about a project the interviewer is currently working on, and then they would pick my brain on how to solve this,
 - system design questions - `how would you design this feature`.
 
-##### Competency Questions
+### Competency Questions
 
-Behavioral or competency questions are questions of the form `Tell me about a time you did X` - `X` being either a soft or hard skill.
+Behavioral or competency questions typically follow the format "Tell me about a time you did X" - where X relates to either a soft skill or technical competency. Being prepared for these questions is crucial for data job interviews.
 
-Tell me about a time you had to solve a complex problem. What steps did you take?
+**Problem-Solving & Analytical Skills**:
 
-Describe a situation where you had to meet a tight deadline. How did you manage it?
+- Tell me about a time you had to solve a complex problem. What steps did you take?
+- Describe a project where you had to use your analytical skills.
+- How do you ensure quality in your work when faced with tight deadlines?
+- Tell me about a time you had to work with limited resources.
 
-Can you share an experience where you led a team to achieve a specific goal?
+**Time Management & Prioritization**:
 
-How have you handled a difficult team member in the past?
+- Describe a situation where you had to meet a tight deadline. How did you manage it?
+- Have you ever had to manage conflicting priorities? How did you handle it?
+- How do you manage stress in high-pressure situations?
 
-Describe a project where you had to use your analytical skills.
+**Leadership & Teamwork**:
 
-Can you provide an example of a successful customer interaction you've had?
+- Can you share an experience where you led a team to achieve a specific goal?
+- How have you handled a difficult team member in the past?
+- Can you describe a situation where you had to resolve a conflict between team members?
+- Tell me about a time when you had to collaborate with departments outside of your own. How did you manage communication?
 
-Tell me about a time you had to adapt to a significant change at work.
+**Adaptability & Learning**:
 
-Have you ever had to manage conflicting priorities? How did you handle it?
+- Tell me about a time you had to adapt to a significant change at work.
+- Describe a time you had to learn a new skill to complete a task.
+- How do you handle receiving constructive criticism?
+- Tell me about a time you changed your mind.
 
-What's an example of a risk you've taken in your career and the outcome?
+**Initiative & Innovation**:
 
-Describe a time when you had to convince a team to adopt a new technology.
+- What's an example of a risk you've taken in your career and the outcome?
+- Describe a time when you had to convince a team to adopt a new technology.
+- Have you ever implemented a cost-saving measure? What was it and what was the result?
+- Can you share an example where you had to go above and beyond in your job?
 
-How do you manage stress in high-pressure situations?
+**Communication & Stakeholder Management**:
 
-Tell me about a time when you had to work with limited resources.
+- Can you provide an example of a successful customer interaction you've had?
+- Tell me about an instance where you had to use your negotiation skills.
 
-Can you describe a situation where you had to resolve a conflict between team members?
+Preparing stories for these questions in advance using the STAR method (Situation, Task, Action, Result) will help you provide structured, compelling responses during interviews.
 
-Tell me about an instance where you had to use your negotiation skills.
+### Questions You Can Ask
 
-How do you ensure quality in your work when faced with tight deadlines?
+Always ask thoughtful questions during interviews - this demonstrates interest and helps you evaluate if the role is right for you. Below are categories of questions you might consider asking.
 
-Describe a time you had to learn a new skill to complete a task.
+**Team Structure & Culture**:
 
-Have you ever implemented a cost-saving measure? What was it and what was the result?
+- What is the size of the data team, and how long have team members been with the company?
+- What is your turnover/retention rate for data professionals?
+- How do data professionals collaborate with other departments?
+- How closely do the technical teams work with business stakeholders or customers?
 
-How do you handle receiving constructive criticism?
+**Technical Environment**:
 
-Can you share an example where you had to go above and beyond in your job?
+- What is your current technical stack for data work?
+- What cloud platforms or infrastructure do you use?
+- Do you use deep learning approaches in your current projects?
+- What data engineering support is available?
+- Can team members choose their preferred operating system/equipment?
 
-Tell me about a time when you had to collaborate with departments outside of your own. How did you manage communication?
+**Work Management**:
 
-Tell me about a time you changed your mind?
+- How is technical work planned and managed (sprint length, retros, etc.)?
+- What's your deployment process like?
+- How often do you release to production?
+- What's your testing strategy for data products?
+- What are the current technical challenges your team is facing?
 
+**Career Development**:
 
-#### Questions You Can Ask
+- What does a senior role (data scientist/analyst/engineer) look like, and how would I progress to that level?
+- What does your promotion process look like?
+- Is there a training or conference budget for professional development?
+- What career advancement opportunities exist within the organization?
 
-Also make sure to always ask questions - be interested to learn more.
+**Performance & Success**:
 
-- what is your turnover rate?
-- how is technical work planned and managed - sprint length, retros etc?
-- what is your current technical stack?
-- what are you current technical problems / challenges?
-- retention rate, career advancement, potential for scale?
-- what is a senior role (data scientist) and how do I get there?
-- how closely do the dev team work with business stakeholders/customers?
-- what’s your deployment process like?
-- how often do you release to production?
-- what’s your testing strategy?
-- training budget?
-- size of team, how long have they been there (to see if team is new / churning)
-- data engineering support?
-- laptops?
-- cloud?
-- do you do deep learning?
-- can devs use any computer / operating system?
-- what does your promotion process look like?
-- what kind of feedback do you get from your manager?
-- what does a typical conversation with your product manager look like?
-- what topics are covered during your 1:1s with your manager?
-- what does success look like for this role?
-- what does success look like for your team?
-- how is success measured?
-- what went well / badly in the past for this role?
-- what are your current challenges in your role?
-- how is the commitment to sustainability balanced with financial success?
+- What does success look like for this specific role?
+- What does success look like for the data team as a whole?
+- How is performance measured and evaluated?
+- What has gone well or poorly in the past for someone in this role?
+- What are your current challenges in your management role?
 
-For startups you can ask questions about how much funding do you have or when they next need to raise money.
+**Management & Feedback**:
 
-For large corporations, ask if you are able to choose what operating system runs on your laptop.
+- What kind of feedback can I expect from my manager?
+- What does a typical conversation with the product manager look like?
+- What topics are typically covered during 1:1s with managers?
 
+**Company Values & Priorities**:
+
+- How is the commitment to sustainability balanced with financial success?
+- How does data work align with the company's overall mission?
+
+**For Startups**:
+
+- What is your current funding situation?
+- When do you anticipate needing to raise the next round?
+- What are the key metrics the company is focused on right now?
+
+**For Large Corporations**:
+
+- How autonomous are individual teams within the larger organization?
+- How are decisions made about technology adoption or project priorities?
+- What internal mobility exists between different data teams or departments?
 
 ### In Person Programming Tests
 
@@ -690,11 +775,11 @@ Part of the application process may involve live, in person programming.
 
 A good way to think about these is:
 
-- start with a simple solution,
-- then more advanced,
-- talk about time and memory complexity,
-- write or mention test cases,
-- then an even harder version.
+- Start with a simple solution,
+- Then more advanced,
+- Talk about time and memory complexity,
+- Write or mention test cases,
+- Then an even harder version.
 
 ### Take Home Tests
 
@@ -702,19 +787,19 @@ After the interview, the company may ask the candidate to take a take-home test 
 
 Some tips for take home tests:
 
-- ask upfront for expectations (time input) and future feedback,
-- ask questions and state assumptions,
-- make your code readable,
-- write Tests and Comments,
-- summarize your thought process in under 500 words!
+- Ask upfront for expectations (time input) and future feedback,
+- Ask questions and state assumptions,
+- Make your code readable,
+- Write Tests and Comments,
+- Summarize your thought process in under 500 words!
 
 Sample ML take home pipeline:
 
-- data cleaning, Impute missing values
-- minimal feature selection
-- create a simple test train split or use cross validation if enough time,
-- put in a baseline dummy model,
-- train a random forest classifier or regressor.
+- Data cleaning, Impute missing values
+- Minimal feature selection
+- Create a simple test train split or use cross validation if enough time,
+- Put in a baseline dummy model,
+- Train a random forest classifier or regressor.
 
 ### Offer
 
