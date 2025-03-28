@@ -3,7 +3,6 @@ title: Find a Data Job
 summary: Find your next role as a a data professional by focusing on the correct data role and using stories to demonstrate your compentence. 
 competencies:
   - "Soft Skills"
-draft: false
 ---
 
 This lesson is all about getting a job as a data professional.  In my mentoring work, this is the most common goal of people I mentor.
