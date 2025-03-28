@@ -5,7 +5,7 @@ competencies:
   - "Soft Skills"
 ---
 
-This lesson is all about getting a job as a data professional.  In my mentoring work, this is the most common goal of people I mentor.
+**This lesson is all about getting a job as a data professional**.  In my mentoring work, this is the most common goal of people I mentor.
 
 ## Staying Positive
 
@@ -17,10 +17,10 @@ It's important to ride out this variance with a positive attitude - the belief t
 
 There are four steps to finding a data job:
 
-1. Choose your data focus (data analyst, engineer or scientist).
-2. Summarize common job requirements for your target roles.
-3. Create stories to demonstrate your competence in these requirements.
-4. Use these stories in your career materials.
+1. **Choose your Data Focus** - Data analyst, data engineer or data scientist.
+2. **Summarize Common Job Requirements** - For your target roles.
+3. **Create Stories** - To demonstrate your competence in these requirements.
+4. **Use these Stories** - In your career materials.
 
 ## 1. Choose Your Data Focus
 
@@ -83,9 +83,9 @@ What data professionals call themselves changes between companies and over time:
 
 The business value a data professional generates can come in many forms - a few examples:
 
-- financial,
-- ecological,
-- safety.
+- Financial,
+- Ecological,
+- Health and safety.
 
 What business value you want to generate, depends on who you work for.
 
@@ -284,10 +284,10 @@ To summarize, stories are important because:
 
 **There are four competencies that make up a data professional**:
 
-1. domain expertise,
-2. software engineering,
-3. analytics,
-4. soft skills.
+1. Domain Expertise,
+2. Software Engineering,
+3. Analytics,
+4. Soft Skills.
 
 ```mermaid
 graph TD
@@ -339,10 +339,10 @@ The table below provides a general guideline of the importance of each skill for
 
 This includes understanding things like:
 
-- statistics,
-- probability,
-- linear algebra,
-- machine learning.
+- Statistics,
+- Probability,
+- Linear Algebra,
+- Machine Learning.
 
 Which specific areas of analytics are important depends on the role you are working in.
 
@@ -365,12 +365,12 @@ The table below provides a general guideline of the importance of each skill for
 
 Alongside the hard skills discussed above, a data professional also needs soft skills such as:
 
-- communication,
-- collaboration,
-- mentoring,
-- time management,
-- curiosity,
-- attention to detail.
+- Communication,
+- Collaboration,
+- Mentoring,
+- Time Management,
+- Curiosity,
+- Attention to Detail.
 
 The table below provides a general guideline of the importance of each skill for each role on a scale from 1 to 3, with 3 being the highest.
 
