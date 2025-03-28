@@ -7,7 +7,7 @@ A website full of data science, analytics and engineering content for data profe
 ## Use
 
 Requires [Hugo](https://gohugo.io/installation/):
-https://datasciencesouth.com/
+
 ```shell-session
 $ make
 ```
