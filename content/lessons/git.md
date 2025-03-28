@@ -5,12 +5,24 @@ competencies:
 - "Software Engineering"
 ---
 
+## What is Git?
+
+Git is a version control system that allows developers to track changes in text files.
+
+## Resources
+
+- [Pro Git](https://git-scm.com/book/en/v2) - A book that covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
+- [Beej's Guide to Git](https://beej.us/guide/bggit/) - A guide to go from complete Git novice up to intermediate.
+- [Learn the workings of Git, not just the commands](https://developer.ibm.com/tutorials/d-learn-workings-git/) - Guide about how Git works internally.
+
 ## Why Learn Git?
+
+Git is a popular version control tool - many of the tools you use will keep their code in Git (often on GitHub).
 
 Learning Git will allow you to:
 
-- **Version control** - allows developers to maintain a history of changes in a code base.
-- **Collaboration** - allows multiple developers to work on the same code base.
+- **Version Control** - To maintain a history of changes in a code base.
+- **Collaboration** - Enable multiple developers to work on the same code base at the same time.
 
 {{< img 
     src="https://imgs.xkcd.com/comics/git.png" 
@@ -18,12 +30,6 @@ Learning Git will allow you to:
     title="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything."
     caption="[XKCD #1597](https://xkcd.com/1597/)" 
 >}}
-
-## Useful Git Resources
-
-The [Pro Git](https://git-scm.com/book/en/v2) book, covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
-
-[Beej's Guide to Git](https://beej.us/guide/bggit/).
 
 ## Tooling
 
@@ -38,7 +44,15 @@ Other Git tools include:
 
 Git commits & branches can be naturally visualized, making visual tools popular and useful.
 
+### Git GUIs
+
+Git naturally lends to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.  
+
+You can find a list of [Git GUI tools here](https://git-scm.com/downloads/guis).
+
 ### Git CLI
+
+It's also possible to use Git only via a command line interface (CLI).
 
 [Install Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - you can then use the Git CLI:
 
@@ -693,3 +707,10 @@ remote:
 To github.com:ADGEfficiency/the-repo-name.git
  * [new branch]      tech/requirements -> tech/requirements
 ```
+
+## What To Do When Things Go Wrong
+
+TODO
+- git merge conflicts
+- undoing a commit (soft & hard reset)
+- checkout from another branch

@@ -6,14 +6,22 @@ competencies:
 draft: false
 ---
 
+TODO - where does the `start as a data analyst then become ds` go?  I guess into data analyst section?
+
+## Staying Positive
+
+Finding a job is a (small) numbers game - because `n` is small, finding a job is high variance. Luck will play a big factor in your job searches.
+
+It's important to ride out this variance with a positive attitude - the belief that the right role is out there for you. See each iteration of CV fine tuning or interview as practice - it may take 50 applications to get one offer.
+
 ## Four Steps to Find a Data Job
 
 There are four steps to finding a data job:
 
-1. choose your data focus,
-2. summarize common job requirements across many job advertisements for that role,
-3. create stories that demonstrate your competence in requirements,
-4. use these stories in your career materials.
+1. Choose your data focus (data analyst, engineer or scientist).
+2. Summarize common job requirements for your target roles.
+3. Create stories to demonstrate your competence in these requirements.
+4. Use these stories in your career materials.
 
 ## 1. Choose Your Data Focus
 
@@ -206,13 +214,28 @@ AI researchers require a deep understanding of mathematics, computer science, an
 
 ## 2. Find Common Job Requirements
 
-You can look for jobs in places like LinkedIn or Kaggle Jobs.
+Favour a concentrated, deep approach over a wide, shallow net.  You only need to find one job!  Better to spend half a day writing materials for one job than four.
+
+**In the best case, your career materials will reflect the job requirements of your desired role**.  
 
 You are looking for:
 
 - skills,
 - tools,
 - competencies like leadership or initiative.
+ 
+#### Where to find jobs?
+
+One of the best places to find a job is directly from a company - by paying attention to their job listings on their website or social media.
+
+If you know someone, you can be referred or introduced.  These direct contact channels are difficult to find, and valuable if you have them.
+
+More common is to find job listings on an aggregated platform such as LinkedIn, Glassdoor or Kaggle Jobs.  Most of these sites allow you to setup job alerts based on keywords or to follow companies you like.
+
+Even when you find a job on an aggregation site, always try to apply through the company website - it is very easy to spam applications on LinkedIn!
+
+Jobs can also posted on community forums such as Slack or Discord channels - here are a few of our favourites are the [Climate Change AI](https://www.climatechange.ai/) and [DataTalks.Club](https://datatalks.club/).
+
  
 ## 3. Demonstrate Competence
 
@@ -361,19 +384,11 @@ The table below provides a general guideline of the importance of each skill for
 
 ## 4. Use Stories in Your Career Materials
 
-## Why Learn about Career Materials?
-
-## What are Career Materials?
+### What are Career Materials?
 
 **Career materials are content that you to create & maintain to succeed in your career**.  This content will be shared with others, and can represent you both privately and publicly.
 
 **All your career materials should be cleanly and consistently formatted, without spelling or grammatical errors**.
-
-## Looking for Roles
-
-Favour a concentrated, deep approach over a wide, shallow net.  You only need to find one job!
-
-**In the best case, your career materials will reflect the job requirements of your desired role**.  
 
 ## CV 
 
@@ -506,12 +521,6 @@ Your LinkedIn profile is most similar to your CV - both can have the same conten
 A GitHub profile has many false negatives - many good developers have no GitHub, with their best work being done in private & on the job.
 
 
-## Staying Positive
-
-Finding a job is a numbers game - it is high variance.  Luck will play a big factor in how your job search goes.
-
-See each iteration of CV fine tuning or interview as practice - it may take 50 applications to get one offer.
-
 ## Application Process
 
 ```mermaid
@@ -536,18 +545,6 @@ Potential co-workers will be involved at different points in the process, often 
 ### Find and Apply for Jobs
 
 The process starts with the candidate applying via a company website, which can be done by submitting a CV, cover letter and other required application materials.  Always prefer applying via the company website over an aggregator like LinkedIn.
-
-#### Where to find jobs?
-
-One of the best places to find a job is directly from a company - by paying attention to their job listings on their website or social media.
-
-If you know someone, you can be referred or introduced.  These direct contact channels are difficult to find, and valuable if you have them.
-
-More common is to find job listings on an aggregated platform such as LinkedIn, Glassdoor or Kaggle Jobs.  Most of these sites allow you to setup job alerts based on keywords or to follow companies you like.
-
-Even when you find a job on an aggregation site, always try to apply through the company website - it is very easy to spam applications on LinkedIn!
-
-Jobs can also posted on community forums such as Slack or Discord channels - here are a few of our favourites are the [Climate Change AI](https://www.climatechange.ai/) and [DataTalks.Club](https://datatalks.club/).
 
 #### What jobs should I apply for?
 
