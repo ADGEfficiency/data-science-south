@@ -5,19 +5,19 @@ competencies:
   - "Soft Skills"
 ---
 
-**This lesson is all about getting a job as a data professional**.  In my mentoring work, this is the most common goal of people I mentor.
+**This lesson is all about getting a job as a data professional**.  In my mentoring work, this is the most common goal of people I mentor.  People either want to start a data career, or move from one data role to another.
 
 ## Staying Positive
 
 Finding a job is a (small) numbers game - because `n` is small, finding a job is high variance. Luck will play a big factor in your job searches.
 
-It's important to ride out this variance with a positive attitude - the belief that the right role is out there for you. See each iteration of CV fine tuning or interview as practice - it may take 50 applications to get one offer.
+**It's important to ride out this variance with a positive attitude** - the belief that the right role is out there for you. See each iteration of CV fine tuning or interview as practice - it may take 50 applications to get one offer.
 
 ## Four Steps to Find a Data Job
 
 There are four steps to finding a data job:
 
-1. **Choose your Data Focus** - Data analyst, data engineer or data scientist.
+1. **Choose your Data Focus** - Focus yourself on either a data analyst, data engineer or data scientist path.
 2. **Summarize Common Job Requirements** - For your target roles.
 3. **Create Stories** - To demonstrate your competence in these requirements.
 4. **Use these Stories** - In your career materials.
@@ -26,9 +26,11 @@ There are four steps to finding a data job:
 
 You should always have a clear idea about which data role best aligns with your current work, your goals and your future work.  Different data roles require different skill sets and career paths.
 
+You can change your path - one common transition is for data analysts to transition into data scientists.  At different points in your data career, different roles will best match your interests, skill sets and opportunities.
+
 ### Why Choose a Data Focus?
 
-A data focus is important because it allows you to focus your development on the set of skills and technologies that matter.
+A data focus is important because it allows you to focus your development on the set of skills and technologies that matter, now or in the future.
 
 The modern data world is vast, with many different areas to focus in. Understanding what you are focused on, either as an employee working as a data professional or someone working towards their first data role, is useful.
 
@@ -58,36 +60,24 @@ There is a lot of overlap between the competencies and skills in each of the thr
 
 **If you find yourself more attracted or useful in a different data role, change your focus!**
 
-### Why Learn About a Data Careers?
-
-Learning about data careers will allow you to:
-
-- **Data Roles** - Understand the core data roles and how they differ.
-- **Data Competencies** - Know what skills and competencies are required for data roles.
-- **Target Jobs** - Know what jobs to apply for.
-
-### What is a Data Professional?
+## What is a Data Professional?
 
 **A data professional provides business value from data**.
 
-As technology progresses, businesses generate and capture more and more data.
-
-Alongside the increased volume, variety and velocity of data, professions have developed to provide value from data.
+As technology progresses, businesses generate and capture more and more data. Alongside the increased volume, variety and velocity of data, professions have developed to provide value from data.
 
 What data professionals call themselves changes between companies and over time:
 
-- a data engineer in one company is called a business intelligence analyst in another,
-- the big data technologist of the 2000's would now call themselves a data scientist.
+- A data engineer in one company is called a business intelligence analyst in another.
+- The big data technologist of the 2000's would now call themselves a data scientist.
 
 ### Value
 
-The business value a data professional generates can come in many forms - a few examples:
+The business value a data professional generates can come in many forms, such as financial, ecological or health and safety.
 
-- Financial,
-- Ecological,
-- Health and safety.
+What business value you want to generate, depends on who you work for and what work you do.
 
-What business value you want to generate, depends on who you work for.
+Any data project should generate enough value to justify it's existence.
 
 ### Where Do Data Professionals Come From?
 
@@ -105,7 +95,7 @@ Some backgrounds (such as a math or programming heavy bachelors degree) will hav
 
 **While a STEM background offers an advantage, I believe that if you want it, anyone can develop the skills to deliver value as a data professional**.
 
-### Core Data Roles
+## Core Data Roles
 
 **There are three core data roles**:
 
@@ -217,13 +207,9 @@ AI researchers require a deep understanding of mathematics, computer science, an
 
 Favour a concentrated, deep approach over a wide, shallow net.  You only need to find one job!  Better to spend half a day writing materials for one job than four.
 
-**In the best case, your career materials will reflect the job requirements of your desired role**.  
+Your career materials will reflect the job requirements of your desired role.
 
-You are looking for:
-
-- skills,
-- tools,
-- competencies like leadership or initiative.
+When you review job advertisements for roles in your data focus, you are looking for skills, tools and competencies like leadership or initiative.  **If they are mentioned in the job advertisement, they should be mentioned in your career materials (CV, cover letter etc.)**.
  
 ### Where to Find Jobs?
 
@@ -249,7 +235,7 @@ Competence is best demonstrated through stories - concrete examples that show yo
 
 Compare the difference between two approaches to communicate skills.
 
-The first lists the skills:
+The first approach to communicate skills lists the skills:
 
 ```
 Skills:
@@ -257,7 +243,7 @@ Skills:
 - Python.
 ```
 
-The second tells a story:
+The second approach to communicate skills tells a story:
 
 ```
 Used Python to analyze data.
@@ -273,21 +259,21 @@ Show evidence of your successes - use specific and relevant examples of your ach
 
 Stories can be reused - on your CV and in an interview.  One story can also communicate multiple skills or competencies - such as showing teamwork and leadership.
 
-To summarize, stories are important because:
+To summarize, stories are important because they:
 
-- stories can be action focused - an engaging way to demonstrate competence,
-- stories can show specific & quantified examples of your success,
-- stories can be re-used - one story can demonstrate many competencies,
-- stories are believable - it's harder to lie in a story than a list.
+- **Be Action Focused** - an engaging way to demonstrate competence.
+- **Can Show Specific Examples** (ideally quantified) of your success.
+- **Can Be Re-Used** - one story can demonstrate many competencies.
+- **Are Believable** - it's harder to lie in a story than a list.
 
 ### Four Competencies of a Data Professional
 
 **There are four competencies that make up a data professional**:
 
-1. Domain Expertise,
-2. Software Engineering,
-3. Analytics,
-4. Soft Skills.
+1. **Domain Expertise** - How well you understand a specific industry or company.
+2. **Software Engineering** - Technical skills require to work with data on computers.
+3. **Analytics** - Mathematics and knowledge of machine learning.
+4. **Soft Skills** - Leadership, communication, teamwork (and many more).
 
 ```mermaid
 graph TD
@@ -384,11 +370,11 @@ The table below provides a general guideline of the importance of each skill for
 
 ## 4. Use Stories in Your Career Materials
 
-### What are Career Materials?
-
 **Career materials are content that you to create & maintain to succeed in your career**.  This content will be shared with others, and can represent you both privately and publicly.
 
-**All your career materials should be cleanly and consistently formatted, without spelling or grammatical errors**.
+Your career materials should be tailored to the data role you are interested in.  They should be full of stories and examples of you demonstrating competency in the skills your prospective employer cares about.
+
+All your career materials should be cleanly and consistently formatted, without spelling or grammatical errors.
 
 ## CV 
 
@@ -398,9 +384,9 @@ It's likely that everyone involved in your job application process will look at 
 
 You should share your CV as a PDF document, and it should be one or two pages long.
 
-### CV Length is Important
+**Space on your CV is valuable** - it represents time that someone needs to spend understanding your CV.  The more you can focus on important, relevant skills, the better your CV will be.
 
-Space on your CV is valuable - it represents time that someone needs to spend understanding your CV.  The more you can focus on important, relevant skills, the better your CV will be.
+Personally I will always want a single page CV.  Two pages is also common.
 
 ### Structuring Your CV
 
@@ -412,7 +398,7 @@ A CV should have these sections:
 - Education,
 - Projects.
 
-You should not have a skills section - instead your skills should naturally appear in your work experience, education or projects sections.
+**You should not have a skills section** - instead your skills should naturally appear in your work experience, education or projects sections.
 
 ### Header
 
@@ -424,13 +410,17 @@ The first part of your CV should be a header that contains:
 
 Whether you need to include a picture or not depends on the market - most likely you don't need a picture on your CV.
 
+```text {title = "Header CV Section"}
+Adam Green - Christchurch, New Zealand - adam.green@adgefficiency.com
+```
+
 ### Summary
 
 **Your CV should start with a one to three sentence summary**.
 
 Your summary can focus on your experience, your skills or your professional mission.
 
-```text {title = "Summary Section"}
+```text {title = "Summary CV Section"}
 Data {analyst | scientist | engineer} with {n} years of experience in {industry}.
 Proven ability to {skill}. 
 Passionate about {industry | topic}.
@@ -446,7 +436,7 @@ Passionate about {industry | topic}.
 - built, developed or constructed,
 - made or saved money.
 
-```text {title = "Experience Section"}
+```text {title = "Experience CV Section"}
 {job title} at {company} from {date} to {date}
 - {action focused achievement},
 - {action focused achievement}.
@@ -462,7 +452,7 @@ How much you include here depends on your level.  If you are early on in your ca
 
 For those with a decade of experience, they may only include the degree title, preferring to use the space on their experience.
 
-```text {title = "Experience"}
+```text {title = "Education CV Section"}
 {degree} at {university} from {date} to {date}
 - {action focused achievement},
 - {action focused achievement}.

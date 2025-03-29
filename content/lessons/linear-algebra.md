@@ -8,7 +8,30 @@ competencies:
 
 ## Why Learn Linear Algebra?
 
-TODO
+Linear algebra is the computational engine that powers modern data science and machine learning. Its importance goes beyond theoretical mathematics—it's the key to unlocking computational efficiency on today's hardware and implementing powerful mathematical algorithms.
+
+- **Dimensionality Reduction**
+- **Machine Learning**
+- **Neural Networks**
+- **Parallelization**: Linear algebra operations are naturally parallelizable, making them ideal for modern multi-core CPUs and GPUs. Matrix multiplication, for example, can be split across hundreds or thousands of processing cores simultaneously.
+- **GPU Acceleration**: GPUs were originally designed for graphics rendering—a deeply linear algebraic process. Their architecture is perfectly suited for matrix operations, offering 10-100x speedups for tasks like neural network training.
+- **Memory Efficiency**: Well-implemented linear algebra allows for cache-friendly memory access patterns, reducing bottlenecks in data movement between memory and compute units.
+
+### Mathematical Capabilities
+
+- **Transformations**: Linear algebra gives us powerful tools to transform data through operations like rotation, scaling, projection, and reflection—all expressible as matrix operations.
+- **Systems of Equations**: Solve complex systems of linear equations efficiently using techniques like Gaussian elimination, LU decomposition, and matrix inversion. An example of linear regression, where the closed-form solution to fitting a linear model involves matrix multiplication and inversion.
+- **Dimensionality Reduction**: Algorithms like Principal Component Analysis (PCA) and Singular Value Decomposition (SVD) help identify patterns in high-dimensional data and reduce dimensions while preserving key information.
+
+- **Eigendecomposition**: Find eigenvalues and eigenvectors to understand the fundamental properties of linear systems, identify principal directions of variation, and solve differential equations.
+
+### Algorithms Enabled by Linear Algebra
+
+- **Optimization Algorithms**: Gradient descent, conjugate gradient methods, and Newton's method rely on linear algebra for efficient parameter updates in machine learning models.
+- **Matrix Factorizations**: Techniques like QR, Cholesky, and LU decompositions enable stable and efficient solutions to many computational problems.
+- **Spectral Methods**: Analyze graphs, networks, and signals by examining the spectrum (eigenvalues) of associated matrices.
+- **Linear Regression**: The workhorse of predictive modeling uses the normal equation (a linear algebraic formulation) for exact solutions.
+- **Recommendation Systems**: Matrix factorization methods like SVD and Alternating Least Squares power many collaborative filtering systems.
 
 ### Attribution
 
@@ -21,6 +44,8 @@ To run the Python code in this lesson, you need a Python interpreter and to inst
 ```shell-session
 $ pip install -q numpy pandas matplotlib
 ```
+
+Give examples of JAX and PyTorch
 
 ## Resources
 
