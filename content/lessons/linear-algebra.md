@@ -33,19 +33,16 @@ Linear algebra is the computational engine that powers modern data science and m
 - **Linear Regression**: The workhorse of predictive modeling uses the normal equation (a linear algebraic formulation) for exact solutions.
 - **Recommendation Systems**: Matrix factorization methods like SVD and Alternating Least Squares power many collaborative filtering systems.
 
-### Attribution
-
-This lesson uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
-
 ## Tooling
 
 To run the Python code in this lesson, you need a Python interpreter and to install the following Python packages:
 
 ```shell-session
+# TODO - pip versions???
 $ pip install -q numpy pandas matplotlib
 ```
 
-Give examples of JAX and PyTorch
+Give examples of JAX and PyTorch as well?
 
 ## Resources
 
@@ -62,7 +59,6 @@ Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville]
 Scipy lectures:
 - [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
 - [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
-
 
 ## Why Learn NumPy?
 
