@@ -9,11 +9,16 @@ competencies:
 
 Git is a version control system that allows developers to track changes in text files.
 
-## Resources
+### Resources
+
+A few resources to use in addition to this lesson:
 
 - [Pro Git](https://git-scm.com/book/en/v2) - A book that covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
 - [Beej's Guide to Git](https://beej.us/guide/bggit/) - A guide to go from complete Git novice up to intermediate.
 - [Learn the workings of Git, not just the commands](https://developer.ibm.com/tutorials/d-learn-workings-git/) - Guide about how Git works internally.
+- [./missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including Git.
+
+Because Git is popular, LLM tools like Claude are excellent learning and development partners for Git.
 
 ## Why Learn Git?
 
@@ -30,6 +35,27 @@ Learning Git will allow you to:
     title="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything."
     caption="[XKCD #1597](https://xkcd.com/1597/)" 
 >}}
+
+### Software Development Lifecycle
+
+**Git plays a crucial role in the Software Development Lifecycle (SDLC) by enabling code to move between environments in a safe and repeatable way**.
+
+![](/images/trunk-based-development.svg)
+
+Most modern software development teams use multiple environments to safely develop, test, and deploy code.  Common environments include:
+
+- **Development (Dev)** - Where new features are built and initial testing occurs. Developers work on feature branches that don't affect the main codebase.
+- **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
+- **Production (Prod)** - The live environment where end-users interact with the software.
+
+Which of these you need depends on the work you are doing, how many other people are doing development on the same code and company culture. At a minimum dev and prod are needed.
+
+Git facilitates the SDLC by:
+
+1. **Environment Isolation** - Code changes stay isolated in branches until they're ready to move to the next stage.
+2. **Controlled Promotion** - Code gets promoted between environments through merges and pull requests, often requiring approvals.
+3. **Deployment Tracking** - Git commit hashes provide clear tracking of what code was/is deployed where.
+4. **Rollback Capability** - If issues arise in production, teams can quickly roll back to a previous stable version.
 
 ## Tooling
 
