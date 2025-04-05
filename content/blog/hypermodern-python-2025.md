@@ -2,9 +2,8 @@
 title: Hypermodern Python Toolbox 2025 
 description: Python tools setting the standard in 2025.
 date: 2025-01-01
-tags:
-- Python
-- Hypermodern
+competencies:
+- Software Engineering
 slug: hypermodern-python
 aliases:
 - "/blog/hypermodern-python-2025"

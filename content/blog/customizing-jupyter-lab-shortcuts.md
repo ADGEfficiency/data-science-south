@@ -2,8 +2,8 @@
 title: Customizing Jupyter Lab Shortcuts
 description: How to setup custom keyboard shortcuts for Jupyter Lab.
 date: '2020-12-06'
-tags:
-- 'Notebooks'
+competencies:
+- Software Engineering
 
 ---
 

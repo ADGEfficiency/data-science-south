@@ -16,7 +16,7 @@ A few resources to use in addition to this lesson:
 - [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/) - A short guide on Unix.
 - [Effective Shell](https://effective-shell.com/) - A book of essentials on how to use the shell.
 - [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
-- [./missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
+- [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
 
 Because Bash is popular, LLM tools like Claude are excellent learning and development partners for Bash.
 
