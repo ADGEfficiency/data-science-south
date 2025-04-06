@@ -43,12 +43,19 @@ Learning how to use a shell will allow you to:
 - **Repeat and Automate Tasks** - automating text commands is easier than automating pointing and clicking. 
 - **Unlock Powerful Tools** - many development tasks are best (or only) done with shell tools.
 
-![](/images/bash-enables-git-cicd.svg)
+{{< img 
+    src="/images/bash-enables-git-cicd.svg"
+    width="500"
+>}}
 
 Bash is an enabling skill - it enables workflows that have huge benefits for development, such as source control, automated tests (CI) and automated deployments (CD).
 
-![](/images/other-stuff-needed-to-program.svg)
+The shell is a key skill that allows you to use programming languages:
 
+{{< img 
+    src="/images/other-stuff-needed-to-program.svg"
+    width="500"
+>}}
 ## Terminal, Command-Line & Shell
 
 The terminal, command line and shell are often used interchangeably. 
@@ -59,7 +66,12 @@ They are however different tools - all three are used when using a computer via 
 
 **The terminal (also called a console) is an interface that controls user input & output**.
 
-![The DEC VT100 Terminal](/images/bash-shell/terminal.png "The DEC VT100 Terminal")
+
+{{< img 
+    src="/images/bash-shell/terminal.png"
+    caption="The DEC VT100 Terminal"
+    width="500"
+>}}
 
 **Historically a terminal was hardware**. The terminal originates in the mainframe era of computing.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
@@ -434,7 +446,10 @@ The shell establishes three text streams:
 
 It's possible to direct these text streams to different places - for example to redirect STDOUT to a file, rather than the terminal console.
 
-![](/static/mermaid/redirection1.svg)
+{{< img 
+    src="/images/shell-redirection-1.svg"
+    width="500"
+>}}
 
 ### Redirecting Input
 
@@ -444,7 +459,10 @@ The `<` operator is used to redirect input. It reads input from a file instead o
 $ sort < unsorted.txt
 ```
 
-![](/static/mermaid/redirection2.svg)
+{{< img 
+    src="/images/shell-redirection-2.svg"
+    width="500"
+>}}
 
 ### Redirecting Output
 
@@ -456,7 +474,10 @@ The following redirects the output of `ls -l` to a file named `files.txt`.
 $ ls -l > files.txt
 ```
 
-![](/static/mermaid/redirection3.svg)
+{{< img 
+    src="/images/shell-redirection-3.svg"
+    width="300"
+>}}
 
 ### Appending Output
 
