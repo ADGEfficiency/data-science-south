@@ -18,7 +18,7 @@ A few resources to use in addition to this lesson:
 - [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
 - [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
 
-Because Bash is popular, LLM tools like Claude are excellent learning and development partners for Bash.
+Because Bash is popular, LLM tools like Claude are excellent learning and development partners for learning about the Bash shell.
 
 ### Notation
 

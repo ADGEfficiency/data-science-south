@@ -40,7 +40,12 @@ Learning Git will allow you to:
 
 **Git plays a crucial role in the Software Development Lifecycle (SDLC) by enabling code to move between environments in a safe and repeatable way**.
 
-![](/images/trunk-based-development.svg)
+An example of how code is managed across two environments (dev and prod) is below:
+
+{{< img 
+    src="/images/trunk-based-development.svg"
+    width="800"
+>}}
 
 Most modern software development teams use multiple environments to safely develop, test, and deploy code.  Common environments include:
 
