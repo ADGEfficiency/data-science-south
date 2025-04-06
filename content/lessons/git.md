@@ -617,6 +617,7 @@ By default Git starts on the master branch.
 {{< img 
     src="https://github.com/ADGEfficiency/programming-resources/blob/master/memes/merge-master.jpg?raw=true"
     alt="Meme about merging to master branch" 
+    width="400"
 >}}
 
 For Git the `master` branch is the default branch - it's the one that is automatically created when you create a Git repository:
