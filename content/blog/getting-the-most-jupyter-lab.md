@@ -2,8 +2,8 @@
 title: Getting the most out of Jupyter Lab 
 description: A guide to the next generation of notebook tooling.
 date: '2020-11-05'
-tags:
-- 'Notebooks'
+competencies:
+- Software Engineering
 
 ---
 

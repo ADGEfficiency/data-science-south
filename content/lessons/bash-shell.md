@@ -11,11 +11,14 @@ Bash is a shell - a shell is a program that uses text commands to run computer p
 
 ### Resources
 
-[Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/).
+A few resources to use in addition to this lesson:
 
-[Effective Shell](https://effective-shell.com/).
+- [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/) - A short guide on Unix.
+- [Effective Shell](https://effective-shell.com/) - A book of essentials on how to use the shell.
+- [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
+- [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
 
-[BashGuide](https://mywiki.wooledge.org/BashGuide).
+Because Bash is popular, LLM tools like Claude are excellent learning and development partners for learning about the Bash shell.
 
 ### Notation
 
@@ -29,33 +32,53 @@ $ ls
 
 ## Why Learn Bash?
 
-Bash is a popular shell, that is commonly available in the cloud.  A lot of computing in the cloud is done on machines running Linux, where the Bash shell will either be installed by default or easily available.  Likewise in cloud CI/CD tools like GitHub Actions or Azure Devops, Bash is very available.
+Bash is a popular shell, that is readily available in the cloud.  It's a tool you can easily find in places where serious computing is done.
+
+A lot of cloud computing is done on machines running some form of Linux, with the Bash shell often installed with the operating system.  Cloud CI/CD tools like GitHub Actions or Azure Devops usually use run Bash to run pipeline components by default.
 
 Learning how to use a shell will allow you to:
 
-- **Efficiently use a computer** - text is a precise way to use a computer.
-- **Repeat and automate tasks** - automating text commands is easier than automating pointing and clicking. 
-- **Unlock powerful tools** - many development tasks are best done with shells - for example DBT is used via a CLI.
+- **Create CI/CD Pipelines** - Most pipelines are sequences of shell commands.
+- **Use Docker** - Dockerfiles are sequences of shell commands.
+- **Repeat and Automate Tasks** - automating text commands is easier than automating pointing and clicking. 
+- **Unlock Powerful Tools** - many development tasks are best (or only) done with shell tools.
 
-Learning to use Bash unlocks automation in the cloud. Learning the shell makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  
+{{< img 
+    src="/images/bash-enables-git-cicd.svg"
+    width="500"
+>}}
 
-You might not always need to write shell scripts to automate tests and deployments, but the skills required to write shell scripts will allow you setup both CI and CD.
+Bash is an enabling skill - it enables workflows that have huge benefits for development, such as source control, automated tests (CI) and automated deployments (CD).
 
-## Terminal, Command-Line, Shell
+The shell is a key skill that allows you to use programming languages:
+
+{{< img 
+    src="/images/other-stuff-needed-to-program.svg"
+    width="500"
+>}}
+## Terminal, Command-Line & Shell
+
+The terminal, command line and shell are often used interchangeably. 
+
+They are however different tools - all three are used when using a computer via text commands, but they do different things.
 
 ### The Terminal
 
-The terminal, command line and shell are often used interchangeably. They are however different tools - all three are used when using a computer via text commands.
-
 **The terminal (also called a console) is an interface that controls user input & output**.
 
-![The DEC VT100 Terminal](/images/bash-shell/terminal.png "The DEC VT100 Terminal")
+
+{{< img 
+    src="/images/bash-shell/terminal.png"
+    caption="The DEC VT100 Terminal"
+    width="500"
+>}}
 
 **Historically a terminal was hardware**. The terminal originates in the mainframe era of computing.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
 **Today terminals are often software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
 
 Popular terminal emulators include:
+
 - **MacOS** - iTerm2,
 - **Windows** - Windows Terminal,
 - **Ubuntu** - Gnome Terminal.
@@ -64,68 +87,25 @@ Popular terminal emulators include:
 
 The command-line is the space or interface in the terminal where you can type and execute text commands. 
 
-When you launch your terminal, you are in a command-line interface.
+When you launch your terminal, you are in a command-line interface.  The command-line below shows a Bash shell, with the `echo` command:
 
 ```shell-session
 $ echo "this is the command line"
+"this is the command line"
 ```
 
 ### The Shell
 
-**A shell is a computer program that executes text commands**. 
-
-Shells are used in two ways:
+**A shell is a computer program that executes text commands**. Shells are used in two ways:
 
 1. **as a REPL** (Read-Eval-Print Loop) that runs interactively,
 2. **as a programming language** that runs via scripts.
 
+The shell we shall use in this lesson is the Bash shell. This is because it's common and readily available in the cloud.
+
+#### Shell as a REPL
+
 A shell is automatically started in a new terminal. When you write text in the command-line of a terminal, it is executed in a shell, the output displayed, and then a new command line prompt is shown, ready for the next user input.
-
-**The shell we shall use in this lesson is the Bash shell**.
-
-## Tooling
-
-**Different developers use different tools for using a Bash shell**.
-
-Some developers run terminals inside an IDE like VS Code - one terminal can be used with different shells.  Others will use a separate program like Windows Terminal to run different shells.
-
-What shells you have available depends on your operating system - my suggestion is:
-
-- **Windows** - for a shell, either Windows Subsystem for Linux or Git Bash.  For a terminal, Windows terminal is great.
-- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
-- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
-
-### Shells
-
-There are many different shells available -- commonly used shells are:
-
-- **sh** - the Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`).
-- **Bash** - the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
-- **zsh** - the default shell on MacOS, which improves on Bash,
-- **PowerShell** - a shell developed by Microsoft for Windows.
-
-You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
-
-The best shells to know are the ones that are most easily available in the cloud. **Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud**.
-
-### Common Bash Programs
-
-A shell has its own syntax and set of commands, along with a collection of programs available.  
-
-Common Bash shell programs include:
-
-- `ls` - list files & directories,
-- `pwd` - print working directory,
-- `cd` - change directory,
-- `cat` - print file contents.
-
-A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
-
-The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
-
-## Ways to use Bash
-
-### Bash as a REPL
 
 We can use the shell as a REPL to list the current directory files & directories using the `ls` program:
 
@@ -133,7 +113,9 @@ We can use the shell as a REPL to list the current directory files & directories
 $ ls
 ```
 
-### Bash as a Programming Language
+#### Shell Scripting
+
+Shell scripts are text files that contain a sequence of shell commands. These scripts can be run in a shell, and the commands in the script will be executed in order.
 
 We can use the shell as a programming language via shell scripting - an example shell script that lists the current directory using `ls`:
 
@@ -149,6 +131,52 @@ $ bash script.sh
 ```
 
 Shell scripts can take input from command-line arguments or from environment variables.
+
+#### Types of Shells
+
+There are many different shells available -- commonly used shells are:
+
+- **sh** - the Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`).
+- **Bash** - the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
+- **zsh** - the default shell on MacOS, which improves on Bash,
+- **PowerShell** - a shell developed by Microsoft for Windows.
+
+You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
+
+The best shells to know are the ones that are most easily available in the cloud. 
+
+Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud.
+
+### Common Bash Programs
+
+A shell has its own syntax and set of commands, along with a collection of programs available.  
+
+Common Bash shell programs include:
+
+- `ls` - list files & directories,
+- `pwd` - print working directory,
+- `cd` - change directory,
+- `cat` - print file contents.
+
+The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
+
+## Tooling
+
+**Different developers use different tools for using a Bash shell**.
+
+Some developers run terminals inside an IDE like VS Code - one terminal can be used with different shells.  Others will use a separate program like Windows Terminal to run different shells.
+
+What shells you have available depends on your operating system - my suggestion is:
+
+- **Windows** - for a shell, either Bash on Windows Subsystem for Linux or Git Bash on Windows.  For a terminal, Windows terminal is great.
+- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
+- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
+
+### Text Editors 
+
+VS Code is a good choice for most!  You'll want a text editor to write things like shell scripts or configuration files (YAML, JSON etc).
+
+VS Code also offers the ability to run a terminal alongside your editor, meaning you don't need to run a separate terminal application like Windows Terminal.
 
 ## Whitespace
 
@@ -418,7 +446,10 @@ The shell establishes three text streams:
 
 It's possible to direct these text streams to different places - for example to redirect STDOUT to a file, rather than the terminal console.
 
-![](/static/mermaid/redirection1.svg)
+{{< img 
+    src="/images/shell-redirection-1.svg"
+    width="500"
+>}}
 
 ### Redirecting Input
 
@@ -428,7 +459,10 @@ The `<` operator is used to redirect input. It reads input from a file instead o
 $ sort < unsorted.txt
 ```
 
-![](/static/mermaid/redirection2.svg)
+{{< img 
+    src="/images/shell-redirection-2.svg"
+    width="500"
+>}}
 
 ### Redirecting Output
 
@@ -440,7 +474,10 @@ The following redirects the output of `ls -l` to a file named `files.txt`.
 $ ls -l > files.txt
 ```
 
-![](/static/mermaid/redirection3.svg)
+{{< img 
+    src="/images/shell-redirection-3.svg"
+    width="300"
+>}}
 
 ### Appending Output
 
@@ -728,7 +765,7 @@ echo "Hello, $name!"
 
 We use the `$name` syntax to refer to the value of the `name` variable within the script.
 
-### Accepting Command Line Arguments
+### Accepting Command Line Arguments in Shell Scripts
 
 Command line arguments provide a way to customize the behavior of a script each time it's run. They are provided after the script name, separated by spaces.
 
@@ -746,6 +783,79 @@ Running a Bash script with command line arguments:
 ```shell-session
 $ ./myscript.sh adam
 ```
+
+### Using Environment Variables in Shell Scripts
+
+Environment variables provide another way to customize script behavior. They can be set before running the script and accessed within the script.
+
+To access environment variables in a script, use the `$VARIABLE_NAME` syntax:
+
+```bash { title = "env-script.sh" }
+#!/usr/bin/env bash
+
+# Access an environment variable
+echo "Running in $STAGE environment"
+
+# Use a default value if the environment variable is not set
+: "${LOG_LEVEL:=info}"
+echo "Log level: $LOG_LEVEL"
+```
+
+Running a script with environment variables:
+
+```shell-session
+$ STAGE=production ./env-script.sh
+Running in production environment
+Log level: info
+
+$ STAGE=production LOG_LEVEL=debug ./env-script.sh
+Running in production environment
+Log level: debug
+```
+
+You can also set environment variables within your script, which will be available to any processes started by the script:
+
+```bash { title = "set-env.sh" }
+#!/usr/bin/env bash
+
+# set an environment variable for this process (script or REPL) and its child processes
+export API_URL="https://api.example.com"
+
+# the script below will have access to the API_URL environment variable
+./call-api.sh
+```
+
+Environment variables are commonly used for:
+
+- Configuration settings (database connections, API endpoints)
+- Controlling behavior (debug mode, verbose output)
+- Storing sensitive information (API keys, credentials)
+- Passing information between scripts or processes
+
+It's important to understand that environment variables set in a script will not be automatically available in the parent shell that called the script. This is because each script runs in a separate subprocess:
+
+```bash { title = "set-env.sh" }
+#!/usr/bin/env bash
+
+# This variable will NOT be available in the parent shell
+export MY_VAR="hello"
+```
+
+```shell-session
+$ ./set-env.sh
+$ echo $MY_VAR
+# Nothing is printed because MY_VAR is not set in the parent shell
+```
+
+If you need to set environment variables in the parent shell, you can source the script instead of executing it:
+
+```shell-session
+$ source ./set-env.sh
+$ echo $MY_VAR
+hello
+```
+
+This pattern is commonly used in setup scripts like `activate` in Python virtual environments.
 
 ## Functions 
 

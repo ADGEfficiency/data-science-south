@@ -5,12 +5,29 @@ competencies:
 - "Software Engineering"
 ---
 
+## What is Git?
+
+Git is a version control system that allows developers to track changes in text files.
+
+### Resources
+
+A few resources to use in addition to this lesson:
+
+- [Pro Git](https://git-scm.com/book/en/v2) - A book that covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
+- [Beej's Guide to Git](https://beej.us/guide/bggit/) - A guide to go from complete Git novice up to intermediate.
+- [Learn the workings of Git, not just the commands](https://developer.ibm.com/tutorials/d-learn-workings-git/) - Guide about how Git works internally.
+- [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including Git.
+
+Because Git is popular, LLM tools like Claude are excellent learning and development partners for Git.
+
 ## Why Learn Git?
+
+Git is a popular version control tool - many of the tools you use will keep their code in Git (often on GitHub).
 
 Learning Git will allow you to:
 
-- **Version control** - allows developers to maintain a history of changes in a code base.
-- **Collaboration** - allows multiple developers to work on the same code base.
+- **Version Control** - To maintain a history of changes in a code base.
+- **Collaboration** - Enable multiple developers to work on the same code base at the same time.
 
 {{< img 
     src="https://imgs.xkcd.com/comics/git.png" 
@@ -19,11 +36,31 @@ Learning Git will allow you to:
     caption="[XKCD #1597](https://xkcd.com/1597/)" 
 >}}
 
-## Useful Git Resources
+### Software Development Lifecycle
 
-The [Pro Git](https://git-scm.com/book/en/v2) book, covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
+**Git plays a crucial role in the Software Development Lifecycle (SDLC) by enabling code to move between environments in a safe and repeatable way**.
 
-[Beej's Guide to Git](https://beej.us/guide/bggit/).
+An example of how code is managed across two environments (dev and prod) is below:
+
+{{< img 
+    src="/images/trunk-based-development.svg"
+    width="800"
+>}}
+
+Most modern software development teams use multiple environments to safely develop, test, and deploy code.  Common environments include:
+
+- **Development (Dev)** - Where new features are built and initial testing occurs. Developers work on feature branches that don't affect the main codebase.
+- **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
+- **Production (Prod)** - The live environment where end-users interact with the software.
+
+Which of these you need depends on the work you are doing, how many other people are doing development on the same code and company culture. At a minimum dev and prod are needed.
+
+Git facilitates the SDLC by:
+
+1. **Environment Isolation** - Code changes stay isolated in branches until they're ready to move to the next stage.
+2. **Controlled Promotion** - Code gets promoted between environments through merges and pull requests, often requiring approvals.
+3. **Deployment Tracking** - Git commit hashes provide clear tracking of what code was/is deployed where.
+4. **Rollback Capability** - If issues arise in production, teams can quickly roll back to a previous stable version.
 
 ## Tooling
 
@@ -38,7 +75,15 @@ Other Git tools include:
 
 Git commits & branches can be naturally visualized, making visual tools popular and useful.
 
+### Git GUIs
+
+Git naturally lends to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.  
+
+You can find a list of [Git GUI tools here](https://git-scm.com/downloads/guis).
+
 ### Git CLI
+
+It's also possible to use Git only via a command line interface (CLI).
 
 [Install Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) - you can then use the Git CLI:
 
@@ -572,6 +617,7 @@ By default Git starts on the master branch.
 {{< img 
     src="https://github.com/ADGEfficiency/programming-resources/blob/master/memes/merge-master.jpg?raw=true"
     alt="Meme about merging to master branch" 
+    width="400"
 >}}
 
 For Git the `master` branch is the default branch - it's the one that is automatically created when you create a Git repository:
@@ -693,3 +739,257 @@ remote:
 To github.com:ADGEfficiency/the-repo-name.git
  * [new branch]      tech/requirements -> tech/requirements
 ```
+
+## What To Do When Things Go Wrong
+
+**Even experienced developers make mistakes with Git**. Knowing how to fix common issues will save you time and frustration.
+
+### Merge Conflicts
+
+Merge conflicts happen when Git can't automatically merge changes because two branches have edited the same lines of code.
+
+When this happens, Git will mark the conflicts in your files:
+
+```
+<<<<<<< HEAD
+This is the change in your current branch
+=======
+This is the change in the branch you're merging
+>>>>>>> branch-name
+```
+
+To resolve a merge conflict:
+
+1. Open the files with conflicts and edit them to choose the correct version (remove the conflict markers)
+2. Add the resolved files with `git add`
+3. Complete the merge with `git commit`
+
+```shell-session
+$ git merge feature/login
+Auto-merging user.py
+CONFLICT (content): Merge conflict in user.py
+Automatic merge failed; fix conflicts and then commit the result.
+
+# After resolving conflicts in your editor
+$ git add user.py
+$ git commit
+```
+
+## Understanding Git Merge Conflict Markers
+
+When Git encounters a merge conflict, it modifies the affected files by inserting special conflict markers to show you exactly where and what the conflicts are. Let's break down these markers in detail:
+
+### The Anatomy of Conflict Markers
+
+```
+<<<<<<< HEAD
+This is the change in your current branch
+=======
+This is the change in the branch you're merging
+>>>>>>> branch-name
+```
+
+These markers divide the conflicting section into distinct parts:
+
+### 1. `<<<<<<< HEAD`
+- This marks the beginning of the conflicting section
+- Everything between this marker and the `=======` separator represents the content from your **current branch** (the branch you were on when you started the merge)
+- `HEAD` refers to the latest commit on your current branch
+
+### 2. `=======`
+- This separator divides the two conflicting versions
+- It acts as a boundary between "your version" and "their version"
+
+### 3. `>>>>>>> branch-name`
+- This marks the end of the conflicting section
+- Everything between the `=======` separator and this marker represents the content from the **incoming branch** (the branch you're trying to merge in)
+- `branch-name` will be replaced with the actual name or commit reference of the branch you're merging
+
+### What This Means in Practice
+
+When Git shows you these markers, it's essentially saying:
+
+1. "Here's what this section looks like in your current work (above the `=======`)"
+2. "Here's what this section looks like in the work you're trying to merge in (below the `=======`)"
+
+Git cannot automatically decide which version to keep, so it's asking you to make that decision.
+
+### How These Conflicts Happen
+
+Conflicts typically occur when:
+
+1. **Same-line changes**: Two branches modify the same line of code differently
+2. **Surrounding changes**: One branch modifies lines while another branch deletes them
+3. **Structural changes**: Both branches make significant structural changes to the same section of code
+
+## Real-World Example
+
+Let's say you're working on a feature branch called `feature/login` and you have this function in your current branch:
+
+```python
+def authenticate_user(username, password):
+    if username == "admin" and password == "secret":
+        return True
+    return False
+```
+
+Meanwhile, your colleague has changed the same function in the `main` branch to use a database check:
+
+```python
+def authenticate_user(username, password):
+    return database.check_credentials(username, password)
+```
+
+When you try to merge `main` into your feature branch, Git will create a conflict that looks like:
+
+```python
+def authenticate_user(username, password):
+<<<<<<< HEAD
+    if username == "admin" and password == "secret":
+        return True
+    return False
+=======
+    return database.check_credentials(username, password)
+>>>>>>> main
+```
+
+## Resolving the Conflict
+
+To resolve this conflict, you need to:
+
+1. Decide which implementation to keep (or create a combination of both)
+2. Edit the file to remove the conflict markers and unwanted code
+3. Ensure the resulting code is valid and works as intended
+
+For example, you might decide to keep the database authentication but add your admin check as a fallback:
+
+```python
+def authenticate_user(username, password):
+    # Try database first
+    if database.check_credentials(username, password):
+        return True
+    # Fallback for admin during development
+    if username == "admin" and password == "secret":
+        return True
+    return False
+```
+
+After editing, you would:
+```shell
+git add authenticate.py
+git commit
+```
+
+Git will automatically generate a merge commit message explaining that you resolved conflicts.
+
+## Multiple Conflicts
+
+A single file can have multiple conflict sections, each wrapped in its own set of conflict markers. You need to resolve each one individually.
+
+## Tool Support
+
+Most modern IDEs and code editors have built-in support for resolving merge conflicts with a visual interface that makes it easier to choose between "yours" (HEAD), "theirs" (incoming branch), or combine the changes.
+
+Understanding these conflict markers is essential for effective collaboration with Git, as merge conflicts are a normal part of the collaborative development process.
+
+### Undoing Commits
+
+Git gives you multiple ways to undo changes, depending on what you need:
+
+#### Soft Reset - Keep Changes Staged
+
+Use `git reset --soft` to undo a commit but keep all changes staged for a new commit:
+
+```shell-session
+$ git reset --soft HEAD~1
+```
+
+This is useful when you committed too early or need to change your commit message.
+
+#### Mixed Reset - Keep Changes Unstaged
+
+Use `git reset` (or `git reset --mixed`) to undo a commit and keep changes unstaged:
+
+```shell-session
+$ git reset HEAD~1
+```
+
+This gives you a chance to re-stage only some changes for your next commit.
+
+#### Hard Reset - Discard Changes
+
+Use `git reset --hard` to completely remove a commit and all its changes:
+
+```shell-session
+$ git reset --hard HEAD~1
+```
+
+**Warning**: This permanently discards changes, so be careful!
+
+### Checkout Files from Another Branch
+
+If you need a specific file from another branch without switching branches:
+
+```shell-session
+$ git checkout branch-name -- path/to/file
+```
+
+This brings the file from the specified branch into your current branch.
+
+### Stashing Changes
+
+When you need to switch branches but aren't ready to commit:
+
+```shell-session
+# Save your changes
+$ git stash
+
+# Switch branches, do other work
+$ git checkout another-branch
+
+# Come back and restore your changes
+$ git checkout original-branch
+$ git stash pop
+```
+
+### Amending the Last Commit
+
+If you forgot to add a file or need to fix your commit message:
+
+```shell-session
+# Add any missed files
+$ git add forgotten-file.py
+
+# Amend the commit
+$ git commit --amend
+```
+
+### Recovering Deleted Commits
+
+If you accidentally deleted a commit with `reset --hard`, you can usually recover it:
+
+```shell-session
+# Find the lost commit SHA
+$ git reflog
+
+# Recover the commit
+$ git checkout <commit-sha>
+$ git checkout -b recovery-branch
+```
+
+### General Advice for Git Mistakes
+
+1. **Before trying fixes, make a backup**:
+   ```shell-session
+   $ cp -r my-repo my-repo-backup
+   ```
+
+2. **When in doubt, use `git status`** to see where you are
+
+3. **For dangerous operations, try them on a new branch first**
+
+4. **Remember that pushed commits are harder to rewrite** - be extra careful with `git push --force`
+
+5. **Use descriptive commit messages** - they'll help you identify what went wrong later
+
+The learning curve with Git can be steep, but the more you use it, the more comfortable you'll become with fixing mistakes when they happen.
