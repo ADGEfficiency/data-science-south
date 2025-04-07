@@ -1,17 +1,17 @@
 // Immediately check dark mode preference before page renders to prevent flash
-(function() {
+;(function () {
   const savedTheme = localStorage.getItem('theme')
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
   if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
     document.documentElement.classList.add('dark')
   }
-})();
+})()
 
 // Dark mode toggle functionality
 document.addEventListener('DOMContentLoaded', function () {
   const darkModeToggle = document.getElementById('darkModeToggle')
-  
+
   // Show the toggle button after DOM is loaded
   if (darkModeToggle) {
     darkModeToggle.classList.remove('hidden')
@@ -26,3 +26,4 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
   })
 })
+
