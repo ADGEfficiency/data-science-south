@@ -48,7 +48,7 @@ Learning how to use a shell will allow you to:
     width="500"
 >}}
 
-Bash is an enabling skill - it enables workflows that have huge benefits for development, such as source control, automated tests (CI) and automated deployments (CD).
+**Bash is an enabling skill** - it enables workflows that have huge benefits for development, such as source control, automated testing (aka continuous integration, or CI) and automated deployments (aka continuous deployment, or CD).
 
 The shell is a key skill that allows you to use programming languages:
 
@@ -66,14 +66,14 @@ They are however different tools - all three are used when using a computer via 
 
 **The terminal (also called a console) is an interface that controls user input & output**.
 
+**Historically a terminal was hardware**. The terminal originates in the mainframe era of computing.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
+
 
 {{< img 
     src="/images/bash-shell/terminal.png"
     caption="The DEC VT100 Terminal"
     width="500"
 >}}
-
-**Historically a terminal was hardware**. The terminal originates in the mainframe era of computing.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
 **Today terminals are often software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
 
@@ -96,7 +96,9 @@ $ echo "this is the command line"
 
 ### The Shell
 
-**A shell is a computer program that executes text commands**. Shells are used in two ways:
+**A shell is a computer program that executes text commands**. 
+
+Shells are used in two ways:
 
 1. **as a REPL** (Read-Eval-Print Loop) that runs interactively,
 2. **as a programming language** that runs via scripts.
@@ -396,26 +398,85 @@ $ find /path/to/search -type d -name "directory-name"
 
 ### Finding Files
 
-To find a file by it's name, we can use the `find` program:
+To find a file by its name, we can use the `find` program.
 
-```shell-session
-$ find /path/to/search -type f -name "file-name"
+If we have a directory structure as follows:
+
+```
+project/
+├── data/
+│   ├── data.csv
+│   └── config.json
+├── src/
+│   ├── main.py
+│   └── utils.py
+└── docs/
+    ├── readme.md
+    └── setup.py
 ```
 
-We can use the wildcard character `*` to match any characters.
-
-For example, to find all Python scripts:
+We can find all Python files in the project directory:
 
 ```shell-session
-$ find /path/to/search -type f -name "*.py"
+$ find project -type f -name "*.py"
+project/src/main.py
+project/src/utils.py
+project/docs/setup.py
+```
+
+We can find a specific file by name:
+
+```shell-session
+$ find project -type f -name "config.json"
+project/data/config.json
+```
+
+We can use the `-path` option to match part of the path:
+
+```shell-session
+$ find project -type f -path "*/data/*"
+project/data/data.csv
+project/data/config.json
 ```
 
 ### Finding Text in Files
 
-To find a specific string in files, we can use `grep`:
+To find a specific string in files, we can use `grep`.
+
+If we have a file `data.txt`:
+
+```text { title = "data.txt" }
+haystack
+a needle
+haystack
+another needle
+haystack
+haystack
+```
+
+We can show each line that has the string `hay`:
 
 ```shell-session
-$ grep "search-string" filename.txt
+$ grep "hay" data.txt
+haystack one
+haystack
+haystack
+haystack
+```
+
+We can only show the filename:
+
+```shell-session
+$ grep -l "hay" data.txt
+data.txt
+```
+
+Another useful flag is `-r`, which will search recursively through all files in a directory.
+
+I use the following command many times per day:
+
+```shell-session
+$ grep -rl "pattern .
 ```
 
 ### Finding Programs
@@ -424,25 +485,24 @@ To find where a program lives, we can use `which`:
 
 ```shell-session
 $ which ls
+/bin/ls
 ```
 
-This will show the location of the `ls` program, which is a binary file.
+This will show the location of the `ls` program, which is a binary that lives in the `/bin` folder.
 
 ## Redirection 
 
 **Shells can redirect input and output between commands**.  
 
-Redirection allows a program to accept text input and output text to another program.
-
-This enables the composition of programs, with programs generating text for each other.
+Redirection allows a program to accept text input and output text to another program. This enables the composition of programs, with programs generating text for each other.
 
 ### Standard Input, Output & Error
 
 The shell establishes three text streams:
 
-- **standard input** (STDIN) - the input stream (commonly a keyboard),
-- **standard output** (STDOUT) - the output stream (commonly a terminal console),
-- **standard error** (STDERR) - the error output stream (also usually goes to terminal console).
+1. **standard input** (STDIN) - the input stream (commonly a keyboard),
+2. **standard output** (STDOUT) - the output stream (commonly a terminal console),
+3. **standard error** (STDERR) - the error output stream (also usually goes to terminal console).
 
 It's possible to direct these text streams to different places - for example to redirect STDOUT to a file, rather than the terminal console.
 
@@ -453,11 +513,32 @@ It's possible to direct these text streams to different places - for example to 
 
 ### Redirecting Input
 
-The `<` operator is used to redirect input. It reads input from a file instead of the keyboard. For example:
+**The `<` operator is used to redirect input**. It reads input from a file instead of the keyboard.
+
+If we have a file `numbers.txt`:
+
+```text { title = "numbers.txt" }
+5
+3
+8
+1
+4
+2
+```
+
+We can use the `sort` command with input redirection to sort these numbers:
 
 ```shell-session
-$ sort < unsorted.txt
+$ sort < numbers.txt
+1
+2
+3
+4
+5
+8
 ```
+
+This takes the contents of `numbers.txt` and passes it as input to the `sort` command.
 
 {{< img 
     src="/images/shell-redirection-2.svg"
@@ -466,13 +547,20 @@ $ sort < unsorted.txt
 
 ### Redirecting Output
 
-The `>` operator is used to redirect output from a command to a file, overwriting the file if it exists.
+**The `>` operator is used to redirect output from a command to a file**. It will overwrite the file if it exists.
 
-The following redirects the output of `ls -l` to a file named `files.txt`.
+If we run a command that lists all files in the current directory:
 
 ```shell-session
 $ ls -l > files.txt
+$ cat files.txt
+total 16
+-rw-r--r--  1 user  staff  14 Aug  4 14:30 numbers.txt
+-rw-r--r--  1 user  staff  98 Aug  4 14:31 files.txt
+drwxr-xr-x  5 user  staff 160 Aug  4 14:29 project
 ```
+
+The output that would normally be displayed in the terminal is instead written to `files.txt`.
 
 {{< img 
     src="/images/shell-redirection-3.svg"
@@ -481,13 +569,21 @@ $ ls -l > files.txt
 
 ### Appending Output
 
-The `>` command will overwrite - if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
+**The `>>` operator appends output to the end of a file instead of overwriting it**.
+
+If we already have a file and want to add more content:
 
 ```shell-session
-$ ls -l >> files.txt
+$ echo "First line" > log.txt
+$ cat log.txt
+First line
+$ echo "Second line" >> log.txt
+$ cat log.txt
+First line
+Second line
 ```
 
-This will sort the lines in the `unsorted.txt` file.
+The first command creates (or overwrites) `log.txt` with "First line", while the second command appends "Second line" to the file.
 
 ### Pipes
 
@@ -495,15 +591,64 @@ This will sort the lines in the `unsorted.txt` file.
 
 A pipe connects the standard output of the first command to the standard input of the second command.
 
+Let's say we have a directory with these files:
+
+```
+project/
+├── data.csv
+├── report.txt
+├── notes.txt
+├── script.py
+└── config.json
+```
+
+We can count the number of files in the directory:
+
 ```shell-session
-$ ls | wc -l
+$ ls project
+data.csv  report.txt  notes.txt  script.py  config.json
+
+$ ls project | wc -l
+5
+```
+
+{{< img 
+    src="/images/pipes.svg"
+    width="400"
+>}}
+
+This first lists the files with `ls project`, then passes that output to `wc -l` which counts the lines.
+
+We can filter for specific file types:
+
+```shell-session
+$ ls project | grep ".txt"
+report.txt
+notes.txt
 ```
 
 Multiple pipes can be chained together to create more complex operations:
 
 ```shell-session
-$ ls -l | grep ".txt" | sort | head -n 5
+$ cat project/data.csv
+name,age,city
+alice,28,new york
+charlie,35,chicago
+bob,42,seattle
+david,31,boston
+eve,25,los angeles
+
+$ cat project/data.csv | grep -v "name" | sort | head -n 3
+alice,28,new york
+bob,42,seattle
+charlie,35,chicago
 ```
+
+This pipeline:
+1. Reads the CSV file
+2. Removes the header line with `grep -v "name"`
+3. Sorts the lines alphabetically
+4. Shows only the first 3 results
 
 ## Shell Configuration
 
@@ -561,7 +706,10 @@ You can use `echo` to view the value of an environment variable - below we look 
 
 ```shell-session
 $ echo $HOME
+/Users/adamgreen
 ```
+
+The value of the `HOME` variable will depend on the operating system and user name.
 
 ### `$PATH`
 
@@ -793,12 +941,10 @@ To access environment variables in a script, use the `$VARIABLE_NAME` syntax:
 ```bash { title = "env-script.sh" }
 #!/usr/bin/env bash
 
-# Access an environment variable
 echo "Running in $STAGE environment"
-
-# Use a default value if the environment variable is not set
+# use a default value if the environment variable is not set
 : "${LOG_LEVEL:=info}"
-echo "Log level: $LOG_LEVEL"
+echo "Log Level: $LOG_LEVEL"
 ```
 
 Running a script with environment variables:
@@ -806,11 +952,11 @@ Running a script with environment variables:
 ```shell-session
 $ STAGE=production ./env-script.sh
 Running in production environment
-Log level: info
+Log Level: info
 
 $ STAGE=production LOG_LEVEL=debug ./env-script.sh
 Running in production environment
-Log level: debug
+Log Level: debug
 ```
 
 You can also set environment variables within your script, which will be available to any processes started by the script:
@@ -818,10 +964,10 @@ You can also set environment variables within your script, which will be availab
 ```bash { title = "set-env.sh" }
 #!/usr/bin/env bash
 
-# set an environment variable for this process (script or REPL) and its child processes
+# set environment variable for this process (script or REPL) and its child processes
 export API_URL="https://api.example.com"
 
-# the script below will have access to the API_URL environment variable
+# script execution will have access to the API_URL environment variable
 ./call-api.sh
 ```
 
@@ -837,7 +983,7 @@ It's important to understand that environment variables set in a script will not
 ```bash { title = "set-env.sh" }
 #!/usr/bin/env bash
 
-# This variable will NOT be available in the parent shell
+# not available in the parent shell
 export MY_VAR="hello"
 ```
 
