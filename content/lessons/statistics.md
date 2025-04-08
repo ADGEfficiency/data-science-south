@@ -2,7 +2,7 @@
 title: Statistics
 summary: Don't be fooled by randomness!
 competencies:
-- Algorithms
+- Analytics
 draft: true
 ---
 

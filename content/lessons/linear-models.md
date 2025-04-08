@@ -3,7 +3,7 @@ title: Linear Predictive Models
 summary: TODO
 draft: true
 competencies:
-- Algorithms
+- Analytics
 ---
 
 
