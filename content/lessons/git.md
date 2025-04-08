@@ -75,6 +75,8 @@ Other Git tools include:
 
 Git commits & branches can be naturally visualized, making visual tools popular and useful.
 
+On Windows Git Bash is a great way to access Git - you can use `start .` to open a folder in Windows Explorer.
+
 ### Authentication with Git
 
 When working with remote repositories, you'll need to authenticate with the Git server. There are three main methods of authentication.
