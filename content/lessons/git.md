@@ -75,6 +75,76 @@ Other Git tools include:
 
 Git commits & branches can be naturally visualized, making visual tools popular and useful.
 
+On Windows Git Bash is a great way to access Git - you can use `start .` to open a folder in Windows Explorer.
+
+### Authentication with Git
+
+When working with remote repositories, you'll need to authenticate with the Git server. There are three main methods of authentication.
+
+#### Git Credential Manager
+
+Git Credential Manager (GCM) is a secure and user-friendly way to store your authentication credentials for Git repositories.
+
+- **Cross-platform support**: Works on Windows, macOS, and Linux
+- **Secure storage**: Stores credentials in your operating system's secure credential store
+- **Multi-factor authentication**: Supports two-factor authentication
+- **Automatic credential refresh**: Can refresh tokens when they expire
+
+To install GCM:
+```shell-session
+# Windows and macOS (comes bundled with Git)
+# Linux
+$ sudo apt install git-credential-manager
+```
+
+To configure Git to use the credential manager:
+```shell-session
+$ git config --global credential.helper manager
+```
+
+When you first clone or push to a remote repository, GCM will prompt you to authenticate and then securely store your credentials.
+
+#### SSH Keys
+
+SSH (Secure Shell) keys are a secure way to authenticate with Git servers without entering your password each time.
+
+1. **Generate an SSH key pair**:
+   ```shell-session
+   $ ssh-keygen -t ed25519 -C "your_email@example.com"
+   ```
+
+2. **Add the public key to your Git server** (GitHub, GitLab, etc.):
+   - Copy the contents of `~/.ssh/id_ed25519.pub`
+   - Add it to your account settings on the Git server
+
+3. **Use SSH URLs for your repositories**:
+   ```shell-session
+   $ git clone git@github.com:username/repo.git
+   ```
+
+SSH keys are more secure than passwords and don't expire, making them ideal for development machines.
+
+#### Personal Access Tokens (PATs)
+
+Personal Access Tokens are an alternative to passwords when authenticating with Git servers.
+
+1. **Generate a PAT** on your Git server (GitHub, GitLab, etc.)
+   - In your account settings, find the developer settings or access tokens section
+   - Specify the required permissions (repo, read:packages, etc.)
+   - Set an optional expiration date
+
+2. **Use the token for authentication**:
+   ```shell-session
+   $ git clone https://username:token@github.com/username/repo.git
+   ```
+
+PATs are useful for:
+- Automated scripts and CI/CD pipelines
+- Limiting access scope (unlike passwords which grant full account access)
+- Setting time-limited access
+
+For security, treat PATs like passwords and avoid committing them to your repositories.
+
 ### Git GUIs
 
 Git naturally lends to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.  
