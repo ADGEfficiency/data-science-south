@@ -1,36 +1,64 @@
 {{ define "main" }}
-<div class="container mx-auto p-4 flex flex-col gap-4 min-h-[calc(100vh-8rem)]"
-     data-pagefind-ignore>
-    <div class="p-6 rounded-lg">
-        <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
-        {{ range .Data.Terms.Alphabetical }}
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-                {{ .Page.Title }}
-                <span class="text-sm font-normal text-gray-600">({{ .Count }} lessons)</span>
-            </h2>
-            <div class="grid gap-4 pl-4">
-                {{ range .Pages.ByTitle }}
-                <div class="group">
-                    <a href="{{ .RelPermalink }}"
-                       class="block p-4 bg-white rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 hover:text-white transition-all duration-200">
-                        <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
-                        {{ with .Params.summary }}
-                        <p class="text-sm opacity-75 group-hover:text-white/75">{{ . }}</p>
-                        {{ end }}
-                        <div class="mt-2 flex flex-wrap gap-2">
-                            {{ range .Params.competencies }}
-                            <span class="px-2 py-1 text-xs rounded bg-gray-100 text-gray-700 group-hover:bg-emerald-500 group-hover:text-emerald-50 transition-colors duration-200">
-                                {{ . }}
-                            </span>
-                            {{ end }}
-                        </div>
-                    </a>
-                </div>
-                {{ end }}
+<div
+  class="container mx-auto p-4 flex flex-col gap-4 min-h-[calc(100vh-8rem)]"
+  data-pagefind-ignore
+>
+  <div class="p-6 rounded-lg">
+    <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
+    <p class="mb-6">
+      All our content, organized by the
+      <a
+        href="/lessons/find-a-data-job/#four-competencies-of-a-data-professional"
+        class="text-blue-600 hover:underline"
+        >Four Competencies of a Data Professional</a
+      >.
+    </p>
+    {{ range .Data.Terms.Alphabetical }}
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        {{ .Page.Title }}
+        <span class="text-sm font-normal text-gray-600"
+          >({{ .Count }} lessons)</span
+        >
+      </h2>
+      <div class="grid gap-4 pl-4">
+        {{ range .Pages.ByTitle }}
+        <div class="group">
+          <a
+            href="{{ .RelPermalink }}"
+            class="block p-4 bg-white rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 hover:text-white transition-all duration-200"
+          >
+            <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
+            {{ with .Params.summary }}
+            <p class="text-sm opacity-75 group-hover:text-white/75">{{ . }}</p>
+            {{ end }}
+            <div class="mt-2 flex flex-wrap gap-2">
+              {{ if in .RelPermalink "/blog/" }}
+              <span
+                class="px-2 py-1 text-xs rounded bg-blue-100 text-blue-700 group-hover:bg-blue-500 group-hover:text-blue-50 transition-colors duration-200"
+              >
+                Blog
+              </span>
+              {{ else if in .RelPermalink "/lessons/" }}
+              <span
+                class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-700 group-hover:bg-purple-500 group-hover:text-purple-50 transition-colors duration-200"
+              >
+                Lesson
+              </span>
+              {{ end }} {{ range .Params.competencies }}
+              <span
+                class="px-2 py-1 text-xs rounded bg-gray-100 text-gray-700 group-hover:bg-emerald-500 group-hover:text-emerald-50 transition-colors duration-200"
+              >
+                {{ . }}
+              </span>
+              {{ end }}
             </div>
+          </a>
         </div>
         {{ end }}
+      </div>
     </div>
+    {{ end }}
+  </div>
 </div>
 {{ end }}
