@@ -19,6 +19,15 @@
                         <p class="text-sm opacity-75 group-hover:text-white/75">{{ . }}</p>
                         {{ end }}
                         <div class="mt-2 flex flex-wrap gap-2">
+                            {{ if in .RelPermalink "/blog/" }}
+                            <span class="px-2 py-1 text-xs rounded bg-blue-100 text-blue-700 group-hover:bg-blue-500 group-hover:text-blue-50 transition-colors duration-200">
+                                Blog
+                            </span>
+                            {{ else if in .RelPermalink "/lessons/" }}
+                            <span class="px-2 py-1 text-xs rounded bg-purple-100 text-purple-700 group-hover:bg-purple-500 group-hover:text-purple-50 transition-colors duration-200">
+                                Lesson
+                            </span>
+                            {{ end }}
                             {{ range .Params.competencies }}
                             <span class="px-2 py-1 text-xs rounded bg-gray-100 text-gray-700 group-hover:bg-emerald-500 group-hover:text-emerald-50 transition-colors duration-200">
                                 {{ . }}
