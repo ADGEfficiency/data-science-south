@@ -40,8 +40,8 @@ Learning how to use a shell will allow you to:
 
 - **Create CI/CD Pipelines** - Most pipelines are sequences of shell commands.
 - **Use Docker** - Dockerfiles are sequences of shell commands.
-- **Repeat and Automate Tasks** - automating text commands is easier than automating pointing and clicking. 
-- **Unlock Powerful Tools** - many development tasks are best (or only) done with shell tools.
+- **Repeat and Automate Tasks** - Automating text commands is easier than automating pointing and clicking. 
+- **Unlock Powerful CLI Tools** - Some development tasks are best (or only) done with shell tools.
 
 {{< img 
     src="/images/bash-enables-git-cicd.svg"
@@ -62,7 +62,7 @@ The terminal, command line and shell are often used interchangeably.
 
 They are however different tools - all three are used when using a computer via text commands, but they do different things.
 
-### The Terminal
+### Terminals
 
 **The terminal (also called a console) is an interface that controls user input & output**.
 
@@ -83,7 +83,7 @@ Popular terminal emulators include:
 - **Windows** - Windows Terminal,
 - **Ubuntu** - Gnome Terminal.
 
-### Command-Line
+### Command-Lines
 
 The command-line is the space or interface in the terminal where you can type and execute text commands. 
 
@@ -94,7 +94,7 @@ $ echo "this is the command line"
 "this is the command line"
 ```
 
-### The Shell
+### Shells
 
 **A shell is a computer program that executes text commands**. 
 
@@ -114,6 +114,8 @@ We can use the shell as a REPL to list the current directory files & directories
 ```shell-session
 $ ls
 ```
+
+We can use Python as a REPL as well via the `python` CLI.
 
 #### Shell Scripting
 
@@ -205,6 +207,54 @@ If you do use spaces, you may end up seeing (or having to write!) your paths by 
 
 ## Navigation
 
+### Arrow Keys
+
+The up and down arrow keys allow you to navigate through your command history:
+
+- **Up Arrow** (`↑`): Shows the previous command you typed. Press multiple times to go further back in history.
+- **Down Arrow** (`↓`): Shows the next command in your history (after you've used the up arrow).
+- **Left Arrow** (`←`) and **Right Arrow** (`→`): Navigate within the current command line to edit characters.
+
+This feature is invaluable for reusing or modifying previously executed commands without retyping them.
+
+### TAB
+
+The `TAB` key provides command and file path completion, saving you time and reducing typing errors:
+
+- Press `TAB` once to complete a partial command or filename if there's only one possible match.
+- Press `TAB` twice to show all possible completions if there are multiple matches.
+
+Examples:
+```shell-session
+$ cd Doc[TAB]             # Autocompletes to "cd Documents/"
+$ ls -[TAB][TAB]          # Shows all available options that start with "-"
+$ cat Re[TAB]             # Autocompletes to "cat README.md" if that's the only match
+```
+
+TAB completion works with:
+- Commands
+- File and directory names
+- Environment variables
+- Username completion (with ~)
+- Package names (in package managers like apt)
+
+### CTRL-R
+
+`CTRL-R` initiates a reverse search through your command history:
+
+1. Press `CTRL-R` to start the search
+2. Type a portion of the command you're looking for
+3. The most recent matching command will appear
+4. Press `CTRL-R` again to cycle through older matches
+5. Press `Enter` to execute the displayed command or `Esc` to edit it
+
+```shell-session
+$ [Press CTRL-R]
+(reverse-i-search)`git': git commit -m "Update documentation"
+```
+
+This is extremely useful for finding and reusing complex commands you've run previously without scrolling through your entire history.
+
 ### Where Am I?
 
 `pwd` shows us where we are in the file system - this is our current directory:
@@ -220,7 +270,7 @@ We can remove output from the terminal with `clear`:
 $ clear
 ```
 
-### What is in the Current Directory?
+### What is Here?
 
 `ls` lists our current directory - showing us the files and folders:
 
@@ -494,7 +544,9 @@ This will show the location of the `ls` program, which is a binary that lives in
 
 **Shells can redirect input and output between commands**.  
 
-Redirection allows a program to accept text input and output text to another program. This enables the composition of programs, with programs generating text for each other.
+Redirection allows a program to accept text input and output text to another program.
+
+**This enables the composition of shell programs, with programs generating text for each other**.
 
 ### Standard Input, Output & Error
 
@@ -654,11 +706,13 @@ This pipeline:
 
 ### Environment Variables
 
-The shell is a stateful system - a shell stores data in between execution of programs.  This data is stored in environment variables.
+The shell is a stateful system - a shell stores data in between execution of programs.  **This data is stored in environment variables in the shell session**.
 
 Environment variables can set and accessed in the shell, and then used as part of shell commands.
 
-Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in.
+Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in. Shell scripts can also access environment variables.
+
+This flexibility makes environment variables a key strategy for setting the values of configuration and secrets in CI/CD pipelines.
 
 #### Setting an Environment Variable
 

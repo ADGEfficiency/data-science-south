@@ -1,3 +1,13 @@
+[project]
+name = "data-science-south"
+version = "0.0.1"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11.9"
+dependencies = [
+    "phmdoctest>=1.4.0",
+]
+
 [tool.phmdoctest]
 markdown_globs = ["content/lessons/*.md"]
 exclude_globs = []
