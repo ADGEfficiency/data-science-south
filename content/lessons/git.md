@@ -913,6 +913,7 @@ def authenticate_user(username, password):
 
 When you try to merge `main` into your feature branch, Git will create a conflict that looks like:
 
+<!--phmdoctest-skip-->
 ```python
 def authenticate_user(username, password):
 <<<<<<< HEAD
