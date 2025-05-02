@@ -39,9 +39,63 @@ A lot of cloud computing is done on machines running some form of Linux, with th
 Learning how to use a shell will allow you to:
 
 - **Create CI/CD Pipelines** - Most pipelines are sequences of shell commands, commonly written in `.yaml` files.
+
+```yaml
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -e .
+      - name: Run tests
+        run: |
+          pytest
+```
+
 - **Use Docker** - Dockerfiles are sequences of shell commands.
+
+```Dockerfile
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "app.py"]
+```
+
 - **Repeat and Automate Tasks** - Repeating and automating text commands is easier than pointing and clicking.
+
+```shell-session
+$ for file in *.csv; do
+>   python process_data.py "$file" > "${file%.csv}_processed.csv"
+> done
+```
+
 - **Unlock Powerful CLI Tools** - Some development tasks are best (or only) done with shell tools.
+
+```shell-session
+$ sqlite3 db.sqlite "SELECT * FROM users"
+```
 
 {{< img 
     src="/images/bash-enables-git-cicd.svg"
@@ -113,6 +167,7 @@ We can use the shell as a REPL to list the current directory files & directories
 
 ```shell-session
 $ ls
+CLAUDE.md  Makefile  README.md  archetypes/  assets/  content/  data/  hugo.toml  i18n/  layouts/  pyproject.toml  static/  tests/
 ```
 
 We can use Python as a REPL as well via the `python` CLI.
@@ -263,7 +318,7 @@ This is extremely useful for finding and reusing complex commands you've run pre
 
 ```shell-session
 $ pwd
-/Users/adamgreen/data-science-south-projects/bash-shell
+/Users/adamgreen/data-science-south-neu
 ```
 
 We can remove output from the terminal with `clear`:
@@ -286,6 +341,22 @@ Two common flags for `ls` are showing hidden files with `-a` in a long format wi
 
 ```shell-session
 $ ls -al
+total 48
+drwxr-xr-x  12 adamgreen  staff   384 Mar  5 10:23 .
+drwxr-xr-x   6 adamgreen  staff   192 Feb 15 09:42 ..
+-rw-r--r--   1 adamgreen  staff  1176 Mar  5 10:23 CLAUDE.md
+-rw-r--r--   1 adamgreen  staff   434 Jan 15 14:22 Makefile
+-rw-r--r--   1 adamgreen  staff  1825 Jan 15 14:22 README.md
+drwxr-xr-x   3 adamgreen  staff    96 Jan 15 14:22 archetypes
+drwxr-xr-x   3 adamgreen  staff    96 Jan 15 14:22 assets
+drwxr-xr-x   4 adamgreen  staff   128 Jan 15 14:22 content
+drwxr-xr-x   3 adamgreen  staff    96 Jan 15 14:22 data
+-rw-r--r--   1 adamgreen  staff  5125 Jan 15 14:22 hugo.toml
+drwxr-xr-x   2 adamgreen  staff    64 Jan 15 14:22 i18n
+drwxr-xr-x   6 adamgreen  staff   192 Jan 15 14:22 layouts
+-rw-r--r--   1 adamgreen  staff   283 Jan 15 14:22 pyproject.toml
+drwxr-xr-x   4 adamgreen  staff   128 Jan 15 14:22 static
+drwxr-xr-x   3 adamgreen  staff    96 Jan 15 14:22 tests
 ```
 
 ### Changing Directories
@@ -295,18 +366,25 @@ We can change our current directory using `cd`, which will move down into a dire
 ```shell-session
 $ mkdir practice-dir
 $ cd practice-dir
+$ pwd
+/Users/adamgreen/data-science-south-neu/practice-dir
 ```
 
 We can move back up a directory with `cd ..`, which moves into the parent directory:
 
 ```shell-session
 $ cd ..
+$ pwd
+/Users/adamgreen/data-science-south-neu
 ```
 
 Another useful `cd` command is `cd -`, which moves to the directory we were previously in:
 
 ```shell-session
 $ cd -
+/Users/adamgreen/data-science-south-neu/practice-dir
+$ pwd
+/Users/adamgreen/data-science-south-neu/practice-dir
 ```
 
 A special directory on Unix system is the home folder, which is the highest level folder for a user.  
@@ -315,8 +393,14 @@ We can get to the home folder in a few different ways:
 
 ```shell-session
 $ cd ~
+$ pwd
+/Users/adamgreen
 $ cd $HOME
+$ pwd
+/Users/adamgreen
 $ cd
+$ pwd
+/Users/adamgreen
 ```
 
 `~` is a special syntax that refers to the home folder. `$HOME` is an environment variable that is the path to your home folder.
@@ -325,6 +409,14 @@ The highest level of a file system on MacOS contains folders like `/etc` and `/U
 
 ```shell-session
 $ cd /etc
+$ pwd
+/etc
+$ ls | head -n 5
+afpovertcp.cfg
+aliases
+apache2
+asl
+auto_home
 ```
 
 Important top level directories include:
@@ -406,6 +498,21 @@ $ rm -rf directory
 
 ```shell-session
 $ cat README.md
+# Data Science South
+
+This is the source code for the Data Science South website, a resource for learning data science.
+
+## Local Development
+
+```bash
+hugo server -D
+```
+
+## Production Build
+
+```bash
+hugo
+```
 ```
 
 One common use of `cat` is at the start of a shell pipeline.  
@@ -414,18 +521,25 @@ For example, we can pipe the contents of a file into another program `grep`:
 
 ```shell-session
 $ cat README.md | grep "data"
+This is the source code for the Data Science South website, a resource for learning data science.
 ```
 
 `head` will print the first `n` lines of a file:
 
 ```shell-session
-$ head -n 3 readme.md
+$ head -n 3 README.md
+# Data Science South
+
+This is the source code for the Data Science South website, a resource for learning data science.
 ```
 
 `tail` will print the last `n` lines of a file:
 
 ```shell-session
-$ tail -n 3 readme.md
+$ tail -n 3 README.md
+```bash
+hugo
+```
 ```
 
 A file pager is a program that will keep a file open and allows you to move through that file.  
@@ -509,9 +623,17 @@ haystack
 We can show each line that has the string `hay`:
 
 ```shell-session
-$ grep "hay" data.txt
-haystack one
+$ cat data.txt
 haystack
+a needle
+haystack
+another needle
+haystack
+haystack
+$ grep "hay" data.txt
+haystack
+haystack
+another needle
 haystack
 haystack
 ```
@@ -538,6 +660,10 @@ To find where a program lives, we can use `which`:
 ```shell-session
 $ which ls
 /bin/ls
+$ which python
+/usr/bin/python
+$ which bash
+/bin/bash
 ```
 
 This will show the location of the `ls` program, which is a binary that lives in the `/bin` folder.
@@ -583,6 +709,13 @@ If we have a file `numbers.txt`:
 We can use the `sort` command with input redirection to sort these numbers:
 
 ```shell-session
+$ cat numbers.txt
+5
+3
+8
+1
+4
+2
 $ sort < numbers.txt
 1
 2
@@ -763,6 +896,10 @@ You can use `echo` to view the value of an environment variable - below we look 
 ```shell-session
 $ echo $HOME
 /Users/adamgreen
+$ echo $USER
+adamgreen
+$ echo $SHELL
+/bin/zsh
 ```
 
 The value of the `HOME` variable will depend on the operating system and user name.
@@ -777,6 +914,14 @@ The `$PATH` variable will be quite long - a useful tip is to pipe the variable i
 
 ```shell-session
 $ echo $PATH | tr ":" "\n"
+/usr/local/bin
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+/usr/local/go/bin
+/opt/homebrew/bin
+/Users/adamgreen/.local/bin
 ```
 
 It's common to see the `PATH` variable modified in scripts by appending a new path onto the existing path:
@@ -806,6 +951,8 @@ NAME=value
 ```
 
 ```shell-session
+$ cat myfile
+NAME=value
 $ source myfile
 $ echo $NAME
 value
@@ -874,6 +1021,8 @@ Below prints when we are using Bash as a REPL:
 ```shell-session
 $ echo "this is printing in the Bash repl"
 this is printing in the Bash repl
+$ echo "Hello $USER, today is $(date +%A)"
+Hello adamgreen, today is Tuesday
 ```
 
 Below is a script that prints some text:
@@ -887,6 +1036,8 @@ We can run this script in the shell to see what it prints:
 ```shell-session
 $ bash script.sh
 this is printing in a Bash script
+$ cat script.sh
+echo "this is printing in a Bash script"
 ```
 
 ### The Shebang
@@ -985,7 +1136,9 @@ echo "Hello, $name!"
 Running a Bash script with command line arguments:
 
 ```shell-session
+$ chmod +x myscript.sh
 $ ./myscript.sh adam
+Hello, adam!
 ```
 
 ### Using Environment Variables in Shell Scripts
