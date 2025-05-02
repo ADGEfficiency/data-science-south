@@ -38,9 +38,9 @@ A lot of cloud computing is done on machines running some form of Linux, with th
 
 Learning how to use a shell will allow you to:
 
-- **Create CI/CD Pipelines** - Most pipelines are sequences of shell commands.
+- **Create CI/CD Pipelines** - Most pipelines are sequences of shell commands, commonly written in `.yaml` files.
 - **Use Docker** - Dockerfiles are sequences of shell commands.
-- **Repeat and Automate Tasks** - Automating text commands is easier than automating pointing and clicking. 
+- **Repeat and Automate Tasks** - Repeating and automating text commands is easier than pointing and clicking.
 - **Unlock Powerful CLI Tools** - Some development tasks are best (or only) done with shell tools.
 
 {{< img 
@@ -163,6 +163,8 @@ Common Bash shell programs include:
 - `cat` - print file contents.
 
 The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
+
+Other shell programs might be specific to your project.  You might use the AWS CLI or Azure CLI to interact with cloud services, run databases or servers in long running processes.  You might also write your own CLI programs with Python.
 
 ## Tooling
 
