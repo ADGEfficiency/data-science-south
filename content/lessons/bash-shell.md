@@ -133,9 +133,9 @@ They are however different tools - all three are used when using a computer via 
 
 Popular terminal emulators include:
 
-- **MacOS** - iTerm2,
-- **Windows** - Windows Terminal,
-- **Ubuntu** - Gnome Terminal.
+- **MacOS** - iTerm2
+- **Windows** - Windows Terminal
+- **Ubuntu** - Gnome Terminal
 
 ### Command-Lines
 
@@ -260,6 +260,183 @@ If you do use spaces, you may end up seeing (or having to write!) your paths by 
 ```bash
 # this is harder to work with
 /folder\ name/file\ name.txt
+```
+
+## Shell Configuration
+
+### Environment Variables
+
+The shell is a stateful system - a shell stores data in between execution of programs.  **This data is stored in environment variables in the shell session**.
+
+Environment variables can set and accessed in the shell, and then used as part of shell commands.
+
+Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in. Shell scripts can also access environment variables.
+
+This flexibility makes environment variables a key strategy for setting the values of configuration and secrets in CI/CD pipelines.
+
+#### Setting an Environment Variable
+
+We can set an environment variable using `NAME=VALUE` - note the lack of space around the `=`:
+
+```shell-session
+$ stage=production
+```
+
+#### Accessing an Environment Variable
+
+We can view the value of this environment variable with `echo`, using the `$NAME` syntax:
+
+```shell-session
+$ echo $stage
+production
+```
+
+#### Exporting Environment Variables to Sub-Processes
+
+Our shell is run in a process - there are hundreds of processes running on your computer now.
+
+Many actions we take in a shell create a new process - this new process is called a sub-process.  For example, when we run a Python script in a shell, a new Python process is created.
+
+Environment variables are not inherited by sub processes.
+
+We can however make environment variables accessible to sub processes using `export`:
+
+```shell-session
+$ export stage=production
+```
+You will often see `export` used in the shell config scripts like `.bashrc`.  This is because these scripts are run during shell startup, and the environment variables defined in these scripts are supposed to be available to all sub processes.
+
+#### Viewing All Environment Variables
+
+You can see all the environment variables currently defined in your shell with the `env` command:
+
+```shell-session
+$ env
+```
+
+You can access an environment variable using the `$NAME` syntax.  
+
+You can use `echo` to view the value of an environment variable - below we look at the `$HOME` environment variable.
+
+```shell-session
+$ echo $HOME
+/Users/adamgreen
+$ echo $USER
+adamgreen
+$ echo $SHELL
+/bin/zsh
+```
+
+The value of the `HOME` variable will depend on the operating system and user name.
+
+### `$PATH`
+
+The `$PATH` environment variable is a list of directories, separated by a `:`.
+
+The `$PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `$PATH` makes that program accessible via a shell from any directory.
+
+The `$PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
+
+```shell-session
+$ echo $PATH | tr ":" "\n"
+/usr/local/bin
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+/usr/local/go/bin
+/opt/homebrew/bin
+/Users/adamgreen/.local/bin
+```
+
+It's common to see the `PATH` variable modified in scripts by appending a new path onto the existing path:
+
+```shell-session
+$ export PATH=$PATH:$SPARK_HOME/bin
+```
+
+A common pattern you will see in install scripts is to copy this path update command into our shell configuration script:
+
+`$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
+
+This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
+
+Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run from the shell.
+
+### Sourcing
+
+Sourcing a file executes the commands in the file in the current shell.  
+
+This is different from running a file, which will execute the commands in a new shell in a sub-process.
+
+One common use of `source` is to load environment variables into the current shell:
+
+```bash { title = "myfile" }
+NAME=value
+```
+
+```shell-session
+$ cat myfile
+NAME=value
+$ source myfile
+$ echo $NAME
+value
+```
+
+### RC Files
+
+Your shell is configured using text files.  These text files are `source`'d during shell startup, before you see your first command line prompt.  Often these files are `.rc` files, which stands for "run command".
+
+Which shell configuration file depends on both your shell and your operating system:
+
+- `~/.bashrc` on Linux with Bash,
+- `~/.zshrc` on Linux with Zsh,
+- `~/.bashrc` & `~/.bash_profile` on MacOS with Bash,
+- `~/.bashrc` & `~/.zshenv` on MacOS with Zsh.
+
+Here's what a typical `.bashrc` file might contain:
+
+```bash { title = "~/.bashrc" }
+# set environment variables
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="vim"
+
+# aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias cls='clear && ls'
+alias gs='git status'
+
+# initialize tools
+eval "$(pyenv init -)"
+```
+
+### Login vs. Non-Login Shells
+
+A final complexity here is the difference between a login versus non-login shell.  
+
+When you log into a system and start a shell, that's called a login shell. Login shells read certain configuration files, and the settings in those files persist for the session.
+
+When you start a new terminal window or a new shell in an existing session, those are non-login shells. They read a different set of configuration files, and settings last only for the life of the shell.
+
+This distinction depends on your operating system - for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
+
+### Aliases
+
+A shell alias is a shortcut for a command or set of commands.  Aliases are commonly defined in your shell configuration files.
+
+Here are some example aliases you can use for inspiration:
+
+```bash
+alias ls='ls -aGl'
+alias c='clear'
+alias cls='clear && ls'
+```
+
+You can use `"command"` to run a command without alias expansion:
+
+```shell-session
+$ "ls"
 ```
 
 ## Navigation
@@ -498,21 +675,6 @@ $ rm -rf directory
 
 ```shell-session
 $ cat README.md
-# Data Science South
-
-This is the source code for the Data Science South website, a resource for learning data science.
-
-## Local Development
-
-```bash
-hugo server -D
-```
-
-## Production Build
-
-```bash
-hugo
-```
 ```
 
 One common use of `cat` is at the start of a shell pipeline.  
@@ -533,14 +695,7 @@ $ head -n 3 README.md
 This is the source code for the Data Science South website, a resource for learning data science.
 ```
 
-`tail` will print the last `n` lines of a file:
-
-```shell-session
-$ tail -n 3 README.md
-```bash
-hugo
-```
-```
+`tail` will print the last `n` lines of a file.
 
 A file pager is a program that will keep a file open and allows you to move through that file.  
 
@@ -633,7 +788,6 @@ haystack
 $ grep "hay" data.txt
 haystack
 haystack
-another needle
 haystack
 haystack
 ```
@@ -650,7 +804,7 @@ Another useful flag is `-r`, which will search recursively through all files in 
 I use the following command many times per day:
 
 ```shell-session
-$ grep -rl "pattern .
+$ grep -rl "pattern" .
 ```
 
 ### Finding Programs
@@ -837,166 +991,21 @@ This pipeline:
 3. Sorts the lines alphabetically
 4. Shows only the first 3 results
 
-## Shell Configuration
+### Chaining Commands
 
-### Environment Variables
+You can chain commands together using various operators:
 
-The shell is a stateful system - a shell stores data in between execution of programs.  **This data is stored in environment variables in the shell session**.
+- `command1 && command2` - Run command2 only if command1 succeeds
+- `command1 || command2` - Run command2 only if command1 fails
+- `command1 ; command2` - Run command1 then command2 regardless of the outcome
 
-Environment variables can set and accessed in the shell, and then used as part of shell commands.
-
-Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in. Shell scripts can also access environment variables.
-
-This flexibility makes environment variables a key strategy for setting the values of configuration and secrets in CI/CD pipelines.
-
-#### Setting an Environment Variable
-
-We can set an environment variable using `NAME=VALUE` - note the lack of space around the `=`:
+Example:
 
 ```shell-session
-$ stage=production
+$ mkdir new_dir && cd new_dir || echo "Failed to create directory"
 ```
 
-#### Accessing an Environment Variable
-
-We can view the value of this environment variable with `echo`, using the `$NAME` syntax:
-
-```shell-session
-$ echo $stage
-production
-```
-
-#### Exporting Environment Variables to Sub-Processes
-
-Our shell is run in a process - there are hundreds of processes running on your computer now.
-
-Many actions we take in a shell create a new process - this new process is called a sub-process.  For example, when we run a Python script in a shell, a new Python process is created.
-
-Environment variables are not inherited by sub processes.
-
-We can however make environment variables accessible to sub processes using `export`:
-
-```shell-session
-$ export stage=production
-```
-You will often see `export` used in the shell config scripts like `.bashrc`.  This is because these scripts are run during shell startup, and the environment variables defined in these scripts are supposed to be available to all sub processes.
-
-#### Viewing All Environment Variables
-
-You can see all the environment variables currently defined in your shell with the `env` command:
-
-```shell-session
-$ env
-```
-
-You can access an environment variable using the `$NAME` syntax.  
-
-You can use `echo` to view the value of an environment variable - below we look at the `$HOME` environment variable.
-
-```shell-session
-$ echo $HOME
-/Users/adamgreen
-$ echo $USER
-adamgreen
-$ echo $SHELL
-/bin/zsh
-```
-
-The value of the `HOME` variable will depend on the operating system and user name.
-
-### `$PATH`
-
-The `$PATH` environment variable is a list of directories, separated by a `:`.
-
-The `$PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `$PATH` makes that program accessible via a shell from any directory.
-
-The `$PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
-
-```shell-session
-$ echo $PATH | tr ":" "\n"
-/usr/local/bin
-/usr/bin
-/bin
-/usr/sbin
-/sbin
-/usr/local/go/bin
-/opt/homebrew/bin
-/Users/adamgreen/.local/bin
-```
-
-It's common to see the `PATH` variable modified in scripts by appending a new path onto the existing path:
-
-```shell-session
-$ export PATH=$PATH:$SPARK_HOME/bin
-```
-
-A common pattern you will see in install scripts is to copy this path update command into our shell configuration script:
-
-`$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
-
-This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
-
-Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run from the shell.
-
-### Sourcing
-
-Sourcing a file executes the commands in the file in the current shell.  
-
-This is different from running a file, which will execute the commands in a new shell in a sub-process.
-
-One common use of `source` is to load environment variables into the current shell:
-
-```bash { title = "myfile" }
-NAME=value
-```
-
-```shell-session
-$ cat myfile
-NAME=value
-$ source myfile
-$ echo $NAME
-value
-```
-
-### RC Files
-
-Your shell is configured using text files.  These text files are `source`'d during shell startup, before you see your first command line prompt.  Often these files are `.rc` files, which stands for "run command".
-
-Which shell configuration file depends on both your shell and your operating system:
-
-- `~/.bashrc` on Linux with Bash,
-- `~/.zshrc` on Linux with Zsh,
-- `~/.bashrc` & `~/.bash_profile` on MacOS with Bash,
-- `~/.bashrc` & `~/.zshenv` on MacOS with Zsh.
-
-### Login vs. Non-Login Shells
-
-A final complexity here is the difference between a login versus non-login shell.  
-
-When you log into a system and start a shell, that's called a login shell. Login shells read certain configuration files, and the settings in those files persist for the session.
-
-When you start a new terminal window or a new shell in an existing session, those are non-login shells. They read a different set of configuration files, and settings last only for the life of the shell.
-
-This distinction depends on your operating system - for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
-
-## Aliases
-
-A shell alias is a shortcut for a command or set of commands.  Aliases are commonly defined in your shell configuration files.
-
-Here are some example aliases you can use for inspiration:
-
-```bash
-alias ls='ls -aGl'
-alias c='clear'
-alias cls='clear && ls'
-alias bashrc='vim ~/git/dotfiles/.bashrc'
-```
-
-You can use `"command"` to run a command without alias expansion:
-
-```shell-session
-$ "ls"
-```
+This attempts to create a directory and change into it. If either step fails, it prints an error message.
 
 ## Shell Scripting
 
@@ -1025,20 +1034,31 @@ $ echo "Hello $USER, today is $(date +%A)"
 Hello adamgreen, today is Tuesday
 ```
 
-Below is a script that prints some text:
+### Command Substitution
 
-```bash { title = "script.sh" }
-echo "this is printing in a Bash script"
-```
-
-We can run this script in the shell to see what it prints:
+Command substitution allows you to capture the output of a command and use it as part of another command. This is one of Bash's most powerful features for creating dynamic, responsive scripts.
 
 ```shell-session
-$ bash script.sh
-this is printing in a Bash script
-$ cat script.sh
-echo "this is printing in a Bash script"
+$ echo "Today is $(date +%A)"
+Today is Tuesday
 ```
+
+Command substitution creates a subshell for each command, which can impact performance in scripts with many substitutions.
+
+#### Capturing Command Output in Variables
+
+Command substitution is commonly used to store command output in variables:
+
+```shell-session
+$ current_date=$(date +%Y-%m-%d)
+$ echo "Current date: $current_date"
+Current date: 2025-03-05
+
+$ file_count=$(find . -type f | wc -l)
+$ echo "This project contains $file_count files"
+This project contains 127 files
+```
+
 
 ### The Shebang
 
@@ -1211,6 +1231,37 @@ hello
 ```
 
 This pattern is commonly used in setup scripts like `activate` in Python virtual environments.
+
+## Processes and Subprocesses
+
+In Unix-like operating systems, a process is an instance of a running program. Every command you execute in a shell runs as a process with its own memory space and resources.
+
+When a shell executes a command, it generally creates a new process (a child process or subprocess) to run that command:
+
+```shell-session
+$ echo "This runs in a subprocess"
+```
+
+### Subshells
+
+A subshell is a child shell process created by the current shell. You can create a subshell explicitly with parentheses:
+
+```shell-session
+$ (cd /tmp && ls)  # Changes directory only in the subshell
+```
+
+In this example, the current directory changes only within the subshell, not in the parent shell.
+
+Subshells are commonly used in command substitution with `$()` syntax, which executes commands in a subshell and captures their output:
+
+```shell-session
+$ echo "Today is $(date +%A)"
+```
+
+A subprocess is any child process that's created by another process (the parent). When you run a
+  command like ls or python script.py, the shell creates a subprocess to execute that command.
+
+A subshell is specifically a child shell process - a new instance of the shell program itself. Subshells inherit environment variables from the parent shell but have their own working directory and local variables.
 
 ## Functions 
 
