@@ -7,18 +7,25 @@ competencies:
 
 ## What is Bash?
 
-Bash is a shell - a shell is a program that uses text commands to run computer programs.  
+Bash is a shell. Shells are computer programs that can run other programs.
+
+Shells do a few different things:
+
+- Run programs
+- Compose & run pipelines of programs
+- Scripting
+- Command history and TAB completion
+
+All of these capabilities are useful - but the idea that *the shell is a place where we run other programs* is the most important.
 
 ### Resources
 
-A few resources to use in addition to this lesson:
+Recommended resources:
 
 - [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/) - A short guide on Unix.
 - [Effective Shell](https://effective-shell.com/) - A book of essentials on how to use the shell.
 - [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
 - [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
-
-Because Bash is popular, LLM tools like Claude are excellent learning and development partners for learning about the Bash shell.
 
 ### Notation
 
@@ -86,9 +93,7 @@ CMD ["python", "app.py"]
 - **Repeat and Automate Tasks** - Repeating and automating text commands is easier than pointing and clicking.
 
 ```shell-session
-$ for file in *.csv; do
->   python process_data.py "$file" > "${file%.csv}_processed.csv"
-> done
+$ file=data.csv python process_data.py "$file" > "${file%.csv}_processed.csv"
 ```
 
 - **Unlock Powerful CLI Tools** - Some development tasks are best (or only) done with shell tools.
@@ -97,19 +102,24 @@ $ for file in *.csv; do
 $ sqlite3 db.sqlite "SELECT * FROM users"
 ```
 
+**Bash is an enabling skill** - it enables workflows that have huge benefits for development:
+
+- Source control 
+- Automated testing (aka continuous integration, or CI) 
+- Automated deployments (aka continuous deployment, or CD)
+
 {{< img 
     src="/images/bash-enables-git-cicd.svg"
     width="500"
 >}}
 
-**Bash is an enabling skill** - it enables workflows that have huge benefits for development, such as source control, automated testing (aka continuous integration, or CI) and automated deployments (aka continuous deployment, or CD).
-
-The shell is a key skill that allows you to use programming languages:
+The shell is a key skill that allows you to use programming languages - it's the *everything else* or *other stuff* you need to know to be able to do what you really want to do (Python, SQL):
 
 {{< img 
     src="/images/other-stuff-needed-to-program.svg"
     width="500"
 >}}
+
 ## Terminal, Command-Line & Shell
 
 The terminal, command line and shell are often used interchangeably. 
@@ -125,17 +135,25 @@ They are however different tools - all three are used when using a computer via 
 
 {{< img 
     src="/images/bash-shell/terminal.png"
-    caption="The DEC VT100 Terminal"
+    caption="The DEC VT100 Terminal (Hardware)"
     width="500"
 >}}
 
-**Today terminals are often software** - using terminal emulator programs on a computer.  These software terminals can also be used to connect to other computers.
+**Today terminals are often software** - using terminal emulator programs on a computer. 
+
+{{< img 
+    src="/images/bash-shell/terminal-software.png"
+    caption="The Kitty Terminal (Software)"
+    width="500"
+>}}
 
 Popular terminal emulators include:
 
 - **MacOS** - iTerm2
 - **Windows** - Windows Terminal
 - **Ubuntu** - Gnome Terminal
+
+Alongside an emulator, it's common to use a program like tmux or GNU Screen to multiplex multiple terminals in a single window.
 
 ### Command-Lines
 
@@ -150,18 +168,20 @@ $ echo "this is the command line"
 
 ### Shells
 
-**A shell is a computer program that executes text commands**. 
+Shells are mainly used in two ways:
 
-Shells are used in two ways:
-
-1. **as a REPL** (Read-Eval-Print Loop) that runs interactively,
-2. **as a programming language** that runs via scripts.
-
-The shell we shall use in this lesson is the Bash shell. This is because it's common and readily available in the cloud.
+1. **As a REPL** (Read-Eval-Print Loop) that runs interactively,
+2. **As a programming language** that can be run in scripts.
 
 #### Shell as a REPL
 
-A shell is automatically started in a new terminal. When you write text in the command-line of a terminal, it is executed in a shell, the output displayed, and then a new command line prompt is shown, ready for the next user input.
+A shell is automatically started in each new terminal.
+
+When you write text in the command-line of a terminal, it is:
+
+- Executed in a subprocess shell 
+- Output displayed back to user
+- A new command line prompt is shown, ready for the next user input
 
 We can use the shell as a REPL to list the current directory files & directories using the `ls` program:
 
@@ -227,11 +247,11 @@ Other shell programs might be specific to your project.  You might use the AWS C
 
 Some developers run terminals inside an IDE like VS Code - one terminal can be used with different shells.  Others will use a separate program like Windows Terminal to run different shells.
 
-What shells you have available depends on your operating system - my suggestion is:
-
-- **Windows** - for a shell, either Bash on Windows Subsystem for Linux or Git Bash on Windows.  For a terminal, Windows terminal is great.
-- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
-- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
+| Operating System | Terminal Emulators        | Shells                           | Text Editor |
+|------------------|---------------------------|----------------------------------|-------------|
+| Windows          | Windows Terminal, VS Code | Bash on WSL, Git Bash on Windows | VS Code     |
+| macOS            | iTerm2, VS Code           | Bash or Zsh                      | VS Code     |
+| Linux            | VS Code, Gnome Terminal   | Bash or Zsh                      | VS Code     |
 
 ### Text Editors 
 
@@ -268,11 +288,11 @@ If you do use spaces, you may end up seeing (or having to write!) your paths by 
 
 The shell is a stateful system - a shell stores data in between execution of programs.  **This data is stored in environment variables in the shell session**.
 
-Environment variables can set and accessed in the shell, and then used as part of shell commands.
+Environment variables can set and accessed in the shell, and then used as part of shell commands. Environment variables are important because they are commonly used to setup and configure things like deployments, databases or scheduled jobs.
 
 Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in. Shell scripts can also access environment variables.
 
-This flexibility makes environment variables a key strategy for setting the values of configuration and secrets in CI/CD pipelines.
+This flexibility makes environment variables a key strategy for configuration and storing secrets in CI/CD pipelines.
 
 #### Setting an Environment Variable
 
@@ -316,13 +336,13 @@ $ env
 
 You can access an environment variable using the `$NAME` syntax.  
 
-You can use `echo` to view the value of an environment variable - below we look at the `$HOME` environment variable.
+You can use `echo` to view the value of an environment variable:
 
 ```shell-session
 $ echo $HOME
 /Users/adamgreen
-$ echo $USER
-adamgreen
+$ echo "user is $USER"
+user is adamgreen
 $ echo $SHELL
 /bin/zsh
 ```
@@ -331,7 +351,7 @@ The value of the `HOME` variable will depend on the operating system and user na
 
 ### `$PATH`
 
-The `$PATH` environment variable is a list of directories, separated by a `:`.
+The `$PATH` environment variable is a special environment variable used by the shell.  It's used to tell the shell where to look for programs. It is a list of directories, separated by a `:`.
 
 The `$PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `$PATH` makes that program accessible via a shell from any directory.
 
@@ -357,7 +377,9 @@ $ export PATH=$PATH:$SPARK_HOME/bin
 
 A common pattern you will see in install scripts is to copy this path update command into our shell configuration script:
 
-`$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
+```shell-session
+$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
+```
 
 This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
 
@@ -439,6 +461,40 @@ You can use `"command"` to run a command without alias expansion:
 $ "ls"
 ```
 
+## Processes and Subprocesses
+
+In Unix-like operating systems, a process is an instance of a running program. Every command you execute in a shell runs as a process with its own memory space and resources.
+
+When a shell executes a command, it generally creates a new process (a child process or subprocess) to run that command:
+
+```shell-session
+$ echo "This runs in a subprocess"
+```
+
+A subprocess is any child process that's created by another process (the parent). When you run a command like `ls` or `python script.py`, the shell creates a subprocess to execute that command.
+
+Subprocesses inherit environment variables from the parent process at the time the subprocess is created.
+
+### Subshells
+
+A subshell is a child shell process created by the current shell. You can create a subshell explicitly with parentheses.
+
+The command below will only change the current directory within the subshell, not in the parent shell:
+
+```shell-session
+$ (cd /tmp && ls)
+```
+
+Subshells are commonly used in command substitution with `$()` syntax, which executes commands in a subshell and captures their output:
+
+```shell-session
+$ echo "Today is $(date +%A)"
+```
+
+A subshell is specifically a child shell process - a new instance of the shell program itself. 
+
+Child inherit environment variables from the parent shell but have their own working directory and local variables.
+
 ## Navigation
 
 ### Arrow Keys
@@ -451,7 +507,7 @@ The up and down arrow keys allow you to navigate through your command history:
 
 This feature is invaluable for reusing or modifying previously executed commands without retyping them.
 
-### TAB
+### TAB Completion
 
 The `TAB` key provides command and file path completion, saving you time and reducing typing errors:
 
@@ -1112,13 +1168,11 @@ You can also specify the program to run the script as part of the command - this
 $ bash script.sh
 ```
 
-## Writing a Bash Script
-
-### Hello World
+### Writing a Hello World Bash Script
 
 Let's start with the traditional Hello World program as a Bash script:
 
-```bash { title = "script.sh" }
+```bash { title = "hello.sh" }
 #!/usr/bin/env bash
 
 # comments in Bash use a #
@@ -1127,11 +1181,9 @@ echo "Hello, World!"
 
 `echo` is a shell program that prints its arguments to standard out - commonly to a terminal.
 
-### Adding Variables
-
 We can add a variable for a name:
 
-```bash { title = "script.sh" }
+```bash { title = "hello.sh" }
 #!/usr/bin/env bash
 
 name="adam"
@@ -1232,37 +1284,6 @@ hello
 
 This pattern is commonly used in setup scripts like `activate` in Python virtual environments.
 
-## Processes and Subprocesses
-
-In Unix-like operating systems, a process is an instance of a running program. Every command you execute in a shell runs as a process with its own memory space and resources.
-
-When a shell executes a command, it generally creates a new process (a child process or subprocess) to run that command:
-
-```shell-session
-$ echo "This runs in a subprocess"
-```
-
-### Subshells
-
-A subshell is a child shell process created by the current shell. You can create a subshell explicitly with parentheses:
-
-```shell-session
-$ (cd /tmp && ls)  # Changes directory only in the subshell
-```
-
-In this example, the current directory changes only within the subshell, not in the parent shell.
-
-Subshells are commonly used in command substitution with `$()` syntax, which executes commands in a subshell and captures their output:
-
-```shell-session
-$ echo "Today is $(date +%A)"
-```
-
-A subprocess is any child process that's created by another process (the parent). When you run a
-  command like ls or python script.py, the shell creates a subprocess to execute that command.
-
-A subshell is specifically a child shell process - a new instance of the shell program itself. Subshells inherit environment variables from the parent shell but have their own working directory and local variables.
-
 ## Functions 
 
 We can write a function in a Bash script using the `function` keyword:
@@ -1274,3 +1295,32 @@ function greet {
 
 greet "adam"
 ```
+
+## Summary
+
+In this lesson we've covered:
+
+- **What is Bash**: A shell program that runs other programs, enabling command execution, pipelines, scripting, and history features
+- **Terminal vs Shell vs Command Line**: Understanding the differences between these related but distinct components
+- **Shell Configuration**: Customizing your shell environment with `.bashrc`, `.zshrc`, and other configuration files
+- **Environment Variables**: Using and configuring your shell environment with variables like `$PATH`
+- **Navigation**: Moving around the filesystem with commands like `cd`, `pwd`, and using keyboard shortcuts like tab completion and CTRL-R
+- **File Operations**: Creating, viewing, moving, and deleting files and directories with `touch`, `cat`, `mv`, `rm` and more
+- **Redirection and Pipes**: Connecting programs together using `|`, `>`, `>>`, and `<` to build powerful command pipelines
+- **Shell Scripting**: Writing reusable scripts with commands, variables, command-line arguments, and functions
+
+These skills form the foundation for many data science workflows, enabling everything from automated data processing to CI/CD pipelines and Docker deployments.
+
+### Next Steps
+
+Recommended resources:
+
+- [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/) - A short guide on Unix.
+- [Effective Shell](https://effective-shell.com/) - A book of essentials on how to use the shell.
+- [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
+- [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
+
+Recommended next lessons:
+
+- [Git](https://datasciencesouth.com/lessons/git/)
+- [CI/CD](https://datasciencesouth.com/lessons/ci-cd/)
