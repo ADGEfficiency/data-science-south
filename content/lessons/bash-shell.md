@@ -220,11 +220,7 @@ There are many different shells available -- commonly used shells are:
 - **zsh**: The default shell on MacOS, which improves on Bash
 - **PowerShell**: A shell developed by Microsoft for Windows
 
-You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
-
-The best shells to know are the ones that are most easily available in the cloud. 
-
-Bash is the most common shell on Linux systems, which is the most common compute environment available in the cloud.
+You can combine different shells with a different terminal emulators. For example, you could use Bash, Zsh and Powershell with Windows Terminal.
 
 ### Common Bash Programs
 
@@ -297,13 +293,11 @@ If you do use spaces, you may end up seeing (or having to write!) your paths by 
 
 ### Environment Variables
 
-The shell is a stateful system - a shell stores data in between execution of programs.  **This data is stored in environment variables in the shell session**.
+**A shell process is a stateful system** - it stores data in between execution of programs. One place to store state is in environment variables, which are similar to variables in other programming languages like Python.
 
-Environment variables can set and accessed in the shell, and then used as part of shell commands. Environment variables are important because they are commonly used to setup and configure things like deployments, databases or scheduled jobs.
+**Environment variables can set and accessed in the shell, and then used as part of shell commands or in programs run from the shell**. Environment variables are commonly used to configure things like applications, databases or scheduled jobs.
 
-Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in. Shell scripts can also access environment variables.
-
-This flexibility makes environment variables a key strategy for configuration and storing secrets in CI/CD pipelines.
+Programming languages like Python can access environment variables - in Python we can use `os.ENVIRON` to access the environment variables of the shell process the Python program is running in.
 
 #### Setting an Environment Variable
 
@@ -484,7 +478,7 @@ $ echo "This runs in a subprocess"
 
 A subprocess is any child process that's created by another process (the parent). When you run a command like `ls` or `python script.py`, the shell creates a subprocess to execute that command.
 
-Subprocesses inherit environment variables from the parent process at the time the subprocess is created.
+Subprocesses inherit environment variables from the parent process at the time the subprocess is created.  Understanding processes and subprocesses are crucial for using environment variables correctly.
 
 ### Subshells
 
@@ -506,7 +500,7 @@ A subshell is specifically a child shell process - a new instance of the shell p
 
 Child inherit environment variables from the parent shell but have their own working directory and local variables.
 
-## Navigation
+## Keyboard Shortcuts
 
 ### Arrow Keys
 
@@ -556,6 +550,8 @@ $ [Press CTRL-R]
 ```
 
 This is extremely useful for finding and reusing complex commands you've run previously without scrolling through your entire history.
+
+## Navigation
 
 ### Where Am I?
 
