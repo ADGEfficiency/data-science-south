@@ -11,10 +11,10 @@ Bash is a shell. Shells are computer programs that can run other programs.
 
 Shells do a few different things:
 
-- Run programs
-- Compose & run pipelines of programs
-- Scripting
-- Command history and TAB completion
+- **Run programs**: Execute other software on your computer
+- **Compose & run pipelines**: Chain programs together to process data
+- **Scripting**: Automate tasks with shell scripts
+- **Command history**: Access previously used commands with TAB completion
 
 All of these capabilities are useful - but the idea that **the shell is a place where we run other programs** is the most important.
 
@@ -22,10 +22,10 @@ All of these capabilities are useful - but the idea that **the shell is a place 
 
 Recommended resources:
 
-- [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/) - A short guide on Unix.
-- [Effective Shell](https://effective-shell.com/) - A book of essentials on how to use the shell.
-- [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
-- [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
+- **Survival guide for Unix newbies**: A short guide on Unix [matt.might.net](https://matt.might.net/articles/basic-unix/)
+- **Effective Shell**: A book of essentials on how to use the shell [effective-shell.com](https://effective-shell.com/)
+- **BashGuide**: A guide on Bash and Bash scripting [mywiki.wooledge.org](https://mywiki.wooledge.org/BashGuide)
+- **Missing semester**: Proficiency with tools, including shell, shell scripting and the command line [missing.csail.mit.edu](https://missing.csail.mit.edu/)
 
 ### Notation
 
@@ -45,7 +45,7 @@ A lot of cloud computing is done on machines running some form of Linux, with th
 
 Learning how to use a shell will allow you to:
 
-- **Create CI/CD Pipelines** - Most pipelines are sequences of shell commands, commonly written in `.yaml` files.
+- **Create CI/CD pipelines**: Most pipelines are sequences of shell commands, commonly written in `.yaml` files.
 
 ```yaml
 name: CI Pipeline
@@ -75,7 +75,7 @@ jobs:
           pytest
 ```
 
-- **Use Docker** - Dockerfiles are sequences of shell commands.
+- **Use Docker**: Dockerfiles are sequences of shell commands.
 
 ```Dockerfile
 FROM python:3.10-slim
@@ -90,13 +90,13 @@ COPY . .
 CMD ["python", "app.py"]
 ```
 
-- **Repeat and Automate Tasks** - Repeating and automating text commands is easier than pointing and clicking.
+- **Repeat and automate tasks**: Repeating and automating text commands is easier than pointing and clicking.
 
 ```shell-session
 $ file=data.csv python process_data.py "$file" > "${file%.csv}_processed.csv"
 ```
 
-- **Unlock Powerful CLI Tools** - Some development tasks are best (or only) done with shell tools.
+- **Unlock powerful CLI tools**: Some development tasks are best (or only) done with shell tools.
 
 ```shell-session
 $ sqlite3 db.sqlite "SELECT * FROM users"
@@ -104,9 +104,9 @@ $ sqlite3 db.sqlite "SELECT * FROM users"
 
 **Bash is an enabling skill** - it enables workflows that have huge benefits for development:
 
-- Source control 
-- Automated testing (aka continuous integration, or CI) 
-- Automated deployments (aka continuous deployment, or CD)
+- **Source control**: Version control and code history management
+- **Automated testing**: Continuous integration (CI) processes
+- **Automated deployments**: Continuous deployment (CD) pipelines
 
 {{< img 
     src="/images/bash-enables-git-cicd.svg"
@@ -149,9 +149,9 @@ They are however different tools - all three are used when using a computer via 
 
 Popular terminal emulators include:
 
-- **MacOS** - iTerm2
-- **Windows** - Windows Terminal
-- **Ubuntu** - Gnome Terminal
+- **MacOS**: iTerm2 terminal application
+- **Windows**: Windows Terminal
+- **Ubuntu**: Gnome Terminal
 
 Alongside an emulator, it's common to use a program like tmux or GNU Screen to multiplex multiple terminals in a single window.
 
@@ -170,8 +170,8 @@ $ echo "this is the command line"
 
 Shells are mainly used in two ways:
 
-1. **As a REPL** (Read-Eval-Print Loop) that runs interactively,
-2. **As a programming language** that can be run in scripts.
+1. **Interactive REPL**: A Read-Eval-Print Loop that runs commands interactively
+2. **Scripting language**: A programming language that can be run in scripts
 
 #### Shell as a REPL
 
@@ -215,10 +215,10 @@ Shell scripts can take input from command-line arguments or from environment var
 
 There are many different shells available -- commonly used shells are:
 
-- **sh** - the Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`).
-- **Bash** - the Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems. 
-- **zsh** - the default shell on MacOS, which improves on Bash,
-- **PowerShell** - a shell developed by Microsoft for Windows.
+- **sh**: The Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`)
+- **Bash**: The Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems
+- **zsh**: The default shell on MacOS, which improves on Bash
+- **PowerShell**: A shell developed by Microsoft for Windows
 
 You can combine different shells with a given terminal emulator.  For example, you could use Bash with the Windows Terminal, or Zsh with iTerm2.
 
@@ -228,18 +228,29 @@ Bash is the most common shell on Linux systems, which is the most common compute
 
 ### Common Bash Programs
 
-A shell has its own syntax and set of commands, along with a collection of programs available.  
+**A shell has its own syntax and set of commands, along with a collection of programs available**.  
 
 Common Bash shell programs include:
 
-- `ls` - list files & directories,
-- `pwd` - print working directory,
-- `cd` - change directory,
-- `cat` - print file contents.
+- **ls**: List files & directories
+- **pwd**: Print working directory
+- **cd**: Change directory
+- **cat**: Print file contents
 
 The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
 
-Other shell programs might be specific to your project.  You might use the AWS CLI or Azure CLI to interact with cloud services, run databases or servers in long running processes.  You might also write your own CLI programs with Python.
+You can use the `which` program to show where programs are located:
+
+```shell-session
+$ which can
+/bin/cat
+```
+
+Other shell programs might be specific to your project:  
+
+- **Cloud CLIs**: The AWS CLI or Azure CLI to interact with cloud services
+- **Long Running Processes**: Run databases or servers
+- **Custom CLIs**: Your own CLI programs with Python
 
 ## Tooling
 
@@ -261,7 +272,7 @@ VS Code also offers the ability to run a terminal alongside your editor, meaning
 
 ## Whitespace
 
-Bash use the space character to separate commands & arguments. This makes working at the shell natural, but requires some care.
+Bash uses the space character to separate commands & arguments. This makes working at the shell natural, but requires some care.
 
 **The shell will expand spaces by default into separate commands** - this means that spaces in the wrong places can cause shell scripts to break.
 
@@ -387,7 +398,7 @@ Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run
 
 ### Sourcing
 
-Sourcing a file executes the commands in the file in the current shell.  
+**Sourcing a file executes the commands in the file in the current shell**.  
 
 This is different from running a file, which will execute the commands in a new shell in a sub-process.
 
@@ -501,9 +512,9 @@ Child inherit environment variables from the parent shell but have their own wor
 
 The up and down arrow keys allow you to navigate through your command history:
 
-- **Up Arrow** (`↑`): Shows the previous command you typed. Press multiple times to go further back in history.
-- **Down Arrow** (`↓`): Shows the next command in your history (after you've used the up arrow).
-- **Left Arrow** (`←`) and **Right Arrow** (`→`): Navigate within the current command line to edit characters.
+- **Up arrow** (`↑`): Shows the previous command you typed. Press multiple times to go further back in history
+- **Down arrow** (`↓`): Shows the next command in your history (after you've used the up arrow)
+- **Left arrow** (`←`) and **right arrow** (`→`): Navigate within the current command line to edit characters
 
 This feature is invaluable for reusing or modifying previously executed commands without retyping them.
 
@@ -522,21 +533,22 @@ $ cat Re[TAB]             # Autocompletes to "cat README.md" if that's the only 
 ```
 
 TAB completion works with:
-- Commands
-- File and directory names
-- Environment variables
-- Username completion (with ~)
-- Package names (in package managers like apt)
+
+- **Commands**: Executable programs in PATH
+- **File and directory names**: Local filesystem paths
+- **Environment variables**: System configuration values
+- **Username completion**: With tilde (~) prefix
+- **Package names**: In package managers like apt
 
 ### CTRL-R
 
 `CTRL-R` initiates a reverse search through your command history:
 
-1. Press `CTRL-R` to start the search
-2. Type a portion of the command you're looking for
-3. The most recent matching command will appear
-4. Press `CTRL-R` again to cycle through older matches
-5. Press `Enter` to execute the displayed command or `Esc` to edit it
+1. **Start search**: Press `CTRL-R` to begin searching
+2. **Type query**: Enter a portion of the command you're looking for
+3. **View matches**: The most recent matching command will appear
+4. **Cycle matches**: Press `CTRL-R` again to see older matching commands
+5. **Execute or edit**: Press `Enter` to run the displayed command or `Esc` to edit it
 
 ```shell-session
 $ [Press CTRL-R]
@@ -654,10 +666,10 @@ auto_home
 
 Important top level directories include:
 
-- `/etc` - configuration files,
-- `/bin` - programs,
-- `/Users` - user home directories (MacOS),
-- `/home` - user home directories (Linux).
+- **/etc**: Configuration files
+- **/bin**: Programs
+- **/Users**: User home directories (MacOS)
+- **/home**: User home directories (Linux)
 
 ## Files & Directories
 
@@ -1051,9 +1063,9 @@ This pipeline:
 
 You can chain commands together using various operators:
 
-- `command1 && command2` - Run command2 only if command1 succeeds
-- `command1 || command2` - Run command2 only if command1 fails
-- `command1 ; command2` - Run command1 then command2 regardless of the outcome
+- **AND operator (`&&`)**: Run the second command only if the first command succeeds
+- **OR operator (`||`)**: Run the second command only if the first command fails
+- **Sequence operator (`;`)**: Run commands in sequence regardless of outcome
 
 Example:
 
@@ -1067,9 +1079,7 @@ This attempts to create a directory and change into it. If either step fails, it
 
 ### Why Use Shell Scripts?  
 
-Shell scripts allow code reuse and automation.
-
-Bash is frequently used for scripting as it's the default shell on common Linux distributions like Ubuntu.
+**Shell scripts allow code reuse and automation.** Bash is frequently used for scripting as it's the default shell on common Linux distributions like Ubuntu.
 
 Even you are using Zsh as an interactive REPL via a terminal, you can still run scripts using the Bash program - below would work in both Zsh and Bash:
 
@@ -1140,9 +1150,9 @@ $ ./script.sh
 
 Common shebangs include:
 
-- **Python** - `#!/usr/bin/env python`,
-- **Bash** - `#!/usr/bin/env bash`,
-- **sh** - `#!/usr/bin/env sh`.
+- **Python**: `#!/usr/bin/env python` for Python scripts
+- **Bash**: `#!/usr/bin/env bash` for Bash shell scripts
+- **sh**: `#!/usr/bin/env sh` for POSIX-compliant shell scripts
 
 We use `/bin/env` as this will find the program wherever it occurs in the `$PATH` shell environment variable.
 
@@ -1194,7 +1204,7 @@ We use the `$name` syntax to refer to the value of the `name` variable within th
 
 ### Accepting Command Line Arguments in Shell Scripts
 
-Command line arguments provide a way to customize the behavior of a script each time it's run. They are provided after the script name, separated by spaces.
+**Command line arguments provide a way to customize the behavior of a script each time it's run**. They are provided after the script name, separated by spaces.
 
 Inside the script, you can access the arguments using special variables - `$1` refers to the first argument:
 
@@ -1215,7 +1225,7 @@ Hello, adam!
 
 ### Using Environment Variables in Shell Scripts
 
-Environment variables provide another way to customize script behavior. They can be set before running the script and accessed within the script.
+**Environment variables can also customize script behavior**. They can be set before running the script and accessed within the script.
 
 To access environment variables in a script, use the `$VARIABLE_NAME` syntax:
 
@@ -1254,10 +1264,10 @@ export API_URL="https://api.example.com"
 
 Environment variables are commonly used for:
 
-- Configuration settings (database connections, API endpoints)
-- Controlling behavior (debug mode, verbose output)
-- Storing sensitive information (API keys, credentials)
-- Passing information between scripts or processes
+- **Configuration settings**: Database connections, API endpoints, service URLs
+- **Behavior control**: Debug mode, verbose output, logging levels
+- **Sensitive information**: API keys, credentials, tokens
+- **Inter-process communication**: Passing information between scripts or processes
 
 It's important to understand that environment variables set in a script will not be automatically available in the parent shell that called the script. This is because each script runs in a separate subprocess:
 
@@ -1301,13 +1311,13 @@ greet "adam"
 In this lesson we've covered:
 
 - **What is Bash**: A shell program that runs other programs, enabling command execution, pipelines, scripting, and history features
-- **Terminal vs Shell vs Command Line**: Understanding the differences between these related but distinct components
-- **Shell Configuration**: Customizing your shell environment with `.bashrc`, `.zshrc`, and other configuration files
-- **Environment Variables**: Using and configuring your shell environment with variables like `$PATH`
+- **Terminal vs shell vs command line**: Understanding the differences between these related but distinct components
+- **Shell configuration**: Customizing your shell environment with `.bashrc`, `.zshrc`, and other configuration files
+- **Environment variables**: Using and configuring your shell environment with variables like `$PATH`
 - **Navigation**: Moving around the filesystem with commands like `cd`, `pwd`, and using keyboard shortcuts like tab completion and CTRL-R
-- **File Operations**: Creating, viewing, moving, and deleting files and directories with `touch`, `cat`, `mv`, `rm` and more
-- **Redirection and Pipes**: Connecting programs together using `|`, `>`, `>>`, and `<` to build powerful command pipelines
-- **Shell Scripting**: Writing reusable scripts with commands, variables, command-line arguments, and functions
+- **File operations**: Creating, viewing, moving, and deleting files and directories with `touch`, `cat`, `mv`, `rm` and more
+- **Redirection and pipes**: Connecting programs together using `|`, `>`, `>>`, and `<` to build powerful command pipelines
+- **Shell scripting**: Writing reusable scripts with commands, variables, command-line arguments, and functions
 
 These skills form the foundation for many data science workflows, enabling everything from automated data processing to CI/CD pipelines and Docker deployments.
 
@@ -1315,12 +1325,12 @@ These skills form the foundation for many data science workflows, enabling every
 
 Recommended resources:
 
-- [Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/) - A short guide on Unix.
-- [Effective Shell](https://effective-shell.com/) - A book of essentials on how to use the shell.
-- [BashGuide](https://mywiki.wooledge.org/BashGuide) - A guide on Bash and Bash scripting.
-- [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including shell, shell scripting and the command line.
+- **Survival guide for Unix newbies**: A short guide on Unix, available at [matt.might.net](https://matt.might.net/articles/basic-unix/)
+- **Effective Shell**: A book of essentials on how to use the shell, available at [effective-shell.com](https://effective-shell.com/)
+- **BashGuide**: A guide on Bash and Bash scripting, available at [mywiki.wooledge.org](https://mywiki.wooledge.org/BashGuide)
+- **Missing semester**: Proficiency with tools, including shell, shell scripting and the command line, available at [missing.csail.mit.edu](https://missing.csail.mit.edu/)
 
 Recommended next lessons:
 
-- [Git](https://datasciencesouth.com/lessons/git/)
-- [CI/CD](https://datasciencesouth.com/lessons/ci-cd/)
+- **Git**: Learn version control fundamentals at [datasciencesouth.com/lessons/git/](https://datasciencesouth.com/lessons/git/)
+- **CI/CD**: Explore continuous integration and deployment at [datasciencesouth.com/lessons/ci-cd/](https://datasciencesouth.com/lessons/ci-cd/)
