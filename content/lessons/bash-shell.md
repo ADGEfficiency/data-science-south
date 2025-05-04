@@ -16,7 +16,7 @@ Shells do a few different things:
 - Scripting
 - Command history and TAB completion
 
-All of these capabilities are useful - but the idea that *the shell is a place where we run other programs* is the most important.
+All of these capabilities are useful - but the idea that **the shell is a place where we run other programs** is the most important.
 
 ### Resources
 
