@@ -7,20 +7,47 @@ competencies:
 
 ## What is Bash?
 
-Bash is a shell. Shells are computer programs that can run other programs.
+Bash is a shell.  Shells are computer programs that do a few different things:
 
-Shells do a few different things:
+- **Run programs**: Execute other programs on your computer
 
-- **Run programs**: Execute other software on your computer
+```shell-session
+$ python script.py
+```
+
 - **Compose & run pipelines**: Chain programs together to process data
-- **Scripting**: Automate tasks with shell scripts
-- **Command history**: Access previously used commands with TAB completion
 
-All of these capabilities are useful - but the idea that **the shell is a place where we run other programs** is the most important.
+```shell-session
+$ cat file.txt | sort > sorted.txt
+```
+
+- **Scripting**: Automate tasks with shell scripts
+
+```bash
+#!/usr/bin/env bash
+echo "hello from a script"
+```
+
+- **Command history**: Access previously used commands 
+
+### This Lesson
+
+This lesson covers:
+
+- **What is Bash**: A shell program that runs other programs, enabling command execution, pipelines, scripting, and history features
+- **Terminal vs shell vs command line**: Understanding the differences between these related but distinct components
+- **Shell configuration**: Customizing your shell environment with `.bashrc`, `.zshrc`, and other configuration files
+- **Environment variables**: Using and configuring your shell environment with variables like `$PATH`
+- **Navigation**: Moving around the filesystem with commands like `cd`, `pwd`, and using keyboard shortcuts like tab completion and CTRL-R
+- **File operations**: Creating, viewing, moving, and deleting files and directories with `touch`, `cat`, `mv`, `rm` and more
+- **Redirection and pipes**: Connecting programs together using `|`, `>`, `>>`, and `<` to build powerful command pipelines
+- **Shell scripting**: Writing reusable scripts with commands, variables, command-line arguments, and functions
+
+These skills form the foundation for many data science workflows, enabling everything from automated data processing to CI/CD pipelines and Docker deployments.
 
 ### Resources
 
-Recommended resources:
+Recommended resources to learn Bash:
 
 - **Survival guide for Unix newbies**: A short guide on Unix [matt.might.net](https://matt.might.net/articles/basic-unix/)
 - **Effective Shell**: A book of essentials on how to use the shell [effective-shell.com](https://effective-shell.com/)
@@ -35,7 +62,14 @@ For example, in the code below, to run this on your own machine, you need to typ
 
 ```shell-session
 $ ls
+archetypes                      data-science-south.excalidraw   log.py                          public                          temp
+assets                          data.txt                        main.py                         pyproject.toml                  temp.py
+CLAUDE.md                       hugo.toml                       Makefile                        README.md                       temp.sh
+content                         i18n                            mistake.py                      resources                       tests
+data                            layouts                         out.xml                         static                          uv.lock
 ```
+
+The output of the command displayed below the command.
 
 ## Why Learn Bash?
 
@@ -67,6 +101,7 @@ jobs:
           python-version: '3.10'
       - name: Install dependencies
         run: |
+          # these are all shell commands!
           python -m pip install --upgrade pip
           pip install pytest
           pip install -e .
@@ -83,6 +118,8 @@ FROM python:3.10-slim
 WORKDIR /app
 
 COPY requirements.txt .
+
+# shell command
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
@@ -96,7 +133,7 @@ CMD ["python", "app.py"]
 $ file=data.csv python process_data.py "$file" > "${file%.csv}_processed.csv"
 ```
 
-- **Unlock powerful CLI tools**: Some development tasks are best (or only) done with shell tools.
+- **Unlock powerful CLI tools**: Some development tasks are best (or even only) done with shell tools.
 
 ```shell-session
 $ sqlite3 db.sqlite "SELECT * FROM users"
@@ -132,10 +169,9 @@ They are however different tools - all three are used when using a computer via 
 
 **Historically a terminal was hardware**. The terminal originates in the mainframe era of computing.  Terminals could connect to other computers - you could run programs on a central computer from your terminal.
 
-
 {{< img 
     src="/images/bash-shell/terminal.png"
-    caption="The DEC VT100 Terminal (Hardware)"
+    caption="The DEC VT100 terminal (Hardware)"
     width="500"
 >}}
 
@@ -143,19 +179,20 @@ They are however different tools - all three are used when using a computer via 
 
 {{< img 
     src="/images/bash-shell/terminal-software.png"
-    caption="The Kitty Terminal (Software)"
+    caption="The Kitty terminal running tmux for terminal multiplexing (Software)"
     width="500"
 >}}
 
 Popular terminal emulators include:
 
+- **Any OS**: VS Code
 - **MacOS**: iTerm2 terminal application
 - **Windows**: Windows Terminal
 - **Ubuntu**: Gnome Terminal
 
 Alongside an emulator, it's common to use a program like tmux or GNU Screen to multiplex multiple terminals in a single window.
 
-### Command-Lines
+### The Command-Line
 
 The command-line is the space or interface in the terminal where you can type and execute text commands. 
 
@@ -173,15 +210,17 @@ Shells are mainly used in two ways:
 1. **Interactive REPL**: A Read-Eval-Print Loop that runs commands interactively
 2. **Scripting language**: A programming language that can be run in scripts
 
+It's possible to use different shells for both of these - for example, you could use the Zsh shell in an interactive REPL to run Bash scripts.
+
 #### Shell as a REPL
 
-A shell is automatically started in each new terminal.
+A REPL (Read-Eval-Print Loop) is an interactive programming process that:
 
-When you write text in the command-line of a terminal, it is:
-
-- Executed in a subprocess shell 
-- Output displayed back to user
-- A new command line prompt is shown, ready for the next user input
+1. Provides a command-line for user input
+2. Evaluates user input in a subprocess shell
+3. Displays output to user
+4. Returns the results
+5. Provides a new command-line for user input
 
 We can use the shell as a REPL to list the current directory files & directories using the `ls` program:
 
@@ -190,7 +229,16 @@ $ ls
 CLAUDE.md  Makefile  README.md  archetypes/  assets/  content/  data/  hugo.toml  i18n/  layouts/  pyproject.toml  static/  tests/
 ```
 
-We can use Python as a REPL as well via the `python` CLI.
+Other programs can be used as REPLs - we can use Python as a REPL as well via the `python` CLI:
+
+```shell-session
+$ python
+Python 3.11.10 (main, Oct 16 2024, 08:56:36) [Clang 18.1.8 ] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print("hello")
+hello
+>>> exit()
+```
 
 #### Shell Scripting
 
@@ -200,6 +248,7 @@ We can use the shell as a programming language via shell scripting - an example 
 
 ```bash { title = "script.sh" }
 #!/usr/bin/env bash
+echo "hello from the script"
 ls
 ```
 
@@ -207,6 +256,8 @@ We can then execute this script in a shell REPL:
 
 ```shell-session
 $ bash script.sh
+hello from the script
+CLAUDE.md  Makefile  README.md  archetypes/  assets/  content/  data/  hugo.toml  i18n/  layouts/  pyproject.toml  static/  tests/
 ```
 
 Shell scripts can take input from command-line arguments or from environment variables.
@@ -217,7 +268,7 @@ There are many different shells available -- commonly used shells are:
 
 - **sh**: The Bourne Shell, the original Unix shell. It introduced features like redirection (`>`, `>>`, `<`) and piping (`|`)
 - **Bash**: The Bourne Again Shell, an improved version of Bourne Shell, is the default shell for many Unix and Linux systems
-- **zsh**: The default shell on MacOS, which improves on Bash
+- **zsh**: The Z shell, the default shell on MacOS, which improves on Bash
 - **PowerShell**: A shell developed by Microsoft for Windows
 
 You can combine different shells with a different terminal emulators. For example, you could use Bash, Zsh and Powershell with Windows Terminal.
@@ -226,14 +277,14 @@ You can combine different shells with a different terminal emulators. For exampl
 
 **A shell has its own syntax and set of commands, along with a collection of programs available**.  
 
-Common Bash shell programs include:
+Some common Bash shell programs include:
 
 - **ls**: List files & directories
 - **pwd**: Print working directory
 - **cd**: Change directory
 - **cat**: Print file contents
 
-The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
+The programs that are available in your shell are programs that are on the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
 
 You can use the `which` program to show where programs are located:
 
