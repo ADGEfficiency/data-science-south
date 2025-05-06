@@ -382,13 +382,13 @@ We can do a norm in `numpy` using:
 ```python
 p = 2
 
-%timeit sum([abs(x)**p for x in data])**(1 / p)
+# %timeit sum([abs(x)**p for x in data])**(1 / p)
 ```
 
 ```python
 data = np.arange(100000)
 
-%timeit np.linalg.norm(data, ord=2)
+# %timeit np.linalg.norm(data, ord=2)
 ```
 
 There are various kinds of norms:

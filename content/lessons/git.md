@@ -17,6 +17,7 @@ A few resources to use in addition to this lesson:
 - [Beej's Guide to Git](https://beej.us/guide/bggit/) - A guide to go from complete Git novice up to intermediate.
 - [Learn the workings of Git, not just the commands](https://developer.ibm.com/tutorials/d-learn-workings-git/) - Guide about how Git works internally.
 - [missing-semester](https://missing.csail.mit.edu/) - Proficiency with tools, including Git.
+- [Learn Git Branching JS](https://learngitbranching.js.org/) - Interactive tutorial website to practice working with Git in your browser.
 
 Because Git is popular, LLM tools like Claude are excellent learning and development partners for Git.
 
@@ -912,6 +913,7 @@ def authenticate_user(username, password):
 
 When you try to merge `main` into your feature branch, Git will create a conflict that looks like:
 
+<!--phmdoctest-skip-->
 ```python
 def authenticate_user(username, password):
 <<<<<<< HEAD
