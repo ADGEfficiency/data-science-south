@@ -6,6 +6,28 @@ competencies:
 - Analytics
 ---
 
+/Users/adamgreen/ml-resources/classic/linear-regression.md
+
+---
+
+The fundamental property of linearity refers to the mathematical concept that a linear function or system maintains proportionality and additivity.
+
+In the context of linear programming, this property means:
+
+Proportionality: Scaling an input by some factor results in the output being scaled by that same factor
+
+If f(x) = mx + b is linear, then f(αx) = αf(x) + (1-α)f(0)
+
+Additivity: The output from the sum of inputs equals the sum of the outputs from each input
+
+If f is linear, then f(x + y) = f(x) + f(y)
+
+---
+
+Continuous feasible region: The set of all possible solutions forms a convex polyhedron with smooth boundaries that can be traversed continuously
+
+When integer constraints are introduced (as in integer programming), this third property is violated. The solution space becomes a discrete set of points rather than a continuous region, breaking the fundamental linearity property.
+This is why solving integer programming problems requires fundamentally different techniques than linear programming - the continuous methods (like simplex) don't work when solutions must land exactly on integer points.
 
 ## Linearity
 

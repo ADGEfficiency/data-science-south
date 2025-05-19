@@ -472,7 +472,7 @@ Which shell configuration file depends on both your shell and your operating sys
 - `~/.bashrc` & `~/.bash_profile` on MacOS with Bash,
 - `~/.bashrc` & `~/.zshenv` on MacOS with Zsh.
 
-Here's what a typical `.bashrc` file might contain:
+Here's what a `.bashrc` might contain:
 
 ```bash { title = "~/.bashrc" }
 # set environment variables
@@ -531,6 +531,8 @@ A subprocess is any child process that's created by another process (the parent)
 
 Subprocesses inherit environment variables from the parent process at the time the subprocess is created.  Understanding processes and subprocesses are crucial for using environment variables correctly.
 
+Knowing how `export VAR=value` and `source file.sh` interact with subprocesses in different contexts can avoid some annoying debugging sessions.
+
 ### Subshells
 
 A subshell is a child shell process created by the current shell. You can create a subshell explicitly with parentheses.
@@ -550,6 +552,38 @@ $ echo "Today is $(date +%A)"
 A subshell is specifically a child shell process - a new instance of the shell program itself. 
 
 Child inherit environment variables from the parent shell but have their own working directory and local variables.
+
+## `sudo`
+
+**`sudo` (superuser do) is a command that allows users to run programs with the security privileges of another user**, by default the root user or system administrator. It's essential for operations that require elevated permissions, such as installing system packages or modifying system files.
+
+{{< img 
+    src="/images/bash-shell/please.jpg"
+    width="500"
+>}}
+
+```shell-session
+$ sudo apt update
+[sudo] password for user: 
+```
+
+**Use `sudo` when you need to perform operations that require elevated privileges**. Common cases include:
+
+- **Limited usage**: Only use sudo when absolutely necessary
+- **Caution required**: Commands run with sudo can damage your system if used incorrectly
+- **Command understanding**: Always know what a command does before giving it elevated privileges
+- **Graphical applications**: Use specific tools like `gksudo` or `pkexec` instead
+- **Avoid `sudo su`**: This gives you a root shell, which can be dangerous - prefer targeted sudo commands
+
+```shell-session
+$ sudo apt install python3-pip
+$ sudo nano /etc/hosts
+$ sudo systemctl restart nginx
+$ sudo reboot
+```
+
+**While `sudo` allows temporary elevation of privileges for specific commands, logging in as root maintains elevated privileges for all commands**, which is generally considered less secure. Modern best practice is to use `sudo` for specific commands requiring elevated privileges rather than maintaining a root session.
+
 
 ## Keyboard Shortcuts
 
@@ -585,6 +619,46 @@ TAB completion works with:
 - **Username completion**: With tilde (~) prefix
 - **Package names**: In package managers like apt
 
+A common use of TAB completion is with the wildcard `*`. The asterisk wildcard matches any number of characters in file and directory names, making it powerful for filtering and batch operations.
+
+If you have files and folders as follows:
+
+```
+$ tree
+project/
+├── data/
+│   ├── sales-2024.csv
+│   ├── sales-2023.csv
+│   ├── customers.csv
+│   └── products.json
+├── docs/
+│   ├── README.md
+│   ├── SETUP.md
+│   └── API.md
+└── requirements.txt
+```
+
+When you use TAB completion with wildcards in this directory structure:
+
+```shell-session
+$ cat project/docs/*.md[TAB]      
+$ cat project/docs/API.md project/docs/README.md project/docs/SETUP.md
+```
+
+```shell-session
+$ ls project/data/sales-*[TAB]    
+$ ls project/data/sales-2023.csv project/data/sales-2024.csv
+```
+
+This combination is particularly useful for:
+
+- **Batch operations**: Quickly selecting multiple files with similar patterns (like all sales CSV files)
+- **Verification**: Seeing exactly which files will be affected before executing a command
+- **Exploration**: Discovering files matching certain patterns without listing everything
+- **Command building**: Constructing complex commands with the right files
+
+TAB completion with wildcards provides a safety mechanism - by expanding the wildcard before executing the command, you can verify exactly which files will be affected, preventing accidental operations on unintended files.
+
 ### CTRL-R
 
 `CTRL-R` initiates a reverse search through your command history:
@@ -602,7 +676,7 @@ $ [Press CTRL-R]
 
 This is extremely useful for finding and reusing complex commands you've run previously without scrolling through your entire history.
 
-## Navigation
+## Moving Around the File System
 
 ### Where Am I?
 
@@ -625,6 +699,11 @@ $ clear
 
 ```shell-session
 $ ls
+archetypes                      data-science-south.excalidraw   log.py                          public                          temp
+assets                          data.txt                        main.py                         pyproject.toml                  temp.py
+CLAUDE.md                       hugo.toml                       Makefile                        README.md                       temp.sh
+content                         i18n                            mistake.py                      resources                       tests
+data                            layouts                         out.xml                         static                          uv.lock
 ```
 
 We can configure how `ls` works using **flags** - these are options that the `ls` program exposes.
@@ -662,7 +741,7 @@ $ pwd
 /Users/adamgreen/data-science-south-neu/practice-dir
 ```
 
-We can move back up a directory with `cd ..`, which moves into the parent directory:
+We can move back up a directory with `cd ..` which moves into the parent directory:
 
 ```shell-session
 $ cd ..
@@ -670,7 +749,7 @@ $ pwd
 /Users/adamgreen/data-science-south-neu
 ```
 
-Another useful `cd` command is `cd -`, which moves to the directory we were previously in:
+Another useful `cd` command is `cd -` which moves to the directory we were previously in:
 
 ```shell-session
 $ cd -
@@ -697,18 +776,18 @@ $ pwd
 
 `~` is a special syntax that refers to the home folder. `$HOME` is an environment variable that is the path to your home folder.
 
-The highest level of a file system on MacOS contains folders like `/etc` and `/Users` - we can move to these directories using `cd`:
+The highest level of a file system on is in `/`. On MacOS contains folders like `/etc` and `/Users` - we can move to these directories using `cd`:
 
 ```shell-session
-$ cd /etc
+$ cd /bin
 $ pwd
 /etc
 $ ls | head -n 5
-afpovertcp.cfg
-aliases
-apache2
-asl
-auto_home
+.
+..
+[
+bash
+cat
 ```
 
 Important top level directories include:
@@ -717,6 +796,62 @@ Important top level directories include:
 - **/bin**: Programs
 - **/Users**: User home directories (MacOS)
 - **/home**: User home directories (Linux)
+
+### Special Path Notation: Wildcards and Directory References
+
+Unix-like systems use several special characters and symbols for referencing files and directories, making navigation more efficient:
+
+**`.`** refers to the current directory
+
+```shell-session
+$ ls .
+```
+
+**`..`** refers to the parent directory:
+
+```shell-session
+$ cd ..
+# Moves up one directory level
+```
+
+**`*`** is a wildcard that matches any number of characters in filenames:
+
+```shell-session
+$ ls *.txt
+# Lists all .txt files in the current directory
+```
+
+**`?`** is a wildcard that matches exactly one character:
+
+```shell-session
+$ ls file?.txt
+# Matches file1.txt, fileA.txt, but not file10.txt
+```
+
+**`[]`** a character class that matches any single character within the brackets:
+
+```shell-session
+$ ls file[123].txt
+# Matches file1.txt, file2.txt, or file3.txt
+```
+
+These path notation symbols are especially powerful when combined:
+
+```shell-session
+$ ls ../*.md
+# Lists all markdown files in the parent directory
+
+$ cd ../..
+# Moves up two directory levels
+
+$ cp ./config.json ../backup/
+# Copies a file from current directory to a backup directory one level up
+
+$ rm ./*.log
+# Removes all log files in the current directory
+```
+
+Mastering these path notations allows for efficient navigation and file operations without having to repeatedly type absolute paths.
 
 ## Files & Directories
 
@@ -735,6 +870,18 @@ It's important to know how to use at least one of the text editors that are incl
 ```shell-session
 $ nano myfile.txt
 ```
+
+Or Vim:
+
+```shell-session
+$ vim myfile.txt
+```
+
+{{< img 
+    src="/images/bash-shell/exiting-vi.png"
+    caption="The DEC VT100 terminal (Hardware)"
+    width="500"
+>}}
 
 ### Making Directories
 
@@ -960,87 +1107,6 @@ It's possible to direct these text streams to different places - for example to 
     width="500"
 >}}
 
-### Redirecting Input
-
-**The `<` operator is used to redirect input**. It reads input from a file instead of the keyboard.
-
-If we have a file `numbers.txt`:
-
-```text { title = "numbers.txt" }
-5
-3
-8
-1
-4
-2
-```
-
-We can use the `sort` command with input redirection to sort these numbers:
-
-```shell-session
-$ cat numbers.txt
-5
-3
-8
-1
-4
-2
-$ sort < numbers.txt
-1
-2
-3
-4
-5
-8
-```
-
-This takes the contents of `numbers.txt` and passes it as input to the `sort` command.
-
-{{< img 
-    src="/images/shell-redirection-2.svg"
-    width="500"
->}}
-
-### Redirecting Output
-
-**The `>` operator is used to redirect output from a command to a file**. It will overwrite the file if it exists.
-
-If we run a command that lists all files in the current directory:
-
-```shell-session
-$ ls -l > files.txt
-$ cat files.txt
-total 16
--rw-r--r--  1 user  staff  14 Aug  4 14:30 numbers.txt
--rw-r--r--  1 user  staff  98 Aug  4 14:31 files.txt
-drwxr-xr-x  5 user  staff 160 Aug  4 14:29 project
-```
-
-The output that would normally be displayed in the terminal is instead written to `files.txt`.
-
-{{< img 
-    src="/images/shell-redirection-3.svg"
-    width="300"
->}}
-
-### Appending Output
-
-**The `>>` operator appends output to the end of a file instead of overwriting it**.
-
-If we already have a file and want to add more content:
-
-```shell-session
-$ echo "First line" > log.txt
-$ cat log.txt
-First line
-$ echo "Second line" >> log.txt
-$ cat log.txt
-First line
-Second line
-```
-
-The first command creates (or overwrites) `log.txt` with "First line", while the second command appends "Second line" to the file.
-
 ### Pipes
 
 **The pipe operator `|` allows you to chain commands together by passing the output of one command as input to another**. This enables composition of commands without using temporary files.
@@ -1105,6 +1171,94 @@ This pipeline:
 2. Removes the header line with `grep -v "name"`
 3. Sorts the lines alphabetically
 4. Shows only the first 3 results
+
+
+### Redirecting Input
+
+**The `<` operator is used to redirect input**. It reads input from a file instead of the keyboard.
+
+If we have a file `numbers.txt`:
+
+```text { title = "numbers.txt" }
+5
+3
+8
+1
+4
+2
+```
+
+We can use the `sort` command with input redirection to sort these numbers:
+
+```shell-session
+$ cat numbers.txt
+5
+3
+8
+1
+4
+2
+$ sort < numbers.txt
+1
+2
+3
+4
+5
+8
+```
+
+This takes the contents of `numbers.txt` and passes it as input to the `sort` command.
+
+{{< img 
+    src="/images/shell-redirection-2.svg"
+    width="500"
+>}}
+
+You can also achieve the same with (more on pipes `|` later):
+
+```shell-session
+$ cat numbers.txt | sort
+```
+
+### Redirecting Output
+
+**The `>` operator is used to redirect output from a command to a file**. It will overwrite the file if it exists.
+
+If we run a command that lists all files in the current directory:
+
+```shell-session
+$ ls -l > files.txt
+$ cat files.txt
+total 16
+-rw-r--r--  1 user  staff  14 Aug  4 14:30 numbers.txt
+-rw-r--r--  1 user  staff  98 Aug  4 14:31 files.txt
+drwxr-xr-x  5 user  staff 160 Aug  4 14:29 project
+```
+
+The output that would normally be displayed in the terminal is instead written to `files.txt`.
+
+{{< img 
+    src="/images/shell-redirection-3.svg"
+    width="300"
+>}}
+
+### Appending Output
+
+**The `>>` operator appends output to the end of a file instead of overwriting it**.
+
+If we already have a file and want to add more content:
+
+```shell-session
+$ echo "First line" > log.txt
+$ cat log.txt
+First line
+$ echo "Second line" >> log.txt
+$ cat log.txt
+First line
+Second line
+```
+
+The first command creates (or overwrites) `log.txt` with "First line", while the second command appends "Second line" to the file.
 
 ### Chaining Commands
 
@@ -1292,8 +1446,8 @@ $ STAGE=production ./env-script.sh
 Running in production environment
 Log Level: info
 
-$ STAGE=production LOG_LEVEL=debug ./env-script.sh
-Running in production environment
+$ STAGE=dev LOG_LEVEL=debug ./env-script.sh
+Running in dev environment
 Log Level: debug
 ```
 
@@ -1361,7 +1515,10 @@ In this lesson we've covered:
 - **Terminal vs shell vs command line**: Understanding the differences between these related but distinct components
 - **Shell configuration**: Customizing your shell environment with `.bashrc`, `.zshrc`, and other configuration files
 - **Environment variables**: Using and configuring your shell environment with variables like `$PATH`
-- **Navigation**: Moving around the filesystem with commands like `cd`, `pwd`, and using keyboard shortcuts like tab completion and CTRL-R
+- **Keyboard shortcuts**: Using arrow keys, tab completion, and CTRL-R for efficient command-line navigation
+- **Sudo usage**: Running commands with elevated privileges safely and effectively
+- **Navigation**: Moving around the filesystem with commands like `cd`, `pwd`, and special path references
+- **Special path notation**: Using wildcards (`*`, `?`, `[]`) and directory references (`.`, `..`) for efficient file operations
 - **File operations**: Creating, viewing, moving, and deleting files and directories with `touch`, `cat`, `mv`, `rm` and more
 - **Redirection and pipes**: Connecting programs together using `|`, `>`, `>>`, and `<` to build powerful command pipelines
 - **Shell scripting**: Writing reusable scripts with commands, variables, command-line arguments, and functions
