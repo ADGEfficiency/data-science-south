@@ -9,30 +9,26 @@ competencies:
 
 Bash is a shell.  Shells are computer programs that do a few different things:
 
-- **Run programs**: Execute other programs on your computer
+**Run programs**: Execute other programs on your computer:
 
 ```shell-session
 $ python script.py
 ```
 
-- **Compose & run pipelines**: Chain programs together to process data
+**Compose & run pipelines**: Chain programs together to process data:
 
 ```shell-session
 $ cat file.txt | sort > sorted.txt
 ```
 
-- **Scripting**: Automate tasks with shell scripts
+**Scripting**: Automate tasks with shell scripts:
 
 ```bash
 #!/usr/bin/env bash
 echo "hello from a script"
 ```
 
-- **Command history**: Access previously used commands 
-
 ### This Lesson
-
-This lesson covers:
 
 - **What is Bash**: A shell program that runs other programs, enabling command execution, pipelines, scripting, and history features
 - **Terminal vs shell vs command line**: Understanding the differences between these related but distinct components
@@ -675,6 +671,8 @@ $ [Press CTRL-R]
 ```
 
 This is extremely useful for finding and reusing complex commands you've run previously without scrolling through your entire history.
+
+Under the hood, your shell history is kept in a text file like `~/.bash_history`.
 
 ## Moving Around the File System
 
