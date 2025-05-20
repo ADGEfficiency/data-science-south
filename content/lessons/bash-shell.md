@@ -279,6 +279,17 @@ Some common Bash shell programs include:
 - **pwd**: Print working directory
 - **cd**: Change directory
 - **cat**: Print file contents
+- **clear**: Clear screen
+- **echo**: Print text to terminal
+- **mkdir**: Create directories
+- **rm**: Remove files or directories
+- **cp**: Copy files and directories
+- **mv**: Move or rename files and directories
+- **grep**: Search for patterns in files
+- **find**: Search for files in a directory hierarchy
+- **chmod**: Change file permissions
+- **touch**: Create empty files or update timestamps
+- **man**: Display manual pages for commands
 
 The programs that are available in your shell are programs that are on the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
 
