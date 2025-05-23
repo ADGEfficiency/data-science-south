@@ -1,0 +1,10 @@
+{{ if .Site.Params.donations.enabled }}
+<a
+  href="{{ .Site.Params.donations.stripe_link }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="text-white font-semibold px-4 py-2 rounded-lg bg-pink-600 hover:bg-pink-700 hover:text-pink-50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
+>
+  ❤️ Donate
+</a>
+{{ end }}
