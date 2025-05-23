@@ -9,9 +9,23 @@ competencies:
 
 Git is a version control system that allows developers to track changes in text files.
 
+**Create and commit to a local repository**:
+
+```shell-session
+```
+
+**Clone and push to a remote repository**:
+
+```shell-session
+```
+
+### This Lesson
+
+TODO
+
 ### Resources
 
-A few resources to use in addition to this lesson:
+Recommended resources to learn Git:
 
 - [Pro Git](https://git-scm.com/book/en/v2) - A book that covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
 - [Beej's Guide to Git](https://beej.us/guide/bggit/) - A guide to go from complete Git novice up to intermediate.
@@ -39,7 +53,9 @@ Learning Git will allow you to:
 
 ### Software Development Lifecycle
 
-**Git plays a crucial role in the Software Development Lifecycle (SDLC) by enabling code to move between environments in a safe and repeatable way**.
+**Git enables managing software through a Software Development Lifecycle (SDLC).** 
+
+It enables code to move between environments in a safe and repeatable way. As code moves into different branches, side effects like running tests or deploying to the cloud can occur.
 
 An example of how code is managed across two environments (dev and prod) is below:
 
@@ -53,6 +69,8 @@ Most modern software development teams use multiple environments to safely devel
 - **Development (Dev)** - Where new features are built and initial testing occurs. Developers work on feature branches that don't affect the main codebase.
 - **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
 - **Production (Prod)** - The live environment where end-users interact with the software.
+
+You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).
 
 Which of these you need depends on the work you are doing, how many other people are doing development on the same code and company culture. At a minimum dev and prod are needed.
 
