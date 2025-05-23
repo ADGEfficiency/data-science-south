@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Dark mode prose styles */
+.dark .prose {
+  --tw-prose-body: theme('colors.white');
+  --tw-prose-headings: theme('colors.white');
+  --tw-prose-bold: theme('colors.white');
+  --tw-prose-counters: theme('colors.gray.300');
+  --tw-prose-bullets: theme('colors.gray.300');
+  --tw-prose-hr: theme('colors.gray.700');
+  --tw-prose-quotes: theme('colors.white');
+  --tw-prose-quote-borders: theme('colors.gray.700');
+  --tw-prose-captions: theme('colors.gray.300');
+  --tw-prose-code: theme('colors.white');
+  --tw-prose-pre-code: theme('colors.gray.200');
+  --tw-prose-pre-bg: theme('colors.gray.800');
+  --tw-prose-th-borders: theme('colors.gray.700');
+  --tw-prose-td-borders: theme('colors.gray.700');
+}

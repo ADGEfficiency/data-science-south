@@ -2,10 +2,56 @@
 <div class="container mx-auto p-4 pt-6 flex flex-row justify-center gap-4 min-h-[calc(100vh-8rem)]">
     <div class="flex-1 max-w-64 p-2 rounded-lg">{{ partial "left-sidebar.html" . }}</div>
     <div class="flex-1 max-w-3xl p-2 rounded-lg ">
-        <h2 class="text-3xl font-bold mb-6">{{ .Title }}</h2>
-        <div class="prose prose-blue max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
+        <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">{{ .Title }}</h2>
+        <div class="prose prose-blue dark:prose-invert max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
             {{ .Content }}
             <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+            <style>
+              /* Dark mode styles for pagefind search */
+              .dark #search .pagefind-ui__search-input {
+                background-color: #374151;
+                border-color: #4b5563;
+                color: #f9fafb;
+              }
+              .dark #search .pagefind-ui__search-input::placeholder {
+                color: #9ca3af;
+              }
+              .dark #search .pagefind-ui__results {
+                background-color: #1f2937;
+                border-color: #4b5563;
+              }
+              .dark #search .pagefind-ui__result {
+                background-color: #374151;
+                border-color: #4b5563;
+              }
+              .dark #search .pagefind-ui__result:hover {
+                background-color: #4b5563;
+              }
+              .dark #search .pagefind-ui__result-title {
+                color: #f9fafb !important;
+              }
+              .dark #search .pagefind-ui__result-title a {
+                color: #f9fafb !important;
+              }
+              .dark #search .pagefind-ui__result-excerpt {
+                color: #e5e7eb !important;
+              }
+              .dark #search .pagefind-ui__result-excerpt mark {
+                background-color: #fbbf24 !important;
+                color: #000000 !important;
+              }
+              .dark #search .pagefind-ui__button {
+                background-color: #374151;
+                border-color: #4b5563;
+                color: #f9fafb;
+              }
+              .dark #search .pagefind-ui__button:hover {
+                background-color: #4b5563;
+              }
+              .dark #search .pagefind-ui__message {
+                color: #9ca3af;
+              }
+            </style>
             <script src="/pagefind/pagefind-ui.js"></script>
             <div id="search">
                 <script>
