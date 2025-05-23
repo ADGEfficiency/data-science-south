@@ -28,3 +28,6 @@ title = 'Data Science South'
 [params]
   mainSections = ["lessons"]
   math = true
+  [params.donations]
+    enabled = true
+    stripe_link = "https://buy.stripe.com/5kQ8wO0Zp2IG3Dp0fWcMM00"
