@@ -9,9 +9,65 @@ competencies:
 
 Git is a version control system that allows developers to track changes in text files.
 
+**Create and commit to a local repository**:
+
+```shell-session
+$ git init
+$ git add README.md  # add specific file
+$ git add .          # add all files in current directory
+$ git add -u         # add all tracked files that have been modified
+$ git commit -m "initial commit"
+$ git push
+```
+
+**Clone and push to a remote repository**:
+
+```shell-session
+$ git clone https://github.com/username/repo.git  # HTTPS
+$ git clone git@github.com:username/repo.git      # SSH
+$ cd repo
+$ git add README.md
+$ git commit -m "update readme"
+$ git push
+```
+
+**Create a repo from scratch and connect to the `origin` remote**:
+
+```shell-session
+$ git init
+$ git add README.md
+$ git commit -m "initial commit"
+$ git remote add origin https://github.com/username/repo.git
+$ git push -u origin main
+```
+
+**Create and switch branches**:
+
+```shell-session
+$ git branch feature-branch        # create new branch
+$ git checkout feature-branch      # switch to branch
+$ git checkout -b feature-branch   # create and switch in one command
+$ git branch                       # list all branches
+$ git checkout main               # switch back to main branch
+$ git checkout -b local-branch origin/remote-branch  # create local branch tracking remote
+```
+
+### This Lesson
+
+- **What is Git**: A version control system that tracks changes in text files, enabling version history and code collaboration
+- **Repository management**: Creating local repositories with `git init`, connecting to remote repositories, and understanding the `.git` directory structure
+- **Commits and staging**: Using `git add` to stage changes and `git commit` to create snapshots of your codebase with descriptive messages
+- **Git workflow**: Essential commands like `git status`, `git add`, `git commit`, and `git push` for daily development work
+- **Branching**: Creating separate development lines with `git branch` and `git checkout` to work on features without affecting the main codebase
+- **Remote repositories**: Connecting local work to GitHub, pushing and pulling changes, and collaborating with other developers
+- **Merge conflicts**: Understanding and resolving conflicts when Git can't automatically merge changes from different branches
+- **Safety and recovery**: Git's safety features, best practices for avoiding data loss, and commands for undoing mistakes when they happen
+
+These skills enable you to maintain version history, collaborate effectively with other developers, and integrate with modern software development workflows including CI/CD pipelines and code review processes.
+
 ### Resources
 
-A few resources to use in addition to this lesson:
+Recommended resources to learn Git:
 
 - [Pro Git](https://git-scm.com/book/en/v2) - A book that covers Git basics all the way through to Git internals.  Something for beginners and experienced Git users.
 - [Beej's Guide to Git](https://beej.us/guide/bggit/) - A guide to go from complete Git novice up to intermediate.
@@ -39,13 +95,16 @@ Learning Git will allow you to:
 
 ### Software Development Lifecycle
 
-**Git plays a crucial role in the Software Development Lifecycle (SDLC) by enabling code to move between environments in a safe and repeatable way**.
+**Git enables managing software through a Software Development Lifecycle (SDLC).** 
 
-An example of how code is managed across two environments (dev and prod) is below:
+It enables code to move between environments in a safe and repeatable way. As code moves into different branches, side effects like running tests or deploying to the cloud can occur.
+
+An example of how code is branched to manage deployments across two environments (dev and prod) is below:
 
 {{< img 
     src="/images/trunk-based-development.svg"
     width="800"
+    caption="Software Development Lifecycle (SDLC) using Git branches to manage deployments to development and production environments."
 >}}
 
 Most modern software development teams use multiple environments to safely develop, test, and deploy code.  Common environments include:
@@ -53,6 +112,8 @@ Most modern software development teams use multiple environments to safely devel
 - **Development (Dev)** - Where new features are built and initial testing occurs. Developers work on feature branches that don't affect the main codebase.
 - **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
 - **Production (Prod)** - The live environment where end-users interact with the software.
+
+You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  It's also common for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.
 
 Which of these you need depends on the work you are doing, how many other people are doing development on the same code and company culture. At a minimum dev and prod are needed.
 
@@ -80,7 +141,9 @@ On Windows Git Bash is a great way to access Git - you can use `start .` to open
 
 ### Authentication with Git
 
-When working with remote repositories, you'll need to authenticate with the Git server. There are three main methods of authentication.
+There are three main methods of authentication with Git.
+
+When working with remote repositories, you'll need to authenticate with the Git server. Authentication can be the hardest part about development sometimes - knowing which method to use, or getting one method to work.
 
 #### Git Credential Manager
 
@@ -91,9 +154,9 @@ Git Credential Manager (GCM) is a secure and user-friendly way to store your aut
 - **Multi-factor authentication**: Supports two-factor authentication
 - **Automatic credential refresh**: Can refresh tokens when they expire
 
-To install GCM:
+To install GCM on Linux (no need on Windows and MacOS):
+
 ```shell-session
-# Windows and macOS (comes bundled with Git)
 # Linux
 $ sudo apt install git-credential-manager
 ```
@@ -130,14 +193,15 @@ SSH keys are more secure than passwords and don't expire, making them ideal for 
 Personal Access Tokens are an alternative to passwords when authenticating with Git servers.
 
 1. **Generate a PAT** on your Git server (GitHub, GitLab, etc.)
-   - In your account settings, find the developer settings or access tokens section
-   - Specify the required permissions (repo, read:packages, etc.)
-   - Set an optional expiration date
+2. In your account settings, find the developer settings or access tokens section
+3. Specify the required permissions (repo, read:packages, etc.)
+4. Set an optional expiration date
 
-2. **Use the token for authentication**:
-   ```shell-session
-   $ git clone https://username:token@github.com/username/repo.git
-   ```
+1. **Use the token for authentication**:
+
+```shell-session
+$ git clone https://username:token@github.com/username/repo.git
+```
 
 PATs are useful for:
 - Automated scripts and CI/CD pipelines
@@ -148,7 +212,7 @@ For security, treat PATs like passwords and avoid committing them to your reposi
 
 ### Git GUIs
 
-Git naturally lends to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.  
+Git naturally lends itself to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.  
 
 You can find a list of [Git GUI tools here](https://git-scm.com/downloads/guis).
 
