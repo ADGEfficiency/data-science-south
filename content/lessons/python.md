@@ -13,6 +13,12 @@ Learning Python will allow you to:
 - **Powerful** - Rich ecosystem of data science tools like `pandas` and `scikit-learn`.
 - **Mature** - Massive open-source community providing libraries, tools, and support.
 
+### Resources
+
+Recommended resources to learn Python:
+
+- [jpmorganchase/python-training](https://github.com/jpmorganchase/python-training/tree/main/notebooks) - An introduction to numerical computing and data visualization in Python.
+
 ## How to Run Python Code?
 
 Running Python code requires two things - code and a Python interpreter.

@@ -38,7 +38,6 @@ Scipy lectures:
 - [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
 - [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
 
-
 ## Why Learn NumPy?
 
 NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.  
