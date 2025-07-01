@@ -505,12 +505,8 @@ Changes to be committed:
 
 We can then commit this file, which turns the staged changes into committed changes:
 
-```shell
-$ git commit -m 'initial commit'
-[master (root-commit) db9a248] initial commit
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 README.md
-[master (root-commit) 19d0f58] initial commit
+```shell-session
+[master (root-commit) 19d0f58] chore: initial commit
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 README.md
 ```
@@ -523,7 +519,7 @@ commit 19d0f58e53bfcf2ee449477e60680285cd7a2d4e (HEAD -> master)
 Author: Adam Green <adam.green@adgefficiency.com>
 Date:   Sat Aug 5 15:14:38 2023 +1200
 
-    initial commit
+    chore: initial commit
 
  README.md | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
