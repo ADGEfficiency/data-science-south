@@ -16,7 +16,7 @@ $ git init
 $ git add README.md  # add specific file
 $ git add .          # add all files in current directory
 $ git add -u         # add all tracked files that have been modified
-$ git commit -m "initial commit"
+$ git commit -m "chore: initial commit"
 ```
 
 **Clone and push to a remote repository**:
@@ -26,7 +26,7 @@ $ git clone https://github.com/username/repo.git  # HTTPS
 $ git clone git@github.com:username/repo.git      # SSH
 $ cd repo
 $ git add README.md
-$ git commit -m "update readme"
+$ git commit -m "docs: update readme"
 $ git push
 ```
 
@@ -647,6 +647,50 @@ Two useful `git log` commands are:
 - show all files changed in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
 - show all files changed with diffs in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
 
+## Conventional Commits
+
+**Conventional Commits is a standardized format for writing commit messages that makes project history easier to read and automate**.
+
+The format follows this pattern:
+
+```
+<type>: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Common types include:
+
+- **feat**: New feature for users
+- **fix**: Bug fix
+- **docs**: Documentation changes
+- **style**: Code formatting (no logic changes)
+- **refactor**: Code restructuring without changing functionality
+- **test**: Adding or updating tests
+- **chore**: Maintenance tasks (dependencies, build tools, etc.)
+
+Examples:
+
+```shell-session
+$ git commit -m "feat: add user authentication"
+$ git commit -m "fix: resolve login button styling issue"
+$ git commit -m "docs: update API documentation"
+$ git commit -m "chore: update dependencies"
+```
+
+### Benefits
+
+Using conventional commits provides:
+
+- **Readable history**: Commit messages clearly indicate the type and scope of changes
+- **Automation**: Tools can automatically generate changelogs and determine version bumps
+- **Team consistency**: Everyone follows the same commit message format
+- **Better collaboration**: Reviewers can quickly understand what each commit does
+
+Many teams and open source projects use conventional commits to maintain clean, professional commit histories.
+
 ## GitHub
 
 ### What is Github?
@@ -730,7 +774,7 @@ The ability to work on multiple branches allows developers to work on features o
 
 Similar to commit messages, consistency around branch naming can be useful.
 
-For example, prefixing with `feature/` or `bug/` or a GitHub issue number can help other understand what a branch is used for.
+For example, prefixing with `feature/`, `fix/`, or a GitHub issue number can help other understand what a branch is used for.
 
 ### Master Branch is the Default
 
