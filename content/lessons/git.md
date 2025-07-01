@@ -9,6 +9,8 @@ competencies:
 
 Git is a version control system that allows developers to track changes in text files.
 
+### Cheat Sheet
+
 **Create and commit to a local repository**:
 
 ```shell-session
@@ -16,8 +18,7 @@ $ git init
 $ git add README.md  # add specific file
 $ git add .          # add all files in current directory
 $ git add -u         # add all tracked files that have been modified
-$ git commit -m "initial commit"
-$ git push
+$ git commit -m "chore: initial commit"
 ```
 
 **Clone and push to a remote repository**:
@@ -27,11 +28,11 @@ $ git clone https://github.com/username/repo.git  # HTTPS
 $ git clone git@github.com:username/repo.git      # SSH
 $ cd repo
 $ git add README.md
-$ git commit -m "update readme"
+$ git commit -m "docs: update readme"
 $ git push
 ```
 
-**Create a repo from scratch and connect to the `origin` remote**:
+**Create a repository from scratch and connect to the `origin` remote repository**:
 
 ```shell-session
 $ git init
@@ -41,14 +42,14 @@ $ git remote add origin https://github.com/username/repo.git
 $ git push -u origin main
 ```
 
-**Create and switch branches**:
+**Create, switch and track branches**:
 
 ```shell-session
+$ git branch                       # list all branches
 $ git branch feature-branch        # create new branch
 $ git checkout feature-branch      # switch to branch
-$ git checkout -b feature-branch   # create and switch in one command
-$ git branch                       # list all branches
-$ git checkout main               # switch back to main branch
+$ git checkout -b feature-branch   # create and switch to branch
+$ git checkout main                # switch back to `main` branch
 $ git checkout -b local-branch origin/remote-branch  # create local branch tracking remote
 ```
 
@@ -62,8 +63,6 @@ $ git checkout -b local-branch origin/remote-branch  # create local branch track
 - **Remote repositories**: Connecting local work to GitHub, pushing and pulling changes, and collaborating with other developers
 - **Merge conflicts**: Understanding and resolving conflicts when Git can't automatically merge changes from different branches
 - **Safety and recovery**: Git's safety features, best practices for avoiding data loss, and commands for undoing mistakes when they happen
-
-These skills enable you to maintain version history, collaborate effectively with other developers, and integrate with modern software development workflows including CI/CD pipelines and code review processes.
 
 ### Resources
 
@@ -83,8 +82,9 @@ Git is a popular version control tool - many of the tools you use will keep thei
 
 Learning Git will allow you to:
 
-- **Version Control** - To maintain a history of changes in a code base.
-- **Collaboration** - Enable multiple developers to work on the same code base at the same time.
+1. **Version Control**: A navigable history of changes in a code base.
+2. **Collaboration**: Enabling multiple developers to work on the same code at the same time.
+3. **CI/CD**: Git enables continuous integration and development workflows and a software development lifecycle (SDLC).
 
 {{< img 
     src="https://imgs.xkcd.com/comics/git.png" 
@@ -113,11 +113,13 @@ Most modern software development teams use multiple environments to safely devel
 - **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
 - **Production (Prod)** - The live environment where end-users interact with the software.
 
-You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  It's also common for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.
+You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  
+
+It's also common for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.  This allows developers to change their entire stack during development, without affecting anyone else on the cloud.
 
 Which of these you need depends on the work you are doing, how many other people are doing development on the same code and company culture. At a minimum dev and prod are needed.
 
-Git facilitates the SDLC by:
+Git facilitates a SDLC by:
 
 1. **Environment Isolation** - Code changes stay isolated in branches until they're ready to move to the next stage.
 2. **Controlled Promotion** - Code gets promoted between environments through merges and pull requests, often requiring approvals.
@@ -154,14 +156,13 @@ Git Credential Manager (GCM) is a secure and user-friendly way to store your aut
 - **Multi-factor authentication**: Supports two-factor authentication
 - **Automatic credential refresh**: Can refresh tokens when they expire
 
-To install GCM on Linux (no need on Windows and MacOS):
+Install GCM on Ubuntu Linux (no need on Windows and MacOS):
 
 ```shell-session
-# Linux
 $ sudo apt install git-credential-manager
 ```
 
-To configure Git to use the credential manager:
+Configure Git to use the credential manager:
 ```shell-session
 $ git config --global credential.helper manager
 ```
@@ -173,18 +174,20 @@ When you first clone or push to a remote repository, GCM will prompt you to auth
 SSH (Secure Shell) keys are a secure way to authenticate with Git servers without entering your password each time.
 
 1. **Generate an SSH key pair**:
-   ```shell-session
-   $ ssh-keygen -t ed25519 -C "your_email@example.com"
-   ```
+
+```shell-session
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
+```
 
 2. **Add the public key to your Git server** (GitHub, GitLab, etc.):
-   - Copy the contents of `~/.ssh/id_ed25519.pub`
-   - Add it to your account settings on the Git server
+- Copy the contents of `~/.ssh/id_ed25519.pub`.
+- Add it to your account settings on the Git server.
 
 3. **Use SSH URLs for your repositories**:
-   ```shell-session
-   $ git clone git@github.com:username/repo.git
-   ```
+
+```shell-session
+$ git clone git@github.com:username/repo.git
+```
 
 SSH keys are more secure than passwords and don't expire, making them ideal for development machines.
 
@@ -192,23 +195,14 @@ SSH keys are more secure than passwords and don't expire, making them ideal for 
 
 Personal Access Tokens are an alternative to passwords when authenticating with Git servers.
 
-1. **Generate a PAT** on your Git server (GitHub, GitLab, etc.)
-2. In your account settings, find the developer settings or access tokens section
-3. Specify the required permissions (repo, read:packages, etc.)
-4. Set an optional expiration date
-
-1. **Use the token for authentication**:
-
-```shell-session
-$ git clone https://username:token@github.com/username/repo.git
-```
-
 PATs are useful for:
 - Automated scripts and CI/CD pipelines
 - Limiting access scope (unlike passwords which grant full account access)
 - Setting time-limited access
 
 For security, treat PATs like passwords and avoid committing them to your repositories.
+
+Often PAT are set as environment variables, like `OPENAI_API_KEY`, which any program run can access.
 
 ### Git GUIs
 
@@ -310,26 +304,26 @@ Most of these you will not need to use in daily work.  If in doubt, copy the fol
 
 Remote repositories (like those on GitHub) are extremely safe:
 
-- impossible to corrupt the remote repository through normal Git operations,
-- all commits are immutable (can't be changed),
-- even if you delete a branch, the commits still exist and can be recovered.
+- Hard to unintentionally corrupt the remote repository through normal Git operations,
+- Commits are immutable (can't be changed),
+- Even if you delete a branch, the commits still exist and can be recovered.
 
 ### Local Repository Risks
 
 Your local Git repository can lose work in a few ways:
 
-- uncommitted changes can be lost if you switch branches, run `git reset --hard` or `git checkout`,
-- staged but uncommitted changes can be lost,
-- commits that aren't pushed to a remote can be lost if your local repository is corrupted or deleted.
+- Uncommitted changes can be lost if you switch branches, run `git reset --hard` or `git checkout`,
+- Staged but uncommitted changes can be lost,
+- Commits that aren't pushed to a remote can be lost if your local repository is corrupted or deleted.
 
 ### Best Practices for Safety
 
 You can keep your work safe by:
 
-- committing work frequently,
-- pushing to a remote repository regularly,
-- being careful with commands that can't be undone (like `git reset --hard`),
-- making sure you understand a Git command before running it.
+- Committing work frequently,
+- Pushing to a remote repository regularly,
+- Being careful with commands that can't be undone (like `git reset --hard`),
+- Making sure you understand a Git command before running it.
 
 These practices mean that even if you do lose work locally, you'll only ever lose a small amount of recent changes.
 
@@ -463,15 +457,11 @@ Git joins changes from multiple files into a single unit - a commit.  These comm
 
 ### Commit Hashes
 
-A commit has unique hash identifier - a string like `d6a583a419797104d985ab8aaa471a153cd24d2f`.  
-
-The hash uniquely identifies a commit.
+A commit has unique hash identifier - a string like `d6a583a419797104d985ab8aaa471a153cd24d2f`.  The hash uniquely identifies a commit - i.e. the state of the entire code base at one point in time.
 
 ### Diffs
 
-**The difference between one commit to another is known as a diff**.  
-
-When developers are reviewing the commits of others, they often only look at the diff between one commit and another.
+The difference between one commit and another is known as a diff.  
 
 ### Adding Untracked Files to a Commit
 
@@ -515,12 +505,8 @@ Changes to be committed:
 
 We can then commit this file, which turns the staged changes into committed changes:
 
-```shell
-$ git commit -m 'initial commit'
-[master (root-commit) db9a248] initial commit
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 README.md
-[master (root-commit) 19d0f58] initial commit
+```shell-session
+[master (root-commit) 19d0f58] chore: initial commit
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 README.md
 ```
@@ -533,7 +519,7 @@ commit 19d0f58e53bfcf2ee449477e60680285cd7a2d4e (HEAD -> master)
 Author: Adam Green <adam.green@adgefficiency.com>
 Date:   Sat Aug 5 15:14:38 2023 +1200
 
-    initial commit
+    chore: initial commit
 
  README.md | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
@@ -660,6 +646,50 @@ Two useful `git log` commands are:
 - show all files changed in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
 - show all files changed with diffs in the last 5 commits - `git log --pretty=fuller --abbrev-commit --stat -n 5`,
 
+## Conventional Commits
+
+**Conventional Commits is a standardized format for writing commit messages that makes project history easier to read and automate**.
+
+The format follows this pattern:
+
+```
+<type>: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Common types include:
+
+- **feat**: New feature for users
+- **fix**: Bug fix
+- **docs**: Documentation changes
+- **style**: Code formatting (no logic changes)
+- **refactor**: Code restructuring without changing functionality
+- **test**: Adding or updating tests
+- **chore**: Maintenance tasks (dependencies, build tools, etc.)
+
+Examples:
+
+```shell-session
+$ git commit -m "feat: add user authentication"
+$ git commit -m "fix: resolve login button styling issue"
+$ git commit -m "docs: update API documentation"
+$ git commit -m "chore: update dependencies"
+```
+
+### Benefits
+
+Using conventional commits provides:
+
+- **Readable history**: Commit messages clearly indicate the type and scope of changes
+- **Automation**: Tools can automatically generate changelogs and determine version bumps
+- **Team consistency**: Everyone follows the same commit message format
+- **Better collaboration**: Reviewers can quickly understand what each commit does
+
+Many teams and open source projects use conventional commits to maintain clean, professional commit histories.
+
 ## GitHub
 
 ### What is Github?
@@ -743,7 +773,7 @@ The ability to work on multiple branches allows developers to work on features o
 
 Similar to commit messages, consistency around branch naming can be useful.
 
-For example, prefixing with `feature/` or `bug/` or a GitHub issue number can help other understand what a branch is used for.
+For example, prefixing with `feature/`, `fix/`, or a GitHub issue number can help other understand what a branch is used for.
 
 ### Master Branch is the Default
 
@@ -1116,9 +1146,10 @@ $ git checkout -b recovery-branch
 ### General Advice for Git Mistakes
 
 1. **Before trying fixes, make a backup**:
-   ```shell-session
-   $ cp -r my-repo my-repo-backup
-   ```
+
+```shell-session
+$ cp -r my-repo my-repo-backup
+```
 
 2. **When in doubt, use `git status`** to see where you are
 
