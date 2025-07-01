@@ -9,6 +9,8 @@ competencies:
 
 Git is a version control system that allows developers to track changes in text files.
 
+### Cheat Sheet
+
 **Create and commit to a local repository**:
 
 ```shell-session
@@ -30,7 +32,7 @@ $ git commit -m "docs: update readme"
 $ git push
 ```
 
-**Create a repo from scratch and connect to the `origin` remote**:
+**Create a repository from scratch and connect to the `origin` remote repository**:
 
 ```shell-session
 $ git init
@@ -40,7 +42,7 @@ $ git remote add origin https://github.com/username/repo.git
 $ git push -u origin main
 ```
 
-**Create and switch branches**:
+**Create, switch and track branches**:
 
 ```shell-session
 $ git branch                       # list all branches
@@ -80,8 +82,9 @@ Git is a popular version control tool - many of the tools you use will keep thei
 
 Learning Git will allow you to:
 
-- **Version Control** - To maintain a history of changes in a code base.
-- **Collaboration** - Enable multiple developers to work on the same code base at the same time.
+1. **Version Control**: A navigable history of changes in a code base.
+2. **Collaboration**: Enabling multiple developers to work on the same code at the same time.
+3. **CI/CD**: Git enables continuous integration and development workflows and a software development lifecycle (SDLC).
 
 {{< img 
     src="https://imgs.xkcd.com/comics/git.png" 
