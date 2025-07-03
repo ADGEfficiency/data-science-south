@@ -36,20 +36,26 @@ Query optimization allows multiple data transformations to be grouped together a
 ```python
 import polars as pl
 
-# Lazy evaluation with query optimization
+# Create a lazy query that will be optimized before execution
+# Lazy evaluation allows Polars to optimize the entire query plan
 query = (
-    df
-    .lazy()
-    .with_columns([
+    df  # Start with the input DataFrame
+    .lazy()  # Convert to lazy mode for query optimization
+    .with_columns([  # Add new columns or transform existing ones
+        # Parse the "date" column from string to Date type using strptime
         pl.col("date").str.strptime(pl.Date).alias("date"),
+        # Calculate cumulative sum of sales and create new column
         pl.col("sales").cum_sum().alias("cumulative_sales"),
     ])
-    .group_by("region")
-    .agg([
+    .group_by("region")  # Group rows by the "region" column
+    .agg([  # Aggregate functions to apply to each group
+        # Calculate mean sales for each region
         pl.col("sales").mean().alias("avg_sales"),
+        # Count number of records (days) for each region
         pl.col("sales").count().alias("n_days"),
     ])
 )
+# Execute the optimized query and materialize results to DataFrame
 result = query.collect()
 ```
 
@@ -69,15 +75,21 @@ import jax.numpy as jnp
 from jax import grad, jit, vmap
 
 def predict(params, x):
+    """Computes the dot product."""
+    # Compute linear prediction: params · x (dot product)
     return jnp.dot(params, x)
 
-# Automatic differentiation
+# Create gradient function using automatic differentiation
+# grad() transforms the function to compute gradients with respect to first argument (params)
 grad_fn = grad(predict)
 
-# JIT compilation for speed
+# Create JIT-compiled version for faster execution
+# jit() compiles the function to XLA for near-C performance
 fast_predict = jit(predict)
 
-# Automatic vectorization
+# Create vectorized version to operate on batches
+# vmap() automatically vectorizes the function over the second argument (x)
+# in_axes=(None, 0) means: don't vectorize params, vectorize x along axis 0
 batch_predict = vmap(predict, in_axes=(None, 0))
 ```
 
@@ -98,17 +110,26 @@ import torch
 import torch.nn as nn
 
 class SimpleNet(nn.Module):
+    """Feedforward neural network."""
     def __init__(self, input_size, hidden_size, output_size):
+        # Initialize the parent Module class
         super().__init__()
+        # Create a sequential container of layers
         self.layers = nn.Sequential(
+            # First layer: linear transformation from input to hidden layer
             nn.Linear(input_size, hidden_size),
+            # Activation function: ReLU introduces non-linearity
             nn.ReLU(),
+            # Output layer: linear transformation from hidden to output
             nn.Linear(hidden_size, output_size)
         )
     
     def forward(self, x):
+        """Forward pass through the network."""
+        # Pass input through all layers sequentially
         return self.layers(x)
 
+# Create model instance: 784 inputs (28x28 image), 128 hidden units, 10 outputs (classes)
 model = SimpleNet(784, 128, 10)
 ```
 
@@ -126,14 +147,15 @@ spaCy focuses on production-ready NLP with pre-trained models for multiple langu
 ```python
 import spacy
 
-# Load pre-trained model
+# Load pre-trained English language model (small version)
 nlp = spacy.load("en_core_web_sm")
 
-# Process text
+# Process text through the NLP pipeline (tokenization, POS tagging, NER, etc.)
 doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
 
-# Extract entities
+# Extract named entities detected by the model
 for ent in doc.ents:
+    # Print entity text and its predicted label type
     print(ent.text, ent.label_)
 # Output: Apple ORG, U.K. GPE, $1 billion MONEY
 ```
@@ -155,22 +177,25 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 
 def objective(trial):
-    # Suggest hyperparameters
+    """Objective function that Optuna will optimize."""
+    # Suggest hyperparameter values from specified ranges
     n_estimators = trial.suggest_int('n_estimators', 10, 100)
     max_depth = trial.suggest_int('max_depth', 1, 10)
     
-    # Train model
+    # Create and train model with suggested hyperparameters
     clf = RandomForestClassifier(
         n_estimators=n_estimators,
         max_depth=max_depth,
-        random_state=42
+        random_state=42  # Fixed seed for reproducibility
     )
     
-    # Return metric to optimize
+    # Evaluate model performance using cross-validation
+    # Return mean accuracy score to maximize
     return cross_val_score(clf, X, y, cv=3).mean()
 
-# Optimize
+# Create optimization study to maximize the objective
 study = optuna.create_study(direction='maximize')
+# Run optimization for 100 trials using TPE algorithm
 study.optimize(objective, n_trials=100)
 ```
 
@@ -188,18 +213,22 @@ Ray simplifies distributed computing with a clean API for parallel and distribut
 ```python
 import ray
 
-# Initialize Ray
+# Initialize Ray runtime (connects to existing cluster or starts local one)
 ray.init()
 
+# Decorator to make function executable as remote task
 @ray.remote
 def expensive_function(x):
-    # Simulate expensive computation
+    # Simulate expensive computation with sleep
     import time
     time.sleep(1)
+    # Return computed result
     return x ** 2
 
-# Parallel execution
+# Execute function calls in parallel across available resources
+# Each call returns a future (ObjectRef) immediately
 futures = [expensive_function.remote(i) for i in range(10)]
+# Block until all parallel tasks complete and retrieve results
 results = ray.get(futures)
 ```
 
@@ -217,15 +246,19 @@ Hugging Face offers the largest collection of pre-trained models with simple API
 ```python
 from transformers import pipeline
 
-# Text classification
+# Create sentiment analysis pipeline with default pre-trained model
 classifier = pipeline("sentiment-analysis")
+# Analyze sentiment of input text
 result = classifier("I love this product!")
 # [{'label': 'POSITIVE', 'score': 0.9998}]
 
-# Question answering
+# Create question answering pipeline with default pre-trained model
 qa = pipeline("question-answering")
+# Define context text containing the information
 context = "Paris is the capital of France."
+# Define question to ask about the context
 question = "What is the capital of France?"
+# Extract answer from context using the model
 answer = qa(question=question, context=context)
 ```
 
@@ -244,18 +277,22 @@ Pandera allows you to define schemas for tabular data, catching data issues befo
 import pandera as pa
 from pandera.polars import DataFrameSchema, Column
 
+# Define schema with column specifications and validation rules
 schema = DataFrameSchema({
     "sales": Column(
-        int,
+        int,  # Expected data type: integer
+        # List of validation checks to apply
         checks=[pa.Check.greater_than(0), pa.Check.less_than(10000)],
     ),
     "region": Column(
-        str,
+        str,  # Expected data type: string
+        # Check that values are in specified set
         checks=[pa.Check.isin(["North", "South", "East", "West"])],
     ),
 })
 
-# Validate data
+# Validate data against schema and return validated DataFrame
+# Raises SchemaError if validation fails
 validated_data = schema(data)
 ```
 
@@ -273,20 +310,28 @@ Marimo offers reactive execution, Git-friendly storage, and interactive web apps
 ```python
 import marimo
 
+# Version metadata for reproducibility
 __generated_with = "0.10.12"
+# Create Marimo app with medium width layout
 app = marimo.App(width="medium")
 
+# Define first cell with markdown output
 @app.cell
 def _(mo):
     import polars as pl
     import altair as alt
+    # Display markdown heading
     mo.md("# Data Analysis")
 
+# Define second cell that depends on polars (pl) from first cell
 @app.cell  
 def _(pl):
+    # Load CSV data using Polars
     data = pl.read_csv("data.csv")
+    # Return data to make it available to other cells
     return data,
 
+# Run the app when script is executed directly
 if __name__ == "__main__":
     app.run()
 ```
@@ -306,27 +351,28 @@ Altair is based on Vega-Lite and uses a grammar of graphics approach, making it 
 import altair as alt
 import polars as pl
 
-# Load data
+# Load sales data from CSV file
 data = pl.read_csv('sales_data.csv')
 
-# Create interactive scatter plot
+# Create interactive scatter plot using grammar of graphics
 chart = alt.Chart(data).mark_circle(size=60).encode(
-    x='sales:Q',
-    y='profit:Q',
-    color='region:N',
-    tooltip=['region', 'sales', 'profit']
-).interactive()
+    x='sales:Q',        # X-axis: sales (quantitative)
+    y='profit:Q',       # Y-axis: profit (quantitative)
+    color='region:N',   # Color by region (nominal)
+    tooltip=['region', 'sales', 'profit']  # Show data on hover
+).interactive()  # Enable zoom, pan, and selection
 
+# Display the chart
 chart.show()
 
-# Faceted visualization
+# Create faceted line chart (small multiples)
 faceted = alt.Chart(data).mark_line().encode(
-    x='date:T',
-    y='sales:Q',
-    color='product:N'
+    x='date:T',         # X-axis: date (temporal)
+    y='sales:Q',        # Y-axis: sales (quantitative)
+    color='product:N'   # Color by product (nominal)
 ).facet(
-    column='region:N'
-).resolve_scale(y='independent')
+    column='region:N'   # Create separate subplot for each region
+).resolve_scale(y='independent')  # Independent Y-axis scales per facet
 ```
 
 **Tradeoffs:**
@@ -346,25 +392,25 @@ import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-# Start MLflow run
+# Start MLflow tracking run to log experiment details
 with mlflow.start_run():
-    # Log parameters
+    # Log hyperparameters for this experiment
     mlflow.log_param("n_estimators", 100)
     mlflow.log_param("max_depth", 10)
     
-    # Train model
+    # Create and train model with specified hyperparameters
     model = RandomForestClassifier(n_estimators=100, max_depth=10)
     model.fit(X_train, y_train)
     
-    # Log metrics
+    # Evaluate model and log performance metrics
     predictions = model.predict(X_test)
     accuracy = accuracy_score(y_test, predictions)
     mlflow.log_metric("accuracy", accuracy)
     
-    # Log model
+    # Log trained model artifact for later deployment
     mlflow.sklearn.log_model(model, "random_forest_model")
     
-    # Log artifacts
+    # Log additional files (plots, reports, etc.)
     mlflow.log_artifact("feature_importance.png")
 ```
 
@@ -383,20 +429,21 @@ Darts provides a unified API for classical and modern time series forecasting me
 from darts import TimeSeries
 from darts.models import ExponentialSmoothing, Prophet, NBEATSModel
 
-# Load time series data
+# Load time series data from CSV with specified time and value columns
 ts = TimeSeries.from_csv('sales_data.csv', time_col='date', value_cols=['sales'])
 
-# Classical method
+# Create and train classical forecasting model
 exp_smoothing = ExponentialSmoothing()
 exp_smoothing.fit(ts)
 
-# Modern deep learning method  
+# Create and train modern deep learning forecasting model
+# input_chunk_length: historical window size, output_chunk_length: forecast horizon
 nbeats = NBEATSModel(input_chunk_length=24, output_chunk_length=12)
 nbeats.fit(ts)
 
-# Generate forecasts
-forecast_classical = exp_smoothing.predict(n=12)
-forecast_modern = nbeats.predict(n=12)
+# Generate forecasts using both models
+forecast_classical = exp_smoothing.predict(n=12)  # 12-period forecast
+forecast_modern = nbeats.predict(n=12)           # 12-period forecast
 ```
 
 **Tradeoffs:**
@@ -427,4 +474,3 @@ The **2025 Hypermodern Data Science Toolbox** prioritizes:
 - Consider the learning curve and team expertise
 - Balance cutting-edge capabilities with ecosystem maturity
 - Start with simpler tools and upgrade as needs grow
-
