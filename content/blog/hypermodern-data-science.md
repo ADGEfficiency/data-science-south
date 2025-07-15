@@ -16,14 +16,15 @@ This post provides a **Hypermodern Data Science Toolbox** - tools that are setti
 
 ## Python 3.11+
 
-Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 as 3.12 is still a bit unstable with some popular data science libraries.
+Python 3.11 and 3.12 have both brought performance improvements to Python. We choose 3.11 for the 2025 toolbox as 3.12 is still a bit unstable with some popular data science libraries.
 
 **Python 3.11 added better tracebacks** - the exact location of the error is pointed out in the traceback. This improves the information available during development and debugging.
 
 **Tradeoffs:**
-- Python 3.12+ offers 10-15% performance improvements for numerical computing
-- Some cutting-edge ML libraries may require newer Python versions
-- 3.11 provides the best balance of performance and ecosystem stability
+
+- ✅ **Performance**: Python 3.12+ offers 10-15% performance improvements for numerical computing
+- ❌ **Compatibility**: Some cutting-edge ML libraries may require newer Python versions
+- ✅ **Stability**: 3.11 provides the best balance of performance and ecosystem stability
 
 ## Polars
 
@@ -38,7 +39,7 @@ import polars as pl
 
 # Create a lazy query that will be optimized before execution
 # Lazy evaluation allows Polars to optimize the entire query plan
-query = (
+query: pl.LazyFrame = (
     df  # Start with the input DataFrame
     .lazy()  # Convert to lazy mode for query optimization
     .with_columns([  # Add new columns or transform existing ones
@@ -56,48 +57,51 @@ query = (
     ])
 )
 # Execute the optimized query and materialize results to DataFrame
-result = query.collect()
+result: pl.DataFrame = query.collect()
 ```
 
 **Tradeoffs:**
-- Faster than Pandas for most operations
-- Query optimization automatically combines operations reducing both code complexity and execution time
-- Different syntax than Pandas
+
+- ✅ **Performance**: Faster than Pandas for most operations
+- ✅ **Optimization**: Query optimization automatically combines operations reducing both code complexity and execution time
+- ❌ **Maturity**: Less mature framework than Pandas or PySpark
 
 ## JAX
 
-**[JAX](https://jax.readthedocs.io/) is a numerical computing library** - it's an alternative to NumPy with automatic differentiation and JIT compilation.
+**[JAX](https://jax.readthedocs.io/) is a numerical computing library** - it's an alternative to NumPy or PyTorch.
 
 JAX combines NumPy-compatible API with automatic differentiation (grad), just-in-time compilation (jit), and automatic vectorization (vmap).
 
 ```python
 import jax.numpy as jnp
 from jax import grad, jit, vmap
+from jax.typing import ArrayLike
+from typing import Callable
 
-def predict(params, x):
+def predict(params: ArrayLike, x: ArrayLike) -> ArrayLike:
     """Computes the dot product."""
     # Compute linear prediction: params · x (dot product)
     return jnp.dot(params, x)
 
 # Create gradient function using automatic differentiation
 # grad() transforms the function to compute gradients with respect to first argument (params)
-grad_fn = grad(predict)
+grad_fn: Callable[[ArrayLike, ArrayLike], ArrayLike] = grad(predict)
 
 # Create JIT-compiled version for faster execution
 # jit() compiles the function to XLA for near-C performance
-fast_predict = jit(predict)
+fast_predict: Callable[[ArrayLike, ArrayLike], ArrayLike] = jit(predict)
 
 # Create vectorized version to operate on batches
 # vmap() automatically vectorizes the function over the second argument (x)
 # in_axes=(None, 0) means: don't vectorize params, vectorize x along axis 0
-batch_predict = vmap(predict, in_axes=(None, 0))
+batch_predict: Callable[[ArrayLike, ArrayLike], ArrayLike] = vmap(predict, in_axes=(None, 0))
 ```
 
 **Tradeoffs:**
 
-- Unmatched performance for numerical computing with automatic differentiation and JIT compilation
-- Functional programming paradigm enables powerful transformations (vmap, pmap) impossible in imperative frameworks
-- Steep learning curve and debugging challenges due to functional constraints and compilation overhead
+- ✅ **Performance**: High performance numerical computing with automatic differentiation and JIT compilation
+- ✅ **Transformations**: Functional programming paradigm enables powerful transformations (vmap, pmap) impossible in imperative frameworks
+- ❌ **Complexity**: Steep learning curve and debugging challenges due to functional constraints and compilation overhead
 
 ## PyTorch
 
@@ -108,10 +112,11 @@ PyTorch offers dynamic computation graphs, making it intuitive for research and 
 ```python
 import torch
 import torch.nn as nn
+from torch import Tensor
 
 class SimpleNet(nn.Module):
     """Feedforward neural network."""
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size: int, hidden_size: int, output_size: int) -> None:
         # Initialize the parent Module class
         super().__init__()
         # Create a sequential container of layers
@@ -124,23 +129,24 @@ class SimpleNet(nn.Module):
             nn.Linear(hidden_size, output_size)
         )
     
-    def forward(self, x):
+    def forward(self, x: Tensor) -> Tensor:
         """Forward pass through the network."""
         # Pass input through all layers sequentially
         return self.layers(x)
 
 # Create model instance: 784 inputs (28x28 image), 128 hidden units, 10 outputs (classes)
-model = SimpleNet(784, 128, 10)
+model: SimpleNet = SimpleNet(784, 128, 10)
 ```
 
 **Tradeoffs:**
-- Intuitive eager execution makes debugging and experimentation straightforward
-- Massive ecosystem with excellent community support and extensive pre-trained models
-- Memory management issues and potential leaks during long training runs require careful monitoring
+
+- ✅ **Debugging**: Intuitive eager execution makes debugging and experimentation straightforward
+- ✅ **Ecosystem**: Massive ecosystem with excellent community support and extensive pre-trained models
+- ❌ **Memory management**: Memory management issues and potential leaks during long training runs require careful monitoring
 
 ## spaCy
 
-**[spaCy](https://spacy.io/) is an industrial-strength NLP library** - it's an alternative to NLTK or transformers for traditional NLP tasks.
+**[spaCy](https://spacy.io/) is a Natural Language Processing (NLP) library** - it's an alternative to NLTK.
 
 spaCy focuses on production-ready NLP with pre-trained models for multiple languages and tasks like named entity recognition, part-of-speech tagging, and dependency parsing.
 
@@ -148,10 +154,10 @@ spaCy focuses on production-ready NLP with pre-trained models for multiple langu
 import spacy
 
 # Load pre-trained English language model (small version)
-nlp = spacy.load("en_core_web_sm")
+nlp: spacy.language.Language = spacy.load("en_core_web_sm")
 
 # Process text through the NLP pipeline (tokenization, POS tagging, NER, etc.)
-doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
+doc: spacy.tokens.Doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
 
 # Extract named entities detected by the model
 for ent in doc.ents:
@@ -161,29 +167,31 @@ for ent in doc.ents:
 ```
 
 **Tradeoffs:**
-- Production-ready performance with optimized C extensions and efficient memory usage
-- Comprehensive pre-trained models covering multiple languages and NLP tasks out of the box
-- Limited relevance in the LLM era as transformer-based approaches dominate most NLP applications
+
+- ✅ **Performance**: Production-ready performance with optimized C extensions and efficient memory usage
+- ✅ **Models**: Comprehensive pre-trained models covering multiple languages and NLP tasks out of the box
+- ✅ **Ecosystem**: Strong ecosystem with extensions for custom pipelines, training, and deployment
 
 ## Optuna
 
 **[Optuna](https://optuna.org/) is a hyperparameter optimization framework** - it's an alternative to grid search, random search, or scikit-learn's hyperparameter tools.
 
-Optuna uses sophisticated algorithms like Tree-structured Parzen Estimator (TPE) and pruning to efficiently search hyperparameter spaces.
+Optuna uses sophisticated algorithms like Tree-Structured Parzen Estimator (TPE) and pruning to efficiently search hyperparameter spaces.
 
 ```python
 import optuna
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
+import numpy as np
 
-def objective(trial):
+def objective(trial: optuna.Trial) -> float:
     """Objective function that Optuna will optimize."""
     # Suggest hyperparameter values from specified ranges
-    n_estimators = trial.suggest_int('n_estimators', 10, 100)
-    max_depth = trial.suggest_int('max_depth', 1, 10)
+    n_estimators: int = trial.suggest_int('n_estimators', 10, 100)
+    max_depth: int = trial.suggest_int('max_depth', 1, 10)
     
     # Create and train model with suggested hyperparameters
-    clf = RandomForestClassifier(
+    clf: RandomForestClassifier = RandomForestClassifier(
         n_estimators=n_estimators,
         max_depth=max_depth,
         random_state=42  # Fixed seed for reproducibility
@@ -191,18 +199,20 @@ def objective(trial):
     
     # Evaluate model performance using cross-validation
     # Return mean accuracy score to maximize
-    return cross_val_score(clf, X, y, cv=3).mean()
+    scores: np.ndarray = cross_val_score(clf, X, y, cv=3)
+    return scores.mean()
 
 # Create optimization study to maximize the objective
-study = optuna.create_study(direction='maximize')
+study: optuna.Study = optuna.create_study(direction='maximize')
 # Run optimization for 100 trials using TPE algorithm
 study.optimize(objective, n_trials=100)
 ```
 
 **Tradeoffs:**
-- Sophisticated optimization algorithms (TPE, pruning) significantly outperform grid/random search
-- Built-in visualization and study management features streamline experiment tracking
-- Hyperparameter space definition still requires deep domain expertise to be effective
+
+- ✅ **Algorithms**: Sophisticated optimization algorithms (TPE, pruning) significantly outperform grid/random search
+- ✅ **Visualization**: Built-in visualization and study management features streamline experiment tracking
+- ❌ **Expertise**: Hyperparameter space definition still requires deep domain expertise to be effective
 
 ## Ray
 
@@ -218,7 +228,7 @@ ray.init()
 
 # Decorator to make function executable as remote task
 @ray.remote
-def expensive_function(x):
+def expensive_function(x: int) -> int:
     # Simulate expensive computation with sleep
     import time
     time.sleep(1)
@@ -227,15 +237,16 @@ def expensive_function(x):
 
 # Execute function calls in parallel across available resources
 # Each call returns a future (ObjectRef) immediately
-futures = [expensive_function.remote(i) for i in range(10)]
+futures: list[ray.ObjectRef] = [expensive_function.remote(i) for i in range(10)]
 # Block until all parallel tasks complete and retrieve results
-results = ray.get(futures)
+results: list[int] = ray.get(futures)
 ```
 
 **Tradeoffs:**
-- Near-linear scaling across multiple machines with minimal code changes required
-- Excellent integration with ML workflows through Ray Tune, Ray Train, and Ray Serve
-- Debugging distributed failures and cluster management complexity create significant operational overhead
+
+- ✅ **Scaling**: Near-linear scaling across multiple machines with minimal code changes required
+- ✅ **Integration**: Excellent integration with ML workflows through Ray Tune, Ray Train, and Ray Serve
+- ❌ **Complexity**: Debugging distributed failures and cluster management complexity create significant operational overhead
 
 ## Hugging Face
 
@@ -245,27 +256,29 @@ Hugging Face offers the largest collection of pre-trained models with simple API
 
 ```python
 from transformers import pipeline
+from typing import Any
 
 # Create sentiment analysis pipeline with default pre-trained model
-classifier = pipeline("sentiment-analysis")
+classifier: transformers.pipelines.Pipeline = pipeline("sentiment-analysis")
 # Analyze sentiment of input text
-result = classifier("I love this product!")
+result: list[dict[str, Any]] = classifier("I love this product!")
 # [{'label': 'POSITIVE', 'score': 0.9998}]
 
 # Create question answering pipeline with default pre-trained model
-qa = pipeline("question-answering")
+qa: transformers.pipelines.Pipeline = pipeline("question-answering")
 # Define context text containing the information
-context = "Paris is the capital of France."
+context: str = "Paris is the capital of France."
 # Define question to ask about the context
-question = "What is the capital of France?"
+question: str = "What is the capital of France?"
 # Extract answer from context using the model
-answer = qa(question=question, context=context)
+answer: dict[str, Any] = qa(question=question, context=context)
 ```
 
 **Tradeoffs:**
-- Largest repository of pre-trained models with consistent APIs across modalities
-- Rapid access to state-of-the-art models often within days of paper publication
-- Inconsistent model quality and documentation with many models failing to reproduce claimed results
+
+- ✅ **Repository**: Largest repository of pre-trained models with consistent APIs across modalities
+- ✅ **Speed**: Rapid access to state-of-the-art models often within days of paper publication
+- ❌ **Quality**: Inconsistent model quality and documentation with many models failing to reproduce claimed results
 
 ## Pandera
 
@@ -278,7 +291,7 @@ import pandera as pa
 from pandera.polars import DataFrameSchema, Column
 
 # Define schema with column specifications and validation rules
-schema = DataFrameSchema({
+schema: pandera.polars.DataFrameSchema = DataFrameSchema({
     "sales": Column(
         int,  # Expected data type: integer
         # List of validation checks to apply
@@ -293,13 +306,14 @@ schema = DataFrameSchema({
 
 # Validate data against schema and return validated DataFrame
 # Raises SchemaError if validation fails
-validated_data = schema(data)
+validated_data: pl.DataFrame = schema(data)
 ```
 
 **Tradeoffs:**
-- Type-safe data validation catches errors early in pipeline development preventing downstream failures
-- Excellent integration with both Pandas and Polars with clear, actionable error messages
-- Runtime validation overhead can significantly slow production pipelines processing large datasets
+
+- ✅ **Validation**: Type-safe data validation catches errors early in pipeline development preventing downstream failures
+- ✅ **Integration**: Excellent integration with both Pandas and Polars with clear, actionable error messages
+- ❌ **Performance**: Runtime validation overhead can significantly slow production pipelines processing large datasets
 
 ## Marimo
 
@@ -311,13 +325,13 @@ Marimo offers reactive execution, Git-friendly storage, and interactive web apps
 import marimo
 
 # Version metadata for reproducibility
-__generated_with = "0.10.12"
+__generated_with: str = "0.10.12"
 # Create Marimo app with medium width layout
-app = marimo.App(width="medium")
+app: marimo.App = marimo.App(width="medium")
 
 # Define first cell with markdown output
 @app.cell
-def _(mo):
+def _(mo: marimo) -> None:
     import polars as pl
     import altair as alt
     # Display markdown heading
@@ -325,9 +339,9 @@ def _(mo):
 
 # Define second cell that depends on polars (pl) from first cell
 @app.cell  
-def _(pl):
+def _(pl: polars) -> tuple[pl.DataFrame]:
     # Load CSV data using Polars
-    data = pl.read_csv("data.csv")
+    data: pl.DataFrame = pl.read_csv("data.csv")
     # Return data to make it available to other cells
     return data,
 
@@ -337,9 +351,10 @@ if __name__ == "__main__":
 ```
 
 **Tradeoffs:**
-- Reactive execution model prevents common notebook pitfalls like out-of-order cell execution
-- Git-friendly Python file format enables proper version control and code review workflows
-- Limited ecosystem compared to Jupyter with fewer extensions, widgets, and third-party integrations
+
+- ✅ **Execution**: Reactive execution model prevents common notebook pitfalls like out-of-order cell execution
+- ✅ **Version control**: Git-friendly Python file format enables proper version control and code review workflows
+- ❌ **Ecosystem**: Limited ecosystem compared to Jupyter with fewer extensions, widgets, and third-party integrations
 
 ## Altair
 
@@ -352,10 +367,10 @@ import altair as alt
 import polars as pl
 
 # Load sales data from CSV file
-data = pl.read_csv('sales_data.csv')
+data: pl.DataFrame = pl.read_csv('sales_data.csv')
 
 # Create interactive scatter plot using grammar of graphics
-chart = alt.Chart(data).mark_circle(size=60).encode(
+chart: altair.Chart = alt.Chart(data).mark_circle(size=60).encode(
     x='sales:Q',        # X-axis: sales (quantitative)
     y='profit:Q',       # Y-axis: profit (quantitative)
     color='region:N',   # Color by region (nominal)
@@ -366,7 +381,7 @@ chart = alt.Chart(data).mark_circle(size=60).encode(
 chart.show()
 
 # Create faceted line chart (small multiples)
-faceted = alt.Chart(data).mark_line().encode(
+faceted: altair.Chart = alt.Chart(data).mark_line().encode(
     x='date:T',         # X-axis: date (temporal)
     y='sales:Q',        # Y-axis: sales (quantitative)
     color='product:N'   # Color by product (nominal)
@@ -376,9 +391,10 @@ faceted = alt.Chart(data).mark_line().encode(
 ```
 
 **Tradeoffs:**
-- Grammar of graphics approach creates consistent, composable visualizations with minimal code
-- Built-in interactivity (zoom, pan, brush, link) works seamlessly without additional configuration
-- Performance degrades significantly with large datasets as rendering happens client-side in browser
+
+- ✅ **Grammar**: Grammar of graphics approach creates consistent, composable visualizations with minimal code
+- ✅ **Interactivity**: Built-in interactivity (zoom, pan, brush, link) works seamlessly without additional configuration
+- ❌ **Performance**: Performance degrades significantly with large datasets as rendering happens client-side in browser
 
 ## MLflow
 
@@ -391,6 +407,7 @@ import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import numpy as np
 
 # Start MLflow tracking run to log experiment details
 with mlflow.start_run():
@@ -399,12 +416,12 @@ with mlflow.start_run():
     mlflow.log_param("max_depth", 10)
     
     # Create and train model with specified hyperparameters
-    model = RandomForestClassifier(n_estimators=100, max_depth=10)
+    model: RandomForestClassifier = RandomForestClassifier(n_estimators=100, max_depth=10)
     model.fit(X_train, y_train)
     
     # Evaluate model and log performance metrics
-    predictions = model.predict(X_test)
-    accuracy = accuracy_score(y_test, predictions)
+    predictions: np.ndarray = model.predict(X_test)
+    accuracy: float = accuracy_score(y_test, predictions)
     mlflow.log_metric("accuracy", accuracy)
     
     # Log trained model artifact for later deployment
@@ -415,9 +432,10 @@ with mlflow.start_run():
 ```
 
 **Tradeoffs:**
-- Complete ML lifecycle management with experiment tracking, model registry, and serving capabilities
-- No vendor lock-in with open source codebase and ability to self-host all components
-- Infrastructure management overhead and limited enterprise features compared to commercial alternatives
+
+- ✅ **Lifecycle**: Complete ML lifecycle management with experiment tracking, model registry, and serving capabilities
+- ✅ **Open source**: No vendor lock-in with open source codebase and ability to self-host all components
+- ❌ **Infrastructure**: Infrastructure management overhead and limited enterprise features compared to commercial alternatives
 
 ## Darts
 
@@ -430,47 +448,44 @@ from darts import TimeSeries
 from darts.models import ExponentialSmoothing, Prophet, NBEATSModel
 
 # Load time series data from CSV with specified time and value columns
-ts = TimeSeries.from_csv('sales_data.csv', time_col='date', value_cols=['sales'])
+ts: darts.TimeSeries = TimeSeries.from_csv('sales_data.csv', time_col='date', value_cols=['sales'])
 
 # Create and train classical forecasting model
-exp_smoothing = ExponentialSmoothing()
+exp_smoothing: darts.models.ExponentialSmoothing = ExponentialSmoothing()
 exp_smoothing.fit(ts)
 
 # Create and train modern deep learning forecasting model
 # input_chunk_length: historical window size, output_chunk_length: forecast horizon
-nbeats = NBEATSModel(input_chunk_length=24, output_chunk_length=12)
+nbeats: darts.models.NBEATSModel = NBEATSModel(input_chunk_length=24, output_chunk_length=12)
 nbeats.fit(ts)
 
 # Generate forecasts using both models
-forecast_classical = exp_smoothing.predict(n=12)  # 12-period forecast
-forecast_modern = nbeats.predict(n=12)           # 12-period forecast
+forecast_classical: darts.TimeSeries = exp_smoothing.predict(n=12)  # 12-period forecast
+forecast_modern: darts.TimeSeries = nbeats.predict(n=12)           # 12-period forecast
 ```
 
 **Tradeoffs:**
-- Unified API across 50+ classical and modern forecasting methods enables easy model comparison
-- Built-in backtesting and evaluation metrics prevent common time series modeling mistakes
-- Individual model implementations often underperform compared to specialized libraries and frameworks
+
+- ✅ **API**: Unified API across 50+ classical and modern forecasting methods enables easy model comparison
+- ✅ **Evaluation**: Built-in backtesting and evaluation metrics prevent common time series modeling mistakes
+- ❌ **Performance**: Individual model implementations often underperform compared to specialized libraries and frameworks
 
 ## Summary
 
-The **2025 Hypermodern Data Science Toolbox** prioritizes:
+The **2025 Hypermodern Data Science Toolbox** is:
 
-- **Python 3.11+** for improved performance and error messages
-- **Polars** for fast, memory-efficient data manipulation
-- **JAX** for high-performance numerical computing and research
-- **PyTorch** for deep learning and neural networks  
-- **spaCy** for production-ready NLP
-- **Optuna** for efficient hyperparameter optimization
-- **Ray** for scaling computations across multiple cores/machines
-- **Hugging Face** for pre-trained transformer models
-- **Pandera** for data quality validation
-- **Marimo** for reactive, reproducible notebooks
-- **Altair** for declarative statistical visualization
-- **MLflow** for ML experiment tracking and lifecycle management
-- **Darts** for comprehensive time series forecasting
+- [**Python 3.11+**](https://www.python.org/downloads/release/python-3110/) for improved performance and error messages
+- [**Polars**](https://docs.pola.rs/) for fast, memory-efficient data manipulation
+- [**JAX**](https://jax.readthedocs.io/) for high-performance numerical computing and research
+- [**PyTorch**](https://docs.pytorch.org/docs/stable/index.html) for deep learning and neural networks  
+- [**spaCy**](https://spacy.io/) for production-ready NLP
+- [**Optuna**](https://optuna.org/) for efficient hyperparameter optimization
+- [**Ray**](https://docs.ray.io/en/latest/) for scaling computations across multiple cores/machines
+- [**Hugging Face**](https://huggingface.co/docs) for pre-trained transformer models
+- [**Pandera**](https://pandera.readthedocs.io) for data quality validation
+- [**Marimo**](https://docs.marimo.io/) for reactive, reproducible notebooks
+- [**Altair**](https://altair-viz.github.io/) for declarative statistical visualization
+- [**MLflow**](https://mlflow.org/docs/latest/) for ML experiment tracking and lifecycle management
+- [**Darts**](https://unit8co.github.io/darts/) for comprehensive time series forecasting
 
-**Key considerations:**
-- Choose tools based on your specific use case (research vs production)
-- Consider the learning curve and team expertise
-- Balance cutting-edge capabilities with ecosystem maturity
-- Start with simpler tools and upgrade as needs grow
+Thanks for reading!
