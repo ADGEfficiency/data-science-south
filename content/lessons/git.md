@@ -30,14 +30,8 @@ $ git init
 $ git add README.md  # add specific file
 $ git add .          # add all files in current directory
 $ git add -u         # add all tracked files that have been modified
-<<<<<<< HEAD
-$ git commit -m "initial commit"
-||||||| eec3e68
-$ git commit -m "initial commit"
-$ git push
-=======
 $ git commit -m "chore: initial commit"
->>>>>>> 3127fee4d376d5f3bd4b30b96bdb371219eecbb7
+$ git push
 ```
 
 **Clone and push to a remote repository**:
@@ -132,27 +126,13 @@ Most modern software development teams use multiple environments to safely devel
 - **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
 - **Production (prod)** - The live environment where end-users interact with the software.
 
-<<<<<<< HEAD
 You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  
-
-It's also common for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.  This allows developers to change their entire stack during development, without affecting anyone else on the cloud.
-||||||| eec3e68
-You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  It's also common for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.
-=======
-You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  
->>>>>>> 3127fee4d376d5f3bd4b30b96bdb371219eecbb7
 
 It's also possible for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.  This allows developers to change their entire stack during development, without affecting anyone else on the cloud.  Developer environments do require a reasonable level of technical sophistication to set up and maintain, so are not common.
 
-<<<<<<< HEAD
-Git facilitates a SDLC by:
-||||||| eec3e68
-Git facilitates the SDLC by:
-=======
 Which environments you need depends on the work you are doing, how many other people are doing development on the same code and company culture.
 
 Git facilitates a SDLC by:
->>>>>>> 3127fee4d376d5f3bd4b30b96bdb371219eecbb7
 
 1. **Environment Isolation** - Code changes stay isolated in branches until they're ready to move to the next stage.
 2. **Controlled Promotion** - Code gets promoted between environments through merges and pull requests, often requiring approvals.
