@@ -11,6 +11,18 @@ Git is a version control system that allows developers to track changes in text 
 
 ### Cheat Sheet
 
+**Minimal Git workflow** - the commands below are what you need to get started:
+
+```shell-session
+$ git status
+$ git add -u OR git add path/to/file
+$ git commit -m 'message'
+$ git push
+```
+
+Other Git operations need to happen before we run these commands (like `git init` or `git clone`) - but the four commands above will get you through the day.
+
+
 **Create and commit to a local repository**:
 
 ```shell-session
@@ -78,13 +90,13 @@ Because Git is popular, LLM tools like Claude are excellent learning and develop
 
 ## Why Learn Git?
 
-Git is a popular version control tool - many of the tools you use will keep their code in Git (often on GitHub).
+**Git is a popular version control tool** - many of the tools you use Git as the core version control engine.  An example is GitHub, which builds on top of Git, and is where many developers keep their code.
 
-Learning Git will allow you to:
+Learning Git will allow you to do:
 
 1. **Version Control**: A navigable history of changes in a code base.
-2. **Collaboration**: Enabling multiple developers to work on the same code at the same time.
-3. **CI/CD**: Git enables continuous integration and development workflows and a software development lifecycle (SDLC).
+2. **Collaborate**: Enabling multiple developers to work on the same code at the same time.
+3. **CI/CD**: Git enables automated continuous integration (CI) and development (CD) workflows, which enable an automated software development lifecycle (SDLC).
 
 {{< img 
     src="https://imgs.xkcd.com/comics/git.png" 
@@ -97,9 +109,9 @@ Learning Git will allow you to:
 
 **Git enables managing software through a Software Development Lifecycle (SDLC).** 
 
-It enables code to move between environments in a safe and repeatable way. As code moves into different branches, side effects like running tests or deploying to the cloud can occur.
+It enables moving code between environments in a safe and repeatable way. As code is merged into specific branches (like `dev` or `prod`), side effects like running tests or deploying to the cloud can occur.
 
-An example of how code is branched to manage deployments across two environments (dev and prod) is below:
+An example of how code is branched to manage deployments across two environments (`dev` and `prod`) is below:
 
 {{< img 
     src="/images/trunk-based-development.svg"
@@ -109,15 +121,15 @@ An example of how code is branched to manage deployments across two environments
 
 Most modern software development teams use multiple environments to safely develop, test, and deploy code.  Common environments include:
 
-- **Development (Dev)** - Where new features are built and initial testing occurs. Developers work on feature branches that don't affect the main codebase.
+- **Development (dev)** - Where new features are built and initial testing occurs. Developers work on feature branches that don't affect the main codebase.
 - **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
-- **Production (Prod)** - The live environment where end-users interact with the software.
+- **Production (prod)** - The live environment where end-users interact with the software.
 
 You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  
 
-It's also common for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.  This allows developers to change their entire stack during development, without affecting anyone else on the cloud.
+It's also possible for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.  This allows developers to change their entire stack during development, without affecting anyone else on the cloud.  Developer environments do require a reasonable level of technical sophistication to set up and maintain, so are not common.
 
-Which of these you need depends on the work you are doing, how many other people are doing development on the same code and company culture. At a minimum dev and prod are needed.
+Which environments you need depends on the work you are doing, how many other people are doing development on the same code and company culture.
 
 Git facilitates a SDLC by:
 
@@ -139,7 +151,7 @@ Other Git tools include:
 
 Git commits & branches can be naturally visualized, making visual tools popular and useful.
 
-On Windows Git Bash is a great way to access Git - you can use `start .` to open a folder in Windows Explorer.
+On Windows, Git Bash is a great way to access Git - you can use `start .` to open a folder in Windows Explorer.
 
 ### Authentication with Git
 
@@ -266,26 +278,6 @@ See 'git help git' for an overview of the system.
 
 If you aren't comfortable using a terminal or CLIs, [work through the lesson on the Bash Shell first](/lessons/bash-shell).
 
-## Minimal Git Workflow
-
-The commands below are what you need to get started:
-
-```shell-session
-# check which files have been modified
-$ git status
-
-# stage all tracked files that have been modified/deleted
-$ git add -u
-
-# commit staged changes with a descriptive message
-$ git commit -m 'message'
-
-# upload commits to remote repository
-$ git push
-```
-
-Other Git operations need to happen before we run these commands (like `git init` or `git clone`) - but the four commands above will get you through the day.
-
 ## How safe is Git?
 
 **Git is designed to protect your code but isn't completely foolproof**. Some Git commands can cause permanent data loss if used incorrectly.
@@ -302,7 +294,7 @@ Most of these you will not need to use in daily work.  If in doubt, copy the fol
 
 ### Remote Repository Safety
 
-Remote repositories (like those on GitHub) are extremely safe:
+Remote repositories (like those on GitHub) are safe backups for Git repositories:
 
 - Hard to unintentionally corrupt the remote repository through normal Git operations,
 - Commits are immutable (can't be changed),
@@ -329,11 +321,11 @@ These practices mean that even if you do lose work locally, you'll only ever los
 
 ## Version Control
 
-**Git's main function is version control of files**.  Developers write code that is stored in text files.
+**Git's main function is version control of files**.  
 
-Version control gives developers a history of their work, by providing the changes made to a given file.
+Developers write code that is stored in text files.  Version control gives developers a history of changes they make to text files, by providing the changes made to a given file.
 
-Version control also allows switching between different versions of a codebase.
+Version control also allows switching between different versions of a codebase - for example switching between a version of the code that works and a version that has a bug.
 
 ### How does Git track changes in a codebase?
 
@@ -343,11 +335,11 @@ Every time a change is made and saved in Git, it is recorded in the project's hi
 
 This keep everything approach means that anything you commit to a repository will be there forever.  This is important to remember when working with secrets (like AWS keys) or with large datasets.
 
-## Repos
+## Repoitories
 
 ### Local Repositories
 
-A local repository is created on a developer's computer using the `git init`, and is contained in a folder called `.git`. 
+A local repository (repo) is created on a developer's computer using the `git init`, and is contained in a folder called `.git`. 
 
 It contains a copy of the entire project commit history, including all the commits and branches. A local repository can be used for version control and collaboration even when working offline.
 
