@@ -333,7 +333,7 @@ Every time a change is made and saved in Git, it is recorded in the project's hi
 
 This keep everything approach means that anything you commit to a repository will be there forever.  This is important to remember when working with secrets (like AWS keys) or with large datasets.
 
-## Repoitories
+## Repositories
 
 ### Local Repositories
 
