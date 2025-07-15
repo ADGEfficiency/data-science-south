@@ -12,6 +12,12 @@ aliases:
 
 **The data science ecosystem moves fast, with new frameworks and tools emerging constantly** 🚀
 
+{{< img 
+    src="/images/hypermodern-data-science-2025/hero.png" 
+    alt="Descending from Renjo La Pass in the Himalayas, Nepal"
+    caption="Descending from Renjo La Pass in the Himalayas, Nepal in 2019"
+>}}
+
 This post provides a **Hypermodern Data Science Toolbox** - tools that are setting the standard for data science and machine learning in 2025.
 
 ## Python 3.11+
