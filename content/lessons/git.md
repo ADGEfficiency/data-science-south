@@ -11,7 +11,7 @@ Git is a version control system that allows developers to track changes in text 
 
 ### Cheat Sheet
 
-**Minimal Git workflow** - the commands below are what you need to get started:
+**Minimal Git workflow** - the four shell commands are the core of a daily Git workflow:
 
 ```shell-session
 $ git status
@@ -19,9 +19,6 @@ $ git add -u OR git add path/to/file
 $ git commit -m 'message'
 $ git push
 ```
-
-Other Git operations need to happen before we run these commands (like `git init` or `git clone`) - but the four commands above will get you through the day.
-
 
 **Create and commit to a local repository**:
 
