@@ -222,7 +222,7 @@ study.optimize(objective, n_trials=100)
 
 ## Ray
 
-**[Ray](https://ray.io/) is a distributed computing framework** - it's an alternative to Dask, multiprocessing, or Spark for scaling Python workloads.
+**[Ray](https://ray.io/) is a distributed computing framework** - it's an alternative to Dask, Python standard library multiprocessing, or Spark for scaling Python workloads.
 
 Ray simplifies distributed computing with a clean API for parallel and distributed execution, plus libraries for ML (Ray Tune, Ray Train).
 
@@ -288,7 +288,7 @@ answer: dict[str, Any] = qa(question=question, context=context)
 
 ## Pandera
 
-**[Pandera](https://pandera.readthedocs.io) is a tool for data quality checks of tabular data** - it's an alternative to Great Expectations or assert statements.
+**[Pandera](https://pandera.readthedocs.io) is a tool for data quality checks of tabular data** - it's an alternative to Great Expectations or Soda.
 
 Pandera allows you to define schemas for tabular data, catching data issues before they propagate through your analysis pipeline.
 
@@ -404,7 +404,7 @@ faceted: altair.Chart = alt.Chart(data).mark_line().encode(
 
 ## MLflow
 
-**[MLflow](https://mlflow.org/) is an ML lifecycle management platform** - it's an alternative to Weights & Biases, Neptune, or custom experiment tracking.
+**[MLflow](https://mlflow.org/) is an ML lifecycle management platform** - it's an alternative to Weights & Biases or Neptune.
 
 MLflow provides experiment tracking, model packaging, model serving, and a model registry for managing the complete ML lifecycle.
 
@@ -445,7 +445,7 @@ with mlflow.start_run():
 
 ## Darts
 
-**[Darts](https://unit8co.github.io/darts/) is a time series forecasting library** - it's an alternative to statsmodels, Prophet, or custom implementations.
+**[Darts](https://unit8co.github.io/darts/) is a time series forecasting library** - it's an alternative to sktime or Nixtla.
 
 Darts provides a unified API for classical and modern time series forecasting methods, with built-in backtesting and model evaluation.
 
