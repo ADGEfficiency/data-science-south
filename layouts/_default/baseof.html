@@ -45,7 +45,10 @@
     {{ if true }} {{ $style := resources.Get "css/syntax.css" | resources.Minify
     }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-    {{ end }} {{ if .Param "math" }} {{ partialCached "math.html" . }} {{ end }}
+    {{ end }}
+    {{ $mainStyle := resources.Get "css/main.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $mainStyle.RelPermalink }}" />
+    {{ if .Param "math" }} {{ partialCached "math.html" . }} {{ end }}
     <title data-pagefind-meta="title">{{.Title}}</title>
     <script
       defer
@@ -114,5 +117,6 @@
       </div>
     </header>
     {{ block "main" . }}{{ end }}
+    <script src="/js/copyCode.js"></script>
   </body>
 </html>
