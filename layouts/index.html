@@ -1,26 +1,143 @@
 {{ define "main" }}
-<div class="container mx-auto p-4 pt-6 flex flex-row justify-center gap-4 min-h-[calc(100vh-8rem)]">
-    <div class="flex-1 max-w-64 p-2 rounded-lg">{{ partial "left-sidebar.html" . }}</div>
-    <div class="flex-1 max-w-3xl p-2 rounded-lg ">
-        <h2 class="text-3xl font-bold mb-6">{{ .Title }}</h2>
-        <div class="prose prose-blue max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
-            {{ .Content }}
-            <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-            <script src="/pagefind/pagefind-ui.js"></script>
-            <div id="search">
-                <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({ element: "#search", showSubResults: true });
-    });
-                </script>
-            </div>
-        </div>
+<div
+  class="container mx-auto p-4 flex flex-col gap-4 min-h-[calc(100vh-8rem)]"
+  data-pagefind-ignore
+>
+  <div class="p-6 rounded-lg">
+    {{/* Introduction text */}}
+    <div class="mb-6">
+      <div class="prose prose-blue max-w-none">{{ .Content }}</div>
     </div>
+    
+    {{/* View toggle controls - aligned with content */}}
+    <div class="mb-6 flex gap-4 items-center">
+      <span class="text-sm font-medium text-gray-700">Organize by:</span>
+      <button
+        id="competency-view-btn"
+        class="px-4 py-2 text-sm rounded bg-green-100 text-green-700 hover:bg-green-200 transition-colors duration-200 view-toggle-btn active"
+      >
+        Competency
+      </button>
+      <button
+        id="year-view-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-100 text-gray-700 hover:bg-green-200 hover:text-green-700 transition-colors duration-200 view-toggle-btn"
+      >
+        Year
+      </button>
+      <button
+        id="type-view-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-100 text-gray-700 hover:bg-green-200 hover:text-green-700 transition-colors duration-200 view-toggle-btn"
+      >
+        Type
+      </button>
+    </div>
+    {{/* Competency view */}}
+    <div id="competency-view">
+      {{/* Get all regular pages (lessons and blog posts) */}} {{ $allPages :=
+      where .Site.RegularPages "Type" "in" (slice "lessons" "blog") }} {{/*
+      Collect all unique competencies dynamically */}} {{ $competenciesSet :=
+      slice }} {{ range $allPages }} {{ range .Params.competencies }} {{
+      $competenciesSet = $competenciesSet | append . }} {{ end }} {{ end }} {{
+      $competencies := $competenciesSet | uniq | sort }} {{ range $competencies
+      }} {{ $competency := . }} {{ $pagesForCompetency := where $allPages
+      ".Params.competencies" "intersect" (slice $competency) }} {{ if
+      $pagesForCompetency }}
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+          {{ $competency }}
+          <span class="text-sm font-normal text-gray-600"
+            >({{ len $pagesForCompetency }} items)</span
+          >
+        </h2>
+        <div class="grid gap-4 pl-4">
+          {{ range $pagesForCompetency.ByTitle }} {{ partial "content-card.html"
+          . }} {{ end }}
+        </div>
+      </div>
+      {{ end }} {{ end }} {{/* Handle pages without competencies */}} {{
+      $pagesWithoutCompetencies := where $allPages ".Params.competencies" "eq"
+      nil }} {{ if $pagesWithoutCompetencies }}
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+          Other Content
+          <span class="text-sm font-normal text-gray-600"
+            >({{ len $pagesWithoutCompetencies }} items)</span
+          >
+        </h2>
+        <div class="grid gap-4 pl-4">
+          {{ range $pagesWithoutCompetencies.ByTitle }} {{ partial
+          "content-card.html" . }} {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{/* Year view */}}
+    <div id="year-view" class="hidden">
+      {{/* Get all pages with dates (primarily blog posts) and lessons (which
+      don't have dates) */}} {{ $datedPages := where $allPages ".Date" "!=" nil
+      }} {{ $undatedPages := where $allPages ".Date" "eq" nil }} {{ $pagesByYear
+      := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">{{ .Key }}</h2>
+        <div class="grid gap-4 pl-4">
+          {{ range .Pages.ByDate.Reverse }} {{ partial "content-card.html" . }}
+          {{ end }}
+        </div>
+      </div>
+      {{ end }} {{/* Handle undated content (lessons) */}} {{ if $undatedPages
+      }}
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+          Lessons
+          <span class="text-sm font-normal text-gray-600"
+            >(timeless content)</span
+          >
+        </h2>
+        <div class="grid gap-4 pl-4">
+          {{ range $undatedPages.ByTitle }} {{ partial "content-card.html" . }}
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{/* Type view */}}
+    <div id="type-view" class="hidden">
+      {{/* Get all pages grouped by type */}}
+      {{ $blogPages := where $allPages "Type" "blog" }}
+      {{ $lessonPages := where $allPages "Type" "lessons" }}
+      
+      {{/* Display blog posts */}}
+      {{ if $blogPages }}
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+          Blog Posts
+          <span class="text-sm font-normal text-gray-600"
+            >({{ len $blogPages }} items)</span
+          >
+        </h2>
+        <div class="grid gap-4 pl-4">
+          {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" . }} {{ end }}
+        </div>
+      </div>
+      {{ end }}
+      
+      {{/* Display lessons */}}
+      {{ if $lessonPages }}
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+          Lessons
+          <span class="text-sm font-normal text-gray-600"
+            >({{ len $lessonPages }} items)</span
+          >
+        </h2>
+        <div class="grid gap-4 pl-4">
+          {{ range $lessonPages.ByTitle }} {{ partial "content-card.html" . }} {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
 </div>
-{{ if .Store.Get "hasMermaid" }}
-<script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-</script>
-{{ end }}
+{{/* Include the JavaScript for view toggling */}}
+<script src="/js/home-toggle.js"></script>
 {{ end }}
