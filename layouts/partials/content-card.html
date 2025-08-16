@@ -6,18 +6,18 @@
   >
     <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
     
-    {{/* Show date for blog posts and lessons */}}
-    {{ if and .Date (or (in .RelPermalink "/blog/") (in .RelPermalink "/lessons/")) }}
-    <p class="text-sm opacity-75 group-hover:text-white/75 mb-2">{{ .Date.Format "January 2006" }}</p>
-    {{ end }}
-    
     {{/* Show description */}}
     {{ with (.Description | default .Params.description) }}
-    <p class="text-sm opacity-75 group-hover:text-white/75 mb-2">{{ . }}</p>
+    <p class="text-sm opacity-75 group-hover:text-white mb-2">{{ . }}</p>
     {{ end }}
     
-    {{/* Content type and competency tags */}}
-    <div class="mt-2 flex flex-wrap gap-2">
+    {{/* Date and labels row */}}
+    <div class="flex flex-wrap items-center gap-2">
+      {{/* Show date for blog posts and lessons */}}
+      {{ if and .Date (or (in .RelPermalink "/blog/") (in .RelPermalink "/lessons/")) }}
+      <span class="text-sm opacity-75 group-hover:text-white">{{ .Date.Format "January 2006" }}</span>
+      {{ end }}
+      
       {{/* Content type label */}}
       {{ if in .RelPermalink "/blog/" }}
       <span

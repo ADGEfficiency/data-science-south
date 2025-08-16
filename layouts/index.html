@@ -148,7 +148,7 @@
           {{ end }}
         </h2>
         <div class="grid gap-3 pl-2">
-          {{ range $lessonPages.ByTitle }} {{ partial "content-card.html" . }} {{ end }}
+          {{ range $lessonPages.ByDate.Reverse }} {{ partial "content-card.html" . }} {{ end }}
         </div>
       </div>
       {{ end }}
