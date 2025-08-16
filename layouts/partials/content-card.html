@@ -11,8 +11,8 @@
     <p class="text-sm opacity-75 group-hover:text-white/75 mb-2">{{ .Date.Format "January 2006" }}</p>
     {{ end }}
     
-    {{/* Show description/summary */}}
-    {{ with (.Description | default .Params.summary) }}
+    {{/* Show description */}}
+    {{ with (.Description | default .Params.description) }}
     <p class="text-sm opacity-75 group-hover:text-white/75 mb-2">{{ . }}</p>
     {{ end }}
     

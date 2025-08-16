@@ -14,7 +14,7 @@
       <span class="text-sm font-medium text-gray-700">Organize by:</span>
       <button
         id="competency-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-200 view-toggle-btn active"
+        class="px-4 py-2 text-sm rounded bg-gray-800 text-white hover:bg-gray-700 hover:text-white transition-colors duration-200 view-toggle-btn active"
       >
         Competency
       </button>
@@ -78,7 +78,12 @@
       }} {{ $undatedPages := where $allPages ".Date" "eq" nil }} {{ $pagesByYear
       := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
       <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">{{ .Key }}</h2>
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+          {{ .Key }}
+          <span class="text-sm font-normal text-gray-600"
+            >({{ len .Pages }} items)</span
+          >
+        </h2>
         <div class="grid gap-4 pl-4">
           {{ range .Pages.ByDate.Reverse }} {{ partial "content-card.html" . }}
           {{ end }}

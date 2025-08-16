@@ -1,6 +1,7 @@
 ---
 title: Linear Predictive Models
-summary: TODO
+description: TODO
+date: 2025-02-16
 draft: true
 competencies:
 - Analytics
