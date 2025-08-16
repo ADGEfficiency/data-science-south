@@ -2,12 +2,12 @@
 <div class="group">
   <a
     href="{{ .RelPermalink }}"
-    class="block p-4 bg-white rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 hover:text-white transition-all duration-200"
+    class="block p-3 bg-white rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 hover:text-white transition-all duration-200"
   >
     <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
     
-    {{/* Show date for blog posts */}}
-    {{ if in .RelPermalink "/blog/" }}
+    {{/* Show date for blog posts and lessons */}}
+    {{ if and .Date (or (in .RelPermalink "/blog/") (in .RelPermalink "/lessons/")) }}
     <p class="text-sm opacity-75 group-hover:text-white/75 mb-2">{{ .Date.Format "January 2006" }}</p>
     {{ end }}
     

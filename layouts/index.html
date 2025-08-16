@@ -1,16 +1,16 @@
 {{ define "main" }}
 <div
-  class="container mx-auto p-4 flex flex-col gap-4 min-h-[calc(100vh-8rem)]"
+  class="container mx-auto p-2 flex flex-col gap-2 min-h-[calc(100vh-8rem)]"
   data-pagefind-ignore
 >
-  <div class="p-6 rounded-lg">
+  <div class="p-4 rounded-lg max-w-4xl mx-auto">
     {{/* Introduction text */}}
-    <div class="mb-6">
+    <div class="mb-4">
       <div class="prose prose-blue max-w-none">{{ .Content }}</div>
     </div>
     
     {{/* View toggle controls - aligned with content */}}
-    <div class="mb-6 flex gap-4 items-center">
+    <div class="mb-4 flex gap-4 items-center">
       <span class="text-sm font-medium text-gray-700">Organize by:</span>
       <button
         id="competency-view-btn"
@@ -42,14 +42,16 @@
       }} {{ $competency := . }} {{ $pagesForCompetency := where $allPages
       ".Params.competencies" "intersect" (slice $competency) }} {{ if
       $pagesForCompetency }}
-      <div class="mb-8">
+      <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
           {{ $competency }}
+          {{ if gt (len $pagesForCompetency) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $pagesForCompetency }} items)</span
           >
+          {{ end }}
         </h2>
-        <div class="grid gap-4 pl-4">
+        <div class="grid gap-3 pl-2">
           {{ range $pagesForCompetency.ByTitle }} {{ partial "content-card.html"
           . }} {{ end }}
         </div>
@@ -57,14 +59,16 @@
       {{ end }} {{ end }} {{/* Handle pages without competencies */}} {{
       $pagesWithoutCompetencies := where $allPages ".Params.competencies" "eq"
       nil }} {{ if $pagesWithoutCompetencies }}
-      <div class="mb-8">
+      <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
           Other Content
+          {{ if gt (len $pagesWithoutCompetencies) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $pagesWithoutCompetencies }} items)</span
           >
+          {{ end }}
         </h2>
-        <div class="grid gap-4 pl-4">
+        <div class="grid gap-3 pl-2">
           {{ range $pagesWithoutCompetencies.ByTitle }} {{ partial
           "content-card.html" . }} {{ end }}
         </div>
@@ -77,28 +81,32 @@
       don't have dates) */}} {{ $datedPages := where $allPages ".Date" "!=" nil
       }} {{ $undatedPages := where $allPages ".Date" "eq" nil }} {{ $pagesByYear
       := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
-      <div class="mb-8">
+      <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
           {{ .Key }}
+          {{ if gt (len .Pages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len .Pages }} items)</span
           >
+          {{ end }}
         </h2>
-        <div class="grid gap-4 pl-4">
+        <div class="grid gap-3 pl-2">
           {{ range .Pages.ByDate.Reverse }} {{ partial "content-card.html" . }}
           {{ end }}
         </div>
       </div>
       {{ end }} {{/* Handle undated content (lessons) */}} {{ if $undatedPages
       }}
-      <div class="mb-8">
+      <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
           Lessons
+          {{ if gt (len $undatedPages) 1 }}
           <span class="text-sm font-normal text-gray-600"
-            >(timeless content)</span
+            >({{ len $undatedPages }} items)</span
           >
+          {{ end }}
         </h2>
-        <div class="grid gap-4 pl-4">
+        <div class="grid gap-3 pl-2">
           {{ range $undatedPages.ByTitle }} {{ partial "content-card.html" . }}
           {{ end }}
         </div>
@@ -113,14 +121,16 @@
       
       {{/* Display blog posts */}}
       {{ if $blogPages }}
-      <div class="mb-8">
+      <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
           Blog Posts
+          {{ if gt (len $blogPages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $blogPages }} items)</span
           >
+          {{ end }}
         </h2>
-        <div class="grid gap-4 pl-4">
+        <div class="grid gap-3 pl-2">
           {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" . }} {{ end }}
         </div>
       </div>
@@ -128,14 +138,16 @@
       
       {{/* Display lessons */}}
       {{ if $lessonPages }}
-      <div class="mb-8">
+      <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
           Lessons
+          {{ if gt (len $lessonPages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $lessonPages }} items)</span
           >
+          {{ end }}
         </h2>
-        <div class="grid gap-4 pl-4">
+        <div class="grid gap-3 pl-2">
           {{ range $lessonPages.ByTitle }} {{ partial "content-card.html" . }} {{ end }}
         </div>
       </div>
