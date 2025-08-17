@@ -1,28 +1,27 @@
 {{ define "main" }}
 <div
-  class="container mx-auto p-2 flex flex-col gap-2 min-h-[calc(100vh-8rem)]"
+  class="container mx-auto px-2 pt-1 pb-2 flex flex-col min-h-[calc(100vh-8rem)]"
   data-pagefind-ignore
 >
   <div class="p-4 rounded-lg max-w-4xl mx-auto">
     {{/* Introduction text */}}
-    <div class="mb-4">
+    <div class="">
       <div class="prose prose-blue max-w-none">{{ .Content }}</div>
     </div>
-    
     {{/* View toggle controls - aligned with content */}}
     <div class="mb-4 flex gap-4 items-center">
       <span class="text-sm font-medium text-gray-700">Organize by:</span>
-      <button
-        id="competency-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-800 text-white hover:bg-gray-700 hover:text-white transition-colors duration-200 view-toggle-btn active"
-      >
-        Competency
-      </button>
       <button
         id="year-view-btn"
         class="px-4 py-2 text-sm rounded bg-gray-100 text-gray-700 hover:bg-gray-800 hover:text-white transition-colors duration-200 view-toggle-btn"
       >
         Year
+      </button>
+      <button
+        id="competency-view-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-800 text-white hover:bg-gray-700 hover:text-white transition-colors duration-200 view-toggle-btn active"
+      >
+        Topic
       </button>
       <button
         id="type-view-btn"
@@ -44,8 +43,7 @@
       $pagesForCompetency }}
       <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          {{ $competency }}
-          {{ if gt (len $pagesForCompetency) 1 }}
+          {{ $competency }} {{ if gt (len $pagesForCompetency) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $pagesForCompetency }} items)</span
           >
@@ -61,8 +59,7 @@
       nil }} {{ if $pagesWithoutCompetencies }}
       <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Other Content
-          {{ if gt (len $pagesWithoutCompetencies) 1 }}
+          Other Content {{ if gt (len $pagesWithoutCompetencies) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $pagesWithoutCompetencies }} items)</span
           >
@@ -83,8 +80,7 @@
       := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
       <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          {{ .Key }}
-          {{ if gt (len .Pages) 1 }}
+          {{ .Key }} {{ if gt (len .Pages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len .Pages }} items)</span
           >
@@ -99,8 +95,7 @@
       }}
       <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Lessons
-          {{ if gt (len $undatedPages) 1 }}
+          Lessons {{ if gt (len $undatedPages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $undatedPages }} items)</span
           >
@@ -115,40 +110,34 @@
     </div>
     {{/* Type view */}}
     <div id="type-view" class="hidden">
-      {{/* Get all pages grouped by type */}}
-      {{ $blogPages := where $allPages "Type" "blog" }}
-      {{ $lessonPages := where $allPages "Type" "lessons" }}
-      
-      {{/* Display blog posts */}}
-      {{ if $blogPages }}
+      {{/* Get all pages grouped by type */}} {{ $blogPages := where $allPages
+      "Type" "blog" }} {{ $lessonPages := where $allPages "Type" "lessons" }}
+      {{/* Display blog posts */}} {{ if $blogPages }}
       <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Blog Posts
-          {{ if gt (len $blogPages) 1 }}
+          Blog Posts {{ if gt (len $blogPages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $blogPages }} items)</span
           >
           {{ end }}
         </h2>
         <div class="grid gap-3 pl-2">
-          {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" . }} {{ end }}
+          {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" .
+          }} {{ end }}
         </div>
       </div>
-      {{ end }}
-      
-      {{/* Display lessons */}}
-      {{ if $lessonPages }}
+      {{ end }} {{/* Display lessons */}} {{ if $lessonPages }}
       <div class="mb-6">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Lessons
-          {{ if gt (len $lessonPages) 1 }}
+          Lessons {{ if gt (len $lessonPages) 1 }}
           <span class="text-sm font-normal text-gray-600"
             >({{ len $lessonPages }} items)</span
           >
           {{ end }}
         </h2>
         <div class="grid gap-3 pl-2">
-          {{ range $lessonPages.ByDate.Reverse }} {{ partial "content-card.html" . }} {{ end }}
+          {{ range $lessonPages.ByDate.Reverse }} {{ partial "content-card.html"
+          . }} {{ end }}
         </div>
       </div>
       {{ end }}
