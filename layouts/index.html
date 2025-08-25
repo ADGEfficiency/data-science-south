@@ -9,7 +9,7 @@
       <div class="prose prose-blue max-w-none">{{ .Content }}</div>
     </div>
     {{/* View toggle controls - aligned with content */}}
-    <div class="mb-4 flex gap-4 items-center">
+    <div class="mb-4 flex gap-4 items-center flex-wrap">
       <span class="text-sm font-medium text-gray-700">Organize by:</span>
       <button
         id="year-view-btn"
@@ -29,6 +29,20 @@
       >
         Type
       </button>
+      <div class="ml-auto">
+        <button
+          id="expand-all-btn"
+          class="px-3 py-1 text-xs rounded bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors duration-200"
+        >
+          Expand All
+        </button>
+        <button
+          id="collapse-all-btn"
+          class="px-3 py-1 text-xs rounded bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors duration-200 ml-2"
+        >
+          Collapse All
+        </button>
+      </div>
     </div>
     {{/* Competency view */}}
     <div id="competency-view">
@@ -41,15 +55,17 @@
       }} {{ $competency := . }} {{ $pagesForCompetency := where $allPages
       ".Params.competencies" "intersect" (slice $competency) }} {{ if
       $pagesForCompetency }}
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          {{ $competency }} {{ if gt (len $pagesForCompetency) 1 }}
-          <span class="text-sm font-normal text-gray-600"
-            >({{ len $pagesForCompetency }} items)</span
-          >
-          {{ end }}
-        </h2>
-        <div class="grid gap-3 pl-2">
+      <div class="collapsible-section">
+        <button class="section-header flex items-center justify-between" data-section="{{ $competency | urlize }}">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            {{ $competency }}
+            <span class="text-sm font-normal text-gray-600">
+              ({{ len $pagesForCompetency }}{{ if eq (len $pagesForCompetency) 1 }} item{{ else }} items{{ end }})
+            </span>
+          </h2>
+          <span class="section-toggle text-gray-500 text-xl">▼</span>
+        </button>
+        <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $pagesForCompetency.ByTitle }} {{ partial "content-card.html"
           . }} {{ end }}
         </div>
@@ -57,15 +73,17 @@
       {{ end }} {{ end }} {{/* Handle pages without competencies */}} {{
       $pagesWithoutCompetencies := where $allPages ".Params.competencies" "eq"
       nil }} {{ if $pagesWithoutCompetencies }}
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Other Content {{ if gt (len $pagesWithoutCompetencies) 1 }}
-          <span class="text-sm font-normal text-gray-600"
-            >({{ len $pagesWithoutCompetencies }} items)</span
-          >
-          {{ end }}
-        </h2>
-        <div class="grid gap-3 pl-2">
+      <div class="collapsible-section">
+        <button class="section-header flex items-center justify-between" data-section="other-content">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            Other Content
+            <span class="text-sm font-normal text-gray-600">
+              ({{ len $pagesWithoutCompetencies }}{{ if eq (len $pagesWithoutCompetencies) 1 }} item{{ else }} items{{ end }})
+            </span>
+          </h2>
+          <span class="section-toggle text-gray-500 text-xl">▼</span>
+        </button>
+        <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $pagesWithoutCompetencies.ByTitle }} {{ partial
           "content-card.html" . }} {{ end }}
         </div>
@@ -78,30 +96,34 @@
       don't have dates) */}} {{ $datedPages := where $allPages ".Date" "!=" nil
       }} {{ $undatedPages := where $allPages ".Date" "eq" nil }} {{ $pagesByYear
       := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          {{ .Key }} {{ if gt (len .Pages) 1 }}
-          <span class="text-sm font-normal text-gray-600"
-            >({{ len .Pages }} items)</span
-          >
-          {{ end }}
-        </h2>
-        <div class="grid gap-3 pl-2">
+      <div class="collapsible-section">
+        <button class="section-header flex items-center justify-between" data-section="year-{{ .Key }}">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            {{ .Key }}
+            <span class="text-sm font-normal text-gray-600">
+              ({{ len .Pages }}{{ if eq (len .Pages) 1 }} item{{ else }} items{{ end }})
+            </span>
+          </h2>
+          <span class="section-toggle text-gray-500 text-xl">▼</span>
+        </button>
+        <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range .Pages.ByDate.Reverse }} {{ partial "content-card.html" . }}
           {{ end }}
         </div>
       </div>
       {{ end }} {{/* Handle undated content (lessons) */}} {{ if $undatedPages
       }}
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Lessons {{ if gt (len $undatedPages) 1 }}
-          <span class="text-sm font-normal text-gray-600"
-            >({{ len $undatedPages }} items)</span
-          >
-          {{ end }}
-        </h2>
-        <div class="grid gap-3 pl-2">
+      <div class="collapsible-section">
+        <button class="section-header flex items-center justify-between" data-section="year-lessons">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            Lessons
+            <span class="text-sm font-normal text-gray-600">
+              ({{ len $undatedPages }}{{ if eq (len $undatedPages) 1 }} item{{ else }} items{{ end }})
+            </span>
+          </h2>
+          <span class="section-toggle text-gray-500 text-xl">▼</span>
+        </button>
+        <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $undatedPages.ByTitle }} {{ partial "content-card.html" . }}
           {{ end }}
         </div>
@@ -113,29 +135,33 @@
       {{/* Get all pages grouped by type */}} {{ $blogPages := where $allPages
       "Type" "blog" }} {{ $lessonPages := where $allPages "Type" "lessons" }}
       {{/* Display blog posts */}} {{ if $blogPages }}
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Blog Posts {{ if gt (len $blogPages) 1 }}
-          <span class="text-sm font-normal text-gray-600"
-            >({{ len $blogPages }} items)</span
-          >
-          {{ end }}
-        </h2>
-        <div class="grid gap-3 pl-2">
+      <div class="collapsible-section">
+        <button class="section-header flex items-center justify-between" data-section="type-blog">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            Blog Posts
+            <span class="text-sm font-normal text-gray-600">
+              ({{ len $blogPages }}{{ if eq (len $blogPages) 1 }} item{{ else }} items{{ end }})
+            </span>
+          </h2>
+          <span class="section-toggle text-gray-500 text-xl">▼</span>
+        </button>
+        <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" .
           }} {{ end }}
         </div>
       </div>
       {{ end }} {{/* Display lessons */}} {{ if $lessonPages }}
-      <div class="mb-6">
-        <h2 class="text-2xl font-semibold mb-4 text-gray-800">
-          Lessons {{ if gt (len $lessonPages) 1 }}
-          <span class="text-sm font-normal text-gray-600"
-            >({{ len $lessonPages }} items)</span
-          >
-          {{ end }}
-        </h2>
-        <div class="grid gap-3 pl-2">
+      <div class="collapsible-section">
+        <button class="section-header flex items-center justify-between" data-section="type-lessons">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            Lessons
+            <span class="text-sm font-normal text-gray-600">
+              ({{ len $lessonPages }}{{ if eq (len $lessonPages) 1 }} item{{ else }} items{{ end }})
+            </span>
+          </h2>
+          <span class="section-toggle text-gray-500 text-xl">▼</span>
+        </button>
+        <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $lessonPages.ByDate.Reverse }} {{ partial "content-card.html"
           . }} {{ end }}
         </div>
@@ -146,4 +172,50 @@
 </div>
 {{/* Include the JavaScript for view toggling */}}
 <script src="/js/home-toggle.js"></script>
+
+<style>
+.collapsible-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.section-header:hover {
+  background-color: #f9fafb;
+}
+
+.section-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  max-height: none;
+  opacity: 1;
+}
+
+.section-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+.section-toggle {
+  transition: transform 0.2s ease;
+  display: inline-block;
+  min-width: 1.5rem;
+}
+
+.collapsed .section-toggle {
+  transform: rotate(-90deg);
+}
+</style>
 {{ end }}
