@@ -1,6 +1,7 @@
 ---
 title: Git
-summary: How Git enables version control and code collaboration.
+description: How Git enables version control and code collaboration.
+date: 2024-12-07
 competencies:
 - "Software Engineering"
 ---

@@ -1,6 +1,6 @@
 ---
 title: Hypermodern Python Toolbox 2025 
-description: Python tools setting the standard in 2025.
+description: Twelve Python tools setting the standard in 2025.
 date: 2025-01-01
 competencies:
 - Software Engineering

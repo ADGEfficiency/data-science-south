@@ -1,6 +1,7 @@
 ---
 title: Statistics
-summary: Don't be fooled by randomness!
+description: Don't be fooled by randomness!
+date: 2025-01-13
 competencies:
 - Analytics
 draft: true

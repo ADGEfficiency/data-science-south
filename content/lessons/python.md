@@ -1,6 +1,7 @@
 ---
 title: Python
-summary: The default programming language for working with data.
+description: The default programming language for working with data.
+date: 2024-12-07
 competencies:
 - "Software Engineering"
 ---

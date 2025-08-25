@@ -1,6 +1,7 @@
 ---
 title: Linear Algebra
-summary: TODO
+description: TODO
+date: 2025-01-13
 draft: true
 competencies:
 - Analytics

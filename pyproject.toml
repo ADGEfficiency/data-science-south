@@ -5,7 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11.9"
 dependencies = [
+    "matplotlib>=3.10.5",
+    "numpy>=2.3.2",
     "phmdoctest>=1.4.0",
+    "scikit-learn>=1.7.1",
+    "scipy>=1.16.1",
+    "seaborn>=0.13.2",
 ]
 
 [tool.phmdoctest]
