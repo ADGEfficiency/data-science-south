@@ -36,6 +36,7 @@ The choice of detector depends on your data characteristics, domain knowledge, c
 
 Resources to learn anomaly detection:
 
+- **Outlier Detection in Python**: Manning book written by Brett Kennedy. A great book, and responsible for most of the content in this lesson. I owe Brett a lot for how important this book has been for me!
 - **PyOD**: Python library with 40+ anomaly detection algorithms [pyod.readthedocs.io](https://pyod.readthedocs.io/)
 - **Numenta Anomaly Benchmark**: Real-world time series anomaly detection benchmark [github.com/numenta/NAB](https://github.com/numenta/NAB)
 
@@ -414,35 +415,27 @@ plt.legend()
 
 ## Anomaly Detection Methods
 
-Anomaly detection methods can be categorized into three main approaches, each with different strengths and use cases:
+Anomaly detection methods can be categorized into three groups of methods:
 
 - **Rules-based**: Simple, interpretable thresholds and conditions
-- **Statistical**: Mathematical approaches using distributions and probabilities  
+- **Statistical**: Mathematical approaches using distributions and probabilities
 - **Machine Learning**: Advanced algorithms that learn patterns from data
 
-The choice of method depends on your data characteristics, domain knowledge, interpretability requirements, and computational constraints.
+## Rules-Based Anomaly Detection
 
-## Rules-Based Detection
+Rules-based anomaly detection uses thresholds and logical conditions to identify outliers:
 
-Rules-based anomaly detection uses predefined thresholds and logical conditions to identify outliers. These methods are highly interpretable and easy to implement.
-
-**Advantages:**
 - **Interpretable**: Easy to understand and explain to stakeholders
 - **Fast**: Simple comparisons with minimal computation
-- **Customizable**: Can incorporate domain expertise and business logic
 - **Deterministic**: Same input always produces same result
-
-**Disadvantages:**
 - **Manual effort**: Requires domain knowledge to set appropriate thresholds
 - **Rigid**: May miss novel anomaly patterns
-- **Complexity explosion**: Multivariate rules become difficult to manage with many features
-- **Threshold sensitivity**: Performance depends heavily on chosen thresholds
 
 ### Univariate Rules
 
-Simple threshold-based rules applied to single variables:
+Univariate rules are simple threshold-based rules applied to single variables.
 
-**Range rules**: Flag values outside expected ranges
+**Range rules** flag values outside expected ranges:
 
 ```python
 ages = [25, 30, -5, 150, 40]
@@ -453,7 +446,7 @@ print(f"Age outliers: {outliers}")
 Age outliers: [-5, 150]
 ```
 
-**Percentage rules**: Flag extreme percentiles
+**Percentage rules** flag extreme percentiles:
 
 ```python
 import numpy as np
@@ -465,7 +458,7 @@ print(f"Top 5% outliers: {outliers}")
 Top 5% outliers: [100]
 ```
 
-**Business logic rules**: Domain-specific constraints
+**Business logic rules** enforce domain-specific constraints:
 
 ```python
 employees = [{'salary': 80000, 'revenue': 70000}, {'salary': 50000, 'revenue': 200000}]
@@ -478,59 +471,57 @@ Salary > revenue: 1 employees
 
 ### Multivariate Rules
 
-Multivariate rules are combinations of univariate rules.  These can do things like check for consistency (that a start date is before an end date) or on ratios of features.
+**Multivariate rules are combinations of univariate rules**.  
+
+These can do things like check for consistency (that a start date is before an end date) or on ratios of features.
 
 Combining multivariate rules is not straightforward, as the number of combinations grows exponentially with the number of features.
 
-## Statistical Methods
+## Statistical Anomaly Detection
 
-Statistical anomaly detection uses mathematical properties of data distributions to identify outliers. These methods assume data follows certain statistical patterns and flag points that deviate significantly from these patterns.
+Statistical anomaly detection uses mathematical properties of data distributions to identify outliers. 
 
-**Advantages of Statistical Methods:**
-- **Well-understood**: Based on established statistical theory
+These methods assume data follows certain statistical patterns and flag points that deviate significantly from these patterns:
+
 - **Computationally efficient**: Simple calculations, fast execution
 - **Threshold interpretability**: Scores have statistical meaning
-- **Robust options available**: MAD and IQR handle outliers well
-
-**Disadvantages:**
 - **Distribution assumptions**: Many methods assume normal distributions
 - **Univariate focus**: Don't capture relationships between variables
 - **Parameter sensitivity**: Threshold choice affects performance significantly
 
-### Z-Score (Standard Score)
+### Z-Score 
 
-Measures how many standard deviations a point is from the mean. Points with $|z\text{-score}| > 2$ or $3$ are typically considered outliers.
+**The Z-score measures how many standard deviations a point is from the mean**.
 
-$$z = \frac{x - \mu}{\sigma}$$
+Points with an absolute Z-score greater than 2 or 3 are typically considered outliers.
 
-Where:
-- $x$ is the data point
-- $\mu$ is the mean
-- $\sigma$ is the standard deviation
+Tradeoffs:
 
-**Advantages:** Simple, well-understood, works well for normal distributions  
-**Disadvantages:** Sensitive to extreme outliers (masking/swamping), assumes normal distribution
+- Simple
+- Works well for normal distributions
+- Sensitive to extreme outliers (masking and swamping)
 
 ```python
 import numpy as np
-from scipy import stats
 
-data = [1, 2, 3, 4, 5, 100]
-z_scores = np.abs(stats.zscore(data))
-outliers = [x for x, z in zip(data, z_scores) if z > 2]
-print(f"Outliers: {outliers}")  # [100]
+data = np.array([1, 2, 3, 4, 5, 100])
+mean = np.mean(data)
+std = np.std(data)
+z_scores = (data - mean) / std
+outliers = data[np.abs(z_scores) > 2]
 ```
 
 ### Interquartile Range (IQR)
 
-Uses quartiles to define outlier boundaries. Points outside $Q_1 - 1.5 \times IQR$ or $Q_3 + 1.5 \times IQR$ are flagged.
+**The interquartile range (IQR) identifies outliers based on the spread of the middle 50% of the data**.
 
-$$IQR = Q_3 - Q_1$$
+Points outside one and a half times the IQR from the first and third quartiles are flagged as outliers.
 
-Outliers if: $x < Q_1 - 1.5 \times IQR$ or $x > Q_3 + 1.5 \times IQR$
+Tradeoffs:
 
-**Advantages:** Robust to outliers, doesn't assume normal distribution  
-**Disadvantages:** Fixed multiplier (1.5) may not suit all datasets
+- Robust to outliers
+- Doesn't assume normal distribution
+- The fixed multiplier (1.5) may not suit all datasets
 
 ```python
 import numpy as np
@@ -539,17 +530,17 @@ data = [1, 2, 3, 4, 5, 100]
 Q1, Q3 = np.percentile(data, [25, 75])
 IQR = Q3 - Q1
 outliers = [x for x in data if x < Q1 - 1.5*IQR or x > Q3 + 1.5*IQR]
-print(f"Outliers: {outliers}")  # [100]
 ```
 
 ### Median Absolute Deviation (MAD)
 
-More robust alternative to standard deviation, using median instead of mean.
+**The Median Absolute Deviation (MAD) is a more robust alternative to standard deviation**.  It uses the median instead of the mean as a measurement of central expectation.
 
-$$MAD = \text{median}(|x_i - \text{median}(x)|)$$
+Tradeoffs:
 
-**Advantages:** Highly robust to outliers, works with skewed distributions  
-**Disadvantages:** Less intuitive than z-score, requires threshold tuning
+- Robust to outliers
+- Works with skewed distributions
+- Less intuitive than Z-score
 
 ```python
 import numpy as np
@@ -558,31 +549,44 @@ data = [1, 2, 3, 4, 5, 100]
 median = np.median(data)
 mad = np.median(np.abs(data - median))
 outliers = [x for x in data if abs(x - median) > 3 * mad]
-print(f"Outliers: {outliers}")  # [100]
 ```
 
 ### Modified Z-Score
 
-Uses MAD instead of standard deviation for more robust outlier detection.
+**The modified Z-score combines the interpretability of the Z-score with the robustness of MAD**.  It uses MAD instead of standard deviation for more robust outlier detection.
 
 $$\text{Modified Z} = \frac{0.6745 \times (x - \text{median}(x))}{MAD}$$
 
 The constant 0.6745 makes MAD equivalent to standard deviation for normal distributions.
 
-**Advantages:** Combines interpretability of z-score with robustness of MAD  
-**Disadvantages:** Constant (0.6745) assumes normal distribution
+Tradeoffs:
+
+- Combines interpretability of z-score with robustness of MAD  
+- Constant (0.6745) assumes normal distribution
+
+```python
+import numpy as np
+
+data = np.array([1, 2, 3, 4, 5, 100])
+median = np.median(data)
+mad = np.median(np.abs(data - median))
+modified_z = 0.6745 * (data - median) / mad
+outliers = data[np.abs(modified_z) > 3.5]
+```
 
 ### Combining Statistical Methods
 
 Statistical scores can be combined across multiple features to create multivariate outlier detection:
 
-- **Sum of scores**: Add z-scores across features
+- **Sum of scores**: Adding across features
 - **Maximum score**: Take the highest absolute score across features  
-- **Sum of squares**: Combine squared z-scores (similar to Mahalanobis distance)
+- **Sum of squares**: Combine squared scores
 
-## Machine Learning Methods
+## Machine Learning Anomaly Detection
 
-Machine learning approaches to anomaly detection learn patterns from data and can handle complex, multivariate relationships. These algorithms are typically more sophisticated but less interpretable than rules or statistical methods.
+**Machine learning anomaly detection methods learn patterns from data**.  They can handle complex, multivariate relationships.
+
+These algorithms are typically more sophisticated but less interpretable than rules or statistical methods.
 
 We will look at a few different groups of machine learning methods:
 
@@ -593,15 +597,13 @@ We will look at a few different groups of machine learning methods:
 - **Probabilistic methods**: Model data distributions and flag low-probability points
 - **Histogram-based methods**: Use histograms to identify outliers
 
-**Advantages of Machine Learning Methods:**
+Tradeoffs:
+
 - **Multivariate**: Capture complex relationships between features
 - **Adaptive**: Learn patterns from data without manual threshold setting
 - **Flexible**: Handle non-linear relationships and arbitrary distributions
 - **Scalable**: Many algorithms work well with large datasets
-
-**Disadvantages:**
 - **Less interpretable**: Harder to explain why a point is flagged
-- **Parameter tuning**: Requires hyperparameter optimization
 - **Computational cost**: More expensive than statistical methods
 - **Overfitting risk**: May learn noise patterns in training data
 - **Data requirements**: Need sufficient training data for reliable patterns
@@ -615,15 +617,31 @@ Identify outliers based on their distance to other points or clusters.
 - Can use mean, median, or maximum distance to k neighbors
 - Works well when normal points form dense clusters
 
-**Advantages:**
+```python
+from sklearn.neighbors import NearestNeighbors
+import numpy as np
 
-- **Simple concept**: Easy to understand and implement
+knn = NearestNeighbors(
+    # Number of neighbors to consider
+    n_neighbors=5,          
+    # Algorithm selection (ball_tree, kd_tree, brute, auto)
+    algorithm='auto',       
+    # Leaf size for tree algorithms
+    leaf_size=30,          
+    # Distance metric
+    metric='minkowski',     
+    # Power parameter for Minkowski metric (2=Euclidean)
+    p=2                    
+)
+
+distances, indices = knn.fit(data).kneighbors(data)
+anomaly_scores = distances.mean(axis=1)
+```
+
+**Tradeoffs:**
+
 - **Arbitrary cluster shapes**: Handles non-spherical clusters well
 - **No distribution assumptions**: Works with any data distribution
-
-**Disadvantages:**
-
-- **Computationally expensive**: O(n²) distance calculations for each point
 - **Parameter sensitivity**: Performance highly dependent on k value
 - **Varying density struggles**: Poor performance when clusters have different densities
 
@@ -636,20 +654,36 @@ Identify outliers as points in low-density regions.
 - Points in sparser regions relative to neighbors are flagged
 - Handles clusters of different densities well
 
+```python
+from sklearn.neighbors import LocalOutlierFactor
+import numpy as np
+
+lof = LocalOutlierFactor(
+    # Number of neighbors to consider
+    n_neighbors=20,
+    # Algorithm for neighbor search (auto, ball_tree, kd_tree, brute)
+    algorithm='auto',
+    # Leaf size for tree algorithms
+    leaf_size=30,
+    # Distance metric
+    metric='minkowski',
+    # Power parameter for Minkowski metric
+    p=2
+)
+
+outlier_labels = lof.fit_predict(data)
+anomaly_scores = -lof.negative_outlier_factor_
+```
+
 **Kernel Density Estimation (KDE):**
 - Estimates probability density function and flags low-probability points
 - Can capture complex data distributions
 
-**Advantages:**
+**Tradeoffs:**
 
 - **Varying cluster densities**: Handles clusters with different densities well
 - **Local anomaly detection**: Finds outliers relative to local neighborhoods
 - **Complex distributions**: Captures non-parametric data patterns
-
-**Disadvantages:**
-
-- **Parameter tuning required**: Bandwidth selection critically affects performance
-- **Computationally intensive**: Expensive for large datasets
 - **Curse of dimensionality**: Performance degrades in high dimensions
 
 ### Clustering-Based Methods
@@ -664,17 +698,31 @@ Use clustering algorithms to identify outliers as points that don't belong to an
 - Points classified as "noise" by the algorithm
 - Points not belonging to any dense cluster
 
-**Advantages:**
+```python
+from sklearn.cluster import DBSCAN
+import numpy as np
 
-- **Leverages existing algorithms**: Uses well-established clustering methods
+dbscan = DBSCAN(
+    # Maximum distance between samples in same neighborhood
+    eps=0.5,
+    # Minimum samples in neighborhood to form core point
+    min_samples=5,
+    # Distance metric
+    metric='euclidean',
+    # Algorithm for neighbor search
+    algorithm='auto',
+    # Leaf size for tree algorithms
+    leaf_size=30
+)
+
+cluster_labels = dbscan.fit_predict(data)
+outliers = data[cluster_labels == -1]
+```
+
+**Tradeoffs:**
+
 - **Intuitive concept**: Easy to understand outliers as non-clustered points
-- **Natural grouping**: Identifies outliers based on natural data clusters
-
-**Disadvantages:**
-
 - **Clustering quality dependence**: Performance tied to underlying clustering success
-- **Parameter sensitivity**: Requires careful tuning of clustering parameters
-- **Cluster assumption**: Assumes data naturally forms clusters
 
 ### Tree-Based Methods
 
@@ -683,19 +731,34 @@ Use clustering algorithms to identify outliers as points that don't belong to an
 - Anomalies require fewer partitions to isolate (shorter paths in trees)
 - Ensemble of isolation trees votes on anomaly score
 
-**Advantages:**
+```python
+from sklearn.ensemble import IsolationForest
+import numpy as np
+
+iforest = IsolationForest(
+    # Number of base estimators in ensemble
+    n_estimators=100,
+    # Number of samples to draw to train each base estimator
+    max_samples='auto',
+    # Proportion of outliers in dataset
+    contamination=0.1,
+    # Number of features to draw to train each base estimator
+    max_features=1.0,
+    # Random state for reproducibility
+    random_state=42
+)
+
+outlier_labels = iforest.fit_predict(data)
+anomaly_scores = -iforest.score_samples(data)
+```
+
+**Tradeoffs:**
 
 - **Fast execution**: Linear time complexity, scales well
-- **Large dataset handling**: Efficient memory usage and processing
 - **No distribution assumptions**: Works with any data distribution
 - **Feature independence**: Handles mixed data types well
-
-**Disadvantages:**
-
 - **Less interpretable**: Difficult to explain why specific points are outliers
 - **Sparse region struggles**: May flag normal points in low-density areas
-- **Random variation**: Results can vary between runs due to randomness
-
 
 ### Probabilistic Methods
 
@@ -708,18 +771,33 @@ Use clustering algorithms to identify outliers as points that don't belong to an
 - Learn boundary around normal data in high-dimensional space
 - Flag points outside the learned boundary
 
-**Advantages:**
+```python
+from sklearn.svm import OneClassSVM
+import numpy as np
 
-- **Principled framework**: Based on solid probabilistic theory
+ocsvm = OneClassSVM(
+    # Kernel type (linear, poly, rbf, sigmoid)
+    kernel='rbf',
+    # Kernel coefficient for rbf, poly, sigmoid
+    gamma='scale',
+    # Upper bound on fraction of outliers
+    nu=0.1,
+    # Regularization parameter
+    C=1.0,
+    # Degree for polynomial kernel
+    degree=3
+)
+
+outlier_labels = ocsvm.fit_predict(data)
+decision_scores = ocsvm.decision_function(data)
+```
+
+**Tradeoffs:**
+
 - **Complex distributions**: Handles multimodal and non-linear patterns
 - **Uncertainty quantification**: Provides confidence scores for predictions
-
-**Disadvantages:**
-
 - **Strong assumptions**: Assumes Gaussian mixture distributions
 - **Computationally intensive**: Expensive training and inference
-- **Parameter selection**: Requires choosing number of components
-
 
 ### Histogram-Based Methods
 
@@ -728,45 +806,41 @@ Use clustering algorithms to identify outliers as points that don't belong to an
 - Combine scores across features (assumes feature independence)
 - Fast and interpretable for high-dimensional data
 
+```python
+from pyod.models.hbos import HBOS
+import numpy as np
+
+hbos = HBOS(
+    # Number of histogram bins
+    n_bins=10,
+    # Regularization parameter for density estimation
+    alpha=0.1,
+    # Tolerance for histogram calculation
+    tol=0.1,
+    # Contamination proportion
+    contamination=0.1
+)
+
+outlier_labels = hbos.fit_predict(data)
+anomaly_scores = hbos.decision_scores_
+```
+
 **Advantages:**
 
 - **Fast execution**: Linear time complexity for training and prediction
 - **Scales well**: Handles high-dimensional data efficiently
 - **Interpretable contributions**: Easy to understand which features drive anomaly scores
-- **Memory efficient**: Low memory requirements compared to distance-based methods
-
-**Disadvantages:**
-
-- **Feature independence assumption**: Ignores correlations between features
-- **Multivariate pattern blindness**: May miss complex feature interactions
-- **Bin size sensitivity**: Performance depends on histogram bin selection
+- **Feature independence assumption**: Ignores correlations and interactions between features
 
 ## Practical Tips
 
-### Data Volume Requirements
-
-Anomaly detection methods generally work best with substantial datasets:
-
-- **Statistical methods**: Need sufficient samples to estimate parameters reliably
-- **Machine learning methods**: Require enough data to learn normal patterns
-- **Minimum recommendations**: At least 1000+ records for robust detection
-
-### Setting Realistic Expectations
+### Setting Realistic Expected Anomalies
 
 Don't expect zero anomalies in real data:
 
 - **Normal anomaly rates**: Expect 1-5% anomalies in typical datasets
 - **Threshold accordingly**: Set contamination parameters based on expected rates
 - **Domain knowledge**: Use business context to validate anomaly rates
-
-```python
-# Set realistic contamination rates
-from pyod.models.iforest import IForest
-
-# Expect 2% anomalies based on domain knowledge
-clf = IForest(contamination=0.02)
-outliers = clf.fit_predict(data)
-```
 
 ### Data Separation Strategy
 
@@ -785,14 +859,6 @@ sale_data = transactions[transactions['type'] == 'sale']
 purchase_outliers = detect_anomalies(purchase_data)
 sale_outliers = detect_anomalies(sale_data)
 ```
-
-### Feature Engineering Considerations
-
-Prepare features appropriately for anomaly detection:
-
-- **Scaling**: Normalize features to prevent dominance by large-scale variables
-- **Encoding**: Handle categorical variables with appropriate encoding methods
-- **Temporal features**: Extract time-based patterns (hour, day, seasonality)
 
 ### Ensemble Methods
 
@@ -821,39 +887,32 @@ scores1 = clf1.fit(data).decision_scores_
 scores2 = clf2.fit(data).decision_scores_
 scores3 = clf3.fit(data).decision_scores_
 
-# Combine scores using different methods
-avg_scores = average([scores1, scores2, scores3])  # Simple average
-aom_scores = aom([scores1, scores2, scores3])      # Average of maximums
-moa_scores = moa([scores1, scores2, scores3])      # Maximum of averages
+# Combine scores using different method
+avg_scores = average([scores1, scores2, scores3])
+aom_scores = aom([scores1, scores2, scores3])
+moa_scores = moa([scores1, scores2, scores3])
 ```
 
-**Ensemble benefits:**
+**Tradeoffs:**
 
 - **Complementary detection**: Statistical + ML methods catch different anomaly types
 - **Reduced false positives**: Consensus voting filters spurious detections  
 - **Improved recall**: Multiple detectors increase chance of catching true anomalies
+- **Complexity**: More models to maintain and tune
 
 ## Explainability & Interpretability
 
-Understanding why an anomaly detector flags certain records as outliers is crucial for building trust and actionable insights. The requirements for explanation vary significantly based on your audience and use case.
+Understanding why an anomaly detector flags records as outliers can be crucial for building trust and actionable insights.
+
+The requirements for explanation vary significantly based on your audience and use case.
 
 ### Interpretability vs. Explainability
 
+**Interpretability generally refers to models that are inherently understandable**, where you can directly see how decisions are made with minimal additional tools.
+
+**Explainability involves external techniques to understand anomaly detection labels and scores**, often applied after the model has made predictions.
+
 The distinction between interpretability and explainability exists on a spectrum rather than as rigid categories. Understanding this spectrum helps choose appropriate techniques for different audiences and use cases.
-
-**Interpretability** generally refers to models that are more inherently understandable, where you can directly see how decisions are made with minimal additional tools.
-
-**Explainability** typically involves external techniques to understand complex models, often applied after the model has made predictions.
-
-```python
-# High interpretability: Z-score threshold
-z_score = (value - mean) / std
-is_outlier = abs(z_score) > 2  # Direct, clear reasoning
-
-# Lower interpretability: Isolation Forest
-clf = IForest()
-outlier_score = clf.decision_function([record])  # Needs explanation tools
-```
 
 **The spectrum in practice:**
 
@@ -875,18 +934,6 @@ outlier_score = clf.decision_function([record])  # Needs explanation tools
 
 **Local explanations** describe why a specific record was flagged as an anomaly.
 
-```python
-# Global: Overall feature importance across all predictions
-feature_importance = [0.4, 0.3, 0.2, 0.1]  # Shows which features matter most
-
-# Local: Why this specific record is anomalous
-record_explanation = {
-    'salary': 'Extremely high (99th percentile)',
-    'age': 'Normal range',
-    'department': 'Rare combination with salary'
-}
-```
-
 ### Interpretable Methods
 
 These methods are inherently understandable without additional explanation tools:
@@ -902,15 +949,6 @@ These methods are inherently understandable without additional explanation tools
 - **HBOS**: Shows which features have unusual value frequencies
 - **Count-based detection**: Simple frequency thresholds easy to understand
 
-```python
-# Interpretable example: MAD-based detection
-median_val = np.median(data)
-mad = np.median(np.abs(data - median_val))
-threshold = 3 * mad
-outliers = data[np.abs(data - median_val) > threshold]
-print(f"Outliers: values more than {threshold:.2f} units from median {median_val:.2f}")
-```
-
 **Rules-based methods:**
 
 - **Business logic rules**: Domain-specific constraints anyone can understand
@@ -919,7 +957,7 @@ print(f"Outliers: values more than {threshold:.2f} units from median {median_val
 
 ### Explainability Techniques
 
-For complex models that lack inherent interpretability, use these post-hoc explanation methods:
+For complex models that lack inherent interpretability, use these post-hoc explanation methods.
 
 ### Feature Importance
 
@@ -1047,3 +1085,24 @@ print(f"Change salary from {original[1]} to {counterfactual[1]} to be normal")
 ```output
 Change salary from 150000 to 80000 to be normal
 ```
+
+## Summary
+
+In this lesson we've covered:
+
+- **What is anomaly detection**: Identification of unusual data points that deviate significantly from expected patterns or normal behavior
+- **Types of outliers**: Strong vs weak, internal vs external, local vs global outliers and their detection characteristics
+- **Masking and swamping**: How extreme outliers can hide other outliers (masking) or cause normal points to be flagged (swamping)
+- **Labels vs scores**: Binary classifications vs continuous measures of anomaly strength
+- **Univariate vs multivariate**: Single feature analysis vs capturing relationships between multiple features
+- **Categorical feature detection**: Using counts, thresholds, and marginal probabilities for non-numeric data
+- **Visualization techniques**: Histograms, boxplots, scatterplots, and advanced methods for understanding anomaly patterns
+- **Rules-based methods**: Simple, interpretable threshold and logical condition approaches
+- **Statistical methods**: Z-score, IQR, MAD, and modified Z-score for mathematical anomaly detection
+- **Machine learning methods**: Distance-based (k-NN), density-based (LOF), clustering-based (DBSCAN), tree-based (Isolation Forest), probabilistic (One-Class SVM), and histogram-based (HBOS) approaches
+- **Practical considerations**: Setting realistic anomaly rates, data separation strategies, and ensemble methods
+- **Explainability**: Understanding the difference between interpretable methods and explainability techniques like SHAP and counterfactuals
+
+These techniques enable you to find interesting data, clean datasets, detect fraud, monitor systems, and identify rare events across diverse domains from finance to healthcare to cybersecurity.
+
+### Next Steps
