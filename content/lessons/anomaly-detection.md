@@ -4,6 +4,7 @@ aliases: []
 tags: []
 competencies:
   - Analytics
+  - Machine Learning
 title: Anomaly Detection
 description: Find interesting data with rules, distance and machine learning based anomaly detection.
 date: 2025-08-16
