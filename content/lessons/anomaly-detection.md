@@ -1016,7 +1016,7 @@ SHAP values: [-0.025, 0.089, 0.034]
 Train simple, interpretable models to mimic complex model predictions:
 
 ```python
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, export_text
 from pyod.models.iforest import IForest
 
 # Complex model predictions
@@ -1028,7 +1028,6 @@ proxy = DecisionTreeClassifier(max_depth=3)
 proxy.fit(X, complex_predictions)
 
 # Proxy provides interpretable rules
-from sklearn.tree import export_text
 rules = export_text(proxy, feature_names=['age', 'salary', 'experience'])
 print(rules)
 ```
@@ -1062,7 +1061,6 @@ plt.show()
 Show minimum changes needed to change a prediction from anomaly to normal:
 
 ```python
-# Pseudo-code for counterfactual generation
 def generate_counterfactual(model, anomalous_record):
     """Find minimal changes to make record normal"""
     counterfactual = anomalous_record.copy()
