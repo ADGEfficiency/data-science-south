@@ -421,7 +421,7 @@ Anomaly detection methods can be categorized into three groups of methods:
 - **Statistical**: Mathematical approaches using distributions and probabilities
 - **Machine Learning**: Advanced algorithms that learn patterns from data
 
-## Rules-Based Anomaly Detection
+## Anomaly Detection with Rules
 
 Rules-based anomaly detection uses thresholds and logical conditions to identify outliers:
 
@@ -477,7 +477,7 @@ These can do things like check for consistency (that a start date is before an e
 
 Combining multivariate rules is not straightforward, as the number of combinations grows exponentially with the number of features.
 
-## Statistical Anomaly Detection
+## Anomaly Detection with Statistics
 
 Statistical anomaly detection uses mathematical properties of data distributions to identify outliers. 
 
@@ -582,7 +582,7 @@ Statistical scores can be combined across multiple features to create multivaria
 - **Maximum score**: Take the highest absolute score across features  
 - **Sum of squares**: Combine squared scores
 
-## Machine Learning Anomaly Detection
+## Anomaly Detection with Machine Learning
 
 **Machine learning anomaly detection methods learn patterns from data**.  They can handle complex, multivariate relationships.
 
