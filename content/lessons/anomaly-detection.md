@@ -49,9 +49,9 @@ Anomaly detection enables you to:
 - **Clean Data**: Find and fix data quality issues
 - **Label Data**: Label anomalies for supervised learning
 
-Anomaly detection methods apply across manyp domains - the same statistical methods that detect credit card fraud can find manufacturing defects or identify unusual patient symptoms.
+Anomaly detection methods apply across many domains - the same statistical methods that detect credit card fraud can find manufacturing defects or identify unusual patient symptoms.
 
-Practical applications of anomaly detection include:
+Applications of anomaly detection include:
 
 - **Prevent financial fraud**: Detect unusual transaction patterns in banking, credit cards, and online payments before losses occur
 - **Monitor system health**: Identify server failures, network intrusions, and performance degradation in real-time
@@ -164,7 +164,7 @@ Z-score detected: [20.]
 MAD detected: [20.]
 ```
 
-The extreme outlier 20 inflated variance, causing normal points to be flagged as outliers
+The extreme outlier 20 inflated variance, causing normal points to be flagged as outliers.
 
 ![Swamping Example](/images/swamping_example.png)
 
@@ -1105,3 +1105,9 @@ In this lesson we've covered:
 These techniques enable you to find interesting data, clean datasets, detect fraud, monitor systems, and identify rare events across diverse domains from finance to healthcare to cybersecurity.
 
 ### Next Steps
+
+Recommended resources:
+
+- **Outlier Detection in Python**: Manning book written by Brett Kennedy. A great book, and responsible for most of the content in this lesson. I owe Brett a lot for how important this book has been for me!
+- **PyOD**: Python library with 40+ anomaly detection algorithms [pyod.readthedocs.io](https://pyod.readthedocs.io/)
+- **Numenta Anomaly Benchmark**: Real-world time series anomaly detection benchmark [github.com/numenta/NAB](https://github.com/numenta/NAB)
