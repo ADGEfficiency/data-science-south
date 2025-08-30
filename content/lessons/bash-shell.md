@@ -1,6 +1,7 @@
 ---
 title: Bash Shell
-summary: Learn how to use a shell, write shell scripts, and configure your shell environment.
+description: Learn how to use a shell, write shell scripts, and configure your shell environment.
+date: 2025-01-13
 competencies:
 - "Software Engineering"
 ---
@@ -43,7 +44,7 @@ These skills form the foundation for many data science workflows, enabling every
 
 ### Resources
 
-Recommended resources to learn Bash:
+Resources to learn Bash:
 
 - **Survival guide for Unix newbies**: A short guide on Unix [matt.might.net](https://matt.might.net/articles/basic-unix/)
 - **Effective Shell**: A book of essentials on how to use the shell [effective-shell.com](https://effective-shell.com/)

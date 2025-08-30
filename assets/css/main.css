@@ -19,3 +19,42 @@
   --tw-prose-th-borders: theme('colors.gray.700');
   --tw-prose-td-borders: theme('colors.gray.700');
 }
+
+/* Copy code button styles */
+.copy-code-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: #374151;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.copy-code-btn:hover {
+  background-color: #4B5563;
+}
+
+.copy-code-btn.copied {
+  background-color: #059669;
+}
+
+.copy-code-btn.copied:hover {
+  background-color: #10B981;
+}
+
+figure.highlight {
+  position: relative;
+}
+
+figure.highlight:hover .copy-code-btn {
+  opacity: 1;
+}

@@ -1,6 +1,7 @@
 ---
 title: CI/CD
-summary: Essential techniques for automatically testing & deploying changes to code.
+description: Automation techniques for testing & deploying infrastructure driven by changes to code.
+date: 2024-12-07
 competencies:
 - "Software Engineering"
 ---
