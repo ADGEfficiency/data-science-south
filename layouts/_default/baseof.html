@@ -3,10 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Prevent flash of white background while CSS loads */
+      html.dark { background-color: #111827; color: #ffffff; }
+      html.dark body { background-color: #111827; }
+      html.dark header { background-color: #111827; }
+    </style>
+    <script>
+      // Prevent flash of white by checking theme immediately
+      ;(function () {
+        const theme = localStorage.getItem('theme')
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             typography: {
@@ -62,9 +78,53 @@
           ;(window.plausible.q = window.plausible.q || []).push(arguments)
         }
     </script>
+    <script>
+      // Dark mode toggle functionality
+      const themeToggle = document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+          const themeToggle = document.getElementById('theme-toggle')
+          const sunIcon = document.getElementById('sun-icon')
+          const moonIcon = document.getElementById('moon-icon')
+          const html = document.documentElement
+
+          // Check for saved theme preference or default to light mode
+          const currentTheme = localStorage.getItem('theme') || 'light'
+
+          if (currentTheme === 'dark') {
+            html.classList.add('dark')
+            sunIcon.classList.remove('hidden')
+            moonIcon.classList.add('hidden')
+          } else {
+            html.classList.remove('dark')
+            sunIcon.classList.add('hidden')
+            moonIcon.classList.remove('hidden')
+          }
+
+          // Toggle theme on button click
+          themeToggle.addEventListener('click', function () {
+            if (html.classList.contains('dark')) {
+              // Switch to light mode
+              html.classList.remove('dark')
+              sunIcon.classList.add('hidden')
+              moonIcon.classList.remove('hidden')
+              localStorage.setItem('theme', 'light')
+            } else {
+              // Switch to dark mode
+              html.classList.add('dark')
+              sunIcon.classList.remove('hidden')
+              moonIcon.classList.add('hidden')
+              localStorage.setItem('theme', 'dark')
+            }
+          })
+        }
+      )
+    </script>
   </head>
-  <body class="font-sans leading-normal">
-    <header class="bg-gray-800 sticky top-0 z-50 p-1 pt-2">
+  <body
+    class="font-sans leading-normal bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200"
+  >
+    <header class="bg-gray-800 dark:bg-gray-900 sticky top-0 z-50 p-1 pt-2">
       <div class="container mx-auto flex justify-between items-center">
         <a
           href="/"
@@ -77,7 +137,8 @@
             {{ .Site.Title }}
           </h1>
         </a>
-        <div class="flex items-center space-x-4 ml-4">
+        <div class="flex items-center space-x-4">
+          {{ partial "dark-mode-toggle.html" . }}
           <a
             href="https://github.com/ADGEfficiency/data-science-south"
             target="_blank"

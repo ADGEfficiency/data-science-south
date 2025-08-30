@@ -6,33 +6,33 @@
   <div class="p-4 rounded-lg max-w-4xl mx-auto">
     {{/* Introduction text */}}
     <div class="">
-      <div class="prose prose-blue max-w-none">{{ .Content }}</div>
+      <div class="prose prose-blue dark:prose-invert max-w-none">{{ .Content }}</div>
     </div>
     {{/* View toggle controls - aligned with content */}}
     <div class="mb-4 flex gap-4 items-center flex-wrap" id="view-controls">
-      <span class="text-sm font-medium text-gray-700">Organize by:</span>
+      <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Organize by:</span>
       <button
         id="year-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-100 text-gray-700 hover:bg-gray-800 hover:text-white transition-colors duration-200 view-toggle-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
       >
         Year
       </button>
       <button
         id="competency-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-100 text-gray-700 hover:bg-gray-800 hover:text-white transition-colors duration-200 view-toggle-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
       >
         Topic
       </button>
       <button
         id="type-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-100 text-gray-700 hover:bg-gray-800 hover:text-white transition-colors duration-200 view-toggle-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
       >
         Type
       </button>
       <div class="ml-auto">
         <button
           id="toggle-all-btn"
-          class="px-4 py-2 text-sm rounded text-gray-700 hover:bg-gray-800 hover:text-white transition-colors duration-200"
+          class="px-4 py-2 text-sm rounded text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200"
         >
           Expand All
         </button>
@@ -52,13 +52,13 @@
       $pagesForCompetency }}
       <div class="collapsible-section">
         <button class="section-header flex items-center justify-between" data-section="{{ $competency | urlize }}">
-          <h2 class="text-2xl font-semibold text-gray-800">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             {{ $competency }}
-            <span class="text-sm font-normal text-gray-600">
+            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
               ({{ len $pagesForCompetency }}{{ if eq (len $pagesForCompetency) 1 }} item{{ else }} items{{ end }})
             </span>
           </h2>
-          <span class="section-toggle text-gray-500 text-xl">▼</span>
+          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $pagesForCompetency.ByDate.Reverse }} {{ partial "content-card.html"
@@ -70,13 +70,13 @@
       nil }} {{ if $pagesWithoutCompetencies }}
       <div class="collapsible-section">
         <button class="section-header flex items-center justify-between" data-section="other-content">
-          <h2 class="text-2xl font-semibold text-gray-800">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Other Content
-            <span class="text-sm font-normal text-gray-600">
+            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
               ({{ len $pagesWithoutCompetencies }}{{ if eq (len $pagesWithoutCompetencies) 1 }} item{{ else }} items{{ end }})
             </span>
           </h2>
-          <span class="section-toggle text-gray-500 text-xl">▼</span>
+          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $pagesWithoutCompetencies.ByDate.Reverse }} {{ partial
@@ -93,13 +93,13 @@
       := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
       <div class="collapsible-section">
         <button class="section-header flex items-center justify-between" data-section="year-{{ .Key }}">
-          <h2 class="text-2xl font-semibold text-gray-800">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             {{ .Key }}
-            <span class="text-sm font-normal text-gray-600">
+            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
               ({{ len .Pages }}{{ if eq (len .Pages) 1 }} item{{ else }} items{{ end }})
             </span>
           </h2>
-          <span class="section-toggle text-gray-500 text-xl">▼</span>
+          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range .Pages.ByDate.Reverse }} {{ partial "content-card.html" . }}
@@ -110,13 +110,13 @@
       }}
       <div class="collapsible-section">
         <button class="section-header flex items-center justify-between" data-section="year-lessons">
-          <h2 class="text-2xl font-semibold text-gray-800">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Lessons
-            <span class="text-sm font-normal text-gray-600">
+            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
               ({{ len $undatedPages }}{{ if eq (len $undatedPages) 1 }} item{{ else }} items{{ end }})
             </span>
           </h2>
-          <span class="section-toggle text-gray-500 text-xl">▼</span>
+          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $undatedPages.ByTitle }} {{ partial "content-card.html" . }}
@@ -132,13 +132,13 @@
       {{/* Display blog posts */}} {{ if $blogPages }}
       <div class="collapsible-section">
         <button class="section-header flex items-center justify-between" data-section="type-blog">
-          <h2 class="text-2xl font-semibold text-gray-800">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Blog Posts
-            <span class="text-sm font-normal text-gray-600">
+            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
               ({{ len $blogPages }}{{ if eq (len $blogPages) 1 }} item{{ else }} items{{ end }})
             </span>
           </h2>
-          <span class="section-toggle text-gray-500 text-xl">▼</span>
+          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" .
@@ -148,13 +148,13 @@
       {{ end }} {{/* Display lessons */}} {{ if $lessonPages }}
       <div class="collapsible-section">
         <button class="section-header flex items-center justify-between" data-section="type-lessons">
-          <h2 class="text-2xl font-semibold text-gray-800">
+          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
             Lessons
-            <span class="text-sm font-normal text-gray-600">
+            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
               ({{ len $lessonPages }}{{ if eq (len $lessonPages) 1 }} item{{ else }} items{{ end }})
             </span>
           </h2>
-          <span class="section-toggle text-gray-500 text-xl">▼</span>
+          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
           {{ range $lessonPages.ByDate.Reverse }} {{ partial "content-card.html"
@@ -187,6 +187,10 @@
 
 .section-header:hover {
   background-color: #f9fafb;
+}
+
+.dark .section-header:hover {
+  background-color: #374151;
 }
 
 .section-content {
