@@ -1,10 +1,9 @@
 ---
-title: 2023 Hypermodern Python Toolbox
-description: Python tools setting the standard in 2023.
+title: Hypermodern Python Toolbox 2023
+description: Ten Python tools setting the standard in 2023.
 date: 2023-02-25
-tags:
-- Python
-- Hypermodern
+competencies:
+- Software Engineering
 
 ---
 

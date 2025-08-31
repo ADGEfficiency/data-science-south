@@ -1,6 +1,7 @@
 ---
 title: Python
-summary: The default programming language for working with data.
+description: The default programming language for working with data.
+date: 2024-12-07
 competencies:
 - "Software Engineering"
 ---
@@ -777,15 +778,15 @@ Python has a large ecosystem of libraries, available both from the standard libr
 
 - A library is a collection of Python packages.
 - A package is a collection of Python modules.
-- A module is Python code written and saved into a `lang:shell-session:.py` file.
+- A module is Python code written and saved into a `.py` file.
 
 Consider this Python project that has:
 
-- an entrypoint `lang:shell-session:main.py` script,
-- a library `lang:shell-session:neulibrary`,
-- two packages `lang:shell-session:package_one` and `lang:shell-session:package_two`,
-- two modules `lang:shell-session:math` and `lang:shell-session:database`,
-- two `lang:shell-session:__init__.py` to tell Python that our two directories are packages.
+- an entrypoint `main.py` script,
+- a library `neulibrary`,
+- two packages `package_one` and `package_two`,
+- two modules `math` and `database`,
+- two `__init__.py` to tell Python that our two directories are packages.
 
 ```shell-session
 $ tree .
@@ -880,9 +881,9 @@ Don't feel the need to go and study these libraries - just being aware of them a
 
 ### Installing Third Party Libraries
 
-Installing third party Python libraries is usually done with `lang:shell-session:pip`.  `lang:shell-session:pip` is a Python package manager that integrates with `PyPI` - an index of Python packages.
+Installing third party Python libraries is usually done with `pip`.  `pip` is a Python package manager that integrates with `PyPI` - an index of Python packages.
 
-If you have installed Python locally, then you can access `lang:shell-session:pip` from a terminal as as shell program:
+If you have installed Python locally, then you can access `pip` from a terminal as as shell program:
 
 ```shell-session
 # install pandas using pip
@@ -896,7 +897,7 @@ If you are in a notebook environment (or anything running iPython), you can use 
 !pip install pandas
 ```
 
-This `!` prefix syntax is very useful within any environment running iPython (like a notebook) - you can also use it for any other shell command (not only `lang:shell-session:pip install`).
+This `!` prefix syntax is very useful within any environment running iPython (like a notebook) - you can also use it for any other shell command (not only `pip install`).
 
 ### Using Third Party Libraries
 

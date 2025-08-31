@@ -3,3 +3,5 @@ resources
 .phmdoctest
 .aider*
 .env
+
+**/.claude/settings.local.json

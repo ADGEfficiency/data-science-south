@@ -6,7 +6,7 @@ test:
 	rm -rf $(PHMDOCTEST_DIR)
 
 	# TODO install pytest and phmdoctest
-	phmdoctest pyproject.toml
+	uv run phmdoctest pyproject.toml
 	pytest $(PHMDOCTEST_DIR)
 
 	# TODO - install shelldoc

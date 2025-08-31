@@ -4,7 +4,9 @@
          {{ with .Get "title" }}
          title="{{ . }}"
          {{ end }}
-         class="max-w-full h-auto rounded-lg shadow-lg transition-transform duration-200 hover:scale-[1.02]">
+         width="{{ .Get "width" | default "auto" }}"
+         height="{{ .Get "height" | default "auto" }}"
+         class="max-w-full h-auto rounded-lg ransition-transform duration-200 hover:scale-[1.02]">
     {{ with .Get "caption" }}
     <figcaption class="text-center mt-4 text-gray-600 italic px-4">{{ . | markdownify }}</figcaption>
     {{ end }}

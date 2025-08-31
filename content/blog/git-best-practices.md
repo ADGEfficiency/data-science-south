@@ -2,6 +2,8 @@
 title: Git Best Practices
 description: Five patterns to guide your Git workflows.
 date: 2024-05-01
+competencies:
+- Software Engineering
 ---
 
 ## Commit Messages
@@ -76,13 +78,13 @@ Git remembers everything, so if you commit large files, binary files, or sensiti
 
 ### Ignoring with a `.gitignore`
 
-To avoid this, it's recommended to use a `lang:shell-session:.gitignore` file to exclude files and directories that you don't want to track in the repository.  
+To avoid this, it's recommended to use a `.gitignore` file to exclude files and directories that you don't want to track in the repository.  
 
-A `lang:shell-session:.gitignore` will mean that commands like `lang:shell-session:git add .` will avoid adding some files.
+A `.gitignore` will mean that commands like `git add .` will avoid adding some files.
 
-Ironically the `lang:shell-session:.gitignore` file should be checked into the repository.
+Ironically the `.gitignore` file should be checked into the repository.
 
-An example `lang:shell-session:.gitignore` is below:
+An example `.gitignore` is below:
 
 ```text
 fn:.gitignore
@@ -108,11 +110,11 @@ build/
 
 **When you're working with Git, it's important to be mindful of the commands you use**. 
 
-Some commands like `lang:shell-session: git checkout` and `lang:shell-session:git reset` can overwrite your work.
+Some commands like `git checkout` and `git reset` can overwrite your work.
 
 ### Checkout
 
-`lang:shell-session:git checkout` allows you to switch between branches and restore files to a previous state:
+`git checkout` allows you to switch between branches and restore files to a previous state:
 
 ```shell-session
 $ git checkout -- <filename>
@@ -120,7 +122,7 @@ $ git checkout -- <filename>
 
 ### Reset
 
-`lang:shell-session:git reset` allows you to undo changes and return to a previous commit:
+`git reset` allows you to undo changes and return to a previous commit:
 
 ```shell-session
 $ git reset <commit-hash>
@@ -128,7 +130,7 @@ $ git reset <commit-hash>
 
 ## Use the Stash
 
-The `lang:shell-session:$ git stash` command allows you to save changes that you haven't committed yet, switch to a different branch, and then restore the changes later. 
+The `git stash` command allows you to save changes that you haven't committed yet, switch to a different branch, and then restore the changes later. 
 
 This is useful when you need to switch to a different branch to work on a bug fix or feature, but don't want to commit your changes yet. 
 

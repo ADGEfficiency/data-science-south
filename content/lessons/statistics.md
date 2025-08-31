@@ -1,8 +1,9 @@
 ---
 title: Statistics
-summary: Don't be fooled by randomness!
+description: Don't be fooled by randomness!
+date: 2025-01-13
 competencies:
-- Algorithms
+- Analytics
 draft: true
 ---
 
@@ -154,7 +155,7 @@ for i in range(num_trials):
     results[result] += 1
 
 prob = results[4] / num_trials
-print(f"probability of rolling a four: {100 * prob.2f} %")
+print(f"probability of rolling a four: {100 * prob:.2%}")
 ```
 
 ```

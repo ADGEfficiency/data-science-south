@@ -1,10 +1,9 @@
 ---
-title: 2025 Hypermodern Python Toolbox 
-description: Python tools setting the standard in 2025.
+title: Hypermodern Python Toolbox 2025 
+description: Twelve Python tools setting the standard in 2025.
 date: 2025-01-01
-tags:
-- Python
-- Hypermodern
+competencies:
+- Software Engineering
 slug: hypermodern-python
 aliases:
 - "/blog/hypermodern-python-2025"
@@ -478,7 +477,7 @@ this will be printed with rich 👏
 
 ## Polars
 
-**Polars is a tool for tabular data manipulation in Python** - it's an alternative to Pandas or Spark.
+**[Polars](https://docs.pola.rs/) is a tool for tabular data manipulation in Python** - it's an alternative to Pandas or Spark.
 
 Polars offers query optimization, parallel processing and can work with larger than memory datasets.  It also has a syntax that many prefer to Pandas.
 
@@ -554,7 +553,7 @@ AGGREGATE
 
 ## Pandera
 
-**Pandera is a tool for data quality checks of tabular data** - it's an alternative to Great Expectations or assert statements.
+**[Pandera](https://pandera.readthedocs.io) is a tool for data quality checks of tabular data** - it's an alternative to Great Expectations or assert statements.
 
 Pandera allows you to define schemas for tabular data (data with rows and columns), which are used validate a table of data. By defining schemas explicitly, Pandera can catch data issues before they propagate through your analysis pipeline.
 
@@ -638,7 +637,7 @@ SchemaError: Column 'sales' failed validator number 0: <Check greater_than: grea
 
 ## DuckDB
 
-**DuckDB is database for analytical SQL queries** - it's an alternative to SQLite, Polars, Spark and Pandas.
+**[DuckDB](https://duckdb.org) is database for analytical SQL queries** - it's an alternative to SQLite, Polars, Spark and Pandas.
 
 DuckDB is a single-file database like SQLite. While SQLite is optimized for row based, transactional workloads, DuckDB is designed for column based, analytical queries. DuckDB shines when working with larger than memory datasets. It can efficiently query Parquet files directly without loading them into memory first.
 
@@ -796,6 +795,7 @@ The **2025 Hypermodern Python Toolbox** is:
 - [**Typer**](https://typer.tiangolo.com/) for typed CLIs,
 - [**Rich**](https://rich.readthedocs.io/en/stable/) for pretty printing to the terminal.
 - [Polars](https://docs.pola.rs/) for manipulating tabular data,
+- [Pandera](https://pandera.readthedocs.io) for data quality checks of tabular data,
 - [DuckDB](https://duckdb.org/docs/) for a single file, analytical SQL database,
 - [Loguru](https://loguru.readthedocs.io/en/stable/) for logging.
 - [Marimo](https://docs.marimo.io/) for reactive Python notebooks.

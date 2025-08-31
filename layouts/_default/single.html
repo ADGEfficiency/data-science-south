@@ -1,12 +1,12 @@
 {{ define "main" }}
-<div class="container mx-auto p-4 pt-6 flex flex-row justify-center gap-4mmin-h-[calc(100vh-8rem)]"
+<div class="container mx-auto p-4 pt-6 flex flex-row justify-center gap-4 min-h-[calc(100vh-8rem)]"
      {{ if in .File.Path "blog" }}
      data-pagefind-ignore
      {{ end }}>
     <div class="hidden xl:block flex-1 max-w-64 p-2 rounded-lg">{{ partial "left-sidebar.html" . }}</div>
-    <div class="flex-1 max-w-3xl p-2 rounded-lg ">
+    <div class="flex-1 max-w-3xl p-2 rounded-lg overflow-x-auto">
         <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
-        <div class="prose max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
+        <div class="prose dark:prose-invert max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
             {{ .Content }}
         </div>
     </div>

@@ -1,27 +1,102 @@
 ---
 title: Linear Algebra
+<<<<<<< HEAD
 summary: TODO
 draft: false
+||||||| 9707b52
+summary: TODO
+draft: true
+=======
+description: TODO
+date: 2025-01-13
+draft: true
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 competencies:
-- Algorithms
+- Analytics
 ---
 
 ## Why Learn Linear Algebra?
 
-TODO
+Linear algebra is the computational engine that powers modern data science and machine learning. Its importance goes beyond theoretical mathematics—it's the key to unlocking computational efficiency on today's hardware and implementing powerful mathematical algorithms.
 
+<<<<<<< HEAD
 ### Attribution
+||||||| 9707b52
+## Setup
 
-This lesson uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
+To run the code in this lesson, you need to install:
+
+```shell-session
+$ pip install -q numpy pandas matplotlib
+todo
+```
+
+## Attribution
+=======
+- **Dimensionality Reduction**
+- **Machine Learning**
+- **Neural Networks**
+- **Parallelization**: Linear algebra operations are naturally parallelizable, making them ideal for modern multi-core CPUs and GPUs. Matrix multiplication, for example, can be split across hundreds or thousands of processing cores simultaneously.
+- **GPU Acceleration**: GPUs were originally designed for graphics rendering—a deeply linear algebraic process. Their architecture is perfectly suited for matrix operations, offering 10-100x speedups for tasks like neural network training.
+- **Memory Efficiency**: Well-implemented linear algebra allows for cache-friendly memory access patterns, reducing bottlenecks in data movement between memory and compute units.
+
+### Mathematical Capabilities
+
+- **Transformations**: Linear algebra gives us powerful tools to transform data through operations like rotation, scaling, projection, and reflection—all expressible as matrix operations.
+- **Systems of Equations**: Solve complex systems of linear equations efficiently using techniques like Gaussian elimination, LU decomposition, and matrix inversion. An example of linear regression, where the closed-form solution to fitting a linear model involves matrix multiplication and inversion.
+- **Dimensionality Reduction**: Algorithms like Principal Component Analysis (PCA) and Singular Value Decomposition (SVD) help identify patterns in high-dimensional data and reduce dimensions while preserving key information.
+
+- **Eigendecomposition**: Find eigenvalues and eigenvectors to understand the fundamental properties of linear systems, identify principal directions of variation, and solve differential equations.
+
+### Algorithms Enabled by Linear Algebra
+
+- **Optimization Algorithms**: Gradient descent, conjugate gradient methods, and Newton's method rely on linear algebra for efficient parameter updates in machine learning models.
+- **Matrix Factorizations**: Techniques like QR, Cholesky, and LU decompositions enable stable and efficient solutions to many computational problems.
+- **Spectral Methods**: Analyze graphs, networks, and signals by examining the spectrum (eigenvalues) of associated matrices.
+- **Linear Regression**: The workhorse of predictive modeling uses the normal equation (a linear algebraic formulation) for exact solutions.
+- **Recommendation Systems**: Matrix factorization methods like SVD and Alternating Least Squares power many collaborative filtering systems.
 
 ## Tooling
 
 To run the Python code in this lesson, you need a Python interpreter and to install the following Python packages:
 
 ```shell-session
+# TODO - pip versions???
 $ pip install -q numpy pandas matplotlib
 ```
 
+Give examples of JAX and PyTorch as well?
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
+
+## Resources
+
+<<<<<<< HEAD
+## Tooling
+||||||| 9707b52
+## numpy
+=======
+Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville](https://www.deeplearningbook.org/)
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
+
+<<<<<<< HEAD
+To run the Python code in this lesson, you need a Python interpreter and to install the following Python packages:
+||||||| 9707b52
+### When `numpy`
+=======
+[Array programming with NumPy - Nature](https://www.nature.com/articles/s41586-020-2649-2)
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
+
+<<<<<<< HEAD
+```shell-session
+$ pip install -q numpy pandas matplotlib
+```
+||||||| 9707b52
+Linear algebra, data processing
+=======
+[Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
+
+<<<<<<< HEAD
 ## Resources
 
 Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville](https://www.deeplearningbook.org/)
@@ -45,6 +120,25 @@ NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is 
 Working with a NumPy array is fast - it stores and operates on data using C structures.
 
 Pandas, a popular tabular data Python library, sits on top of `numpy`. Below we access the numpy array that holds data in a Pandas dataframe:
+||||||| 9707b52
+Pandas sits on top of `numpy`:
+=======
+[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) 
+
+[Understanding the internals of NumPy to avoid unnecessary array copying](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
+
+Scipy lectures:
+- [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
+- [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
+
+## Why Learn NumPy?
+
+NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.  
+
+Working with a NumPy array is fast - it stores and operates on data using C structures.
+
+Pandas, a popular tabular data Python library, sits on top of `numpy`. Below we access the numpy array that holds data in a Pandas dataframe:
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 ```python
 import pandas as pd
@@ -360,13 +454,13 @@ We can do a norm in `numpy` using:
 ```python
 p = 2
 
-%timeit sum([abs(x)**p for x in data])**(1 / p)
+# %timeit sum([abs(x)**p for x in data])**(1 / p)
 ```
 
 ```python
 data = np.arange(100000)
 
-%timeit np.linalg.norm(data, ord=2)
+# %timeit np.linalg.norm(data, ord=2)
 ```
 
 There are various kinds of norms:
@@ -448,13 +542,165 @@ $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\e
 - area
 
 ## Matricies
+<<<<<<< HEAD
 
+||||||| 9707b52
+=======
+
+### Eigenvalues and Eigenvectors
+
+How to compute them using NumPy (np.linalg.eig())
+Visualization of eigenvectors as "directions that don't change under transformation"
+Applications in stability analysis, differential equations, and PCA
+
+---
+
+Eigenvalues and eigenvectors are crucial in:
+
+- Principal Component Analysis (PCA): Finding the directions of maximum variance in data
+- Differential Equations: Solving systems of differential equations
+- Google's PageRank Algorithm: Determining webpage importance
+- Quantum Mechanics: Describing quantum states
+- Stability Analysis: Determining whether a system is stable
+- Machine Learning: Used in various algorithms including dimensionality reduction
+
+#### Analogies for Eigenvalues and Eigenvectors
+
+A workable analogy for eigenvalues and eigenvectors is with factors of an integer.
+
+We can factor the integer 9 into factors of (3, 3) and (9, 1).
+
+Just as we decompose 9 into its fundamental components (3 and 3), we can decompose a matrix using eigenvalues and eigenvectors into more fundamental components.
+
+For a matrix A, finding its eigenvalues (λ) and eigenvectors (v) allows us to understand the matrix's essential behavior through the relationship:
+
+$$\mathbf{A}\vec{v} = \lambda\vec{v}$$
+
+Just as the factors of 9 tell us something about its divisibility and structure, the eigenvalues and eigenvectors of a matrix tell us about its fundamental properties:
+
+- **Scale** - Eigenvalues tell us about scaling (stretching or shrinking) in key directions.
+- **Direction** - Eigenvectors tell us what those key directions are.
+
+So when we have a matrix $\mathbf{A}$ with eigenvector $\vec{v}$ and eigenvalue $\lambda$, the relationship $\mathbf{A}\vec{v} = \lambda\vec{v}$ shows us that applying the matrix to that special direction (the eigenvector) is equivalent to simple scaling by the eigenvalue.
+
+
+#### Numpy
+
+```python
+import numpy as np
+
+# Create a 2x2 matrix
+A = np.array([[3, 1], 
+              [1, 3]])
+
+# Calculate eigenvalues and eigenvectors
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+print("Matrix A:")
+print(A)
+print("\nEigenvalues:")
+print(eigenvalues)
+print("\nEigenvectors (as columns):")
+print(eigenvectors)
+
+# Verify the eigenvector property: A·v = λ·v
+for i in range(len(eigenvalues)):
+    v = eigenvectors[:, i]
+    lambda_v = eigenvalues[i] * v
+    Av = A @ v
+    
+    print(f"\nFor eigenvalue {eigenvalues[i]:.2f}:")
+    print(f"A·v = {Av}")
+    print(f"λ·v = {lambda_v}")
+    print(f"Difference: {np.linalg.norm(Av - lambda_v):.10f}")
+```
+
+```python
+import jax
+import jax.numpy as jnp
+
+# Create a 2x2 matrix
+A = jnp.array([[4, 2], 
+               [1, 3]])
+
+# JAX doesn't have a direct eigendecomposition function like NumPy
+# We can use the SciPy-like API in JAX
+from jax.scipy.linalg import eigh
+
+# Note: eigh is for Hermitian (symmetric) matrices
+# For general matrices, you can use the following function:
+def eig(A):
+    # This is a simplified version - JAX has more optimized methods for production
+    # For a real demonstration, you would use jax.scipy.linalg.eig,
+    # but we implement a basic version for clarity
+    return jnp.linalg.eig(A)
+
+eigenvalues, eigenvectors = eig(A)
+
+print("Matrix A:")
+print(A)
+print("\nEigenvalues:")
+print(eigenvalues)
+print("\nEigenvectors (as columns):")
+print(eigenvectors)
+
+# Verify the eigenvector property using JAX: A·v = λ·v
+def verify_eigenvector(A, v, eigenvalue):
+    Av = A @ v
+    lambda_v = eigenvalue * v
+    difference = jnp.linalg.norm(Av - lambda_v)
+    return Av, lambda_v, difference
+
+# Use JAX's vmap to vectorize this operation across all eigenvectors
+vectorized_verify = jax.vmap(
+    lambda i: verify_eigenvector(A, eigenvectors[:, i], eigenvalues[i]), 
+    out_axes=1
+)(jnp.arange(len(eigenvalues)))
+
+Avs, lambda_vs, differences = vectorized_verify
+
+for i in range(len(eigenvalues)):
+    print(f"\nFor eigenvalue {eigenvalues[i]}:")
+    print(f"A·v = {Avs[:, i]}")
+    print(f"λ·v = {lambda_vs[:, i]}")
+    print(f"Difference: {differences[i]}")
+```
+
+### Eigendecomposition
+
+If a matrix has a complete set of eigenvectors (which is always true for symmetric matrices), we can decompose it as:
+
+$$A = PDP^{-1}$$
+
+Where:
+* P is the matrix of eigenvectors (as columns)
+* D is the diagonal matrix of eigenvalues
+* P⁻¹ is the inverse of P
+
+\text{Where:}
+\begin{itemize}
+\item P \text{ is the matrix of eigenvectors (as columns)}
+\item D \text{ is the diagonal matrix of eigenvalues}
+\item P^{-1} \text{ is the inverse of } P
+\end{itemize}
+
+## Matrix Decompositions
+
+These should follow the Eigenvalues and Eigenvectors section, as many decompositions build on these concepts. This section would cover:
+
+SVD (Singular Value Decomposition)
+QR Decomposition
+LU Decomposition
+Cholesky Decomposition
+How to implement these using NumPy's linalg module
+Applications of each decomposition type
+
+>>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 #### Tensor
 
 - n-dimensional
 - 3 = volume
 - uppercase, bold $\textbf{A}_{i,j,k}$
-
 
 This notebook uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
 

@@ -1,26 +1,28 @@
 <div class="flex-1 max-w-64 p-2 rounded-lg sticky top-20 h-fit">
-    {{ $mainSections := slice
-    (dict "title" "Blog" "url" "/blog/")
-    (dict "title" "Competencies" "url" "/competencies/")
-    }}
-    {{ range $mainSections }}
-    <h2 class="text-xl font-semibold mb-4">
-        <a href="{{ .url }}"
-           class="block -ml-2 py-1 px-2 hover:bg-gray-800 hover:text-white hover:-translate-y-1 hover:shadow-lg transition-all duration-200 rounded-lg">
-        {{ .title }}</a>
-    </h2>
-    {{ end }}
-    <nav>
-        <ul class="space-y-3 -ml-2">
-            {{ range where .Site.RegularPages "Section" "lessons" }}
-            {{ $isCurrentPage := eq .RelPermalink $.RelPermalink }}
-            <li>
-            <a href="{{ .RelPermalink }}"
-               class="block w-full py-1 mx-2 px-2 rounded-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-lg  {{ if $isCurrentPage }} bg-emerald-500 text-emerald-50 shadow-lg {{ else }} hover:bg-gray-800 hover:text-white {{ end }}">
-                {{ .Title }}
-            </a>
-        </li>
-        {{ end }}
+  {{ $mainSections := slice (dict "title" "Blog" "url" "/blog/") (dict "title"
+  "Competencies" "url" "/competencies/") }} {{ range $mainSections }}
+  <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+    <a
+      href="{{ .url }}"
+      class="block -ml-2 py-1 px-2 hover:bg-emerald-500 hover:text-white hover:-translate-y-1 hover:shadow-lg transition-all duration-200 rounded-lg"
+    >
+      {{ .title }}</a
+    >
+  </h2>
+  {{ end }}
+  <nav>
+    <ul class="space-y-3 -ml-2">
+      {{ range where .Site.RegularPages "Section" "lessons" }} {{ $isCurrentPage
+      := eq .RelPermalink $.RelPermalink }}
+      <li>
+        <a
+          href="{{ .RelPermalink }}"
+          class="block w-full py-1 mx-2 px-2 rounded-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-lg text-gray-700 dark:text-gray-300 {{ if $isCurrentPage }} bg-emerald-500 text-emerald-50 shadow-lg {{ else }} hover:bg-emerald-500 hover:text-white {{ end }}"
+        >
+          {{ .Title }}
+        </a>
+      </li>
+      {{ end }}
     </ul>
-</nav>
+  </nav>
 </div>

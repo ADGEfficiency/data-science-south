@@ -2,9 +2,10 @@
 title: 'OpenAI Function Calling in Python'
 description: 'Why this new feature is a game changer for developers.'
 date: '2023-08-15'
-tags:
-- 'Python'
-- 'LLMs'
+competencies:
+- Analytics
+- Software Engineering
+- Machine Learning
 ---
 
 **OpenAI function calling is a game changer for developers**.
