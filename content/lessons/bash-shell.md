@@ -6,43 +6,9 @@ competencies:
 - "Software Engineering"
 ---
 
-<<<<<<< HEAD
 ## What is Bash?
 
-Bash is a shell - a shell is a program that uses text commands to run computer programs.  
-
-### Resources
-
-[Survival guide for Unix newbies](https://matt.might.net/articles/basic-unix/).
-
-[Effective Shell](https://effective-shell.com/).
-
-[BashGuide](https://mywiki.wooledge.org/BashGuide).
-
-### Notation
-
-`$` indicates a command is run interactively in a Bash shell -- you don't need to write this leading `$` when you are typing in the shell.
-
-For example, in the code below, to run this on your own machine, you need to type `ls`, then `Enter` to run the command in the REPL:
-
-```shell-session
-$ ls
-```
-
-## Why Learn Bash?
-||||||| 9707b52
-## Why Learn Bash?
-=======
-## What is Bash?
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
-
-<<<<<<< HEAD
-Bash is a popular shell, that is commonly available in the cloud.  A lot of computing in the cloud is done on machines running Linux, where the Bash shell will either be installed by default or easily available.  Likewise in cloud CI/CD tools like GitHub Actions or Azure Devops, Bash is very available.
-||||||| 9707b52
-The shell is a core development tool. Bash is a commonly used shell, that is readily available in the cloud.
-=======
 Bash is a shell.  Shells are computer programs that do a few different things:
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 **Run programs**: Execute other programs on your computer:
 
@@ -50,70 +16,21 @@ Bash is a shell.  Shells are computer programs that do a few different things:
 $ python script.py
 ```
 
-<<<<<<< HEAD
-Learning to use Bash unlocks automation in the cloud. Learning the shell makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  
-||||||| 9707b52
-Learing Bash makes cloud technologies like CI/CD or Docker easy - both CI/CD and Docker have shell commands at their core.  Learning to use Bash unlocks automation in the cloud.
-=======
 **Compose & run pipelines**: Chain programs together to process data:
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 ```shell-session
 $ cat file.txt | sort > sorted.txt
 ```
 
-<<<<<<< HEAD
-## Terminal, Command-Line, Shell
-||||||| 9707b52
-## Tooling
-=======
 **Scripting**: Automate tasks with shell scripts:
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
-<<<<<<< HEAD
-### The Terminal
-||||||| 9707b52
-**Different developers use different tools for using a Bash shell**.
-=======
 ```bash
 #!/usr/bin/env bash
 echo "hello from a script"
 ```
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
-<<<<<<< HEAD
-The terminal, command line and shell are often used interchangeably. They are however different tools - all three are used when using a computer via text commands.
-||||||| 9707b52
-Some developers run terminals inside an IDE like VS Code.  Others will use a separate program like Windows Terminal to run shell commands.
-=======
 ### This Lesson
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
-<<<<<<< HEAD
-**The terminal (also called a console) is an interface that controls user input & output**.
-||||||| 9707b52
-What shells you have available depends on your operating system.
-
-TODO - Git Bash on Windows or WSL, or Bash on Linux or MacOS. Zsh is also fine.
-
-### Notation
-
-`$` indicates a command is run interactively in a Bash shell -- you don't need to write this leading `$` when you are typing in the shell.
-
-For example, if you see:
-
-```shell-session
-$ ls
-```
-
-You need to type `ls`, then `Enter` to run the command in the REPL.
-
-## Terminal
-
-The terminal, command line and shell are often used interchangeably. They are however different tools - all three are used when using a computer via text input.
-
-**The terminal (also called a console) is an interface that controls user input & output**. It allows you to interact with a computer through text commands.
-=======
 - **What is Bash**: A shell program that runs other programs, enabling command execution, pipelines, scripting, and history features
 - **Terminal vs shell vs command line**: Understanding the differences between these related but distinct components
 - **Shell configuration**: Customizing your shell environment with `.bashrc`, `.zshrc`, and other configuration files
@@ -156,7 +73,6 @@ The output of the command displayed below the command.
 Bash is a popular shell, that is readily available in the cloud.  It's a tool you can easily find in places where serious computing is done.
 
 A lot of cloud computing is done on machines running some form of Linux, with the Bash shell often installed with the operating system.  Cloud CI/CD tools like GitHub Actions or Azure Devops usually use run Bash to run pipeline components by default.
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 Learning how to use a shell will allow you to:
 
@@ -266,11 +182,6 @@ They are however different tools - all three are used when using a computer via 
 
 Popular terminal emulators include:
 
-<<<<<<< HEAD
-### Command-Line
-||||||| 9707b52
-## Command-Line
-=======
 - **Any OS**: VS Code
 - **MacOS**: iTerm2 terminal application
 - **Windows**: Windows Terminal
@@ -279,7 +190,6 @@ Popular terminal emulators include:
 Alongside an emulator, it's common to use a program like tmux or GNU Screen to multiplex multiple terminals in a single window.
 
 ### The Command-Line
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 The command-line is the space or interface in the terminal where you can type and execute text commands. 
 
@@ -290,48 +200,6 @@ $ echo "this is the command line"
 "this is the command line"
 ```
 
-<<<<<<< HEAD
-### The Shell
-
-**A shell is a computer program that executes text commands**. 
-
-Shells are used in two ways:
-
-1. **as a REPL** (Read-Eval-Print Loop) that runs interactively,
-2. **as a programming language** that runs via scripts.
-
-A shell is automatically started in a new terminal. When you write text in the command-line of a terminal, it is executed in a shell, the output displayed, and then a new command line prompt is shown, ready for the next user input.
-
-**The shell we shall use in this lesson is the Bash shell**.
-
-## Tooling
-
-**Different developers use different tools for using a Bash shell**.
-
-Some developers run terminals inside an IDE like VS Code - one terminal can be used with different shells.  Others will use a separate program like Windows Terminal to run different shells.
-
-What shells you have available depends on your operating system - my suggestion is:
-
-- **Windows** - for a shell, either Windows Subsystem for Linux or Git Bash.  For a terminal, Windows terminal is great.
-- **MacOS** - for a shell, either Bash or Zsh are fine. For a terminal, iTerm2 is popular.
-- **Linux** - Zsh or Bash are fine. For a terminal, use the Gnome Terminal if available, or try Kitty.
-
-||||||| 9707b52
-## The Shell
-
-**A shell is a computer program that executes text commands**. 
-
-Shells are used in two ways:
-
-1. **as a REPL** (Read-Eval-Print Loop) that runs interactively,
-2. **as a programming language** that runs via scripts.
-
-A shell is automatically started in a new terminal. When you write text in the command-line of a terminal, it is executed in a shell, the output displayed, and then a new command line prompt is shown, ready for the next user input.
-
-**The shell we shall use in this lesson is the Bash shell**.
-
-=======
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 ### Shells
 
 Shells are mainly used in two ways:
@@ -343,28 +211,6 @@ It's possible to use different shells for both of these - for example, you could
 
 #### Shell as a REPL
 
-<<<<<<< HEAD
-### Common Bash Programs
-
-A shell has its own syntax and set of commands, along with a collection of programs available.  
-
-Common Bash shell programs include:
-
-- `ls` - list files & directories,
-- `pwd` - print working directory,
-- `cd` - change directory,
-- `cat` - print file contents.
-
-A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
-
-The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
-
-## Ways to use Bash
-
-### Bash as a REPL
-||||||| 9707b52
-### Bash as a REPL
-=======
 A REPL (Read-Eval-Print Loop) is an interactive programming process that:
 
 1. Provides a command-line for user input
@@ -372,7 +218,6 @@ A REPL (Read-Eval-Print Loop) is an interactive programming process that:
 3. Displays output to user
 4. Returns the results
 5. Provides a new command-line for user input
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 We can use the shell as a REPL to list the current directory files & directories using the `ls` program:
 
@@ -412,24 +257,6 @@ hello from the script
 CLAUDE.md  Makefile  README.md  archetypes/  assets/  content/  data/  hugo.toml  i18n/  layouts/  pyproject.toml  static/  tests/
 ```
 
-<<<<<<< HEAD
-Shell scripts can take input from command-line arguments or from environment variables.
-||||||| 9707b52
-### Common Shell Programs
-
-A shell has its own syntax and set of commands, along with a collection of programs available.  
-
-Common shell programs include:
-
-- `ls` - list files & directories,
-- `pwd` - print working directory,
-- `cd` - change directory,
-- `cat` - print file contents.
-
-A shell program is a common way for developers to share their work.  AWS and Azure both offer a command-line interface (CLI) that allows interacting with resources on the AWS cloud.
-
-The programs that are available in your shell are programs that are in the shell's `$PATH` environment variable - more on the `$PATH` and environment variables later.
-=======
 Shell scripts can take input from command-line arguments or from environment variables.
 
 #### Types of Shells
@@ -497,19 +324,10 @@ Some developers run terminals inside an IDE like VS Code - one terminal can be u
 VS Code is a good choice for most!  You'll want a text editor to write things like shell scripts or configuration files (YAML, JSON etc).
 
 VS Code also offers the ability to run a terminal alongside your editor, meaning you don't need to run a separate terminal application like Windows Terminal.
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 ## Whitespace
 
-<<<<<<< HEAD
-Bash use the space character to separate commands & arguments. This makes working at the shell natural, but requires some care.
-||||||| 9707b52
-Bash use the space character to separate commands & arguments.  
-
-This makes working at the shell natural, but requires some care when using with spaces.  
-=======
 Bash uses the space character to separate commands & arguments. This makes working at the shell natural, but requires some care.
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 **The shell will expand spaces by default into separate commands** - this means that spaces in the wrong places can cause shell scripts to break.
 
@@ -876,12 +694,7 @@ Under the hood, your shell history is kept in a text file like `~/.bash_history`
 
 ```shell-session
 $ pwd
-<<<<<<< HEAD
-/Users/adamgreen/data-science-south-projects/bash-shell
-||||||| 9707b52
-=======
 /Users/adamgreen/data-science-south-neu
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 ```
 
 We can remove output from the terminal with `clear`:
@@ -989,19 +802,6 @@ cat
 
 Important top level directories include:
 
-<<<<<<< HEAD
-- `/etc` - configuration files,
-- `/bin` - programs,
-- `/Users` - user home directories (MacOS),
-- `/home` - user home directories (Linux).
-
-||||||| 9707b52
-- `/etc` - configuration files,
-- `/bin` - programs,
-- `/Users` - user home directories on MacOS,
-- `/home` - user home directories on Linux.
-- 
-=======
 - **/etc**: Configuration files
 - **/bin**: Programs
 - **/Users**: User home directories (MacOS)
@@ -1063,7 +863,6 @@ $ rm ./*.log
 
 Mastering these path notations allows for efficient navigation and file operations without having to repeatedly type absolute paths.
 
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 ## Files & Directories
 
 ### Making & Editing Files
@@ -1307,104 +1106,16 @@ Redirection allows a program to accept text input and output text to another pro
 
 The shell establishes three text streams:
 
-<<<<<<< HEAD
-- **standard input** (STDIN) - the input stream (commonly a keyboard),
-- **standard output** (STDOUT) - the output stream (commonly a terminal console),
-- **standard error** (STDERR) - the error output stream (also usually goes to terminal console).
-||||||| 9707b52
-- **standard input** (stdin) - the input stream,
-- **standard output** (stdout) - the output stream,
-- **standard error** (stderr) - the error output stream.
-=======
 1. **standard input** (STDIN) - the input stream (commonly a keyboard),
 2. **standard output** (STDOUT) - the output stream (commonly a terminal console),
 3. **standard error** (STDERR) - the error output stream (also usually goes to terminal console).
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
-<<<<<<< HEAD
-It's possible to direct these text streams to different places - for example to redirect STDOUT to a file, rather than the terminal console.
-
-![](/static/mermaid/redirection1.svg)
-
-### Redirecting Input
-
-The `<` operator is used to redirect input. It reads input from a file instead of the keyboard. For example:
-
-```shell-session
-$ sort < unsorted.txt
-```
-
-![](/static/mermaid/redirection2.svg)
-
-### Redirecting Output
-
-The `>` operator is used to redirect output from a command to a file, overwriting the file if it exists.
-
-The following redirects the output of `ls -l` to a file named `files.txt`.
-
-```shell-session
-$ ls -l > files.txt
-```
-
-![](/static/mermaid/redirection3.svg)
-
-### Appending Output
-
-The `>` command will overwrite - if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
-
-```shell-session
-$ ls -l >> files.txt
-```
-
-This will sort the lines in the `unsorted.txt` file.
-||||||| 9707b52
-When using Bash as a REPL, the three text streams are connected to:
-
-- stdin - the keyboard,
-- stdout - the terminal console,
-- stderr - also the terminal console.
-
-![](/static/mermaid/redirection1.svg)
-
-### Redirecting Input
-
-The `<` operator is used to redirect input. It reads input from a file instead of the keyboard. For example:
-
-```shell-session
-$ sort < unsorted.txt
-```
-
-![](/static/mermaid/redirection2.svg)
-
-### Redirecting Output
-
-The `>` operator is used to redirect output from a command to a file, overwriting the file if it exists.
-
-The following redirects the output of `ls -l` to a file named `files.txt`.
-
-```shell-session
-$ ls -l > files.txt
-```
-
-![](/static/mermaid/redirection3.svg)
-
-### Appending Output
-
-The `>` command will overwrite - if you want to append the output to an existing file rather than overwriting it, you can use the >> operator.
-
-```shell-session
-$ ls -l >> files.txt
-```
-
-This will sort the lines in the `unsorted.txt` file.
-=======
 It's possible to direct these text streams to different places - for example to redirect STDOUT to a file, rather than the terminal console.
 
 {{< img 
     src="/images/shell-redirection-1.svg"
     width="500"
 >}}
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 ### Pipes
 
@@ -1557,13 +1268,6 @@ First line
 Second line
 ```
 
-<<<<<<< HEAD
-You can access an environment variable using the `$NAME` syntax.  
-
-You can use `echo` to view the value of an environment variable - below we look at the `$HOME` environment variable.
-||||||| 9707b52
-You can access an environment variable using the `$NAME` syntax.  We can use `echo` to view the value of an environment variable:
-=======
 The first command creates (or overwrites) `log.txt` with "First line", while the second command appends "Second line" to the file.
 
 ### Chaining Commands
@@ -1575,184 +1279,12 @@ You can chain commands together using various operators:
 - **Sequence operator (`;`)**: Run commands in sequence regardless of outcome
 
 Example:
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 ```shell-session
 $ mkdir new_dir && cd new_dir || echo "Failed to create directory"
 ```
 
-<<<<<<< HEAD
-### `$PATH`
-
-The `$PATH` environment variable is a list of directories, separated by a `:`.
-
-The `$PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `$PATH` makes that program accessible via a shell from any directory.
-
-The `$PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
-
-```shell-session
-$ echo $PATH | tr ":" "\n"
-```
-
-It's common to see the `PATH` variable modified in scripts by appending a new path onto the existing path:
-
-```shell-session
-$ export PATH=$PATH:$SPARK_HOME/bin
-```
-
-A common pattern you will see in install scripts is to copy this path update command into our shell configuration script:
-
-`$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
-
-This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
-
-Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run from the shell.
-
-### Sourcing
-
-Sourcing a file executes the commands in the file in the current shell.  
-
-This is different from running a file, which will execute the commands in a new shell in a sub-process.
-
-One common use of `source` is to load environment variables into the current shell:
-
-```bash { title = "myfile" }
-NAME=value
-```
-
-```shell-session
-$ source myfile
-$ echo $NAME
-value
-```
-
-### RC Files
-
-Your shell is configured using text files.  These text files are `source`'d during shell startup, before you see your first command line prompt.  Often these files are `.rc` files, which stands for "run command".
-
-Which shell configuration file depends on both your shell and your operating system:
-
-- `~/.bashrc` on Linux with Bash,
-- `~/.zshrc` on Linux with Zsh,
-- `~/.bashrc` & `~/.bash_profile` on MacOS with Bash,
-- `~/.bashrc` & `~/.zshenv` on MacOS with Zsh.
-
-### Login vs. Non-Login Shells
-
-A final complexity here is the difference between a login versus non-login shell.  
-
-When you log into a system and start a shell, that's called a login shell. Login shells read certain configuration files, and the settings in those files persist for the session.
-
-When you start a new terminal window or a new shell in an existing session, those are non-login shells. They read a different set of configuration files, and settings last only for the life of the shell.
-
-This distinction depends on your operating system - for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
-
-## Aliases
-
-A shell alias is a shortcut for a command or set of commands.  Aliases are commonly defined in your shell configuration files.
-
-Here are some example aliases you can use for inspiration:
-
-```bash
-alias ls='ls -aGl'
-alias c='clear'
-alias cls='clear && ls'
-alias bashrc='vim ~/git/dotfiles/.bashrc'
-```
-
-You can use `"command"` to run a command without alias expansion:
-
-```shell-session
-$ "ls"
-```
-||||||| 9707b52
-### The `PATH`
-
-The `PATH` environment variable is a list of directories, separated by a `:`.
-
-The `PATH` environment variable is a list of directories that the shell will search when you type a command.  Appending a directory to `PATH` makes that program accessible via a shell from any directory.
-
-The `PATH` variable will be quite long - a useful tip is to pipe the variable into `tr`, which can replace the `:` used to separate the paths with a new line `\n`:
-
-```shell-session
-$ echo $PATH | tr ":" "\n"
-```
-
-It's common to see the `PATH` variable modified in scripts by appending a new path onto the existing path:
-
-```shell-session
-$ export PATH=$PATH:$SPARK_HOME/bin
-```
-
-A common pattern you will see in install scripts is to copy this path update command into our shell configuration script:
-
-`$ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc`
-
-This will append `export PATH=$PATH:$SPARK_HOME/bin` to the user's `~/.bashrc`.  On next shell startup, the `$SPARK_HOME/bin` directory will be available in the user's `PATH`.
-
-Any binary programs that exist in `$SPARK_HOME/bin` will now be available to run from the shell.
-
-
-### Sourcing
-
-Sourcing a file executes the commands in the file in the current shell.  
-
-This is different from running a file, which will execute the commands in a new shell in a sub-process.
-
-One common use of `source` is to load environment variables into the current shell:
-
-```bash { title = "myfile" }
-NAME=value
-```
-
-```shell-session
-$ source myfile
-$ echo $NAME
-value
-```
-
-### RC Files
-
-Your shell is configured using text files.  These text files are `source`'d during shell startup, before you see your first command line prompt.  Often these files are `.rc` files, which stands for "run command".
-
-Which shell configuration file depends on both your shell and your operating system:
-
-- `~/.bashrc` on Linux with Bash,
-- `~/.zshrc` on Linux with Zsh,
-- `~/.bashrc` & `~/.bash_profile` on MacOS with Bash,
-- `~/.bashrc` & `~/.zshenv` on MacOS with Zsh.
-
-### Login vs. Non-Login Shells
-
-A final complexity here is the difference between a login versus non-login shell.  
-
-When you log into a system and start a shell, that's called a login shell. Login shells read certain configuration files, and the settings in those files persist for the session.
-
-When you start a new terminal window or a new shell in an existing session, those are non-login shells. They read a different set of configuration files, and settings last only for the life of the shell.
-
-This distinction depends on your operating system - for the shell and OS you are using, make sure you understand the intricacies of which configuration files are `source`'d.
-
-## Aliases
-
-A shell alias is a shortcut for a command or set of commands.  Aliases are commonly defined in your shell configuration files.
-
-Here are some example aliases you can use for inspiration:
-
-```bash
-alias ls='ls -aGl'
-alias c='clear'
-alias cls='clear && ls'
-alias bashrc='vim ~/git/dotfiles/.bashrc'
-```
-
-You can use `"command"` to run a command without alias expansion:
-
-```shell-session
-$ "ls"
-```
-=======
 This attempts to create a directory and change into it. If either step fails, it prints an error message.
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
 
 ## Shell Scripting
 
@@ -1984,10 +1516,6 @@ function greet {
 
 greet "adam"
 ```
-<<<<<<< HEAD
-||||||| 9707b52
-
-=======
 
 ## Summary
 
@@ -2020,4 +1548,3 @@ Recommended next lessons:
 
 - **Git**: Learn version control fundamentals at [datasciencesouth.com/lessons/git/](https://datasciencesouth.com/lessons/git/)
 - **CI/CD**: Explore continuous integration and deployment at [datasciencesouth.com/lessons/ci-cd/](https://datasciencesouth.com/lessons/ci-cd/)
->>>>>>> 3003776f516ef7548ed380bf02b34a0f979c4289
