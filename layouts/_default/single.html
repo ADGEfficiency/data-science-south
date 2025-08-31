@@ -6,7 +6,7 @@
     <div class="hidden xl:block flex-1 max-w-64 p-2 rounded-lg">{{ partial "left-sidebar.html" . }}</div>
     <div class="flex-1 max-w-3xl p-2 rounded-lg overflow-x-auto">
         <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
-        <div class="prose max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
+        <div class="prose dark:prose-invert max-w-none [&_h1]:scroll-mt-20 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20 [&_h4]:scroll-mt-20">
             {{ .Content }}
         </div>
     </div>
