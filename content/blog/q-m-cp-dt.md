@@ -5,7 +5,6 @@ date: 2016-10-31
 date_updated: 2025-09-01
 competencies:
   - Energy
-
 ---
 
 This post will explain the heat transfer equation $Q = m \cdot C_p \cdot dT$ and how to apply it to optimize the capital and operating cost of hot water loops.
