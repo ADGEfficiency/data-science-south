@@ -4,7 +4,9 @@ description: The equation I used the most as an energy engineer.
 date: 2016-10-31
 date_updated: 2025-09-01
 competencies:
-  - Energy
+- Energy
+aliases:
+- 2016-10-31-energy-basics-q-m-cp-dt.
 ---
 
 This post will explain the heat transfer equation $Q = m \cdot C_p \cdot dT$ and how to apply it to optimize the capital and operating cost of hot water loops.

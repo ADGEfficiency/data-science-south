@@ -4,7 +4,9 @@ description: Explaining the conventions for quantifying the heat of combustion.
 date: 2016-10-17
 date_upated: 2025-09-04
 competencies:
-  - Energy
+- Energy
+aliases:
+- 2016-10-17-energy-basics-hhv-versus-lhv
 
 ---
 
