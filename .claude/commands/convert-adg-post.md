@@ -1,4 +1,8 @@
-You are converting a blog post from another website (adgefficiency) to this website (data-science-south).  The filename is provided at the end of this prompt.
+You are converting a blog post from another website (adgefficiency) to this website (data-science-south).  
+
+The original adgefficiency blog posts are in `./ai/adgefficiency-blog-posts-to-import/`.  They should be moved into `./content/blog`
+
+The filename for the post to look at is provided at the end of this prompt.
 
 For the YAML frontmatter:
 

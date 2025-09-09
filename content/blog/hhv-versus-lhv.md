@@ -1,5 +1,5 @@
 ---
-title: What is the Difference between HHV vs. LHV?
+title: What is the Difference Between HHV and LHV?
 description: Explaining the conventions for quantifying the heat of combustion. 
 date: 2016-10-17
 date_upated: 2025-09-04
