@@ -6,7 +6,7 @@ date_updated: 2025-09-05
 competencies:
   - Energy
 aliases:
-- 2016-10-21-energy-basics-kw-vs-kwh
+- energy-basics-kw-vs-kwh
 
 ---
 

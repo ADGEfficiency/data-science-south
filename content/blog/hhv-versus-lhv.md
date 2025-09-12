@@ -1,12 +1,12 @@
 ---
 title: What is the Difference Between HHV and LHV?
-description: Explaining the conventions for quantifying the heat of combustion. 
+description: Explaining the conventions for quantifying the heat of combustion.
 date: 2016-10-17
 date_upated: 2025-09-04
 competencies:
 - Energy
 aliases:
-- 2016-10-17-energy-basics-hhv-versus-lhv
+- energy-basics-hhv-versus-lhv
 
 ---
 
@@ -21,7 +21,7 @@ These two conventions are:
 
 This post uses HHV/GCV and LHV/NCV interchangeably, as they can be in industry.
 
-{{< img 
+{{< img
     src="/images/hhv-versus-lhv/f1.png"
     caption="A fire-tube shell boiler"
     width="500"
