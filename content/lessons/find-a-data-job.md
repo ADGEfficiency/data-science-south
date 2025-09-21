@@ -1,7 +1,8 @@
 ---
 title: Find a Data Job
-description: Find your next role as a a data professional by focusing on the correct data role and using stories to demonstrate your compentence. 
-date: 2025-04-06
+description: Find your next role as a a data professional by focusing on the correct data role and using stories to demonstrate your compentence.
+date_created: 2025-04-06
+date_updated: 2025-04-06
 competencies:
   - "Soft Skills"
 ---

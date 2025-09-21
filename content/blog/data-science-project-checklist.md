@@ -1,7 +1,8 @@
 ---
 title: Data Science Project Checklist
 description: Make your data science projects presentable, reproducible, accessible and extensible.
-date: 2020-10-16
+date_created: 2020-10-16
+date_updated: 2020-10-16
 competencies:
 - Software Engineering
 ---

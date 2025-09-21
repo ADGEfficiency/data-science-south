@@ -1,7 +1,7 @@
 ---
 title: Gas Turbines & Ambient Temperature
-date: 2016-12-08
-date_upated: 2029-09-05
+date_created: 2016-12-08
+date_updated: 2025-09-05
 competencies:
   - Energy
 description: Explaining the relationship between gas turbines and ambient temperature.

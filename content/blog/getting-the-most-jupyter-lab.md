@@ -1,10 +1,10 @@
 ---
-title: Getting the most out of Jupyter Lab 
+title: Getting the most out of Jupyter Lab
 description: A guide to the next generation of notebook tooling.
-date: '2020-11-05'
+date_created: 2020-11-05
+date_updated: 2020-11-05
 competencies:
 - Software Engineering
-
 ---
 
 Notebooks are a common tool among data scientists - many data professionals write all their code in notebooks.

@@ -1,7 +1,8 @@
 ---
 title: CI/CD
 description: Automation techniques for testing & deploying infrastructure driven by changes to code.
-date: 2024-12-07
+date_created: 2024-12-07
+date_updated: 2024-12-07
 competencies:
 - "Software Engineering"
 ---

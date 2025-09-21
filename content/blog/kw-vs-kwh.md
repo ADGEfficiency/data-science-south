@@ -1,7 +1,7 @@
 ---
 title: 'Kilowatts kW vs. Kilowatt Hours kWh'
 description: Being careful and consistent when dealing with kilowatts and kilowatt-hours is a basic for all energy professionals.
-date: 2016-10-21
+date_created: 2016-10-21
 date_updated: 2025-09-05
 competencies:
   - Energy

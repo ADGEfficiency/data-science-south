@@ -13,9 +13,17 @@
     
     {{/* Date and labels row */}}
     <div class="flex flex-wrap items-center gap-2">
-      {{/* Show date for blog posts and lessons */}}
-      {{ if and .Date (or (in .RelPermalink "/blog/") (in .RelPermalink "/lessons/")) }}
-      <span class="text-sm opacity-75 dark:text-gray-300 group-hover:text-white">{{ .Date.Format "January 2006" }}</span>
+      {{/* Show dates for blog posts and lessons */}}
+      {{ if or (in .RelPermalink "/blog/") (in .RelPermalink "/lessons/") }}
+        <div class="flex flex-wrap items-center gap-2 text-sm opacity-75 dark:text-gray-300 group-hover:text-white">
+          {{ if .Params.date_created }}
+          <span>Created: {{ (time .Params.date_created).Format "Jan 2006" }}</span>
+          {{ end }}
+          {{ if and .Params.date_updated (ne .Params.date_created .Params.date_updated) }}
+          <span>•</span>
+          <span>Updated: {{ (time .Params.date_updated).Format "Jan 2006" }}</span>
+          {{ end }}
+        </div>
       {{ end }}
       
       {{/* Content type label */}}

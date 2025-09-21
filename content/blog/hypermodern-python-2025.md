@@ -1,13 +1,13 @@
 ---
-title: Hypermodern Python Toolbox 2025 
+title: Hypermodern Python Toolbox 2025
 description: Twelve Python tools setting the standard in 2025.
-date: 2025-01-01
+date_created: 2025-01-01
+date_updated: 2025-01-01
 competencies:
 - Software Engineering
 slug: hypermodern-python
 aliases:
 - "/blog/hypermodern-python-2025"
-
 ---
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤

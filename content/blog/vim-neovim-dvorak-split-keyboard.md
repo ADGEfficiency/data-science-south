@@ -1,7 +1,7 @@
 ---
 title: From Vim & QWERTY to Neovim & DVORAK
 description: And never back again.
-date: 2023-11-21
+date_created: 2023-11-21
 date_updated: 2025-09-22
 competencies:
   - Software Engineering

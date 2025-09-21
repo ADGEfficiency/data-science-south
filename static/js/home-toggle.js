@@ -6,15 +6,17 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Get DOM elements
   const competencyViewBtn = document.getElementById('competency-view-btn');
-  const yearViewBtn = document.getElementById('year-view-btn');
+  const createdYearViewBtn = document.getElementById('created-year-view-btn');
+  const updatedYearViewBtn = document.getElementById('updated-year-view-btn');
   const typeViewBtn = document.getElementById('type-view-btn');
   const competencyView = document.getElementById('competency-view');
-  const yearView = document.getElementById('year-view');
+  const createdYearView = document.getElementById('created-year-view');
+  const updatedYearView = document.getElementById('updated-year-view');
   const typeView = document.getElementById('type-view');
   const toggleAllBtn = document.getElementById('toggle-all-btn');
   
   // Check if all required elements exist
-  if (!competencyViewBtn || !yearViewBtn || !typeViewBtn || !competencyView || !yearView || !typeView || !toggleAllBtn) {
+  if (!competencyViewBtn || !createdYearViewBtn || !updatedYearViewBtn || !typeViewBtn || !competencyView || !createdYearView || !updatedYearView || !typeView || !toggleAllBtn) {
     console.warn('Home toggle: Required elements not found');
     return;
   }
@@ -26,8 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeCollapsibleSections();
   
   // Set initial view based on saved preference
-  if (savedView === 'year') {
-    showYearView();
+  if (savedView === 'created-year') {
+    showCreatedYearView();
+  } else if (savedView === 'updated-year') {
+    showUpdatedYearView();
   } else if (savedView === 'type') {
     showTypeView();
   } else {
@@ -54,11 +58,24 @@ document.addEventListener('DOMContentLoaded', function() {
     updateToggleButtonText();
   });
   
-  yearViewBtn.addEventListener('click', function(e) {
+  createdYearViewBtn.addEventListener('click', function(e) {
     e.preventDefault();
     const shouldExpandAll = isCurrentStateExpanded();
-    showYearView();
-    localStorage.setItem('home-view-preference', 'year');
+    showCreatedYearView();
+    localStorage.setItem('home-view-preference', 'created-year');
+    if (shouldExpandAll) {
+      expandAllSections();
+    } else {
+      collapseAllSections();
+    }
+    updateToggleButtonText();
+  });
+
+  updatedYearViewBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const shouldExpandAll = isCurrentStateExpanded();
+    showUpdatedYearView();
+    localStorage.setItem('home-view-preference', 'updated-year');
     if (shouldExpandAll) {
       expandAllSections();
     } else {
@@ -98,36 +115,68 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update button states
     competencyViewBtn.classList.remove('bg-gray-100', 'text-gray-700');
     competencyViewBtn.classList.add('bg-gray-800', 'text-white', 'active');
-    
-    yearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
-    yearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
-    
+
+    createdYearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    createdYearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
+    updatedYearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    updatedYearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
     typeViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
     typeViewBtn.classList.add('bg-gray-100', 'text-gray-700');
-    
+
     // Update view visibility
     competencyView.classList.remove('hidden');
-    yearView.classList.add('hidden');
+    createdYearView.classList.add('hidden');
+    updatedYearView.classList.add('hidden');
     typeView.classList.add('hidden');
   }
   
   /**
-   * Show the year-based view
+   * Show the created year view
    */
-  function showYearView() {
+  function showCreatedYearView() {
     // Update button states
-    yearViewBtn.classList.remove('bg-gray-100', 'text-gray-700');
-    yearViewBtn.classList.add('bg-gray-800', 'text-white', 'active');
-    
+    createdYearViewBtn.classList.remove('bg-gray-100', 'text-gray-700');
+    createdYearViewBtn.classList.add('bg-gray-800', 'text-white', 'active');
+
     competencyViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
     competencyViewBtn.classList.add('bg-gray-100', 'text-gray-700');
-    
+
+    updatedYearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    updatedYearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
     typeViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
     typeViewBtn.classList.add('bg-gray-100', 'text-gray-700');
-    
+
     // Update view visibility
-    yearView.classList.remove('hidden');
+    createdYearView.classList.remove('hidden');
     competencyView.classList.add('hidden');
+    updatedYearView.classList.add('hidden');
+    typeView.classList.add('hidden');
+  }
+
+  /**
+   * Show the updated year view
+   */
+  function showUpdatedYearView() {
+    // Update button states
+    updatedYearViewBtn.classList.remove('bg-gray-100', 'text-gray-700');
+    updatedYearViewBtn.classList.add('bg-gray-800', 'text-white', 'active');
+
+    competencyViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    competencyViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
+    createdYearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    createdYearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
+    typeViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    typeViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
+    // Update view visibility
+    updatedYearView.classList.remove('hidden');
+    competencyView.classList.add('hidden');
+    createdYearView.classList.add('hidden');
     typeView.classList.add('hidden');
   }
   
@@ -138,17 +187,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update button states
     typeViewBtn.classList.remove('bg-gray-100', 'text-gray-700');
     typeViewBtn.classList.add('bg-gray-800', 'text-white', 'active');
-    
+
     competencyViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
     competencyViewBtn.classList.add('bg-gray-100', 'text-gray-700');
-    
-    yearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
-    yearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
-    
+
+    createdYearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    createdYearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
+    updatedYearViewBtn.classList.remove('bg-gray-800', 'text-white', 'active');
+    updatedYearViewBtn.classList.add('bg-gray-100', 'text-gray-700');
+
     // Update view visibility
     typeView.classList.remove('hidden');
     competencyView.classList.add('hidden');
-    yearView.classList.add('hidden');
+    createdYearView.classList.add('hidden');
+    updatedYearView.classList.add('hidden');
   }
   
   /**
@@ -256,15 +309,17 @@ document.addEventListener('DOMContentLoaded', function() {
   function getVisibleSections() {
     const currentView = getCurrentView();
     let viewContainer;
-    
+
     if (currentView === 'competency') {
       viewContainer = competencyView;
-    } else if (currentView === 'year') {
-      viewContainer = yearView;
+    } else if (currentView === 'created-year') {
+      viewContainer = createdYearView;
+    } else if (currentView === 'updated-year') {
+      viewContainer = updatedYearView;
     } else {
       viewContainer = typeView;
     }
-    
+
     return viewContainer.querySelectorAll('.collapsible-section');
   }
   
@@ -273,7 +328,8 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   function getCurrentView() {
     if (!competencyView.classList.contains('hidden')) return 'competency';
-    if (!yearView.classList.contains('hidden')) return 'year';
+    if (!createdYearView.classList.contains('hidden')) return 'created-year';
+    if (!updatedYearView.classList.contains('hidden')) return 'updated-year';
     if (!typeView.classList.contains('hidden')) return 'type';
     return 'competency'; // default
   }

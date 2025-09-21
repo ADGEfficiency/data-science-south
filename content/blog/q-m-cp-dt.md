@@ -1,7 +1,7 @@
 ---
 title: 'Q = m · Cp · dT'
 description: The equation I used the most as an energy engineer.
-date: 2016-10-31
+date_created: 2016-10-31
 date_updated: 2025-09-01
 competencies:
 - Energy

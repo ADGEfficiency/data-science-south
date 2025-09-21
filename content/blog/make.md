@@ -1,7 +1,7 @@
 ---
 title: Make for Data Science
 description: Make your data science workflows better with this classic UNIX tool.
-date: 2022-01-20
+date_created: 2022-01-20
 date_updated: '2023-12-05'
 competencies:
 - Software Engineering

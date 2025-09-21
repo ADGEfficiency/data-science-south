@@ -1,7 +1,7 @@
 ---
 title: 'A Hackers Guide to AEMO & NEM Data'
 description: A simple guide to data provided by AEMO for the Australia's National Electricity Market (NEM).
-date: 2018-08-13
+date_created: 2018-08-13
 date_updated: 2025-09-22
 competencies:
   - Energy
