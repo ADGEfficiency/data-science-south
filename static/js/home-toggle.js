@@ -155,6 +155,26 @@ document.addEventListener('DOMContentLoaded', function() {
    * Initialize collapsible sections functionality
    */
   function initializeCollapsibleSections() {
+    // Set all sections to collapsed by default, but check localStorage for saved states
+    const allSections = document.querySelectorAll('.collapsible-section');
+    allSections.forEach(section => {
+      const content = section.querySelector('.section-content');
+      const header = section.querySelector('.section-header');
+      const sectionId = header.getAttribute('data-section');
+      const currentView = getCurrentView();
+      const storageKey = `section-${currentView}-${sectionId}`;
+      const savedState = localStorage.getItem(storageKey);
+
+      // If no saved state, default to collapsed; otherwise restore saved state
+      if (!savedState || savedState === 'collapsed') {
+        content.classList.add('collapsed');
+        section.classList.add('collapsed');
+      } else if (savedState === 'expanded') {
+        content.classList.remove('collapsed');
+        section.classList.remove('collapsed');
+      }
+    });
+
     // Add event listeners to all section headers
     document.addEventListener('click', function(e) {
       if (e.target.closest('.section-header')) {

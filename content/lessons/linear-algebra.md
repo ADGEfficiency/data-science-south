@@ -1,7 +1,7 @@
 ---
 title: Linear Algebra
 summary: TODO
-draft: false
+draft: true
 competencies:
 - Algorithms
 ---
@@ -30,7 +30,7 @@ Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville]
 
 [Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
 
-[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) 
+[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/)
 
 [Understanding the internals of NumPy to avoid unnecessary array copying](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
 
@@ -41,7 +41,7 @@ Scipy lectures:
 
 ## Why Learn NumPy?
 
-NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.  
+NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.
 
 Working with a NumPy array is fast - it stores and operates on data using C structures.
 
@@ -78,7 +78,8 @@ def loop(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     for i in range(data.shape[0]):
         data[i] = left[i] + right[i]
     return data
-    
+
+
 left = np.arange(10000000)
 right = np.arange(10000000)
 
@@ -104,7 +105,7 @@ The reason that `numpy` is faster is **vectorization**
 Many CPU's have operation that run in parallel (modern x86 chips have the SSE instructions)
 
 Vectorization is
-- the process of rewriting a loop 
+- the process of rewriting a loop
 - instead of processing a single element of an array N times
 - it processes 4 elements of the array simultaneously N/4 times
 
@@ -133,7 +134,7 @@ Only holding one data type means that numpy can efficiently store data in memory
 A list doesn't know what the next object will be - this makes storing it in memory challenging
 
 ```python
-[0, 1.0, '2.0']
+[0, 1.0, "2.0"]
 ```
 
 We can make an array from a list - `numpy` will make assumptions about what datatype the array should hold:
@@ -145,7 +146,7 @@ a = np.array([10, 20.0, 0])
 ```
 
 ```python
-a[0] = '3'
+a[0] = "3"
 ```
 
 ```python
@@ -162,13 +163,13 @@ np.array([10, 20.0]).dtype
 We can change the datatype of an array:
 
 ```python
-np.array([10, 20.0]).astype('int')
+np.array([10, 20.0]).astype("int")
 ```
 
 Note that changing the datatype will by default create a newly allocated array (new location in memory) - you can control this using a an argument:
 
 ```python
-np.array([10, 20.0], copy=False).astype('int')
+np.array([10, 20.0], copy=False).astype("int")
 ```
 
 We can see the number of elements in an array:
@@ -183,7 +184,7 @@ For a vector the size will be the same as the shape:
 np.array([10, 20.0, 30]).shape
 ```
 
-We can also get the number of elements in a vector using the Python bulitin `len`:
+We can also get the number of elements in a vector using the Python built-in `len`:
 
 ```python
 len(np.array([10, 20.0, 30]))
@@ -233,7 +234,7 @@ A vector has multiple dimensions.
 $\textbf{x} = \begin{bmatrix}x_{1} \\ x_{2} \\ \vdots \\ x_{n} \end{bmatrix}$
 
 - array of $n$ numbers
-- lowercase, bold 
+- lowercase, bold
 - $x_{1}$ = first element
 - line
 
@@ -305,11 +306,11 @@ np.array([1, 2]) + np.array([1, 1])
 All of the logic above holds for subtraction, multiplication etc:
 
 ```python
-np.array([0, 1, 2]) - np.array([1]) 
+np.array([0, 1, 2]) - np.array([1])
 ```
 
 ```python
-np.array([0, 1, 2]) * np.array([2]) 
+np.array([0, 1, 2]) * np.array([2])
 ```
 
 All of these are examples of broadcasting.
@@ -321,7 +322,7 @@ The smaller array will be broadcast across the larger array
 <img src="assets/broad.png" alt="" width="300"/>
 
 ```python
-np.array([1, 2]) + np.array([1.6]) 
+np.array([1, 2]) + np.array([1.6])
 ```
 
 Note how different adding lists together is:
@@ -354,7 +355,7 @@ Function that maps from a vector to a non-negative scalar
 $||x||_{p} = \left( \sum |x|^{p} \right)^{\frac{1}{p}} $
 
 A common operation in machine learning is **gradient clipping** - this can be done by clipping by value, norm or global norm
-- global norm will keep their relative scale 
+- global norm will keep their relative scale
 
 We can do a norm in `numpy` using:
 
@@ -448,7 +449,7 @@ $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\e
 - $A_{1, 1}$ = first element
 - area
 
-## Matricies
+## Matrices
 
 #### Tensor
 
@@ -459,9 +460,9 @@ $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\e
 
 This notebook uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
 
-In the first notebook ([vector.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/1.vector.ipynb)) we dealt with vectors (one dimensional). 
+In the first notebook ([vector.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/1.vector.ipynb)) we dealt with vectors (one dimensional).
 
-Now we deal with **Matricies** - arrays with two dimensions.
+Now we deal with **Matrices** - arrays with two dimensions.
 
 $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\end{bmatrix}$
 
@@ -546,13 +547,13 @@ Reshape is (usually) computationally **cheap** - to understand why we need to kn
 - the shape is stored as a tuple
 
 Why is storing in a single block (known as a contiguous layout) a good thing?
-- to access the next value an the array 
+- to access the next value an the array
 - we just move to the next memory address
 - length = defined by the data type
 
 > ... storing data in a contiguous block of memory ensures that the architecture of modern CPUs is used optimally, in terms of memory access patterns, CPU cache, and vectorized instructions - [iPython coobook](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
 
-Changing the shape only means changing the tuple 
+Changing the shape only means changing the tuple
 - the layout of the data in memory is not changed
 
 The operations that will change the memory layout are ones that change the order of the data - for example a transpose:
@@ -638,7 +639,7 @@ np.mean(data, axis=1, keepdims=True).shape
 
 ### Practical
 
-Aggregate by variance `np.var` 
+Aggregate by variance `np.var`
 - over the rows
 - over the columns
 - over all data
@@ -676,7 +677,7 @@ Can make arrays from nested lists:
 np.array([[1, 2], [3, 4]])
 ```
 
-We can add matricies of the same shape as expected:
+We can add matrices of the same shape as expected:
 
 
 <img src="assets/add-matrix.png" alt="" width="300"/>
@@ -769,14 +770,14 @@ np.full_like(parent, 3)
 
 #### `empty`
 
-Similar to `zeros`, except the array is filled with garbage from RAM 
+Similar to `zeros`, except the array is filled with garbage from RAM
 - this is a bit quicker than `zeros`
 
 ```python
 d = np.empty(4)
 for e in range(4):
     d[e] = e
-    
+
 d
 ```
 
@@ -849,7 +850,7 @@ Create an array filled from a normal distribution, with the shape
 
 ### Practical
 
-Aggregate by standard deviation `np.std` 
+Aggregate by standard deviation `np.std`
 - over the width
 - over the height
 - over the channels

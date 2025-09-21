@@ -1,4 +1,4 @@
-You are converting a blog post from another website (adgefficiency) to this website (data-science-south).  
+You are converting a blog post from another website (adgefficiency) to this website (data-science-south).
 
 The original adgefficiency blog posts are in `./ai/adgefficiency-blog-posts-to-import/`.  They should be moved into `./content/blog`
 
@@ -10,12 +10,20 @@ For the YAML frontmatter:
 - add a date_updated set to today's date
 - update the taxonomy to use comptencies
 
+Convert image links to use she `img` shortcode:
+
+{{< img
+    src="/images/bash-shell/terminal.png"
+    caption="The DEC VT100 terminal (Hardware)"
+    width="500"
+>}}
+
 Example frontmatter after changes:
 
 <frontmatter>
 ---
 title: What is the Difference between HHV vs. LHV?
-description: Explaining the conventions for quantifying the heat of combustion. 
+description: Explaining the conventions for quantifying the heat of combustion.
 date: 2016-10-17
 date_upated: 2025-09-04
 competencies:
@@ -40,7 +48,7 @@ For the post:
 Example of post before:
 
 <post-before-conversion>
-Heat transfer is a fundamental energy engineering operation.  Hot water loops are commonly used to transfer heat in district heating networks and on industrial sites.  
+Heat transfer is a fundamental energy engineering operation.  Hot water loops are commonly used to transfer heat in district heating networks and on industrial sites.
 
 The capital & operating cost of many hot water loops are higher than they should be.  This post will explain why this is happening in the context of the foundational energy engineering equation `Q = m * Cp * dT`.
 
@@ -57,7 +65,7 @@ kW = kg/s * kJ/kg/°C * °C
 ```
 The mass flow rate `m [kg/s]` is a measurement of the amount of water flowing around the hot water loop.
 
-The specific heat capacity `Cp [kJ/kg/°C]` is a thermodynamic property specific of the fluid used to transfer heat. We could manipulate the specific heat capacity only by changing the fluid used in the loop.  
+The specific heat capacity `Cp [kJ/kg/°C]` is a thermodynamic property specific of the fluid used to transfer heat. We could manipulate the specific heat capacity only by changing the fluid used in the loop.
 
 Water is a good fluid choice for cost and safety considerations.  The specific heat capacity of water does vary with temperature but for the scope of a hot water loop it is essentially constant.
 
@@ -94,10 +102,10 @@ This post will explain the heat transfer equation $Q = m \cdot C_p \cdot dT$ and
 flowchart LR
     HG["Heat Generation<br/> Q = m · C_p · dT"]
     HC["Heat Consumption <br/> Q = m · C_p · dT"]
-    
+
     HG -->|"m [kg/s]<br/>T_FLOW [°C]"| HC
     HC -->|"m [kg/s]<br/>T_RET [°C]"| HG
-    
+
     style HG fill:#ffeeee,stroke:#ff6666,stroke-width:2px
     style HC fill:#eeeeff,stroke:#6666ff,stroke-width:2px
 ```
@@ -110,12 +118,12 @@ $$Q \text{ [kW]} = m \text{ [kg/s]} \cdot C_p \text{ [kJ/kg/°C]} \cdot dT \text
 
 - **Heat transfer rate** $Q$ [kW]: amount of thermal energy transferred per unit time.
 - **Mass flow rate** $m$ [kg/s]: measurement of the amount of water flowing around the hot water loop.
-- **Specific heat capacity** $C_p$ [kJ/kg/°C]: thermodynamic property specific of the fluid used to transfer heat. We could manipulate the specific heat capacity only by changing the fluid used in the loop.  
+- **Specific heat capacity** $C_p$ [kJ/kg/°C]: thermodynamic property specific of the fluid used to transfer heat. We could manipulate the specific heat capacity only by changing the fluid used in the loop.
 - **Temperature difference** $dT$ [°C]: difference in temperature before and after heat transfer.
 
 ## Application: Sizing Hot Water Loops
 
-**Hot water loops are commonly used to transfer heat in district heating networks and on industrial sites**. The capital and operating costs of many hot water loops are higher than they should be.  
+**Hot water loops are commonly used to transfer heat in district heating networks and on industrial sites**. The capital and operating costs of many hot water loops are higher than they should be.
 
 Optimization of a hot water loop requires correctly setting the flow rate and temperature.  **We could use a high mass flow rate and low temperature difference.  We could also use a low mass flow rate with a high temperature difference**.
 
@@ -135,7 +143,7 @@ The operating cost benefit arises from reduced pump electricity consumption and 
 
 ## Summary
 
-Heat transfer is a fundamental energy engineering operation.  
+Heat transfer is a fundamental energy engineering operation.
 
 The heat transfer equation $Q = m \cdot C_p \cdot dT$ relates the heat transfer rate to the mass flow rate, specific heat capacity and temperature difference.
 
@@ -150,4 +158,4 @@ It is fundamental to optimizing hot water loop systems:
 Thanks for reading!
 </converted-post>
 
-Convert the following blog post 
+Convert the following blog post
