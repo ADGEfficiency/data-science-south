@@ -7,32 +7,22 @@ competencies:
   - Software Engineering
 aliases:
   - 2023-11-21-vim-neovim-dvorak-split-keyboard
-toc: true
-toc_sticky: true
 ---
 
 {{< img
     src="/images/vim-neovim-dvorak/dylan.png"
-    caption="Bob Dylan"
     width="500"
 >}}
 
 {{< quote text="There are no veils, curtains, doors, walls or anything between what pours out of Bob's hand onto the page and what is somehow available to the core of people who are believers in him. There's some people who'd say 'You know, not interested'. But if you're interested, he goes way, way deep." author="Joan Baez on Bob Dylan - No Direction Home" >}}
 
-**I'm a Neovim, DVORAK & split keyboard user**.
+**I'm a Neovim, DVORAK & split keyboard user**.  I wasn't born that way.
 
-This post details my transitions between these tools:
+This post details the transitions I've made to arrive at my current toolset:
 
-- Atom to Vim to Neovim
-- QWERTY to DVORAK keyboard layout
-- a traditional to split keyboard
-
-At the end of this post is a table summarizing of each transition:
-
-- how long it took
-- the productivity increase
-- health improvements
-- whether I would recommend it
+- Atom to Vim to **Neovim**
+- QWERTY to **Dvorak keyboard layout**
+- Traditional to **split keyboard**
 
 ## The Journey
 
@@ -233,6 +223,12 @@ There are some common Vim key combinations that feel great in Dvorak:
 **Another challenge are the `{}` and `[]` keys** - on a DVORAK layout, these are hard to get at. A split keyboard helps this a lot, as you can put these on the thumb keys.
 
 ## Summary
+
+My recommendations are:
+
+- Don't use Vim, instead use **Neovim**. I highly recommend **Neovim** if you enjoy configuring your tooling
+- I do not recommend switching to the **DVORAK keyboard layout**
+- I do recommend a **split keyboard**, for the health benefits
 
 Here is a summary of each of the tool and workflow transitions - years of human experience reduced to a Markdown table:
 
