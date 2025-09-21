@@ -7,6 +7,7 @@ competencies:
 - Energy
 aliases:
 - energy-basics-hhv-versus-lhv
+- /energy-basics-hhv-versus-lhv
 
 ---
 

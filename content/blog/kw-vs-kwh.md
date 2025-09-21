@@ -7,6 +7,7 @@ competencies:
   - Energy
 aliases:
 - energy-basics-kw-vs-kwh
+- /energy-basics-kw-vs-kwh
 
 ---
 
