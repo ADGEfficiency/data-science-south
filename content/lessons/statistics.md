@@ -12,7 +12,7 @@ draft: true
 
 - **Decision Making** - Make good decisions by separating signal from noise.
 - **Machine Learning Model Evaluation** - Assess whether your models are truly capturing signal or just fitting to noise.
- 
+
 ## Uncertainty
 
 Uncertainty is inherent in real-world decision-making. Any decision we make will be under uncertainty.
@@ -137,7 +137,7 @@ Probability is essential in machine learning, with applications such as:
 
 There are two main perspectives on probability - the Frequentist perspective and the Bayesian perspective.
 
-### Frequentist Perspective 
+### Frequentist Perspective
 
 The Frequentist probability measures the frequency at which an event occurs. It is calculated by the number of times it occurs in a large number of trials.
 
@@ -178,13 +178,16 @@ This represents our revised belief about the event's likelihood, and can become 
 ```python
 import random
 
+
 def update_belief(prior_heads, prior_total, new_heads, new_flips):
     """Update belief about probability of heads after seeing new flips"""
     return prior_heads + new_heads, prior_total + new_flips
 
+
 def probability_of_heads(heads, total):
     """Calculate probability of heads"""
     return heads / total
+
 
 # starting belief: we've seen 1 heads out of 2 flips
 heads = 1
@@ -196,10 +199,10 @@ print(f"Starting belief: {probability_of_heads(heads, total_flips):.3f}")
 for flip_number in range(10):
     # flip coin (True = heads, False = tails)
     new_flip = 1 if random.random() < 0.7 else 0
-    
+
     # update our belief
     heads, total_flips = update_belief(heads, total_flips, new_flip, 1)
-    
+
     # calculate new probability
     prob = probability_of_heads(heads, total_flips)
     print(f"After flip {flip_number + 1}: {prob:.3f}")
@@ -221,7 +224,7 @@ After flip 10: 0.500
 
 ### Bayes' Theorem
 
-Bayes' Theorem is a mathematical formula that describes how to update our probability estimates based on new data. 
+Bayes' Theorem is a mathematical formula that describes how to update our probability estimates based on new data.
 
 It states that:
 
@@ -241,7 +244,7 @@ Today the inverse is true - we live in a world with access to cheap compute and 
 
 Examples include:
 
-An example of this is the rise of 
+An example of this is the rise of
 - **Bootstraps** - can calculate confidence intervals and determine statistical significance.
 - **Double Descent** - a phenomenon where the performance of a model can improve with more data, even after it has started to overfit. This counteracts traditional statistical thinking where the more training you do, the more likely you are to overfit.
 
@@ -255,7 +258,7 @@ TODO - MORE - USE OLD STATISTICS NOTES
 
 The central tendency of is the middle of a distribution.
 
-Three statistics used to measure the central tendency of a distribution are the mean, the median and the mode.  
+Three statistics used to measure the central tendency of a distribution are the mean, the median and the mode.
 
 The mean will be influenced by outliers (extreme values), where the median is not influenced by outliers.
 
@@ -321,10 +324,12 @@ The mean is the same as the expected value - a weighted average across all possi
 When a statistician says 'on expectation' or 'the expected value of this function', they mean on average.
 
 ```python
-win = {'amount': 100, 'probability': 0.1}
-lose = {'amount': -10, 'probability': 0.9}
+win = {"amount": 100, "probability": 0.1}
+lose = {"amount": -10, "probability": 0.9}
 
-expectation = (win['amount'] * win['probability']) + (lose['amount'] * lose['probability'])
+expectation = (win["amount"] * win["probability"]) + (
+    lose["amount"] * lose["probability"]
+)
 # (100 * 0.9) + (-10 * 0.9)
 # 1.0
 ```
@@ -356,9 +361,11 @@ In many ways, the median is the true centre of the data - it's by definition in 
 ```python
 import numpy as np
 
+
 def stats(data):
     print(np.mean(net_worths))
     print(np.median(net_worths))
+
 
 net_worths = [10_000, 50_000, 80_000, 50_000]
 stats(net_worths)
@@ -472,11 +479,11 @@ iqr = q3 - q1
 print(iqr)
 ```
 
-## Deviation 
+## Deviation
 
 Deviation measures are used to characterize how spread out or random a distribution is.  You should be thinking about deviation measures as measuring the space or width of a distribution.
 
-### Range
+### Ranges
 
 The range is the simplest measure of spread in a dataset, calculated as the difference between the maximum and minimum values:
 
@@ -488,9 +495,10 @@ $$
 def calculate_range(data):
     return max(data) - min(data)
 
+
 data = [2, 4, 4, 4, 5, 5, 7, 9]
 data_range = calculate_range(data)
-print(f'Range: {data_range}')
+print(f"Range: {data_range}")
 ```
 
 Advantages:
@@ -504,79 +512,9 @@ Disadvantages:
 - Sensitive to outliers,
 - Doesn't inform about how data is distributed between the extreme values.
 
-### Interquartile Range
+#### Interquartile Range
 
-### Interdecile Range
-
-### Mean Absolute Deviation
-
-Mean absolute deviation is the average of the absolute differences between each value in the dataset and the mean:
-
-$$
-\text{MAD} = \frac{1}{n} \sum_{i=1}^{n} |x_i - \bar{x}|
-$$
-
-```python
-import numpy as np
-
-wide = np.random.uniform(low=0, high=10, size=5)
-narrow = np.random.uniform(low=4, high=6, size=5)
-
-def mean_absolute_deviation(data):
-    mu = np.mean(data)
-    return np.mean(np.abs(data - mu))
-
-print(mean_absolute_deviation(wide), mean_absolute_deviation(narrow))
-```
-
-Advantages:
-
-- More robust to outliers than range or standard deviation,
-- Easy to interpret as average distance from mean,
-- Same units as original data,
-- Works well for non-normal distributions.
-
-Disadvantages:
-
-- Less commonly used than standard deviation,
-- Not suitable for further mathematical operations (due to absolute values),
-- Harder to work with analytically than standard deviation,
-- Can be computationally more expensive than range.
-
-### Maximal Deviation
-
-Maximal deviation is the largest absolute difference between any value in the dataset and the mean:
-$$
-d_{\max} = \max_i |x_i - \bar{x}|
-$$
-
-```python
-import numpy as np
-
-# create two numpy arrays of size 5 with random uniform values
-wide = np.random.uniform(low=0, high=10, size=5)
-narrow = np.random.uniform(low=4, high=6, size=5)
-
-def max_deviation(data):
-    mu = np.mean(data)
-    return np.max(np.abs(data - mu))
-
-print(max_deviation(wide), max_deviation(narrow))
-```
-
-Advantages:
-
-- Good for detecting extreme outliers,
-- Useful for setting error bounds or tolerance limits,
-- Same units as original data,
-- Simple to understand as "worst case" deviation.
-
-Disadvantages:
-
-- Sensitive to outliers,
-- Ignores all but the most extreme value,
-- May overstate typical spread of data,
-- Not representative of overall distribution.
+#### Interdecile Range
 
 ### Standard Deviation
 
@@ -595,9 +533,11 @@ import numpy as np
 wide = np.random.uniform(low=0, high=10, size=5)
 narrow = np.random.uniform(low=4, high=6, size=5)
 
+
 def standard_deviation(data):
     mu = np.mean(data)
-    return np.sqrt(np.mean((data - mu)**2))
+    return np.sqrt(np.mean((data - mu) ** 2))
+
 
 print(standard_deviation(wide))
 print(standard_deviation(narrow))
@@ -638,9 +578,11 @@ import numpy as np
 wide = np.random.uniform(low=0, high=10, size=5)
 narrow = np.random.uniform(low=4, high=6, size=5)
 
+
 def variance(data):
     mu = np.mean(data)
-    return np.mean((data - mu)**2)
+    return np.mean((data - mu) ** 2)
+
 
 print(variance(wide))
 print(variance(narrow))
@@ -708,7 +650,7 @@ A correlation coefficient of -1 indicates a perfect negative correlation, meanin
 
 ### Pearson
 
-Pearson correlation is a measure of the linear correlation between two variables. It is the most commonly used correlation coefficient, and is denoted by the symbol $r$. 
+Pearson correlation is a measure of the linear correlation between two variables. It is the most commonly used correlation coefficient, and is denoted by the symbol $r$.
 
 The Pearson correlation coefficient ranges from -1 to +1, where -1 indicates a perfect negative correlation, 0 indicates no correlation, and +1 indicates a perfect positive correlation.
 

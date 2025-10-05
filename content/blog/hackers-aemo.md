@@ -5,7 +5,6 @@ date_created: 2018-08-13
 date_updated: 2025-09-22
 competencies:
   - Energy
-  - Machine Learning
 aliases:
 - 2018-08-13-hackers-aemo
 
