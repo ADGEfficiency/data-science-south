@@ -8,6 +8,7 @@ competencies:
   - Energy
 aliases:
   - 2022-03-23-elexon-api-uk-electricity-grid-data-with-python
+  - elexon-api-uk-electricity-grid-data-with-python
 
 ---
 

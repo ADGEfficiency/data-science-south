@@ -7,6 +7,7 @@ competencies:
   - Energy
 aliases:
   - 2017-07-27-cheat-sheet-gas-engine-gas-turbine-chp-energy-basics
+  - cheat-sheet-gas-engine-gas-turbine-chp-energy-basics
 ---
 
 **Combined heat and power (CHP) maximizes the recovery of heat and electricity from fuel**. CHP is a mature technology, well suited for serving energy demands of industrial sites that consume both electricity and various grades of heat.

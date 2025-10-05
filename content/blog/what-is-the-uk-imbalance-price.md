@@ -7,6 +7,7 @@ competencies:
   - Energy
 aliases:
   - 2022-03-24-what-is-the-uk-imbalance-price
+  - what-is-the-uk-imbalance-price
 
 ---
 

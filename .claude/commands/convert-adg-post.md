@@ -30,6 +30,7 @@ competencies:
   - Energy
 aliases:
 - 2016-10-17-energy-basics-hhv-versus-lhv
+- energy-basics-hhv-versus-lhv
 
 ---
 </frontmatter>

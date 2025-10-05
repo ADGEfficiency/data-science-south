@@ -7,6 +7,7 @@ competencies:
   - Energy
 aliases:
 - 2018-08-13-hackers-aemo
+- hackers-aemo
 
 ---
 

@@ -7,6 +7,7 @@ competencies:
   - Software Engineering
 aliases:
   - 2023-11-21-vim-neovim-dvorak-split-keyboard
+  - vim-neovim-dvorak-split-keyboard
 ---
 
 {{< img
