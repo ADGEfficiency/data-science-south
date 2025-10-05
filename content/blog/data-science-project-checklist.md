@@ -5,6 +5,7 @@ date_created: 2020-10-16
 date_updated: 2020-10-16
 competencies:
 - Software Engineering
+- Analytics
 ---
 
 ## Why a Checklist?
@@ -21,7 +22,7 @@ Checklists are also useful in data science projects.  Following our checklist be
 
 ## Tested
 
-Tests are a valuable software engineering practice that all data scientists should use.  
+Tests are a valuable software engineering practice that all data scientists should use.
 
 Testing code has a number of benefits:
 
@@ -49,6 +50,7 @@ def my_complex_function():
 ```python { title = "tests.py" }
 from src import my_complex_function
 
+
 def test_my_complex_function():
     assert my_complex_function() == expected_result
 ```
@@ -61,7 +63,7 @@ $ pytest tests.py
 
 ## Styled
 
-Part of making your code accessible is formatting in a style that people expect - for Python this means following PEP8.  Code style is somewhat arbitrary - this doesn't mean it's not important.  The fact that we drive on one side of the road is also arbitrary!  
+Part of making your code accessible is formatting in a style that people expect - for Python this means following PEP8.  Code style is somewhat arbitrary - this doesn't mean it's not important.  The fact that we drive on one side of the road is also arbitrary!
 
 **Code style is important** - it allows your reader to quickly understand what your code is doing.  You introduce a lot of mental overhead if you format in inconsistent or unexpected ways.
 
@@ -95,15 +97,15 @@ Moving of source code out of notebooks has multiple benefits:
 - **reuse code** in multiple notebooks,
 - **test code**.
 
-A Jupyter Notebook is a big JSON file, with the JSON used to define where the cells are & the source Python code itself.  
+A Jupyter Notebook is a big JSON file, with the JSON used to define where the cells are & the source Python code itself.
 
 **This makes doing proper version control of notebooks almost impossible** - merging two notebooks that have diverged is possible, but it's dicey.
 
-Moving source code out of notebooks allows multiple notebooks to all import the same function. Reuse of code is a basic lesson from software engineering that all data scientists should learn.  Duplication of code is inefficient at the best of times, dangerous at the worst. 
+Moving source code out of notebooks allows multiple notebooks to all import the same function. Reuse of code is a basic lesson from software engineering that all data scientists should learn.  Duplication of code is inefficient at the best of times, dangerous at the worst.
 
 Moving source code out of notebooks is not refactoring - refactoring is the process of restructuring code, without changing behaviour. This process of restructuring code is iterative - production code is likely to have gone through multiple refactors before it's used in the wild.
 
-How many iterations of refactoring your source code should go through depends on the project - work spent refactoring research code that is thrown away may not be a good use of time. 
+How many iterations of refactoring your source code should go through depends on the project - work spent refactoring research code that is thrown away may not be a good use of time.
 
 We would expect the following steps to be taken in most projects:
 
@@ -171,7 +173,7 @@ Getting your users the data they need to run your code is one part of making you
 Next is to make sure they have the correct packages to run your code.  In Python, it's common to include a `requirements.txt` file that lists the packages you user will need.  You can automatically generate this file by writing the output of `pip freeze` into a file:
 
 ```
-$ pip freeze > requirements.txt 
+$ pip freeze > requirements.txt
 ```
 
 This will copy all the packages in your current Python installation, which results in a large and rigid requirements file.  **An alternative is to manually create a human readable `requirements.txt`**, where you specify the versions of important packages, and let `pip` manage the dependencies for you.  More stable packages can be left without version numbers, but unstable packages should have a package number specified:

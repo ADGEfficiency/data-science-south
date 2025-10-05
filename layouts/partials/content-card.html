@@ -5,12 +5,12 @@
     class="block p-3 bg-white dark:bg-transparent dark:text-gray-300 rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 dark:hover:bg-gray-700 hover:text-white dark:hover:text-white transition-all duration-200"
   >
     <h3 class="text-lg font-medium mb-2">{{ .Title }}</h3>
-    
+
     {{/* Show description */}}
     {{ with (.Description | default .Params.description) }}
     <p class="text-sm opacity-75 dark:text-gray-300 group-hover:text-white mb-2">{{ . }}</p>
     {{ end }}
-    
+
     {{/* Date and labels row */}}
     <div class="flex flex-wrap items-center gap-2">
       {{/* Show dates for blog posts and lessons */}}
@@ -18,19 +18,19 @@
         <div class="flex flex-wrap items-center gap-2">
           {{ if .Params.date_created }}
           <span class="px-2 py-1 text-xs rounded bg-orange-100 dark:bg-orange-800 text-orange-700 dark:text-orange-200 group-hover:bg-orange-500 group-hover:text-orange-50 transition-colors duration-200 inline-flex items-center gap-1">
-            <span class="w-1.5 h-1.5 bg-current rounded-full opacity-80"></span>
+            <span>Created:</span>
             {{ (time .Params.date_created).Format "Jan 2006" }}
           </span>
           {{ end }}
           {{ if and .Params.date_updated (ne .Params.date_created .Params.date_updated) }}
           <span class="px-2 py-1 text-xs rounded bg-teal-100 dark:bg-teal-800 text-teal-700 dark:text-teal-200 group-hover:bg-teal-500 group-hover:text-teal-50 transition-colors duration-200 inline-flex items-center gap-1">
-            <span class="w-0 h-0 border-l-[2px] border-r-[2px] border-b-[4px] border-l-transparent border-r-transparent border-b-current opacity-80"></span>
+            <span>Updated:</span>
             {{ (time .Params.date_updated).Format "Jan 2006" }}
           </span>
           {{ end }}
         </div>
       {{ end }}
-      
+
       {{/* Content type label */}}
       {{ if in .RelPermalink "/blog/" }}
       <span
@@ -45,7 +45,7 @@
         Lesson
       </span>
       {{ end }}
-      
+
       {{/* Competency tags */}}
       {{ range .Params.competencies }}
       <span
