@@ -1,0 +1,52 @@
+{{/* Content Metadata Partial - Reusable metadata display for content pages */}}
+{{/* Shows description, dates (created/updated), and competency tags */}}
+{{/* Use with: {{ partial "content-metadata.html" . }} */}}
+
+<div class="flex flex-col gap-3">
+  {{/* Description */}}
+  {{ with (.Description | default .Params.description) }}
+  <p class="text-sm opacity-75 dark:text-gray-300">{{ . }}</p>
+  {{ end }}
+
+  {{/* Metadata badges row */}}
+  <div class="flex flex-wrap items-center gap-2">
+    {{/* Date badges - only show for blog posts and lessons */}}
+    {{ if or (in .RelPermalink "/blog/") (in .RelPermalink "/lessons/") }}
+      <div class="flex flex-wrap items-center gap-2">
+        {{/* Created date */}}
+        {{ if .Params.date_created }}
+        <span class="px-2 py-1 text-xs rounded bg-orange-100 dark:bg-orange-800 text-orange-700 dark:text-orange-200 inline-flex items-center gap-1">
+          <span>Created:</span>
+          {{ (time .Params.date_created).Format "Jan 2006" }}
+        </span>
+        {{ end }}
+
+        {{/* Updated date - only show if different from created */}}
+        {{ if and .Params.date_updated (ne .Params.date_created .Params.date_updated) }}
+        <span class="px-2 py-1 text-xs rounded bg-teal-100 dark:bg-teal-800 text-teal-700 dark:text-teal-200 inline-flex items-center gap-1">
+          <span>Updated:</span>
+          {{ (time .Params.date_updated).Format "Jan 2006" }}
+        </span>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{/* Content type badge */}}
+    {{ if in .RelPermalink "/blog/" }}
+    <span class="px-2 py-1 text-xs rounded bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200">
+      Blog
+    </span>
+    {{ else if in .RelPermalink "/lessons/" }}
+    <span class="px-2 py-1 text-xs rounded bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-200">
+      Lesson
+    </span>
+    {{ end }}
+
+    {{/* Competency tags */}}
+    {{ range .Params.competencies }}
+    <span class="px-2 py-1 text-xs rounded bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200">
+      {{ . }}
+    </span>
+    {{ end }}
+  </div>
+</div>

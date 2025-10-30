@@ -18,6 +18,8 @@ Convert image links to use she `img` shortcode:
     width="500"
 >}}
 
+You must change the `src` to point at `/images`.
+
 Example frontmatter after changes:
 
 <frontmatter>

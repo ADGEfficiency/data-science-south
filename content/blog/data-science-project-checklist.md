@@ -4,8 +4,7 @@ description: Make your data science projects presentable, reproducible, accessib
 date_created: 2020-10-16
 date_updated: 2020-10-16
 competencies:
-- Software Engineering
-- Analytics
+- Soft Skills
 ---
 
 ## Why a Checklist?

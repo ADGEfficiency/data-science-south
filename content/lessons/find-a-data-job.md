@@ -1,6 +1,6 @@
 ---
 title: Find a Data Job
-description: Find your next role as a a data professional by focusing on the correct data role and using stories to demonstrate your compentence.
+description: Find your next role as a a data professional.
 date_created: 2025-04-06
 date_updated: 2025-04-06
 competencies:
@@ -115,7 +115,7 @@ graph TD
     analyst["Data Analyst"]
     engineer["Data Engineer"]
     scientist["Data Scientist"]
-    
+
     core --- analyst
     core --- engineer
     core --- scientist
@@ -212,7 +212,7 @@ Favour a concentrated, deep approach over a wide, shallow net.  You only need to
 Your career materials will reflect the job requirements of your desired role.
 
 When you review job advertisements for roles in your data focus, you are looking for skills, tools and competencies like leadership or initiative.  **If they are mentioned in the job advertisement, they should be mentioned in your career materials (CV, cover letter etc.)**.
- 
+
 ### Where to Find Jobs?
 
 One of the best places to find a job is directly from a company - by paying attention to their job listings on their website or social media.
@@ -224,7 +224,7 @@ More common is to find job listings on an aggregated platform such as LinkedIn, 
 Even when you find a job on an aggregation site, always try to apply through the company website - it is very easy to spam applications on LinkedIn!
 
 Jobs can also posted on community forums such as Slack or Discord channels - here are a few of our favourites are the [Climate Change AI](https://www.climatechange.ai/) and [DataTalks.Club](https://datatalks.club/).
- 
+
 ## 3. Demonstrate Competence
 
 Getting a job requires demonstrating competence - showing you can do the job.
@@ -253,11 +253,11 @@ Used Python to analyze data.
 
 These feel different - the story implies action, the list bores.  Stories also feel more real & convincing - it's harder to lie when you are painting a picture.
 
-Action focused stories highlight your contribution to tangible successes, such as *developed a machine learning model that reduced churn 4%* or *improved data quality leading to saving 4 hours of developer time per week*. 
+Action focused stories highlight your contribution to tangible successes, such as *developed a machine learning model that reduced churn 4%* or *improved data quality leading to saving 4 hours of developer time per week*.
 
 Use strong action verbs to describe your experience - take credit and responsibility for your work (while remaining honest). Be specific - include numbers in your accomplishments whenever possible.
 
-Show evidence of your successes - use specific and relevant examples of your achievements to demonstrate you have what the employer is looking for.  
+Show evidence of your successes - use specific and relevant examples of your achievements to demonstrate you have what the employer is looking for.
 
 Stories can be reused - on your CV and in an interview.  One story can also communicate multiple skills or competencies - such as showing teamwork and leadership.
 
@@ -265,7 +265,7 @@ To summarize, stories are important because they:
 
 - **Be Action Focused** - an engaging way to demonstrate competence.
 - **Can Show Specific Examples** (ideally quantified) of your success.
-- **Can Be Re-Used** - one story can demonstrate many competencies.
+- **Can Be reused** - one story can demonstrate many competencies.
 - **Are Believable** - it's harder to lie in a story than a list.
 
 ### Four Competencies of a Data Professional
@@ -378,9 +378,9 @@ Your career materials should be tailored to the data role you are interested in.
 
 All your career materials should be cleanly and consistently formatted, without spelling or grammatical errors.
 
-## CV 
+## CV
 
-**A CV (Curriculum Vitae) summarizes your education, work experience, and skills**. 
+**A CV (Curriculum Vitae) summarizes your education, work experience, and skills**.
 
 It's likely that everyone involved in your job application process will look at your CV - it's the most important career document.
 
@@ -424,7 +424,7 @@ Your summary can focus on your experience, your skills or your professional miss
 
 ```text {title = "Summary CV Section"}
 Data {analyst | scientist | engineer} with {n} years of experience in {industry}.
-Proven ability to {skill}. 
+Proven ability to {skill}.
 Passionate about {industry | topic}.
 ```
 
@@ -446,11 +446,11 @@ Passionate about {industry | topic}.
 
 ### Education
 
-**Your education section lists relevant education at universities or bootcamps**. 
+**Your education section lists relevant education at universities or bootcamps**.
 
 You can also consider adding online courses or certifications.
 
-How much you include here depends on your level.  If you are early on in your career, you might include a relevant list of courses for your degrees.  
+How much you include here depends on your level.  If you are early on in your career, you might include a relevant list of courses for your degrees.
 
 For those with a decade of experience, they may only include the degree title, preferring to use the space on their experience.
 
@@ -472,7 +472,7 @@ If you do include a skill on your CV, be prepared to be asked questions about in
 
 ## Cover Letter
 
-**A cover letter provides a more detailed explanation of why you are a good fit for the job**. 
+**A cover letter provides a more detailed explanation of why you are a good fit for the job**.
 
 A cover letter is a one page personalised note to support your job application. Like your CV it should be targeted, tailored and personalised.  It should be formatted consistently with your CV.  Your cover letter should be one page - between five to eight paragraphs. Ideally it is addressed to specific person.
 
@@ -500,13 +500,13 @@ Middle section (second, third and/or fourth paragraphs):
 Ending - one of:
 - I look forward to hearing from you to discuss this role further,
 - Kind regards,
-- Your sincerly,
+- Your sincerely,
 - Thank you for considering my application. I look forward to hearing from you,
 ```
 
 ## LinkedIn
 
-**LinkedIn is a professional social media website**. It allows you to showcase your skills, experience, and qualifications. It also allows you to connect with other professionals in your field and get an idea of the kind of job opportunities that are available. 
+**LinkedIn is a professional social media website**. It allows you to showcase your skills, experience, and qualifications. It also allows you to connect with other professionals in your field and get an idea of the kind of job opportunities that are available.
 
 For better or worse, LinkedIn is currently the leading professional social media website. You don't need to be a [LinkedIn influencer](https://www.reddit.com/r/LinkedInLunatics/) - but you should keep your profile updated and professional.
 
@@ -520,7 +520,7 @@ A GitHub profile has many false negatives - many good developers have no GitHub,
 
 ## Portfolio Projects
 
-A well-crafted portfolio of data projects is one of the most powerful ways to demonstrate your skills to potential employers. While 
+A well-crafted portfolio of data projects is one of the most powerful ways to demonstrate your skills to potential employers. While
 
 your resume tells employers what you can do, your portfolio shows them.
 
@@ -795,4 +795,3 @@ Sample ML take home pipeline:
 ### Offer
 
 Once the assessment is completed, the company will make a job offer to the candidate if they are deemed to be a good fit for the position.
-

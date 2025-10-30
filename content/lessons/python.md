@@ -4,7 +4,8 @@ description: The default programming language for working with data.
 date_created: 2024-12-07
 date_updated: 2024-12-07
 competencies:
-- "Software Engineering"
+- Software Engineering
+- Python
 ---
 
 ## Why Learn Python?
@@ -35,7 +36,7 @@ Many development tasks involve more reading than writing code.
 
 ### How is Python Read?
 
-Like English, Python is read from top to bottom, left to right. Code is executed line by line. 
+Like English, Python is read from top to bottom, left to right. Code is executed line by line.
 
 When reading you should start at the top, and read downwards.
 
@@ -59,7 +60,7 @@ Built-in functions are always available in Python. We do not need to define buil
 
 Common built-in functions include:
 - `print` which will print to the screen,
-- `sum`, which will add all the elements of an iterable, 
+- `sum`, which will add all the elements of an iterable,
 - `len` which will measure the length of an iterable.
 
 ### Refactoring Hello World
@@ -81,13 +82,13 @@ Whether you think our refactored program is an improvement depends on your prefe
 
 ## For Loops
 
-**Looping is the process of running the same thing many times**.  
+**Looping is the process of running the same thing many times**.
 
 Looping is an example of iteration, and is a core programming concept.  Many programming languages support loops that can repeat logic on each of the things.
 
 ### Iterable Objects in Python
 
-An iterable thing is a sequence of things. 
+An iterable thing is a sequence of things.
 
 In Python, objects that can be iterated over are iterable. The `list`, `dict` and `str` are all iterable.
 
@@ -95,9 +96,9 @@ What things are in an iterable depends on the iterable.  For a `list`, the thing
 
 ### For Loops in Python
 
-In Python, we can iterate using a `for thing in things:` syntax. 
+In Python, we can iterate using a `for thing in things:` syntax.
 
-The length of the for loop is determined by the length of `things`.  
+The length of the for loop is determined by the length of `things`.
 
 Its length will determine how many times our for loop runs:
 
@@ -125,7 +126,7 @@ These different pockets of space become areas where we can limit access to varia
 
 The program below defines the variable `x` twice - once inside the `main` function and once outside the `main` function.
 
-These two identically named variables `x` can exist alongside each other in the same program, but not at the same time. 
+These two identically named variables `x` can exist alongside each other in the same program, but not at the same time.
 
 They exist in different scopes:
 
@@ -133,6 +134,7 @@ They exist in different scopes:
 def main():
     x = 20
     print(f"function main scope, {x=}")
+
 
 x = 10
 print(f"global scope, {x=}")
@@ -150,7 +152,7 @@ Scope is important in Python as it is how we define what code runs in for loops 
 
 ## Whitespace Indentation
 
-One of Python's defining features is the use of white space to manage scope.  
+One of Python's defining features is the use of white space to manage scope.
 
 Other languages like C or Javascript use characters like `{ }` and `;` to control scope - Python uses whitespace.
 
@@ -194,7 +196,7 @@ We can use this condition in an `if` statement:
 if True:
     print("condition is true")
 
-if (2 == 2):
+if 2 == 2:
     print("condition is true")
 
 if not (1 == 2):
@@ -203,7 +205,7 @@ if not (1 == 2):
 
 ### Truth versus Falsy
 
-**Truthiness is a property of a Python object**. 
+**Truthiness is a property of a Python object**.
 
 All Python objects are either truthy or falsy (but not both).
 
@@ -264,9 +266,9 @@ while counter < 3:
     print(f"counter: {counter}")
 ```
 
-The state that the conditional relies upon (here the variable `counter`) is updated each time through the loop.  
+The state that the conditional relies upon (here the variable `counter`) is updated each time through the loop.
 
-**If the condition is never met, then the loop becomes an infinite loop**. 
+**If the condition is never met, then the loop becomes an infinite loop**.
 
 An infinite loop is a bug where a program will never finish.
 
@@ -292,7 +294,7 @@ assert 1 == 0, "this assert failed because 1 is not equal to 0"
 
 ### When to Use Assert Statements
 
-Use assert statements when you want to check something in your code.  
+Use assert statements when you want to check something in your code.
 
 Data science examples of using asserts include:
 
@@ -304,9 +306,9 @@ Data science examples of using asserts include:
 
 ### Lists are for Sequential Data
 
-A data structure stores and organizes data in a computer program.  
+A data structure stores and organizes data in a computer program.
 
-**The list is an ordered data structure**. Each of the items in the list has a position relative to all the other items.  
+**The list is an ordered data structure**. Each of the items in the list has a position relative to all the other items.
 
 Lists are good when we have data that is ordinal or sequential, where things come in a sequence, one after the other.
 
@@ -333,7 +335,7 @@ for n in range(3):
 print(data)
 ```
 
-`.append` adds data to the list **in-place** and returns `None`. 
+`.append` adds data to the list **in-place** and returns `None`.
 
 If instead we assigned our variable `data` to the output of `.append`, we would lose our variable reference to the list - a common mistake:
 
@@ -378,7 +380,7 @@ assert len(data) == 3
 
 ### Dictionaries are for Named Data
 
-A data structure stores and organizes data in a computer program.  
+A data structure stores and organizes data in a computer program.
 
 The dictionary is a data structure that refers to data by name. Each **value** (data) in the dictionary has a **key** (name).
 
@@ -405,10 +407,7 @@ print(data["message"])
 We can add elements to our dictionary by assigning a key to a value:
 
 ```python
-data = {
-  "message": "hello",
-  "status": "priority"
-}
+data = {"message": "hello", "status": "priority"}
 assert data["status"] == "priority"
 print(data)
 ```
@@ -418,10 +417,7 @@ print(data)
 We can iterate over the keys and values in a dictionary with `.items()`:
 
 ```python
-data = {
-  "message": "hello",
-  "status": "priority"
-}
+data = {"message": "hello", "status": "priority"}
 for key, value in data.items():
     print(f"{key}: {value}")
 ```
@@ -430,11 +426,11 @@ You can also just iterate over the keys using `.keys()` or the values using `.va
 
 The dictionary has no order - you should never rely on the order of iteration when iterating over the keys, values or items in a dictionary.  If you want a particular order, use a list.
 
-## Sets 
+## Sets
 
 ### Sets are for Unique Data
 
-A data structure stores and organizes data in a computer program.  
+A data structure stores and organizes data in a computer program.
 
 The set is a data structure that holds unique values - each value only occurs once in the set.
 
@@ -471,9 +467,9 @@ Functions allow us to organize, manage and structure the functionality of a comp
 
 ### Functions Can Be Reused
 
-**A killer-feature of the function is that we can re-use it**.  
+**A killer-feature of the function is that we can reuse it**.
 
-Executing a function many times allow us to write code once and use it many times. 
+Executing a function many times allow us to write code once and use it many times.
 
 Good function design will avoid duplicated code. Duplicated code is bad because we need to update multiple places in a code base when we want to change only one thing.
 
@@ -484,13 +480,14 @@ def f(x):
     return x * x
 ```
 
-The function `f(x)` is defined at the moment this code is executed, but it's not executed yet, it's just defined. 
+The function `f(x)` is defined at the moment this code is executed, but it's not executed yet, it's just defined.
 
 We can execute this function using `function_name(inputs)`:
 
 ```python
 def f(x):
     return x * x
+
 
 print(f(2))
 assert f(2) == 4
@@ -502,6 +499,7 @@ We can use a different name for our function by changing the word after the `def
 ```python
 def g(x):
     return x * x
+
 
 print(g(2))
 assert g(2) == 4
@@ -515,6 +513,8 @@ Functions can also take multiple inputs, which can be defined in the parenthses 
 ```python
 def add(a, b):
     return a + b
+
+
 print(add(2, 3))
 assert add(2, 3) == 5
 ```
@@ -526,6 +526,7 @@ Functions can also have default values for inputs, which means that the input do
 ```python
 def add(a, b=0):
     return a + b
+
 
 print(add(2))
 assert add(2) == 2
@@ -541,6 +542,7 @@ def calculate_result(a, b):
     message = "Calculation successful"
     return result, message
 
+
 print(calculate_result(2, 3))
 ```
 
@@ -548,15 +550,16 @@ Or it could return a dictionary containing different pieces of information:
 
 ```python
 def gather_data(a, b):
-    data = {"result": a*b, "status": "success"}
+    data = {"result": a * b, "status": "success"}
     return data
 
-print(gather_data(2,3))
+
+print(gather_data(2, 3))
 ```
 
 ## Classes
 
-Classes are a tool used to organize and reuse code. 
+Classes are a tool used to organize and reuse code.
 
 Like a function, a Python class allows us to organize functionality.  **In addition to organizing functionality, a class also allows organizing data**.
 
@@ -566,7 +569,7 @@ Class attributes are often lower level data structures like strings, dictionarie
 
 ### Class Instances
 
-**An instance of a class is an individual object created from that class, which has its own unique set of attributes and methods**. 
+**An instance of a class is an individual object created from that class, which has its own unique set of attributes and methods**.
 
 It can be thought of as a specific occurrence or realization of the general structure defined by the class.
 
@@ -587,6 +590,7 @@ class MathRobot:
 
     def add(self, x, y):
         return x + y
+
 
 robot = MathRobot("issac")
 ```
@@ -619,10 +623,11 @@ class MathRobot:
 
     def add(self, x, y):
         return x + y
-    
+
     @classmethod
     def get_robot_count(cls):
         return cls.robot_count
+
 
 robot1 = MathRobot("issac")
 robot2 = MathRobot("robot2")
@@ -687,7 +692,7 @@ print(fi)
 
 ### Listing Files and Directories
 
-We can use `pathlib` to list the files and directories in a given directory.  
+We can use `pathlib` to list the files and directories in a given directory.
 
 The `pathlib.Path` object has a method called `iterdir()` which returns a list of `Path` objects for each file and directory in the given directory:
 
@@ -719,16 +724,20 @@ A JSON object is represented in key-value pairs, where the keys are strings and 
 
 ```json
 {
-    "name": "John Smith",
-    "age": 30,
-    "isStudent": false,
-    "courses": ["math", "history", "science"]
+  "name": "John Smith",
+  "age": 30,
+  "isStudent": false,
+  "courses": [
+    "math",
+    "history",
+    "science"
+  ]
 }
 ```
 
 The `json` Python library provides `json.dumps()` to convert a Python object to a JSON string, and `json.loads()` to convert a JSON string to a Python object.
 
-The suffix `s` in `json.loads` and `json.dumps` means string - that we are either loading from a string with `json.loads`, or transforming into a string with `json.dumps`, which dumps the object into a string.  
+The suffix `s` in `json.loads` and `json.dumps` means string - that we are either loading from a string with `json.loads`, or transforming into a string with `json.dumps`, which dumps the object into a string.
 
 ### Writing JSON Files
 
@@ -739,7 +748,7 @@ import json
 from pathlib import Path
 
 # define a Python object - a list of dictionaries
-data = [{'name': 'John', 'age': 30}, {'name': 'Jane', 'age': 25}]
+data = [{"name": "John", "age": 30}, {"name": "Jane", "age": 25}]
 
 # convert the Python object to a JSON formatted string
 data_json = json.dumps(data)
@@ -767,9 +776,9 @@ print(data_from_file)
 
 ## Libraries
 
-**A library is a collection of pre-written code that can be used to perform specific tasks**. 
+**A library is a collection of pre-written code that can be used to perform specific tasks**.
 
-Libraries can be imported and used to add functionality to the program without having to write the code from scratch.  
+Libraries can be imported and used to add functionality to the program without having to write the code from scratch.
 
 Python has a large ecosystem of libraries, available both from the standard library and from third-parties.
 
@@ -831,7 +840,7 @@ print(pathlib)
 
 #### Import Objects from a Library
 
-We can also import specific objects from a library.  
+We can also import specific objects from a library.
 
 These objects can be Python classes, functions or variables that point to lower level objects like strings or lists.
 
@@ -855,9 +864,9 @@ print(PathObject)
 
 ### The Standard Library
 
-**The standard library in Python is a collection of libraries that are included with the Python programming language**. 
+**The standard library in Python is a collection of libraries that are included with the Python programming language**.
 
-It includes a wide range of libraries that are available for use without the need for additional installation or setup. 
+It includes a wide range of libraries that are available for use without the need for additional installation or setup.
 
 **Python's standard library is why Python is known as a batteries included programming language**.  Python includes a lot of functionality out of the box.
 

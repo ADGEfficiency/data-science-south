@@ -29,12 +29,6 @@
       >
         Topic
       </button>
-      <button
-        id="type-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
-      >
-        Type
-      </button>
       <div class="ml-auto">
         <button
           id="toggle-all-btn"
@@ -187,42 +181,6 @@
             </div>
           </div>
         {{ end }}
-      {{ end }}
-    </div>
-    {{/* Type view */}}
-    <div id="type-view" class="hidden">
-      {{/* Get all pages grouped by type */}} {{ $blogPages := where $allPages
-      "Type" "blog" }} {{ $lessonPages := where $allPages "Type" "lessons" }}
-      {{/* Display blog posts */}} {{ if $blogPages }}
-      <div class="collapsible-section">
-        <button class="section-header flex items-center justify-between" data-section="type-blog">
-          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Blog Posts
-            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
-              ({{ len $blogPages }}{{ if eq (len $blogPages) 1 }} item{{ else }} items{{ end }})
-            </span>
-          </h2>
-          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
-        </button>
-        <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range sort $blogPages ".Params.date_created" "desc" }} {{ partial "content-card.html" . }} {{ end }}
-        </div>
-      </div>
-      {{ end }} {{/* Display lessons */}} {{ if $lessonPages }}
-      <div class="collapsible-section">
-        <button class="section-header flex items-center justify-between" data-section="type-lessons">
-          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Lessons
-            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
-              ({{ len $lessonPages }}{{ if eq (len $lessonPages) 1 }} item{{ else }} items{{ end }})
-            </span>
-          </h2>
-          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
-        </button>
-        <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range sort $lessonPages ".Params.date_created" "desc" }} {{ partial "content-card.html" . }} {{ end }}
-        </div>
-      </div>
       {{ end }}
     </div>
     </div>

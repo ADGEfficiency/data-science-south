@@ -5,15 +5,17 @@ date_created: 2023-02-25
 date_updated: 2023-02-25
 competencies:
 - Software Engineering
+- Python
+
 
 ---
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤
 
-{{< img 
+{{< img
     src="/images/hypermodern-python-2023/hero.png"
-    alt="Computer terminal in MC Escher style" 
-    caption="{Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white', Seed: 4, Creator: Stable Diffusion 1}" 
+    alt="Computer terminal in MC Escher style"
+    caption="{Prompt: 'a small computer terminal, in the style and layout of 'day and night' by of M.C. Escher, black and white', Seed: 4, Creator: Stable Diffusion 1}"
 >}}
 
 This post provides clarity with the **Hypermodern Python Toolbox** - tools that are setting the standard for Python in 2023.
@@ -22,15 +24,15 @@ This post provides clarity with the **Hypermodern Python Toolbox** - tools that 
 
 **Python 3.10 added better error messages** - improving the information available for developers during development and debugging.
 
-The code below has a mistake. We want to assign a value to the first element of `data`, but the code refers to a non-existent variable `datas`:
+The code below has a mistake. We want to assign a value to the first element of `data`, but the code refers to a non-existent variable `data`:
 
 ```python { title = "mistake.py" }
 data = [1, 4, 8]
-#  the variable datas does not exist!
-datas[0] = 2
+#  the variable data does not exist!
+data[0] = 2
 ```
 
-With older versions of Python, this results in an error traceback that points out that the variable `datas` doesn't exist:
+With older versions of Python, this results in an error traceback that points out that the variable `data` doesn't exist:
 
 ```shell-session
 $ python --version
@@ -39,7 +41,7 @@ $ python --version
 $ python mistake.py
 Traceback (most recent call last):
   File "mistake.py", line 2, in <module>
-    datas[0] = 2
+    data[0] = 2
 NameError: name 'datas' is not defined
 ```
 
@@ -52,7 +54,7 @@ $ python --version
 $ python mistake.py
 Traceback (most recent call last):
   File "/Users/adam/hypermodern-python/mistake.py", line 2, in <module>
-    datas[0] = 2
+    data[0] = 2
 NameError: name 'datas' is not defined. Did you mean: 'data'?
 ```
 
@@ -60,7 +62,7 @@ So much of programming is reading & responding error messages - these improvemen
 
 ## pyenv & pyenv-virtualenv
 
-The hardest thing about learning Python is learning to install & manage Python.  
+The hardest thing about learning Python is learning to install & manage Python.
 
 Even senior developers can struggle with it, especially if Python is not their main language.
 
@@ -95,9 +97,9 @@ Installed Python-3.10.6 to /Users/adam/.pyenv/versions/3.10.6
 One trick with using pyenv is getting compiler flags correct - if you are having an trouble, take a look at this [installer script for Ubuntu](https://github.com/ADGEfficiency/dotfiles/blob/master/ubuntu/pyenv), [installer script for MacOS](https://github.com/ADGEfficiency/dotfiles/blob/master/macos/pyenv) and these [compiler flags](https://github.com/ADGEfficiency/dotfiles/blob/master/macos/pyenv-flags).
 
 
-**[pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) is a tool for managing virtual environments in Python**. It's an alternative to venv or miniconda.  Virtual environments allow separate installations of Python to live side-by-side. 
+**[pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) is a tool for managing virtual environments in Python**. It's an alternative to venv or miniconda.  Virtual environments allow separate installations of Python to live side-by-side.
 
-pyenv-virtualenv plays well with our pyenv installations of Python. We can create a new virtual environment with `$ pyenv virtualenv {version} {name}`. 
+pyenv-virtualenv plays well with our pyenv installations of Python. We can create a new virtual environment with `$ pyenv virtualenv {version} {name}`.
 
 Below we create a 3.10.6 Python virtual environment called `default`:
 
@@ -134,7 +136,7 @@ Poetry uses two different files:
 1. `pyproject.toml` to describe our Python package,
 2. `poetry.lock` to define and lock all dependencies - similar to the output of `$ pip freeze`.
 
-These two files are can be generated automatically - `poetry.lock` is only ever generated automatically.  
+These two files are can be generated automatically - `poetry.lock` is only ever generated automatically.
 
 Poetry has two ways to start a new project:
 
@@ -228,7 +230,7 @@ $ poetry export -f requirements.txt > requirements.txt
 The code below in `bad_format.py` is poorly formatted:
 
 ```python { title = "bad_format.py" }
-data=[1, 4, 8]
+data = [1, 4, 8]
 data[0] = 2
 ```
 
@@ -255,6 +257,7 @@ The code below in `bad_imports.py` has imports that are out of order alphabetica
 import pandas as pd
 import random
 import collections
+
 data = [1, 4, 8]
 data[0] = 2
 ```
@@ -286,12 +289,12 @@ data[0] = 2
 
 Ruff's big thing is being written in Rust - this makes it fast.  When used with Black to ensure consistent code style, Ruff covers much of the Flake8 rule set, along with other rules such as isort.
 
-A great way to use Ruff is with the defaults and check everything.  
+A great way to use Ruff is with the defaults and check everything.
 
-The code below has three problems - we use an undefined variable `datas`, it has imports in the wrong place and imports something we don't use:
+The code below has three problems - we use an undefined variable `data`, it has imports in the wrong place and imports something we don't use:
 
 ```python { title = "ruff.py" }
-data = datas[0]
+data = data[0]
 import collections
 ```
 
@@ -299,7 +302,7 @@ Running Ruff in the same directory points out the issues:
 
 ```shell-session
 $ ruff check .
-ruff.py:1:8: F821 Undefined name `datas`
+ruff.py:1:8: F821 Undefined name `data`
 ruff.py:2:1: E402 Module level import not at top of file
 ruff.py:2:8: F401 [*] `collections` imported but unused
 Found 3 errors.
@@ -319,9 +322,10 @@ The code below in `mypy_error.py` has a problem - we attempt to divide a string 
 ```python { title = "mypy_error.py" }
 def process(user):
     #  line below causes an error
-    user['name'] / 10
+    user["name"] / 10
 
-user = {'name': 'alpha'}
+
+user = {"name": "alpha"}
 process(user)
 ```
 
@@ -340,10 +344,11 @@ These first errors are because our Python code has zero typing - let's add two t
 2. `-> None:` - the `process` function returns None.
 
 ```python { title = "mypy_intermediate.py"}
-def process(user: dict[str,str]) -> None:
-    user['name'] / 10
+def process(user: dict[str, str]) -> None:
+    user["name"] / 10
 
-user = {'name': 'alpha'}
+
+user = {"name": "alpha"}
 process(user)
 ```
 
@@ -373,9 +378,9 @@ pydantic uses Python type hints to define data types. Imagine we want a user wit
 import uuid
 
 users = [
-    {'name': 'alpha', 'id': str(uuid.uuid4())},
-    {'name': 'beta'},
-    {'name': 'omega', 'id': 'invalid'}
+    {"name": "alpha", "id": str(uuid.uuid4())},
+    {"name": "beta"},
+    {"name": "omega", "id": "invalid"},
 ]
 ```
 
@@ -402,11 +407,12 @@ A strength of pydantic is validation - we can introduce some validation of our u
 import uuid
 import pydantic
 
+
 class User(pydantic.BaseModel):
     name: str
     id: str = None
 
-    @pydantic.validator('id')
+    @pydantic.validator("id")
     def validate_id(cls, user_id):
         try:
             user_id = uuid.UUID(user_id, version=4)
@@ -416,10 +422,11 @@ class User(pydantic.BaseModel):
             print(f"{user_id} is invalid")
             return None
 
+
 users = [
-    User(name='alpha', id= str(uuid.uuid4())),
-    User(name='beta'),
-    User(name='omega', id='invalid'),
+    User(name="alpha", id=str(uuid.uuid4())),
+    User(name="beta"),
+    User(name="omega", id="invalid"),
 ]
 [print(user) for user in users]
 ```
@@ -435,7 +442,7 @@ name='beta' id=None
 name='omega' id=None
 ```
 
-These pydantic types can become the primitive data structures in your Python programs (instead of dictionaries) - making it eaiser for other developers to understand what is going on.
+These pydantic types can become the primitive data structures in your Python programs (instead of dictionaries) - making it easier for other developers to understand what is going on.
 
 *Tip - you can generate Typescript types from pydantic models - making it possible to share the same data structures with your Typescript frontend and Python backend.*
 
@@ -465,8 +472,10 @@ We then add a Python file `./general/cli.py` with our Typer CLI:
 ```python { title = "./general/cli.py" }
 import typer
 
+
 def main(name: str) -> None:
     print(f"Hello {name}")
+
 
 if __name__ == "__main__":
     typer.run(main)
@@ -513,9 +522,9 @@ hello zeta
 
 ## zxpy
 
-**[zxpy](https://github.com/tusharsadhwani/zxpy) is a tool for running shell commands inside Python**.  
+**[zxpy](https://github.com/tusharsadhwani/zxpy) is a tool for running shell commands inside Python**.
 
-We will use the [Github CLI](https://cli.github.com/manual/) as a source of shell commands - it is a nice way to get data about your code on Github. 
+We will use the [Github CLI](https://cli.github.com/manual/) as a source of shell commands - it is a nice way to get data about your code on Github.
 
 Below we get all the issues for the mypy repository on Github:
 
@@ -544,7 +553,7 @@ print(f" first {issues[0]}")
 print(" last {issues[-1]}")
 ```
 
-We can then run this script using the zxpy interperter:
+We can then run this script using the zxpy interpreter:
 
 ```shell-session
 $ zxpy zxpy_eg.py
@@ -565,7 +574,7 @@ One of Rich's most useful features is pretty printing of color and emojis:
 ```python
 import rich
 
-user = {'name': 'omega', 'id': 'invalid'}
+user = {"name": "omega", "id": "invalid"}
 print(f" normal printing\nuser {user}\n")
 rich.print(f" :wave: [bold blue]rich[/] [green]printing[/]\nuser {user}\n")
 ```
@@ -576,7 +585,8 @@ If you are happy with Rich you can simplify your code by replacing the built-in 
 
 ```python
 from rich import print
-print('this will be printed with rich :clap:')
+
+print("this will be printed with rich :clap:")
 ```
 
 ![](/static/blog/hypermodern-python/rich2.png)
