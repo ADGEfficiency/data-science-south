@@ -1,6 +1,6 @@
 ---
 id: python-function-signatures
-title: "Function Signatures as Contracts: Python's Hidden Type Safety"
+title: "Python Function Signatures as Contracts"
 tags: []
 competencies:
 - Python
@@ -17,24 +17,23 @@ Why Your Python Functions Are Breaking in Production (And How to Fix Them)
 
 I Stopped Writing Python Functions the Wrong Way After Learning This
 
+https://claude.ai/chat/e532199e-0173-4370-9835-188f2eef69b9
+
 ---
 
-Type as a contract???  Contracts as an idea?
+Python developers obsess over type hints for return values and parameters, but they ignore the most powerful contract mechanism available: the function signature itself.
+
+A contract is an agreement between two parties. In programming, a function signature defines the contract between the function and its callers - the stronger the contract, the happier the world.
 
 This blog post covers four ways to strengthen Python function signatures:
 
 1. Positional & Keyword Function Parameters
-2. Generic Functions with TypeVar
+2. Generic Functions with `TypeVar`
 3. Function Overloading with `@overload`
 
+## Problem: Weak Function Signatures
 
----
-
-https://claude.ai/chat/e532199e-0173-4370-9835-188f2eef69b9
-
-Python developers obsess over type hints for return values and parameters, but they ignore the most powerful contract mechanism available: the function signature itself.
-
-Most Python functions accept arguments in ways that guarantee bugs. Consider this common pattern:
+Most Python functions accept arguments in ways that invite bugs. Consider the function signature below:
 
 ```python
 def process_data(data, encoding="utf-8", strict=False) -> None:
@@ -51,79 +50,43 @@ process_data(my_data, "latin-1", True)
 process_data(encoding="utf-8", data=my_data)
 ```
 
-The variety of different calling conventions have the following impacts:
+All of these different valid function calling patterns makes refactoring the function difficult.  If we change the order of function arguments, or change parameter names, we will break code that relied on that order or those names.
 
-- **Refactoring**: You won't know how users are using your code, which makes changing it safely hard
-- **Debugging**: Parameter order mistakes
+Too much freedom in how a function is called also increases the number of mistakes a function caller can make when using a function.
 
-## Constraining Parameter Passing: `/` and `*` Syntax
+## Solution One: Constraining Parameter Passing: `/` and `*` Syntax
 
-Most Python functions accept arguments in ways that guarantee bugs. The solution: constrain how callers can pass parameters using `/` and `*` in your function signature.
+Most Python functions accept arguments in ways that guarantee bugs. The solution:
+
+The first solution to tightening the function signature contract is to constrain how callers can pass parameters using `/` and `*` in your function signature.
+
+The function below divides parameters into three zones:
+
+- **Positional only**: Use `/` to force parameters to be passed positionally
+- **Keyword only**: Use `*` to force parameters to be passed as keywords
+- **Flexible**: Parameters between `/` and `*` can be passed either way
 
 ```python
-def process_data(data, /, mode="strict", *, encoding="utf-8", errors="ignore"):
+def process_data(
+    data: pd.DataFrame, /, mode: str = "strict", *, encoding: str = "utf-8"
+i) -> None:
     pass
 ```
 
-This signature divides parameters into three zones:
+In the function above:
 
-- Before `/`: positional-only (`data`)
-- Between `/` and `*`: flexible (`mode`)
-- After `*`: keyword-only (`encoding`, `errors`)
+- We can only pass the dataframe `data` positionally
+- We can pass `mode` as either positional or keyword
+- We can only pass` encoding` as a keyword
 
-### Positional-Only Parameters `/`
-
-```python
-def process_data(data, /, encoding="utf-8", strict=False) -> None:
-    # implementation
-```
-
-Parameters before `/` must be positional. This forbids `process_data(data=my_data)`, which seems restrictive until you realize what it enables: you can rename the parameter without breaking any code.
-
-```python
-def process_data(content, /, encoding="utf-8", strict=False):
-    # implementation
-```
-
-Every call site still works. This is why `len(obj)` works but `len(obj=my_list)` doesn't. The standard library uses positional-only parameters everywhere to maintain backward compatibility while evolving parameter names.
-
-### Keyword-Only Parameters `*`
-
-```python
-def process_data(data, /, *, encoding="utf-8", strict=False):
-    # implementation
-```
-
-Parameters after `*` must be keywords. This prevents `process_data(my_data, "latin-1", True)`, which is unreadable at the call site. It forces `process_data(my_data, encoding="latin-1", strict=True)`.
-
-This matters most when booleans are involved:
-
-```python
-# What does True mean here?
-result = fetch_user(user_id, True)
-
-
-# vs forcing clarity
-def fetch_user(user_id, /, *, include_deleted=False):
-    pass
-
-
-result = fetch_user(user_id, include_deleted=True)
-```
-
-Keyword-only parameters make code self-documenting. They prevent reordering bugs when adding parameters. They make refactoring safer because you can't accidentally swap arguments of the same type.
-
-The standard library adopted this pattern heavily in Python 3. Functions like `sorted()` now enforce `sorted(iterable, *, key=None, reverse=False)` to prevent the mistake of passing `reverse` positionally.
-
-### When to Use Each
-
-- **Positional-only**: Parameter name adds no clarity, might be renamed later, or is obvious from context
-- **Keyword-only**: Configuration options, boolean flags, or any parameter that benefits from explicit naming
-- **Flexible**: Parameters where both calling styles are equally clear
-
-## Using `Typevar` for Polymorphic Contracts
+## Solution Two: Using `Typevar` for Polymorphic Contracts
 
 Typing is a intermediate level Python topic.  Adding types to your Python program allows you to:
+
+- **Improve code readability and maintainability**
+- **Catch potential bugs early through static analysis**
+- **Provide better documentation for your functions and methods**
+- **Enable advanced tooling, such as autocompletion and refactoring support**
 
 Type hints help, but they can lose information when functions return the same type they receive:
 

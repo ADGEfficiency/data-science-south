@@ -4,7 +4,8 @@ description: Automation techniques for testing & deploying infrastructure driven
 date_created: 2024-12-07
 date_updated: 2024-12-07
 competencies:
-- "Software Engineering"
+- Software Engineering
+- Data Engineering
 ---
 
 ## Why Learn CI/CD?
@@ -21,7 +22,7 @@ A well engineered CI/CD system offers repeatable, low maintenance deployments.  
 
 ## Continuous Integration
 
-Continuous Integration (CI) is a software engineering technique where changes to a codebase are tested automatically before merging code and deploying to environments like dev or prod. 
+Continuous Integration (CI) is a software engineering technique where changes to a codebase are tested automatically before merging code and deploying to environments like dev or prod.
 
 Testing allows teams to detect and fix problems before they are merged into branches that deploy infrastructure to the cloud.
 
@@ -96,7 +97,7 @@ jobs:
     displayName: 'Install dependencies and run tests'
 ```
 
-In Azure Devops, pipelines will not automatically run when the YAML file is created.  You need to setup the pipeline through the Azure Devops web interface after adding the YAML file to your Azure Devops respository.
+In Azure Devops, pipelines will not automatically run when the YAML file is created.  You need to setup the pipeline through the Azure Devops web interface after adding the YAML file to your Azure Devops repository.
 
 ## Continuous Deployment
 

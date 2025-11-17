@@ -3,6 +3,7 @@ title: Typical Year Forecasting of Electricity Prices
 description: Improve your energy project modelling with this simple & flexible forecasting technique.
 date_created: 2022-11-19
 date_updated: 2025-10-31
+github: https://github.com/ADGEfficiency/typical-year-forecasting-electricity-prices
 competencies:
   - Energy
   - Time Series
@@ -267,7 +268,7 @@ We can compare our two typical year forecasts directly:
 
 **Typical year forecasting based on both the mean and the variance is selecting months with higher prices** - including more of the tasty price spikes that makes Australia's National Electricity Market (NEM) so interesting for battery storage.
 
-## Evaluating the Typical Year Forecast
+## Evaluating a Typical Year Forecast
 
 Let's return to our original motivating example, with an additional estimate of our project cumulative savings using our typical year forecast based on using the mean (show as 2052 in green):
 

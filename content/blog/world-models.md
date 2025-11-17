@@ -3,8 +3,10 @@ title: 'World Models (The Long Version)'
 description: Ha & Schmidhuber's World Models reimplemented in Tensorflow 2.0.
 date_created: 2019-12-21
 date_updated: 2025-10-06
+github: https://github.com/ADGEfficiency/world-models
 competencies:
   - Machine Learning
+  - Reinforcement Learning
 aliases:
   - 2020-04-25-world-models
 ---
