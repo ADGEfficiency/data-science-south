@@ -1,6 +1,6 @@
 baseURL = 'https://adgefficiency.com'
 languageCode = 'en-us'
-title = 'ADGEfficiency'
+title = 'ADG Efficiency'
 [markup]
   [markup.tableOfContents]
     startLevel = 2
