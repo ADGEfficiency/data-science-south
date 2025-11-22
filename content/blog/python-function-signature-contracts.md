@@ -1,39 +1,40 @@
 ---
-id: python-function-signatures
+id: python-function-signature-contracts
 title: "Python Function Signatures as Contracts"
-tags: []
 competencies:
 - Python
 - Software Engineering
 date_created: 2025-10-13
 date_updated: 2025-10-13
+description: Three tips to write better function signatures with positional & keyword parameters, generic functions and function overloads.
 ---
 
-Stop Writing Buggy Python Functions: 4 Signature Tricks That Actually Work
-
-Python's Secret Weapon for Type Safety (It's Not Type Hints)
-
-Why Your Python Functions Are Breaking in Production (And How to Fix Them)
-
-I Stopped Writing Python Functions the Wrong Way After Learning This
-
-https://claude.ai/chat/e532199e-0173-4370-9835-188f2eef69b9
-
----
-
-Python developers obsess over type hints for return values and parameters, but they ignore the most powerful contract mechanism available: the function signature itself.
-
-A contract is an agreement between two parties. In programming, a function signature defines the contract between the function and its callers - the stronger the contract, the happier the world.
-
-This blog post covers four ways to strengthen Python function signatures:
+This blog post covers three ways to strengthen Python function signatures:
 
 1. Positional & Keyword Function Parameters
 2. Generic Functions with `TypeVar`
 3. Function Overloading with `@overload`
 
-## Problem: Weak Function Signatures
+## Preamble
 
-Most Python functions accept arguments in ways that invite bugs. Consider the function signature below:
+Typing is an intermediate level Python topic.  Adding types to your Python program allows you to:
+
+- **Improve code readability and maintainability**
+- **Catch potential bugs early through static analysis**
+- **Provide better documentation for your functions and methods**
+- **Enable advanced tooling, such as autocompletion and refactoring support**
+
+Good Python developers put time, care and effort into type hints for return values and parameters of functions, but they ignore the most powerful contract mechanism available: the function signature itself.
+
+A contract is an agreement between two parties. In programming, a function signature defines the contract between the function and its callers - the stronger the contract, the happier the world.
+
+Too much freedom in how a function is called also increases the number of mistakes a function caller can make when using a function.
+
+## Solution One: Constraining Parameter Passing: `/` and `*` Syntax
+
+The first solution to tightening the function signature contract is to constrain how callers can pass parameters using `/` and `*` in your function signature.
+
+Many Python functions accept arguments in ways that invite bugs. Consider the function signature below:
 
 ```python
 def process_data(data, encoding="utf-8", strict=False) -> None:
@@ -52,15 +53,7 @@ process_data(encoding="utf-8", data=my_data)
 
 All of these different valid function calling patterns makes refactoring the function difficult.  If we change the order of function arguments, or change parameter names, we will break code that relied on that order or those names.
 
-Too much freedom in how a function is called also increases the number of mistakes a function caller can make when using a function.
-
-## Solution One: Constraining Parameter Passing: `/` and `*` Syntax
-
-Most Python functions accept arguments in ways that guarantee bugs. The solution:
-
-The first solution to tightening the function signature contract is to constrain how callers can pass parameters using `/` and `*` in your function signature.
-
-The function below divides parameters into three zones:
+The solution is to use `/` and `*` in the function signature to constrain how parameters can be passed. The function below divides parameters into three zones:
 
 - **Positional only**: Use `/` to force parameters to be passed positionally
 - **Keyword only**: Use `*` to force parameters to be passed as keywords
@@ -69,7 +62,7 @@ The function below divides parameters into three zones:
 ```python
 def process_data(
     data: pd.DataFrame, /, mode: str = "strict", *, encoding: str = "utf-8"
-i) -> None:
+) -> None:
     pass
 ```
 
@@ -77,18 +70,13 @@ In the function above:
 
 - We can only pass the dataframe `data` positionally
 - We can pass `mode` as either positional or keyword
-- We can only pass` encoding` as a keyword
+- We can only pass ` encoding` as a keyword
 
-## Solution Two: Using `Typevar` for Polymorphic Contracts
+## Solution Two: Using `Typevar` for Multiple Return Types
 
-Typing is a intermediate level Python topic.  Adding types to your Python program allows you to:
+`Typevar` allows polymorphic contracts - generic functions that can work with different return types.
 
-- **Improve code readability and maintainability**
-- **Catch potential bugs early through static analysis**
-- **Provide better documentation for your functions and methods**
-- **Enable advanced tooling, such as autocompletion and refactoring support**
-
-Type hints help, but they can lose information when functions return the same type they receive:
+Type hints lose information when functions return the same type they receive:
 
 ```python
 def first(items: list) -> object:
@@ -102,7 +90,7 @@ print(result + 1)  # Type error: can't add object + int
 
 The function works, but the type checker only sees `object` as the return type. You know it's an `int`, but that information is lost.
 
-`TypeVar` preserves type information through functions:
+The solution to this problem is to use `TypeVar` from the `typing` module, which preserves type information through functions:
 
 ```python
 from typing import TypeVar
@@ -124,8 +112,6 @@ print(result.upper())  # Works!
 ```
 
 The contract now says: "Give me a list of T, I'll return a T." The type checker preserves the specific type through the function.
-
-When to use TypeVar:
 
 **Input type determines output type:**
 
@@ -180,9 +166,11 @@ def get_sound(animal: T) -> T:
 
 TypeVar is for "same type in, same type out" - one polymorphic contract that preserves type information through your function.
 
-## Overload: Multiple Contracts for One Function
+## Solution Three: Overloading For Multiple Function Signatures
 
-Sometimes one function needs to behave differently based on input types, and the return type changes accordingly. Type checkers can't infer this from a single signature:
+Above we saw that `TypeVar` preserves type information through a function. But what if the return type changes based on input values?
+
+Sometimes one function needs to behave differently based on input types, and the return type changes accordingly. Type checkers can't infer this from a single signature.  The `transform` function below illustrates the problem, as it returns different types based on the `mode` parameter:
 
 ```python
 def transform(data: str, mode: str) -> str | list[str]:
@@ -200,7 +188,7 @@ for item in result:  # Type error: str is not iterable
     print(item)
 ```
 
-Use `@overload` to declare multiple contracts:
+The solution to this problem is to use `@overload` to declare multiple contracts:
 
 ```python
 from typing import Literal, overload
@@ -251,20 +239,22 @@ def fetch_user(user_id: int, *, include_profile: bool = False) -> User | UserWit
 
 Type checkers now know that `fetch_user(123, include_profile=True)` returns `UserWithProfile`, not just `User`.
 
-## Why This Matters
+## Summary
 
-Function signatures are contracts between you and every caller. Loose contracts mean:
-- Refactoring breaks code in unexpected places
-- Call sites are ambiguous
-- Type checkers can't help you
+**Problems we solve:**
 
-Tight contracts mean:
-- Refactoring is safer
-- Code is self-documenting
-- Type checkers catch bugs before runtime
+- **Fragile refactoring**: Changing parameter order or names breaks code in unexpected places
+- **Lost type information**: Generic functions return `object` instead of preserving specific types
+- **Ambiguous return types**: Type checkers can't infer return types based on input values
 
-The Python standard library evolved to use these features heavily. Your code should too.
+**Solutions:**
 
-Start with keyword-only for any boolean or configuration parameter. Add positional-only when parameter names are unstable or meaningless. Use `TypeVar` when you need to preserve type information through a function. Use `@overload` when return types vary with input values.
+- **Positional/keyword constraints (`/` and `*`)**: Restrict how parameters can be passed to prevent fragile calling patterns
+- **TypeVar for generics**: Preserve type information through functions with "same type in, same type out" contracts
+- **@overload for multiple signatures**: Declare different return types based on input values
 
-Your future self, debugging production at 2am, will thank you for the clarity.
+**When to use each:**
+
+- **`/` and `*` syntax**: Start with keyword-only for boolean or configuration parameters, add positional-only when parameter names are unstable or meaningless
+- **TypeVar**: Use when you need to preserve type information through a function (lists, dictionaries, generic containers)
+- **@overload**: Use when return types vary based on input values (mode parameters, optional flags)

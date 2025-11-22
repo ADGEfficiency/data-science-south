@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+  const DEFAULT_STATE = 'collapsed'
   // Get DOM elements
   const competencyViewBtn = document.getElementById('competency-view-btn')
   const createdYearViewBtn = document.getElementById('created-year-view-btn')
@@ -51,40 +52,25 @@ document.addEventListener('DOMContentLoaded', function () {
   // Add event listeners
   competencyViewBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const shouldExpandAll = isCurrentStateExpanded()
     showCompetencyView()
     localStorage.setItem('home-view-preference', 'competency')
-    if (shouldExpandAll) {
-      expandAllSections()
-    } else {
-      collapseAllSections()
-    }
+    applyDefaultState()
     updateToggleButtonText()
   })
 
   createdYearViewBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const shouldExpandAll = isCurrentStateExpanded()
     showCreatedYearView()
     localStorage.setItem('home-view-preference', 'created-year')
-    if (shouldExpandAll) {
-      expandAllSections()
-    } else {
-      collapseAllSections()
-    }
+    applyDefaultState()
     updateToggleButtonText()
   })
 
   updatedYearViewBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const shouldExpandAll = isCurrentStateExpanded()
     showUpdatedYearView()
     localStorage.setItem('home-view-preference', 'updated-year')
-    if (shouldExpandAll) {
-      expandAllSections()
-    } else {
-      collapseAllSections()
-    }
+    applyDefaultState()
     updateToggleButtonText()
   })
 
@@ -163,25 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
    * Initialize collapsible sections functionality
    */
   function initializeCollapsibleSections() {
-    // Set all sections to collapsed by default, but check localStorage for saved states
-    const allSections = document.querySelectorAll('.collapsible-section')
-    allSections.forEach((section) => {
-      const content = section.querySelector('.section-content')
-      const header = section.querySelector('.section-header')
-      const sectionId = header.getAttribute('data-section')
-      const currentView = getCurrentView()
-      const storageKey = `section-${currentView}-${sectionId}`
-      const savedState = localStorage.getItem(storageKey)
-
-      // If no saved state, default to collapsed; otherwise restore saved state
-      if (!savedState || savedState === 'collapsed') {
-        content.classList.add('collapsed')
-        section.classList.add('collapsed')
-      } else if (savedState === 'expanded') {
-        content.classList.remove('collapsed')
-        section.classList.remove('collapsed')
-      }
-    })
+    applyDefaultState()
 
     // Add event listeners to all section headers
     document.addEventListener('click', function (e) {
@@ -189,6 +157,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const header = e.target.closest('.section-header')
         const section = header.closest('.collapsible-section')
         toggleSection(section)
+      }
+    })
+  }
+
+  /**
+   * Apply default state to all sections
+   */
+  function applyDefaultState() {
+    const allSections = document.querySelectorAll('.collapsible-section')
+    allSections.forEach((section) => {
+      const content = section.querySelector('.section-content')
+
+      if (DEFAULT_STATE === 'collapsed') {
+        content.classList.add('collapsed')
+        section.classList.add('collapsed')
+      } else {
+        content.classList.remove('collapsed')
+        section.classList.remove('collapsed')
       }
     })
   }
@@ -208,15 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
       section.classList.add('collapsed')
     }
 
-    // Save state to localStorage
-    const sectionId = section
-      .querySelector('.section-header')
-      .getAttribute('data-section')
-    const currentView = getCurrentView()
-    const storageKey = `section-${currentView}-${sectionId}`
-    localStorage.setItem(storageKey, isCollapsed ? 'expanded' : 'collapsed')
-
-    // Update toggle button text after individual section toggle
     updateToggleButtonText()
   }
 
@@ -227,17 +204,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const visibleSections = getVisibleSections()
     visibleSections.forEach((section) => {
       const content = section.querySelector('.section-content')
-
       content.classList.remove('collapsed')
       section.classList.remove('collapsed')
-
-      // Save state
-      const sectionId = section
-        .querySelector('.section-header')
-        .getAttribute('data-section')
-      const currentView = getCurrentView()
-      const storageKey = `section-${currentView}-${sectionId}`
-      localStorage.setItem(storageKey, 'expanded')
     })
     updateToggleButtonText()
   }
@@ -249,17 +217,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const visibleSections = getVisibleSections()
     visibleSections.forEach((section) => {
       const content = section.querySelector('.section-content')
-
       content.classList.add('collapsed')
       section.classList.add('collapsed')
-
-      // Save state
-      const sectionId = section
-        .querySelector('.section-header')
-        .getAttribute('data-section')
-      const currentView = getCurrentView()
-      const storageKey = `section-${currentView}-${sectionId}`
-      localStorage.setItem(storageKey, 'collapsed')
     })
     updateToggleButtonText()
   }

@@ -1,6 +1,6 @@
-baseURL = 'https://datasciencesouth.com'
+baseURL = 'https://adgefficiency.com'
 languageCode = 'en-us'
-title = 'Data Science South'
+title = 'ADGEfficiency'
 [markup]
   [markup.tableOfContents]
     startLevel = 2
