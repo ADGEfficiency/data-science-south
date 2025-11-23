@@ -1,7 +1,8 @@
 ---
 title: Hypermodern Terminal Toolbox
 description: Seventeen terminal, shell and command-line tools setting the standard in 2023.
-date: 2023-03-25
+date_created: 2023-03-25
+date_updated: 2023-03-25
 competencies:
 - Software Engineering
 

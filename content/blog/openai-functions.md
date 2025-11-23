@@ -1,7 +1,8 @@
 ---
 title: 'OpenAI Function Calling in Python'
 description: 'Why this new feature is a game changer for developers.'
-date: '2023-08-15'
+date_created: '2023-08-15'
+date_updated: '2023-08-15'
 competencies:
 - Analytics
 - Software Engineering

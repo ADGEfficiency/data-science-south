@@ -1,7 +1,8 @@
 ---
 title: Bash Shell
 description: Learn how to use a shell, write shell scripts, and configure your shell environment.
-date: 2025-01-13
+date_created: 2025-01-13
+date_updated: 2025-01-13
 competencies:
 - "Software Engineering"
 ---

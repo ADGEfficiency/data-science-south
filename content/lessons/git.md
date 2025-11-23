@@ -1,9 +1,11 @@
 ---
 title: Git
 description: How Git enables version control and code collaboration.
-date: 2024-12-07
+date_created: 2024-12-07
+date_updated: 2024-12-07
 competencies:
-- "Software Engineering"
+- Software Engineering
+- Data Engineering
 ---
 
 ## What is Git?
@@ -97,22 +99,22 @@ Learning Git will allow you to do:
 2. **Collaborate**: Enabling multiple developers to work on the same code at the same time.
 3. **CI/CD**: Git enables automated continuous integration (CI) and development (CD) workflows, which enable an automated software development lifecycle (SDLC).
 
-{{< img 
-    src="https://imgs.xkcd.com/comics/git.png" 
-    alt="Git XKCD Comic" 
+{{< img
+    src="https://imgs.xkcd.com/comics/git.png"
+    alt="Git XKCD Comic"
     title="If that doesn't fix it, git.txt contains the phone number of a friend of mine who understands git. Just wait through a few minutes of 'It's really pretty simple, just think of branches as...' and eventually you'll learn the commands that will fix everything."
-    caption="[XKCD #1597](https://xkcd.com/1597/)" 
+    caption="[XKCD #1597](https://xkcd.com/1597/)"
 >}}
 
 ### Software Development Lifecycle
 
-**Git enables managing software through a Software Development Lifecycle (SDLC).** 
+**Git enables managing software through a Software Development Lifecycle (SDLC).**
 
 It enables moving code between environments in a safe and repeatable way. As code is merged into specific branches (like `dev` or `prod`), side effects like running tests or deploying to the cloud can occur.
 
 An example of how code is branched to manage deployments across two environments (`dev` and `prod`) is below:
 
-{{< img 
+{{< img
     src="/images/trunk-based-development.svg"
     width="800"
     caption="Software Development Lifecycle (SDLC) using Git branches to manage deployments to development and production environments."
@@ -124,7 +126,7 @@ Most modern software development teams use multiple environments to safely devel
 - **Staging** - A pre-production environment that closely mimics production. Used for testing and quality assurance before deployment to users.
 - **Production (prod)** - The live environment where end-users interact with the software.
 
-You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).  
+You may also come across environments called test, pre-prod, quality assurance (QA), or user acceptance testing (UAT).
 
 It's also possible for individual developers to have their own environments - a completely separate set of cloud infrastructure that is deployed from feature branches they are working on.  This allows developers to change their entire stack during development, without affecting anyone else on the cloud.  Developer environments do require a reasonable level of technical sophistication to set up and maintain, so are not common.
 
@@ -217,7 +219,7 @@ Often PAT are set as environment variables, like `OPENAI_API_KEY`, which any pro
 
 ### Git GUIs
 
-Git naturally lends itself to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.  
+Git naturally lends itself to visualization - many developers prefer to use a graphical user interface (GUI) to interact with Git.
 
 You can find a list of [Git GUI tools here](https://git-scm.com/downloads/guis).
 
@@ -320,7 +322,7 @@ These practices mean that even if you do lose work locally, you'll only ever los
 
 ## Version Control
 
-**Git's main function is version control of files**.  
+**Git's main function is version control of files**.
 
 Developers write code that is stored in text files.  Version control gives developers a history of changes they make to text files, by providing the changes made to a given file.
 
@@ -338,13 +340,13 @@ This keep everything approach means that anything you commit to a repository wil
 
 ### Local Repositories
 
-A local repository (repo) is created on a developer's computer using the `git init`, and is contained in a folder called `.git`. 
+A local repository (repo) is created on a developer's computer using the `git init`, and is contained in a folder called `.git`.
 
 It contains a copy of the entire project commit history, including all the commits and branches. A local repository can be used for version control and collaboration even when working offline.
 
 ### Remote Repositories
 
-A remote repository is a copy of the local repository that is stored on a remote server, such as GitHub. 
+A remote repository is a copy of the local repository that is stored on a remote server, such as GitHub.
 
 The remote allows developers to share their work.
 
@@ -425,7 +427,7 @@ This can be useful when you get a Git repo into a bad state (it happens - for ex
 
 Be careful though - if you remove this folder (and you don't have a remote copy on a service like GitHub) then you entire project history will be lost.
 
-**A repository (or repo) holds all the files and metadata associated with a codebase, including the codebase's commit history and branches**.  
+**A repository (or repo) holds all the files and metadata associated with a codebase, including the codebase's commit history and branches**.
 
 A repository is created using `git init`. A repository can be either local or remote.
 
@@ -435,16 +437,16 @@ Status will show you what files are staged or unstaged and tracked versus untrac
 
 **The commit is the atomic unit of Git**.
 
-{{< img 
-    src="https://imgs.xkcd.com/comics/git_commit.png" 
-    alt="Git Commit" 
+{{< img
+    src="https://imgs.xkcd.com/comics/git_commit.png"
+    alt="Git Commit"
 title="Merge branch 'asdfasjkfdlas/alkdjf' into sdkjfls-final"
-    caption="[XKCD #1296](https://xkcd.com/1296/)" 
+    caption="[XKCD #1296](https://xkcd.com/1296/)"
 >}}
 
 Git joins changes from multiple files into a single unit - a commit.  These commits are snapshots of your project at different points in time.
 
-**A Git commit is a snapshot of an entire codebase at one point in time**.  
+**A Git commit is a snapshot of an entire codebase at one point in time**.
 
 ### Commit Hashes
 
@@ -452,7 +454,7 @@ A commit has unique hash identifier - a string like `d6a583a419797104d985ab8aaa4
 
 ### Diffs
 
-The difference between one commit and another is known as a diff.  
+The difference between one commit and another is known as a diff.
 
 ### Adding Untracked Files to a Commit
 
@@ -519,7 +521,7 @@ Date:   Sat Aug 5 15:14:38 2023 +1200
 
 These changes to our Git repository live only on our local machine.
 
-### Adding Multiple Files to a Commit 
+### Adding Multiple Files to a Commit
 
 Let's simulate some more work by changing our `README.md` file.
 
@@ -734,23 +736,23 @@ $ git push -u origin master
 
 `git push -u origin master` pushes your commits to the 'master' branch of the 'origin' repository. The `-u` flag tells Git to remember the parameters.
 
-Now your local Git repository is connected & backed up to your GitHub repository, enabling version control.  
+Now your local Git repository is connected & backed up to your GitHub repository, enabling version control.
 
 Other developers can now clone and work on it separately, enabling collaboration.
 
 ## Branching
 
-**A branch is a copy of the codebase that can be worked on independently**. 
+**A branch is a copy of the codebase that can be worked on independently**.
 
-**Branches allow you to work on multiple features or bug fixes in parallel without affecting the main development branch**. 
+**Branches allow you to work on multiple features or bug fixes in parallel without affecting the main development branch**.
 
 A branch is given a human readable name like `amazing-new-feature` or `fix-the-bug`.
 
 ### Creating a New Branch
 
-A branch is created using the `git branch` command and can be switched between using the `git checkout` command. 
+A branch is created using the `git branch` command and can be switched between using the `git checkout` command.
 
-When a branch is created, it is based on the current state of the codebase, and it includes all the commits up to that point. 
+When a branch is created, it is based on the current state of the codebase, and it includes all the commits up to that point.
 
 Any new commits made while on that branch will be added to that branch, creating a separate branch history.
 
@@ -770,9 +772,9 @@ For example, prefixing with `feature/`, `fix/`, or a GitHub issue number can hel
 
 By default Git starts on the master branch.
 
-{{< img 
+{{< img
     src="https://github.com/ADGEfficiency/programming-resources/blob/master/memes/merge-master.jpg?raw=true"
-    alt="Meme about merging to master branch" 
+    alt="Meme about merging to master branch"
     width="400"
 >}}
 
@@ -888,10 +890,10 @@ branch 'master' set up to track 'origin/master'.
 ```shell-session
 $ git push origin tech/requirements
 Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
-remote: 
+remote:
 remote: Create a pull request for 'tech/requirements' on GitHub by visiting:
 remote:      https://github.com/ADGEfficiency/the-repo-name/pull/new/tech/requirements
-remote: 
+remote:
 To github.com:ADGEfficiency/the-repo-name.git
  * [new branch]      tech/requirements -> tech/requirements
 ```

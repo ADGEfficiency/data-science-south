@@ -12,22 +12,22 @@
     <div class="mb-4 flex gap-4 items-center flex-wrap" id="view-controls">
       <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Organize by:</span>
       <button
-        id="year-view-btn"
+        id="created-year-view-btn"
         class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
       >
-        Year
+        Created
+      </button>
+      <button
+        id="updated-year-view-btn"
+        class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
+      >
+        Updated
       </button>
       <button
         id="competency-view-btn"
         class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
       >
         Topic
-      </button>
-      <button
-        id="type-view-btn"
-        class="px-4 py-2 text-sm rounded bg-gray-100 dark:bg-transparent text-gray-700 dark:text-gray-400 hover:bg-gray-800 dark:hover:bg-gray-600 hover:text-white transition-colors duration-200 view-toggle-btn"
-      >
-        Type
       </button>
       <div class="ml-auto">
         <button
@@ -61,8 +61,7 @@
           <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range $pagesForCompetency.ByDate.Reverse }} {{ partial "content-card.html"
-          . }} {{ end }}
+          {{ range sort $pagesForCompetency ".Params.date_created" "desc" }} {{ partial "content-card.html" . }} {{ end }}
         </div>
       </div>
       {{ end }} {{ end }} {{/* Handle pages without competencies */}} {{
@@ -79,88 +78,109 @@
           <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
         </button>
         <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range $pagesWithoutCompetencies.ByDate.Reverse }} {{ partial
-          "content-card.html" . }} {{ end }}
+          {{ range sort $pagesWithoutCompetencies ".Params.date_created" "desc" }} {{ partial "content-card.html" . }} {{ end }}
         </div>
       </div>
       {{ end }}
     </div>
-    {{/* Year view */}}
-    <div id="year-view" class="hidden">
-      {{/* Get all pages with dates (primarily blog posts) and lessons (which
-      don't have dates) */}} {{ $datedPages := where $allPages ".Date" "!=" nil
-      }} {{ $undatedPages := where $allPages ".Date" "eq" nil }} {{ $pagesByYear
-      := $datedPages.GroupByDate "2006" "desc" }} {{ range $pagesByYear }}
-      <div class="collapsible-section">
-        <button class="section-header flex items-center justify-between" data-section="year-{{ .Key }}">
-          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            {{ .Key }}
-            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
-              ({{ len .Pages }}{{ if eq (len .Pages) 1 }} item{{ else }} items{{ end }})
-            </span>
-          </h2>
-          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
-        </button>
-        <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range .Pages.ByDate.Reverse }} {{ partial "content-card.html" . }}
+    {{/* Created Year view */}}
+    <div id="created-year-view" class="hidden">
+      {{/* Create a slice to collect unique years */}}
+      {{ $years := slice }}
+      {{ range $allPages }}
+        {{ if .Params.date_created }}
+          {{ $date := time .Params.date_created }}
+          {{ $year := $date.Year }}
+          {{ if not (in $years $year) }}
+            {{ $years = $years | append $year }}
           {{ end }}
-        </div>
-      </div>
-      {{ end }} {{/* Handle undated content (lessons) */}} {{ if $undatedPages
-      }}
-      <div class="collapsible-section">
-        <button class="section-header flex items-center justify-between" data-section="year-lessons">
-          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Lessons
-            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
-              ({{ len $undatedPages }}{{ if eq (len $undatedPages) 1 }} item{{ else }} items{{ end }})
-            </span>
-          </h2>
-          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
-        </button>
-        <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range $undatedPages.ByTitle }} {{ partial "content-card.html" . }}
+        {{ end }}
+      {{ end }}
+      {{/* Sort years descending (most recent first) - manually reverse */}}
+      {{ $sortedYears := sort $years }}
+      {{ $reversedYears := slice }}
+      {{ range $sortedYears }}
+        {{ $reversedYears = slice . | append $reversedYears }}
+      {{ end }}
+      {{ range $reversedYears }}
+        {{ $year := . }}
+        {{ $yearPages := slice }}
+        {{ range $allPages }}
+          {{ if .Params.date_created }}
+            {{ $date := time .Params.date_created }}
+            {{ if eq $date.Year $year }}
+              {{ $yearPages = $yearPages | append . }}
+            {{ end }}
           {{ end }}
-        </div>
-      </div>
+        {{ end }}
+        {{ if $yearPages }}
+          <div class="collapsible-section">
+            <button class="section-header flex items-center justify-between" data-section="created-year-{{ $year }}">
+              <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                {{ $year }}
+                <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
+                  ({{ len $yearPages }}{{ if eq (len $yearPages) 1 }} item{{ else }} items{{ end }})
+                </span>
+              </h2>
+              <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
+            </button>
+            <div class="section-content grid gap-3 pl-2 pt-2">
+              {{ range sort $yearPages ".Params.date_created" "desc" }}
+                {{ partial "content-card.html" . }}
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
       {{ end }}
     </div>
-    {{/* Type view */}}
-    <div id="type-view" class="hidden">
-      {{/* Get all pages grouped by type */}} {{ $blogPages := where $allPages
-      "Type" "blog" }} {{ $lessonPages := where $allPages "Type" "lessons" }}
-      {{/* Display blog posts */}} {{ if $blogPages }}
-      <div class="collapsible-section">
-        <button class="section-header flex items-center justify-between" data-section="type-blog">
-          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Blog Posts
-            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
-              ({{ len $blogPages }}{{ if eq (len $blogPages) 1 }} item{{ else }} items{{ end }})
-            </span>
-          </h2>
-          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
-        </button>
-        <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range $blogPages.ByDate.Reverse }} {{ partial "content-card.html" .
-          }} {{ end }}
-        </div>
-      </div>
-      {{ end }} {{/* Display lessons */}} {{ if $lessonPages }}
-      <div class="collapsible-section">
-        <button class="section-header flex items-center justify-between" data-section="type-lessons">
-          <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Lessons
-            <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
-              ({{ len $lessonPages }}{{ if eq (len $lessonPages) 1 }} item{{ else }} items{{ end }})
-            </span>
-          </h2>
-          <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
-        </button>
-        <div class="section-content grid gap-3 pl-2 pt-2">
-          {{ range $lessonPages.ByDate.Reverse }} {{ partial "content-card.html"
-          . }} {{ end }}
-        </div>
-      </div>
+    {{/* Updated Year view */}}
+    <div id="updated-year-view" class="hidden">
+      {{/* Create a slice to collect unique years */}}
+      {{ $years := slice }}
+      {{ range $allPages }}
+        {{ if .Params.date_updated }}
+          {{ $date := time .Params.date_updated }}
+          {{ $year := $date.Year }}
+          {{ if not (in $years $year) }}
+            {{ $years = $years | append $year }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{/* Sort years descending (most recent first) - manually reverse */}}
+      {{ $sortedYears := sort $years }}
+      {{ $reversedYears := slice }}
+      {{ range $sortedYears }}
+        {{ $reversedYears = slice . | append $reversedYears }}
+      {{ end }}
+      {{ range $reversedYears }}
+        {{ $year := . }}
+        {{ $yearPages := slice }}
+        {{ range $allPages }}
+          {{ if .Params.date_updated }}
+            {{ $date := time .Params.date_updated }}
+            {{ if eq $date.Year $year }}
+              {{ $yearPages = $yearPages | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ if $yearPages }}
+          <div class="collapsible-section">
+            <button class="section-header flex items-center justify-between" data-section="updated-year-{{ $year }}">
+              <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                {{ $year }}
+                <span class="text-sm font-normal text-gray-600 dark:text-gray-400">
+                  ({{ len $yearPages }}{{ if eq (len $yearPages) 1 }} item{{ else }} items{{ end }})
+                </span>
+              </h2>
+              <span class="section-toggle text-gray-500 dark:text-gray-400 text-xl">▼</span>
+            </button>
+            <div class="section-content grid gap-3 pl-2 pt-2">
+              {{ range sort $yearPages ".Params.date_updated" "desc" }}
+                {{ partial "content-card.html" . }}
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
       {{ end }}
     </div>
     </div>

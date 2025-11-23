@@ -1,44 +1,21 @@
 ---
 title: Linear Predictive Models
-description: TODO
-date: 2025-02-16
+summary: TODO
 draft: true
 competencies:
-- Analytics
+- Algorithms
 ---
 
-/Users/adamgreen/ml-resources/classic/linear-regression.md
-
----
-
-The fundamental property of linearity refers to the mathematical concept that a linear function or system maintains proportionality and additivity.
-
-In the context of linear programming, this property means:
-
-Proportionality: Scaling an input by some factor results in the output being scaled by that same factor
-
-If f(x) = mx + b is linear, then f(αx) = αf(x) + (1-α)f(0)
-
-Additivity: The output from the sum of inputs equals the sum of the outputs from each input
-
-If f is linear, then f(x + y) = f(x) + f(y)
-
----
-
-Continuous feasible region: The set of all possible solutions forms a convex polyhedron with smooth boundaries that can be traversed continuously
-
-When integer constraints are introduced (as in integer programming), this third property is violated. The solution space becomes a discrete set of points rather than a continuous region, breaking the fundamental linearity property.
-This is why solving integer programming problems requires fundamentally different techniques than linear programming - the continuous methods (like simplex) don't work when solutions must land exactly on integer points.
 
 ## Linearity
 
 Linearity concerns how things change.
 
-In a linear system, the system changes at the same rate at all points, while in a nonlinear system, the system changes at different rates at different points. 
+In a linear system, the system changes at the same rate at all points, while in a nonlinear system, the system changes at different rates at different points.
 
 This means that in a linear system, if we make a measurement of direction or change, we can be confident that this will hold for other data, but in a nonlinear system, this may not be the case.
 
-Linear functions are additive, meaning that inputs are proportional to outputs. 
+Linear functions are additive, meaning that inputs are proportional to outputs.
 
 Nonlinear functions, on the other hand, are multiplicative and can be caused by accumulation or feedbacks, such as friction or diminishing returns. Networks are highly nonlinear.
 
@@ -46,7 +23,7 @@ Nonlinear functions, on the other hand, are multiplicative and can be caused by 
 
 A linear model is one that can only learn linear relationships between features and a target.
 
-A linear relationship changes at the same rate at all points.  
+A linear relationship changes at the same rate at all points.
 
 Take for example a linear relationship of doubling:
 
@@ -72,11 +49,11 @@ The advantage of linear models are:
 - **Interpretability** - The coefficients of a linear model are directly proportional to how each feature affects a prediction.
 - **Baseline** - TODO
 
-The disadvantages include: 
+The disadvantages include:
 
 - **Limited Capacity** - model linear relationships between features,
-- **No Feature Interactions** - 
-- **Collinearity** - need to consider mutual infomation between features to ensure stable coefficients.
+- **No Feature Interactions** -
+- **Collinearity** - need to consider mutual information between features to ensure stable coefficients.
 
 Other things to know:
 
@@ -119,11 +96,11 @@ There are also a few different languages used in linear regression.
 
 The dependent variable $y$ is our target; it is the variable we want to predict.
 
-The independent or explanatory variables $x$ are the variables we use to make predictions. 
+The independent or explanatory variables $x$ are the variables we use to make predictions.
 
 It is important to inspect the learned parameters manually and also check the distribution of errors (i.e., through a histogram). In theory, the errors should be normally distributed, which indicates no collinearity between the features.
 
-TODO - add a bit on arrary versions of these - fully connected layer etc
+TODO - add a bit on array versions of these - fully connected layer etc
 
 ## Co-Linearity
 
@@ -131,9 +108,9 @@ Collinearity refers to the correlation between features.
 
 Collinearity can cause instability of parameters, which means we can't interpret the parameters.
 
-If two or more features are highly correlated, it means that they provide redundant information, which can lead to multicollinearity. 
+If two or more features are highly correlated, it means that they provide redundant information, which can lead to multicollinearity.
 
-This can make it hard to determine the true relationship between each feature and the target variable, and can also make it difficult to interpret the coefficients of the model. 
+This can make it hard to determine the true relationship between each feature and the target variable, and can also make it difficult to interpret the coefficients of the model.
 
 It is important to check for collinearity among the features before fitting a linear model, and if collinearity is detected, the features should be removed or combined to reduce redundancy.
 
@@ -147,11 +124,13 @@ from sklearn.decomposition import PCA
 samples = 100
 data = np.random.uniform(0, 1, size=samples)
 
-dataset = np.vstack([
-    data, 
-    data + np.random.uniform(0, 0.5, size=samples),
-    data - np.random.uniform(0, 0.5, size=samples)
-]).T
+dataset = np.vstack(
+    [
+        data,
+        data + np.random.uniform(0, 0.5, size=samples),
+        data - np.random.uniform(0, 0.5, size=samples),
+    ]
+).T
 
 assert dataset.shape[0] == samples
 ```
@@ -225,7 +204,7 @@ print("Learned coefficients:", model.coef_)
 print("Learned intercept:", model.intercept_)
 ```
 
-## Least Squares 
+## Least Squares
 
 In the examples above, our parameters $\beta$ and $\alpha$ were given to us.
 

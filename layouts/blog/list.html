@@ -5,19 +5,43 @@
 >
   <div class="p-6 rounded-lg">
     <h1 class="text-3xl font-bold mb-6">{{ .Title }}</h1>
-    {{ $pages := .Pages.ByDate.Reverse }} {{ $posts := $pages.GroupByDate "2006"
-    }} {{ range $posts }}
+    {{ $years := slice }}
+    {{ range .Pages }}
+      {{ if .Params.date_created }}
+        {{ $date := time .Params.date_created }}
+        {{ $year := $date.Year }}
+        {{ if not (in $years $year) }}
+          {{ $years = $years | append $year }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $sortedYears := sort $years }}
+    {{ $reversedYears := slice }}
+    {{ range $sortedYears }}
+      {{ $reversedYears = slice . | append $reversedYears }}
+    {{ end }}
+    {{ range $reversedYears }}
+      {{ $year := . }}
+      {{ $yearPages := slice }}
+      {{ range $.Pages }}
+        {{ if .Params.date_created }}
+          {{ $date := time .Params.date_created }}
+          {{ if eq $date.Year $year }}
+            {{ $yearPages = $yearPages | append . }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
     <div class="mb-8">
-      <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{{ .Key }}</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{{ $year }}</h2>
       <div class="grid gap-4 pl-4">
-        {{ range .Pages.ByDate }}
+        {{ range sort $yearPages ".Params.date_created" "desc" }}
         <div class="group hover:text-white">
           <a
             href="{{ .RelPermalink }}"
             class="block p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:-translate-y-1 hover:shadow-lg hover:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-200"
           >
             <h3 class="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">{{ .Title }}</h3>
-            <p class="text-sm opacity-75 text-gray-600 dark:text-gray-300">{{ .Date.Format "January" }}</p>
+            <p class="text-sm opacity-75 text-gray-600 dark:text-gray-300">{{ (time .Params.date_created).Format "January 2006" }}</p>
             {{ with .Description }}
             <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">{{ . }}</p>
             {{ end }} {{ with .Params.competencies }}
