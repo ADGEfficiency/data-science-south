@@ -120,6 +120,156 @@
         }
       )
     </script>
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <style>
+      .pagefind-ui__drawer {
+        background-color: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        margin-top: 0 !important;
+        box-shadow: none !important;
+        max-height: none !important;
+      }
+      
+      .pagefind-ui__result {
+        background-color: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(8px) !important;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.5) !important;
+        padding: 1rem !important;
+        margin: 0.25rem !important;
+        border-radius: 0.5rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        transition: all 0.2s ease !important;
+        transform: translateY(0) !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+      }
+      
+      .pagefind-ui__result:hover {
+        background-color: rgb(16 185 129) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+        border-color: rgb(16 185 129) !important;
+      }
+      
+      .pagefind-ui__result-title {
+        color: rgb(17 24 39) !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 1rem !important;
+        transition: color 0.2s ease !important;
+      }
+      
+      .pagefind-ui__result:hover .pagefind-ui__result-title {
+        color: rgb(236 253 245) !important;
+      }
+      
+      .pagefind-ui__result-excerpt,
+      .pagefind-ui__result-nested {
+        display: none !important;
+      }
+      
+      .pagefind-ui__result-link {
+        color: inherit !important;
+        text-decoration: none !important;
+      }
+      
+      .pagefind-ui__result-title a {
+        color: rgb(17 24 39) !important;
+        text-decoration: none !important;
+        transition: color 0.2s ease !important;
+      }
+      
+      .pagefind-ui__result:hover .pagefind-ui__result-title a {
+        color: rgb(236 253 245) !important;
+      }
+      
+      .pagefind-ui__search-clear,
+      .pagefind-ui__search-input {
+        display: none !important;
+      }
+      
+      .pagefind-ui__form::before,
+      .pagefind-ui__search-icon,
+      .pagefind-ui__form svg,
+      .pagefind-ui svg {
+        display: none !important;
+      }
+      
+      .pagefind-ui__message {
+        display: none !important;
+      }
+      
+      .pagefind-ui__stats {
+        display: none !important;
+      }
+      
+      .pagefind-ui__results-area > p {
+        display: none !important;
+      }
+      
+      .pagefind-ui__button {
+        background-color: rgb(16 185 129) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 0.5rem !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        margin: 1rem auto !important;
+        display: block !important;
+        width: fit-content !important;
+      }
+      
+      .pagefind-ui__button:hover {
+        background-color: rgb(5 150 105) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+      
+      /* Dark mode styles */
+      .dark .pagefind-ui__result {
+        background-color: rgba(31, 41, 55, 0.8) !important;
+        backdrop-filter: blur(8px) !important;
+        border-bottom-color: rgba(75, 85, 99, 0.5) !important;
+        border-color: rgba(75, 85, 99, 0.2) !important;
+      }
+      
+      .dark .pagefind-ui__result:hover {
+        background-color: rgb(16 185 129) !important;
+        border-color: rgb(16 185 129) !important;
+      }
+      
+      .dark .pagefind-ui__result-title {
+        color: white !important;
+      }
+      
+      .dark .pagefind-ui__result:hover .pagefind-ui__result-title {
+        color: rgb(236 253 245) !important;
+      }
+      
+      .dark .pagefind-ui__result-title a {
+        color: white !important;
+      }
+      
+      .dark .pagefind-ui__result:hover .pagefind-ui__result-title a {
+        color: rgb(236 253 245) !important;
+      }
+      
+      .dark .pagefind-ui__message {
+        display: none !important;
+      }
+      
+      .dark .pagefind-ui__button {
+        background-color: rgb(16 185 129) !important;
+        color: white !important;
+      }
+      
+      .dark .pagefind-ui__button:hover {
+        background-color: rgb(5 150 105) !important;
+      }
+    </style>
   </head>
   <body
     class="font-sans leading-normal bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200"
@@ -138,6 +288,16 @@
           </h1>
         </a>
         <div class="flex items-center space-x-4">
+          <button
+            id="search-toggle"
+            class="text-white p-2 rounded-lg hover:bg-emerald-500 hover:text-emerald-50 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
+            aria-label="Search"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </button>
           {{ partial "dark-mode-toggle.html" . }}
           <a
             href="https://github.com/ADGEfficiency/data-science-south"
@@ -165,7 +325,120 @@
         </div>
       </div>
     </header>
+    
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden">
+      <div class="min-h-screen px-4 py-8 flex flex-col">
+        <div class="max-w-4xl mx-auto w-full">
+          <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-2xl border border-gray-200/50 dark:border-gray-700/50">
+            <div class="flex items-center p-4 border-b border-gray-200 dark:border-gray-700">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Search lessons & blogs..."
+                class="flex-1 bg-transparent text-gray-900 dark:text-white text-lg placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none"
+              >
+              <button id="search-close" class="text-gray-400 hover:text-gray-600 dark:hover:text-white ml-4">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div id="search-results" class="min-h-[400px] max-h-[400px] overflow-y-auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     {{ block "main" . }}{{ end }}
     <script src="/js/copyCode.js"></script>
+    <script>
+      let pagefindInstance = null;
+      
+      function initializeSearch() {
+        if (typeof PagefindUI !== 'undefined' && !pagefindInstance) {
+          pagefindInstance = new PagefindUI({ 
+            element: "#search-results",
+            showImages: false,
+            showSubResults: false,
+            excerptLength: 0,
+            placeholder: "Search lessons & blogs...",
+            showEmptyFilters: false,
+            resetStyles: false
+          });
+        } else if (!pagefindInstance) {
+          setTimeout(initializeSearch, 100);
+        }
+      }
+      
+      function showSearchOverlay() {
+        const overlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+        overlay.classList.remove('hidden');
+        searchInput.focus();
+      }
+      
+      function hideSearchOverlay() {
+        const overlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+        overlay.classList.add('hidden');
+        searchInput.value = '';
+        // Clear search results
+        const resultsContainer = document.getElementById('search-results');
+        resultsContainer.innerHTML = '';
+      }
+      
+      function performSearch(query) {
+        if (pagefindInstance && query.trim()) {
+          // Trigger search by dispatching input event to PagefindUI's internal input
+          const pagefindInput = document.querySelector('#search-results input[type="text"]');
+          if (pagefindInput) {
+            pagefindInput.value = query;
+            pagefindInput.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      }
+      
+      window.addEventListener('DOMContentLoaded', (event) => {
+        initializeSearch();
+        
+        // Search toggle functionality
+        const searchToggle = document.getElementById('search-toggle');
+        const searchClose = document.getElementById('search-close');
+        const searchOverlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+        
+        searchToggle.addEventListener('click', showSearchOverlay);
+        searchClose.addEventListener('click', hideSearchOverlay);
+        
+        // Close overlay when clicking outside the search box
+        searchOverlay.addEventListener('click', (e) => {
+          if (e.target === searchOverlay) {
+            hideSearchOverlay();
+          }
+        });
+        
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            hideSearchOverlay();
+          }
+        });
+        
+        // Handle search input
+        searchInput.addEventListener('input', (e) => {
+          performSearch(e.target.value);
+        });
+        
+        // Handle enter key in search input
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch(e.target.value);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
