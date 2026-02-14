@@ -1,3 +1,2 @@
 ---
-title: Data Science South
 ---

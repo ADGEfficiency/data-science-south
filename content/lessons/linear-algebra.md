@@ -1,49 +1,26 @@
 ---
 title: Linear Algebra
-description: TODO
-date: 2025-01-13
+summary: TODO
 draft: true
 competencies:
-- Analytics
+- Algorithms
 ---
 
 ## Why Learn Linear Algebra?
 
-Linear algebra is the computational engine that powers modern data science and machine learning. Its importance goes beyond theoretical mathematics—it's the key to unlocking computational efficiency on today's hardware and implementing powerful mathematical algorithms.
+TODO
 
-- **Dimensionality Reduction**
-- **Machine Learning**
-- **Neural Networks**
-- **Parallelization**: Linear algebra operations are naturally parallelizable, making them ideal for modern multi-core CPUs and GPUs. Matrix multiplication, for example, can be split across hundreds or thousands of processing cores simultaneously.
-- **GPU Acceleration**: GPUs were originally designed for graphics rendering—a deeply linear algebraic process. Their architecture is perfectly suited for matrix operations, offering 10-100x speedups for tasks like neural network training.
-- **Memory Efficiency**: Well-implemented linear algebra allows for cache-friendly memory access patterns, reducing bottlenecks in data movement between memory and compute units.
+### Attribution
 
-### Mathematical Capabilities
-
-- **Transformations**: Linear algebra gives us powerful tools to transform data through operations like rotation, scaling, projection, and reflection—all expressible as matrix operations.
-- **Systems of Equations**: Solve complex systems of linear equations efficiently using techniques like Gaussian elimination, LU decomposition, and matrix inversion. An example of linear regression, where the closed-form solution to fitting a linear model involves matrix multiplication and inversion.
-- **Dimensionality Reduction**: Algorithms like Principal Component Analysis (PCA) and Singular Value Decomposition (SVD) help identify patterns in high-dimensional data and reduce dimensions while preserving key information.
-
-- **Eigendecomposition**: Find eigenvalues and eigenvectors to understand the fundamental properties of linear systems, identify principal directions of variation, and solve differential equations.
-
-### Algorithms Enabled by Linear Algebra
-
-- **Optimization Algorithms**: Gradient descent, conjugate gradient methods, and Newton's method rely on linear algebra for efficient parameter updates in machine learning models.
-- **Matrix Factorizations**: Techniques like QR, Cholesky, and LU decompositions enable stable and efficient solutions to many computational problems.
-- **Spectral Methods**: Analyze graphs, networks, and signals by examining the spectrum (eigenvalues) of associated matrices.
-- **Linear Regression**: The workhorse of predictive modeling uses the normal equation (a linear algebraic formulation) for exact solutions.
-- **Recommendation Systems**: Matrix factorization methods like SVD and Alternating Least Squares power many collaborative filtering systems.
+This lesson uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
 
 ## Tooling
 
 To run the Python code in this lesson, you need a Python interpreter and to install the following Python packages:
 
 ```shell-session
-# TODO - pip versions???
 $ pip install -q numpy pandas matplotlib
 ```
-
-Give examples of JAX and PyTorch as well?
 
 ## Resources
 
@@ -53,7 +30,7 @@ Chapter 2 of [Deep Learning - Ian Goodfellow, Yoshua Bengio and Aaron Courville]
 
 [Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
 
-[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) 
+[A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/)
 
 [Understanding the internals of NumPy to avoid unnecessary array copying](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
 
@@ -61,9 +38,10 @@ Scipy lectures:
 - [1.3. NumPy: creating and manipulating numerical data](http://scipy-lectures.org/intro/numpy/index.html)
 - [2.2. Advanced NumPy](http://scipy-lectures.org/advanced/advanced_numpy/)
 
+
 ## Why Learn NumPy?
 
-NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.  
+NumPy is a foundational part of the SciPy Python ecosystem. Central to NumPy is a n-dimensional array.
 
 Working with a NumPy array is fast - it stores and operates on data using C structures.
 
@@ -100,7 +78,8 @@ def loop(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     for i in range(data.shape[0]):
         data[i] = left[i] + right[i]
     return data
-    
+
+
 left = np.arange(10000000)
 right = np.arange(10000000)
 
@@ -126,7 +105,7 @@ The reason that `numpy` is faster is **vectorization**
 Many CPU's have operation that run in parallel (modern x86 chips have the SSE instructions)
 
 Vectorization is
-- the process of rewriting a loop 
+- the process of rewriting a loop
 - instead of processing a single element of an array N times
 - it processes 4 elements of the array simultaneously N/4 times
 
@@ -155,7 +134,7 @@ Only holding one data type means that numpy can efficiently store data in memory
 A list doesn't know what the next object will be - this makes storing it in memory challenging
 
 ```python
-[0, 1.0, '2.0']
+[0, 1.0, "2.0"]
 ```
 
 We can make an array from a list - `numpy` will make assumptions about what datatype the array should hold:
@@ -167,7 +146,7 @@ a = np.array([10, 20.0, 0])
 ```
 
 ```python
-a[0] = '3'
+a[0] = "3"
 ```
 
 ```python
@@ -184,13 +163,13 @@ np.array([10, 20.0]).dtype
 We can change the datatype of an array:
 
 ```python
-np.array([10, 20.0]).astype('int')
+np.array([10, 20.0]).astype("int")
 ```
 
 Note that changing the datatype will by default create a newly allocated array (new location in memory) - you can control this using a an argument:
 
 ```python
-np.array([10, 20.0], copy=False).astype('int')
+np.array([10, 20.0], copy=False).astype("int")
 ```
 
 We can see the number of elements in an array:
@@ -205,7 +184,7 @@ For a vector the size will be the same as the shape:
 np.array([10, 20.0, 30]).shape
 ```
 
-We can also get the number of elements in a vector using the Python bulitin `len`:
+We can also get the number of elements in a vector using the Python built-in `len`:
 
 ```python
 len(np.array([10, 20.0, 30]))
@@ -255,7 +234,7 @@ A vector has multiple dimensions.
 $\textbf{x} = \begin{bmatrix}x_{1} \\ x_{2} \\ \vdots \\ x_{n} \end{bmatrix}$
 
 - array of $n$ numbers
-- lowercase, bold 
+- lowercase, bold
 - $x_{1}$ = first element
 - line
 
@@ -327,11 +306,11 @@ np.array([1, 2]) + np.array([1, 1])
 All of the logic above holds for subtraction, multiplication etc:
 
 ```python
-np.array([0, 1, 2]) - np.array([1]) 
+np.array([0, 1, 2]) - np.array([1])
 ```
 
 ```python
-np.array([0, 1, 2]) * np.array([2]) 
+np.array([0, 1, 2]) * np.array([2])
 ```
 
 All of these are examples of broadcasting.
@@ -343,7 +322,7 @@ The smaller array will be broadcast across the larger array
 <img src="assets/broad.png" alt="" width="300"/>
 
 ```python
-np.array([1, 2]) + np.array([1.6]) 
+np.array([1, 2]) + np.array([1.6])
 ```
 
 Note how different adding lists together is:
@@ -376,20 +355,20 @@ Function that maps from a vector to a non-negative scalar
 $||x||_{p} = \left( \sum |x|^{p} \right)^{\frac{1}{p}} $
 
 A common operation in machine learning is **gradient clipping** - this can be done by clipping by value, norm or global norm
-- global norm will keep their relative scale 
+- global norm will keep their relative scale
 
 We can do a norm in `numpy` using:
 
 ```python
 p = 2
 
-# %timeit sum([abs(x)**p for x in data])**(1 / p)
+%timeit sum([abs(x)**p for x in data])**(1 / p)
 ```
 
 ```python
 data = np.arange(100000)
 
-# %timeit np.linalg.norm(data, ord=2)
+%timeit np.linalg.norm(data, ord=2)
 ```
 
 There are various kinds of norms:
@@ -470,155 +449,7 @@ $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\e
 - $A_{1, 1}$ = first element
 - area
 
-## Matricies
-
-### Eigenvalues and Eigenvectors
-
-How to compute them using NumPy (np.linalg.eig())
-Visualization of eigenvectors as "directions that don't change under transformation"
-Applications in stability analysis, differential equations, and PCA
-
----
-
-Eigenvalues and eigenvectors are crucial in:
-
-- Principal Component Analysis (PCA): Finding the directions of maximum variance in data
-- Differential Equations: Solving systems of differential equations
-- Google's PageRank Algorithm: Determining webpage importance
-- Quantum Mechanics: Describing quantum states
-- Stability Analysis: Determining whether a system is stable
-- Machine Learning: Used in various algorithms including dimensionality reduction
-
-#### Analogies for Eigenvalues and Eigenvectors
-
-A workable analogy for eigenvalues and eigenvectors is with factors of an integer.
-
-We can factor the integer 9 into factors of (3, 3) and (9, 1).
-
-Just as we decompose 9 into its fundamental components (3 and 3), we can decompose a matrix using eigenvalues and eigenvectors into more fundamental components.
-
-For a matrix A, finding its eigenvalues (λ) and eigenvectors (v) allows us to understand the matrix's essential behavior through the relationship:
-
-$$\mathbf{A}\vec{v} = \lambda\vec{v}$$
-
-Just as the factors of 9 tell us something about its divisibility and structure, the eigenvalues and eigenvectors of a matrix tell us about its fundamental properties:
-
-- **Scale** - Eigenvalues tell us about scaling (stretching or shrinking) in key directions.
-- **Direction** - Eigenvectors tell us what those key directions are.
-
-So when we have a matrix $\mathbf{A}$ with eigenvector $\vec{v}$ and eigenvalue $\lambda$, the relationship $\mathbf{A}\vec{v} = \lambda\vec{v}$ shows us that applying the matrix to that special direction (the eigenvector) is equivalent to simple scaling by the eigenvalue.
-
-
-#### Numpy
-
-```python
-import numpy as np
-
-# Create a 2x2 matrix
-A = np.array([[3, 1], 
-              [1, 3]])
-
-# Calculate eigenvalues and eigenvectors
-eigenvalues, eigenvectors = np.linalg.eig(A)
-
-print("Matrix A:")
-print(A)
-print("\nEigenvalues:")
-print(eigenvalues)
-print("\nEigenvectors (as columns):")
-print(eigenvectors)
-
-# Verify the eigenvector property: A·v = λ·v
-for i in range(len(eigenvalues)):
-    v = eigenvectors[:, i]
-    lambda_v = eigenvalues[i] * v
-    Av = A @ v
-    
-    print(f"\nFor eigenvalue {eigenvalues[i]:.2f}:")
-    print(f"A·v = {Av}")
-    print(f"λ·v = {lambda_v}")
-    print(f"Difference: {np.linalg.norm(Av - lambda_v):.10f}")
-```
-
-```python
-import jax
-import jax.numpy as jnp
-
-# Create a 2x2 matrix
-A = jnp.array([[4, 2], 
-               [1, 3]])
-
-# JAX doesn't have a direct eigendecomposition function like NumPy
-# We can use the SciPy-like API in JAX
-from jax.scipy.linalg import eigh
-
-# Note: eigh is for Hermitian (symmetric) matrices
-# For general matrices, you can use the following function:
-def eig(A):
-    # This is a simplified version - JAX has more optimized methods for production
-    # For a real demonstration, you would use jax.scipy.linalg.eig,
-    # but we implement a basic version for clarity
-    return jnp.linalg.eig(A)
-
-eigenvalues, eigenvectors = eig(A)
-
-print("Matrix A:")
-print(A)
-print("\nEigenvalues:")
-print(eigenvalues)
-print("\nEigenvectors (as columns):")
-print(eigenvectors)
-
-# Verify the eigenvector property using JAX: A·v = λ·v
-def verify_eigenvector(A, v, eigenvalue):
-    Av = A @ v
-    lambda_v = eigenvalue * v
-    difference = jnp.linalg.norm(Av - lambda_v)
-    return Av, lambda_v, difference
-
-# Use JAX's vmap to vectorize this operation across all eigenvectors
-vectorized_verify = jax.vmap(
-    lambda i: verify_eigenvector(A, eigenvectors[:, i], eigenvalues[i]), 
-    out_axes=1
-)(jnp.arange(len(eigenvalues)))
-
-Avs, lambda_vs, differences = vectorized_verify
-
-for i in range(len(eigenvalues)):
-    print(f"\nFor eigenvalue {eigenvalues[i]}:")
-    print(f"A·v = {Avs[:, i]}")
-    print(f"λ·v = {lambda_vs[:, i]}")
-    print(f"Difference: {differences[i]}")
-```
-
-### Eigendecomposition
-
-If a matrix has a complete set of eigenvectors (which is always true for symmetric matrices), we can decompose it as:
-
-$$A = PDP^{-1}$$
-
-Where:
-* P is the matrix of eigenvectors (as columns)
-* D is the diagonal matrix of eigenvalues
-* P⁻¹ is the inverse of P
-
-\text{Where:}
-\begin{itemize}
-\item P \text{ is the matrix of eigenvectors (as columns)}
-\item D \text{ is the diagonal matrix of eigenvalues}
-\item P^{-1} \text{ is the inverse of } P
-\end{itemize}
-
-## Matrix Decompositions
-
-These should follow the Eigenvalues and Eigenvectors section, as many decompositions build on these concepts. This section would cover:
-
-SVD (Singular Value Decomposition)
-QR Decomposition
-LU Decomposition
-Cholesky Decomposition
-How to implement these using NumPy's linalg module
-Applications of each decomposition type
+## Matrices
 
 #### Tensor
 
@@ -626,11 +457,12 @@ Applications of each decomposition type
 - 3 = volume
 - uppercase, bold $\textbf{A}_{i,j,k}$
 
+
 This notebook uses many images from the excellent [A Visual Intro to NumPy and Data Representation](https://jalammar.github.io/visual-numpy/) from [Jay Alammar](https://jalammar.github.io/).
 
-In the first notebook ([vector.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/1.vector.ipynb)) we dealt with vectors (one dimensional). 
+In the first notebook ([vector.ipynb](https://github.com/ADGEfficiency/teaching-monolith/blob/master/numpy/1.vector.ipynb)) we dealt with vectors (one dimensional).
 
-Now we deal with **Matricies** - arrays with two dimensions.
+Now we deal with **Matrices** - arrays with two dimensions.
 
 $\textbf{A}_{2, 2} = \begin{bmatrix}A_{1, 1} & A_{1, 2} \\ A_{2, 1} & A_{2, 2}\end{bmatrix}$
 
@@ -715,13 +547,13 @@ Reshape is (usually) computationally **cheap** - to understand why we need to kn
 - the shape is stored as a tuple
 
 Why is storing in a single block (known as a contiguous layout) a good thing?
-- to access the next value an the array 
+- to access the next value an the array
 - we just move to the next memory address
 - length = defined by the data type
 
 > ... storing data in a contiguous block of memory ensures that the architecture of modern CPUs is used optimally, in terms of memory access patterns, CPU cache, and vectorized instructions - [iPython coobook](https://ipython-books.github.io/45-understanding-the-internals-of-numpy-to-avoid-unnecessary-array-copying/)
 
-Changing the shape only means changing the tuple 
+Changing the shape only means changing the tuple
 - the layout of the data in memory is not changed
 
 The operations that will change the memory layout are ones that change the order of the data - for example a transpose:
@@ -807,7 +639,7 @@ np.mean(data, axis=1, keepdims=True).shape
 
 ### Practical
 
-Aggregate by variance `np.var` 
+Aggregate by variance `np.var`
 - over the rows
 - over the columns
 - over all data
@@ -845,7 +677,7 @@ Can make arrays from nested lists:
 np.array([[1, 2], [3, 4]])
 ```
 
-We can add matricies of the same shape as expected:
+We can add matrices of the same shape as expected:
 
 
 <img src="assets/add-matrix.png" alt="" width="300"/>
@@ -938,14 +770,14 @@ np.full_like(parent, 3)
 
 #### `empty`
 
-Similar to `zeros`, except the array is filled with garbage from RAM 
+Similar to `zeros`, except the array is filled with garbage from RAM
 - this is a bit quicker than `zeros`
 
 ```python
 d = np.empty(4)
 for e in range(4):
     d[e] = e
-    
+
 d
 ```
 
@@ -1018,7 +850,7 @@ Create an array filled from a normal distribution, with the shape
 
 ### Practical
 
-Aggregate by standard deviation `np.std` 
+Aggregate by standard deviation `np.std`
 - over the width
 - over the height
 - over the channels

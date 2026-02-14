@@ -1,6 +1,6 @@
-# Data Science South
+# adgefficiency.com
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8b76cbcf-b862-4da8-9ee6-76988c936979/deploy-status)](https://app.netlify.com/sites/datasciencesouth/deploys)
+[![Netlify Status]()]()
 
 Data Science South was a standalone project available at [datasciencesouth.com](https://datasciencesouth.com/). The content now lives on my personal blog, and all traffic is redirected to [adgefficiency.com](https://adgefficiency.com/).
 

@@ -1,7 +1,8 @@
 ---
 title: Hypermodern Data Science Toolbox 2025
 description: Thirteen data science tools setting the standard in 2025.
-date: 2025-07-15
+date_created: 2025-07-15
+date_updated: 2025-07-15
 competencies:
 - Machine Learning
 slug: hypermodern-data-science

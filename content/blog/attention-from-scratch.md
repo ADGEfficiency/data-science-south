@@ -1,12 +1,14 @@
 ---
 title: Attention from Scratch
 description: Attention and Multi-Head Attention in NumPy.
-date: 2024-04-24
+date_created: 2024-04-24
+date_updated: 2024-04-24
 competencies:
 - Analytics
+- Machine Learning
 ---
 
-## Embedding Words 
+## Embedding Words
 
 The first step in using attention for natural language is to embed words into vectors.
 
@@ -18,14 +20,14 @@ import numpy as np
 
 sentence = ["I", "love", "you", "today"]
 
-vocabularly = {
+vocabulary = {
     "I": [0, 1, 0],
     "love": [0, 1, 1],
     "you": [1, 1, 1],
     "today": [0, 0, 0],
 }
 
-words = np.array([vocabularly[word] for word in sentence])
+words = np.array([vocabulary[word] for word in sentence])
 print(f"words:\n{words}")
 ```
 
@@ -42,7 +44,7 @@ Our embedded sentence has a dimensionality of `(4, 3)`:
 <!--phmdoctest-share-names-->
 ```python
 d_sentence = len(sentence)
-d_embedding = len(vocabularly["I"])
+d_embedding = len(vocabulary["I"])
 
 assert d_sentence == 4 == words.shape[0]
 assert d_embedding == 3 == words.shape[1]
@@ -59,11 +61,11 @@ words.shape=(4, 3)
 
 In the previous section we embedded a sentence into word vectors.
 
-Currently our word vector embedding has no concept of the position or order of the words in the input sequence. 
+Currently our word vector embedding has no concept of the position or order of the words in the input sequence.
 
-Attention is permutation invariant - it doesn't consider the order or position of the elements in the input sequence. It treats each word independently. However, word order is critical for understanding language. 
+Attention is permutation invariant - it doesn't consider the order or position of the elements in the input sequence. It treats each word independently. However, word order is critical for understanding language.
 
-**We need a way to inject information about the relative or absolute position of the words in the sequence - one way to do this is to add a position encoding to each input embedding**. 
+**We need a way to inject information about the relative or absolute position of the words in the sequence - one way to do this is to add a position encoding to each input embedding**.
 
 The position encodings have the same dimension `d_embedding` as the word embeddings, so we can add them element-wise.
 
@@ -81,6 +83,7 @@ def get_position_encoding(
             position_encoding[k, 2 * i] = np.sin(k / denominator)
             position_encoding[k, 2 * i + 1] = np.cos(k / denominator)
     return position_encoding
+
 
 position_encoding = get_position_encoding(d_embedding)
 print(position_encoding[:10])
@@ -212,7 +215,7 @@ Now our queries, keys and values have an additional dimension - the number of wo
 
 In previous sections we:
 
-- embedded a sentence into word vectors, 
+- embedded a sentence into word vectors,
 - added positional encoding,
 - transformed our input sentence into queries, keys and values.
 
@@ -309,7 +312,7 @@ scores.shape=(4, 4)
 
 ## Normalization
 
-**Normalization is the process of converting the raw scores into a probability distribution using a softmax**. 
+**Normalization is the process of converting the raw scores into a probability distribution using a softmax**.
 
 Normalization is important for several reasons:
 
@@ -327,6 +330,7 @@ We can use the softmax to normalize the scores for a single word:
 def softmax(x: np.ndarray) -> np.ndarray:
     e_x = np.exp(x - np.max(x))
     return e_x / e_x.sum()
+
 
 scores = queries.dot(keys.T) / np.sqrt(d_query)
 weights = softmax(scores[1])
@@ -350,6 +354,7 @@ def softmax(x: np.ndarray) -> np.ndarray:
     e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
     return e_x / e_x.sum(axis=-1, keepdims=True)
 
+
 scores = queries.dot(keys.T) / np.sqrt(d_query)
 weights = softmax(scores)
 
@@ -366,7 +371,7 @@ weights.shape=(4, 4)
 
 In previous sections we:
 
-- embedded a sentence into word vectors, 
+- embedded a sentence into word vectors,
 - added positional encoding,
 - transformed our input sentence into queries, keys and values,
 - used scaling, a softmax & normalization to produce attention scores.
@@ -374,9 +379,9 @@ In previous sections we:
 
 **The context vector aggregates the information from the entire sequence, weighted by relevance to each input word**. It is the output of the attention mechanism.
 
-The context vector is a weighted sum of value vectors, where the weights are given by the attention scores. 
+The context vector is a weighted sum of value vectors, where the weights are given by the attention scores.
 
-The context vector captures the relevant information from other parts of the input sequence needed to focus on specific elements during processing. 
+The context vector captures the relevant information from other parts of the input sequence needed to focus on specific elements during processing.
 
 ## Context Vector for All The Words
 
@@ -411,15 +416,18 @@ This step is the same as with a single attention head:
 ```python
 import numpy as np
 
+
 def get_words() -> np.ndarray:
     sentence = ["I", "love", "you", "today"]
-    vocabularly = {
+    vocabulary = {
         "I": [0, 1, 0],
         "love": [0, 1, 1],
         "you": [1, 1, 1],
         "today": [0, 0, 0],
     }
-    return np.array([vocabularly[word] for word in sentence])
+    return np.array([vocabulary[word] for word in sentence])
+
+
 words = get_words()
 d_sentence = words.shape[0]
 d_embedding = words.shape[1]
@@ -447,6 +455,7 @@ def get_position_encoding(
             position_encoding[k, 2 * i] = np.sin(k / denominator)
             position_encoding[k, 2 * i + 1] = np.cos(k / denominator)
     return position_encoding
+
 
 position_encoding = get_position_encoding(d_embedding)
 position_encoded_words = words + position_encoding[range(words.shape[0])]
@@ -565,6 +574,7 @@ As with a single head, we use a softmax function to normalize the attention scor
 def softmax(x: np.ndarray) -> np.ndarray:
     e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
     return e_x / e_x.sum(axis=-1, keepdims=True)
+
 
 weights = softmax(scores)
 print(f"{weights.shape=}")

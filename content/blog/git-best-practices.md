@@ -1,7 +1,8 @@
 ---
 title: Git Best Practices
 description: Five patterns to guide your Git workflows.
-date: 2024-05-01
+date_created: 2024-05-01
+date_updated: 2024-05-01
 competencies:
 - Software Engineering
 ---

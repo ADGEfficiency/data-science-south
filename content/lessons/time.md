@@ -1,7 +1,8 @@
 ---
 title: Working with Time
 description: Learn to handle dates, times, and timezones in data analysis and programming.
-date: 2025-08-27
+date_created: 2025-08-27
+date_updated: 2025-08-27
 competencies:
 - "Analytics"
 - "Software Engineering"

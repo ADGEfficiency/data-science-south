@@ -1,20 +1,21 @@
 ---
-title: Hypermodern Python Toolbox 2025 
+title: Hypermodern Python Toolbox 2025
 description: Twelve Python tools setting the standard in 2025.
-date: 2025-01-01
+date_created: 2025-01-01
+date_updated: 2025-01-01
 competencies:
 - Software Engineering
+- Python
 slug: hypermodern-python
 aliases:
 - "/blog/hypermodern-python-2025"
-
 ---
 
 **Every Python developer is challenged by the size and velocity of the Python ecosystem** 😤
 
-{{< img 
-    src="/images/hypermodern-2025/hero.png" 
-    alt="Terminal in MC Escher style with birds" 
+{{< img
+    src="/images/hypermodern-2025/hero.png"
+    alt="Terminal in MC Escher style with birds"
     caption="{Prompt: 'a small computer terminal in the style of MC Escher, birds on the terminal screen, color of Rothko, layout of the painting day and night by MC Escher, colorful and vibrant', Seed: 42, Creator: Stable Diffusion 2}"
 >}}
 
@@ -28,21 +29,21 @@ So much of programming is reading & responding error messages - error message im
 
 **Python 3.11 added better tracebacks** - the exact location of the error is pointed out in the traceback.  This improves the information available to you during development and debugging.
 
-The code below has a mistake. We want to assign a value to the first element of `data`, but the code refers to a non-existent variable `datas`:
+The code below has a mistake. We want to assign a value to the first element of `data`, but the code refers to a non-existent variable `data`:
 
 ```python { title = "mistake.py" }
 data = [1, 4, 8]
-# the variable datas does not exist!
-datas[0] = 2
+# the variable data does not exist!
+data[0] = 2
 ```
 
-With pre 3.10 versions of Python, this results in an error traceback that points out that the variable `datas` doesn't exist:
+With pre 3.10 versions of Python, this results in an error traceback that points out that the variable `data` doesn't exist:
 
 ```shell-session
 $ uv run --python 3.9 --no-project mistake.py
 Traceback (most recent call last):
   File "/Users/adamgreen/data-science-south-neu/mistake.py", line 3, in <module>
-    datas[0] = 2
+    data[0] = 2
 NameError: name 'datas' is not defined
 ```
 
@@ -52,7 +53,7 @@ Python 3.11 takes its diagnosis two steps further and also offers a solution tha
 $ uv run --python 3.11 --no-project mistake.py
 Traceback (most recent call last):
   File "/Users/adamgreen/data-science-south-neu/mistake.py", line 3, in <module>
-    datas[0] = 2
+    data[0] = 2
     ^^^^^
 NameError: name 'datas' is not defined. Did you mean: 'data'?
 ```
@@ -135,7 +136,7 @@ Resolved 17 packages in 5ms
 uv can also be used to add tools, which are globally available Python tools.  The command below installs `pytest` as tool we can use anywhere:
 
 ```shell-session
-$ uv tool install --python 3.11 pytest 
+$ uv tool install --python 3.11 pytest
 Resolved 4 packages in 525ms
 Installed 4 packages in 7ms
  + iniconfig==2.0.0
@@ -160,14 +161,14 @@ $ which pytest
 
 Ruff's big thing is being written in Rust - this makes it fast. Ruff covers much of the Flake8 rule set, along with other rules such as isort.
 
-The code below has three problems: 
+The code below has three problems:
 
-1. We use an undefined variable `datas`.
+1. We use an undefined variable `data`.
 2. It has imports in the wrong place.
 3. Imports something we don't use.
 
 ```python { title = "ruff.py" }
-data = datas[0]
+data = data[0]
 import collections
 ```
 
@@ -175,7 +176,7 @@ Running Ruff in the same directory points out the issues:
 
 ```shell-session
 $ ruff check .
-ruff.py:1:8: F821 Undefined name `datas`
+ruff.py:1:8: F821 Undefined name `data`
 ruff.py:2:1: E402 Module level import not at top of file
 ruff.py:2:8: F401 [*] `collections` imported but unused
 Found 3 errors.
@@ -197,9 +198,10 @@ Static type checking will catch some bugs that many unit test suites won't.  Sta
 ```python { title = "mypy_error.py" }
 def process(user):
     # line below causes an error
-    user['name'] / 10
+    user["name"] / 10
 
-user = {'name': 'alpha'}
+
+user = {"name": "alpha"}
 process(user)
 ```
 
@@ -218,10 +220,11 @@ These first errors are because our code has no typing - we can add two type anno
 2. `-> None:` - the `process` function returns `None`.
 
 ```python { title = "mypy_intermediate.py"}
-def process(user: dict[str,str]) -> None:
-    user['name'] / 10
+def process(user: dict[str, str]) -> None:
+    user["name"] / 10
 
-user = {'name': 'alpha'}
+
+user = {"name": "alpha"}
 process(user)
 ```
 
@@ -249,9 +252,9 @@ Pydantic uses Python type hints to define data types. Imagine we want a user wit
 import uuid
 
 users = [
-    {'name': 'alpha', 'id': str(uuid.uuid4())},
-    {'name': 'beta'},
-    {'name': 'omega', 'id': 'invalid'}
+    {"name": "alpha", "id": str(uuid.uuid4())},
+    {"name": "beta"},
+    {"name": "omega", "id": "invalid"},
 ]
 ```
 
@@ -278,12 +281,13 @@ A strength of Pydantic is validation - we can introduce some validation of our u
 import uuid
 import pydantic
 
+
 class User(pydantic.BaseModel):
     name: str
     id: str = None
 
-    @pydantic.validator('id')
-    def validate_id(cls, user_id:str ) -> str | None:
+    @pydantic.validator("id")
+    def validate_id(cls, user_id: str) -> str | None:
         try:
             user_id = uuid.UUID(user_id, version=4)
             print(f"{user_id} is valid")
@@ -292,10 +296,11 @@ class User(pydantic.BaseModel):
             print(f"{user_id} is invalid")
             return None
 
+
 users = [
-    User(name='alpha', id= str(uuid.uuid4())),
-    User(name='beta'),
-    User(name='omega', id='invalid'),
+    User(name="alpha", id=str(uuid.uuid4())),
+    User(name="beta"),
+    User(name="omega", id="invalid"),
 ]
 [print(user) for user in users]
 ```
@@ -311,7 +316,7 @@ name='beta' id=None
 name='omega' id=None
 ```
 
-These Pydantic types can become the primitive data structures in your Python programs (instead of dictionaries) - making it eaiser for other developers to understand what is going on.
+These Pydantic types can become the primitive data structures in your Python programs (instead of dictionaries) - making it easier for other developers to understand what is going on.
 
 *Tip - you can generate Typescript types from Pydantic models - making it possible to share the same data structures with your Typescript frontend and Python backend.*
 
@@ -448,7 +453,7 @@ Rich's features pretty printing of color and emojis:
 ```python
 import rich
 
-user = {'name': 'omega', 'id': 'invalid'}
+user = {"name": "omega", "id": "invalid"}
 print(f" normal printing\nuser {user}\n")
 rich.print(f" :wave: rich printing\nuser {user}\n")
 ```
@@ -466,7 +471,7 @@ If you are happy with Rich you can simplify your code by replacing the built-in 
 ```python
 from rich import print
 
-print('this will be printed with rich :clap:')
+print("this will be printed with rich :clap:")
 ```
 
 ```
@@ -488,11 +493,13 @@ Let's start with a dataset with three columns:
 ```python
 import polars as pl
 
-df = pl.DataFrame({
-    'date': ['2025-01-01', '2025-01-02', '2025-01-03'],
-    'sales': [1000, 1200, 950],
-    'region': ['North', 'South', 'North']
-})
+df = pl.DataFrame(
+    {
+        "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
+        "sales": [1000, 1200, 950],
+        "region": ["North", "South", "North"],
+    }
+)
 ```
 
 Below we chain together column creation and aggregation into one query:
@@ -559,7 +566,7 @@ Pandera allows you to define schemas for tabular data (data with rows and column
 
 Below we create a schema for sales data, including a few data quality checks:
 
-- null value checks, 
+- null value checks,
 - upper and lower bounds,
 - accepted values.
 
@@ -570,12 +577,7 @@ from pandera.polars import DataFrameSchema, Column
 
 schema = DataFrameSchema(
     {
-        "date": Column(
-            pa.DateTime,
-            nullable=False,
-            coerce=True,
-            title="Date of sale"
-        ),
+        "date": Column(pa.DateTime, nullable=False, coerce=True, title="Date of sale"),
         "sales": Column(
             int,
             checks=[pa.Check.greater_than(0), pa.Check.less_than(10000)],
@@ -593,11 +595,13 @@ schema = DataFrameSchema(
 We can now validate data using this schema:
 
 ```python
-data = pl.DataFrame({
-    "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
-    "sales": [1000, 1200, 950],
-    "region": ["North", "South", "East"]
-})
+data = pl.DataFrame(
+    {
+        "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
+        "sales": [1000, 1200, 950],
+        "region": ["North", "South", "East"],
+    }
+)
 data = data.with_columns(pl.col("date").str.strptime(pl.Date, "%Y-%m-%d"))
 
 print(schema(data))
@@ -619,11 +623,13 @@ shape: (3, 3)
 When we have bad data, Pandera will raise an exception:
 
 ```python
-data = pl.DataFrame({
-    "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
-    "sales": [-1000, 1200, 950],
-    "region": ["North", "South", "East"]
-})
+data = pl.DataFrame(
+    {
+        "date": ["2025-01-01", "2025-01-02", "2025-01-03"],
+        "sales": [-1000, 1200, 950],
+        "region": ["North", "South", "East"],
+    }
+)
 data = data.with_columns(pl.col("date").str.strptime(pl.Date, "%Y-%m-%d"))
 
 print(schema(data))
@@ -669,14 +675,14 @@ print(
     con.execute(
         """
     WITH daily_sales AS (
-        SELECT 
+        SELECT
             date,
             product_id,
             SUM(amount) as daily_total
         FROM 'sales.csv'
         GROUP BY date, product_id
     )
-    SELECT 
+    SELECT
         s.date,
         p.name as product_name,
         p.category,
@@ -700,11 +706,11 @@ print(
 
 ## Loguru
 
-**[Loguru](https://github.com/Delgan/loguru) is a logger** - it's an alternative to the standard library's logging module and structlog.  
+**[Loguru](https://github.com/Delgan/loguru) is a logger** - it's an alternative to the standard library's logging module and structlog.
 
 Loguru builds on top of the Python standard library `logging` module.  It's not a complete rethinking, but a few tweaks that make logging from Python programs less painful. Because Loguru builds on top of the Python `logging` module, it's easy to swap in a Loguru logger for a Python standard library `logging.Logger`.
 
-A central Loguru idea is that there is only one `logger`. This is a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many. 
+A central Loguru idea is that there is only one `logger`. This is a great example of the unintuitive value of constraints - having less `logger` objects is actually better than being able to create many.
 
 Logging with Loguru is as simple as `from loguru import logger`:
 
@@ -727,21 +733,17 @@ logger.add(
     sys.stdout,
     colorize=True,
     format="<green>{time}</green> <level>{message}</level>",
-    level="INFO"
+    level="INFO",
 )
 ```
 
 The code below configures logging to a file:
 
 ```python
-logger.add(
-    "log.txt",
-    format="{time} {level} {message}",
-    level="DEBUG"
-)
+logger.add("log.txt", format="{time} {level} {message}", level="DEBUG")
 ```
 
-*Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", seralize=True)` argument.*
+*Tip - Loguru supports structured logging of records to JSON via the `logger.add("log.txt", serialize=True)` argument.*
 
 ## Marimo
 
